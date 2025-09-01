@@ -2,10 +2,11 @@
 interface Props {
     variant?: "default" | "outline" | "ghost"
     style?: string,
-    link?: string
+    link?: string,
+    blank?: boolean
 }
 
-const { variant = "default", style = "", link } = Astro.props
+const { variant = "default", style = "", link, blank = false } = Astro.props
 
 const variants = {
     default: "cursor-pointer px-6 py-3 bg-zinc-800 text-white rounded-full transition-all duration-200 ease-in-out hover:bg-zinc-700 hover:scale-[1.02] hover:shadow-md active:scale-[0.98] active:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-600 focus:ring-offset-2",
@@ -15,7 +16,7 @@ const variants = {
 ---
 
 {link ? (
-    <a href={link} class={`${style} ${variants[variant]}`}>
+    <a href={link} class={`${style} ${variants[variant]}`} target={blank ? "_blank" : "_self"}>
         <slot />
     </a>
 ) : (
