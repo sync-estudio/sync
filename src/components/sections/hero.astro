@@ -4,7 +4,8 @@ import Button from "../../components/button.astro";
 ---
 
 <div
-    class="pt-32 lg:pt-24 h-full container px-0 lg:px-30 mx-auto flex flex-col gap-12 lg:gap-0 lg:flex-row lg:justify-between lg:items-center"
+    id="hero"
+    class="lg:px-32 pt-32 lg:pt-24 h-full container mx-auto flex flex-col gap-12 lg:gap-0 lg:flex-row lg:justify-between lg:items-center overflow-hidden"
 >
     <div class="flex flex-col text-center gap-8 lg:text-start lg:my-auto">
         <div class="text-zinc-800">
@@ -21,14 +22,14 @@ import Button from "../../components/button.astro";
         </div>
 
         <div class="mx-auto flex gap-2 lg:mx-0">
-            <Button link="/contact">¿Empezamos hoy?</Button>
-            <Button variant="outline">Contactanos</Button>
+            <Button link="/#contact">¿Empezamos hoy?</Button>
+            <Button link="/#projects" variant="outline">Ver más</Button>
         </div>
     </div>
 
     <div class="flex justify-center">
         <img
-            class="h-[500px] lg:h-[700px] rotate-[-5deg] object-contain transform-gpu origin-center"
+            class="h-[500px] lg:h-[700px] rotate-[-6deg] object-contain transform-gpu origin-center"
             src="/hero_mockup.webp"
             alt=""
         />

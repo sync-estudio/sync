@@ -15,7 +15,7 @@ import Footer from "../components/footer.astro";
 	</head>
 
 	<body
-		class="min-h-screen font-[Manrope] text-zinc-800 relative" style="background-image: url('/bg_texture.png'); background-size: 150px; background-repeat: repeat;"
+		class="min-h-screen font-[Manrope] text-zinc-800 relative overflow-x-hidden" style="background-image: url('/bg_texture.png'); background-size: 150px; background-repeat: repeat;"
 	>
 		<Navbar />
 		
@@ -24,5 +24,38 @@ import Footer from "../components/footer.astro";
 		</div>
 		
 		<Footer />
+		<script>
+			// Scroll suave para enlaces de anclas con offset para navbar fijo
+			document.addEventListener('DOMContentLoaded', () => {
+				const anchorLinks = document.querySelectorAll('a[href^="/#"]');
+				
+				// Función para obtener la altura del navbar según el dispositivo
+				const getNavbarHeight = () => {
+					return window.innerWidth <= 768 ? 20 : 80; // 20px en móvil, 80px en desktop
+				};
+				
+				anchorLinks.forEach(link => {
+					link.addEventListener('click', (e) => {
+						e.preventDefault();
+						
+						const href = link.getAttribute('href');
+						if (href && href.startsWith('/#')) {
+							const targetId = href.substring(2); // Remover "/#"
+							const targetElement = document.getElementById(targetId);
+							
+							if (targetElement) {
+								const navbarHeight = getNavbarHeight();
+								const targetPosition = targetElement.offsetTop - navbarHeight;
+								
+								window.scrollTo({
+									top: targetPosition,
+									behavior: 'smooth'
+								});
+							}
+						}
+					});
+				});
+			});
+		</script>
 	</body>
 </html>
