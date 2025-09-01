@@ -1,0 +1,36 @@
+---
+import "../../styles/global.css";
+import Button from "../../components/button.astro";
+---
+
+<div
+    class="pt-32 lg:pt-24 h-full container px-0 lg:px-30 mx-auto flex flex-col gap-12 lg:gap-0 lg:flex-row lg:justify-between lg:items-center"
+>
+    <div class="flex flex-col text-center gap-8 lg:text-start lg:my-auto">
+        <div class="text-zinc-800">
+            <h1 class="text-5xl font-extrabold mb-4">
+                Tu empresa, funcionando <span
+                    class="font-[ibm-plex-serif] font-bold italic text-zinc-700"
+                    >en internet</span
+                >
+            </h1>
+            <p class="font-medium">
+                Haz crecer tu negocio. Vende más, trabaja menos y automatiza lo
+                que te quita tiempo.
+            </p>
+        </div>
+
+        <div class="mx-auto flex gap-2 lg:mx-0">
+            <Button link="/contact">¿Empezamos hoy?</Button>
+            <Button variant="outline">Contactanos</Button>
+        </div>
+    </div>
+
+    <div class="flex justify-center">
+        <img
+            class="h-[500px] lg:h-[700px] rotate-[-5deg] object-contain transform-gpu origin-center"
+            src="/hero_mockup.webp"
+            alt=""
+        />
+    </div>
+</div>

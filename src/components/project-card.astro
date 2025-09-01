@@ -1,0 +1,30 @@
+---
+export interface Props {
+    image: string;
+    style?: string;
+    data: {
+        name: string,
+        year: string,
+        development?: boolean
+    }
+}
+
+const { image, style = "", data } = Astro.props;
+---
+
+<div class="text-start">
+    <div
+        class="bg-emerald-50 w-90 h-90 rounded-2xl flex justify-center items-center overflow-hidden transition-all duration-300 ease-in-out hover:scale-[103%] hover:translate-y-[-.5rem]"
+    >
+        <img
+            class={`${style} transition-all duration-300 ease-in-out`}
+            src={image}
+            alt="Project image"
+        />
+    </div>
+    <div class="mt-4">
+        <h4 class="font-semibold">{data.name}</h4>
+        <p class="text-zinc-500">{data.year}</p>
+        <span class="italic text-zinc-400 font-light">{data.development ? '(En desarrollo)' : ''}</span>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+---
+import ProjectCard from "../project-card.astro";
+---
+
+<section class="h-fit container mx-auto text-center">
+    <div class="font-normal mt-30 mb-16">
+        <h3
+            class="font-[ibm-plex-serif] text-xl font-bold italic text-emerald-900"
+        >
+            Proyectos
+        </h3>
+        <p class="text-3xl">Nuestro trabajo</p>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-8">
+        <ProjectCard
+            data={{ name: "Hauzzo", year: "2024" }}
+            image="/hauzzo_project.webp"
+        />
+        <ProjectCard
+            data={{ name: "The Royal Barber", year: "2024" }}
+            style="w-60 translate-y-20"
+            image="/the_royal_project.webp"
+        />
+        <ProjectCard
+            data={{ name: "Sky HR", year: "2025", development: true }}
+            style="w-full translate-y-2"
+            image="/sky_hr_project.webp"
+        />
+
+        <ProjectCard
+            data={{ name: "GZG Seguros", year: "2025" }}
+            image="/gzg_project.webp"
+        />
+    </div>
+</section>
