@@ -1,0 +1,28 @@
+---
+const linkWrapper =
+    "before:min-w-full before:left-6/12 before:top-6/12 before:translate-y-[-50%] before:translate-x-[-50%] before:box-content before:py-4 before:px-2 before:absolute before:block before:opacity-40";
+---
+
+<nav
+    class="w-full px-8 md:px-0 py-8 fixed justify-between bg-white/10 backdrop-blur-sm border-b border-white/20 z-50"
+>
+    <div class="container mx-auto flex justify-between">
+        <div class="relative w-fit">
+            <a class={linkWrapper} href="/#">
+                <img src="/sync_logo.svg" alt="" />
+            </a>
+        </div>
+
+        <ul class="flex gap-4 md:gap-12">
+            <li class="relative">
+                <a class={linkWrapper} href="">Inicio</a>
+            </li>
+            <li class="relative">
+                <a class={linkWrapper} href="">Proyectos</a>
+            </li>
+            <li class="relative">
+                <a class={linkWrapper} href="">Contacto</a>
+            </li>
+        </ul>
+    </div>
+</nav>
