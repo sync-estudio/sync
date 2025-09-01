@@ -19,7 +19,7 @@ const { image, style = "", data } = Astro.props;
         <img
             class={`${style} transition-all duration-300 ease-in-out`}
             src={image}
-            alt="Project image"
+            alt={`${data.name} (${data.year})`}
         />
     </div>
     <div class="mt-4">

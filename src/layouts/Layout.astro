@@ -8,10 +8,47 @@ import Footer from "../components/footer.astro";
 <html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>SYNC</title>
+		<title>SYNC Estudio — Diseño digital y desarrollo web</title>
+
+		<meta name="description" content="Estudio creativo especializado en diseño digital y desarrollo web. Creamos experiencias únicas que conectan marcas con su audiencia." />
+		<meta name="theme-color" content="#10b981" />
+		<meta name="robots" content="index,follow" />
+
+		<!-- Preconnect for Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+		<!-- Open Graph -->
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="SYNC Estudio" />
+		<meta property="og:title" content="SYNC Estudio — Diseño digital y desarrollo web" />
+		<meta property="og:description" content="Estudio creativo especializado en diseño digital y desarrollo web. Creamos experiencias únicas que conectan marcas con su audiencia." />
+		<meta property="og:locale" content="es_ES" />
+		<meta property="og:image" content="/share_image.png" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="SYNC Estudio - Tu empresa, funcionando en internet" />
+
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="SYNC Estudio — Diseño digital y desarrollo web" />
+		<meta name="twitter:description" content="Estudio creativo especializado en diseño digital y desarrollo web. Creamos experiencias únicas que conectan marcas con su audiencia." />
+		<meta name="twitter:image" content="/share_image.png" />
+		<meta name="twitter:image:alt" content="SYNC Estudio - Tu empresa, funcionando en internet" />
+
+		<!-- Structured Data: Organization -->
+		<script type="application/ld+json">
+			{ 
+				"@context": "https://schema.org", 
+				"@type": "Organization",
+				"name": "SYNC Estudio",
+				"logo": "/sync_logo.svg",
+				"sameAs": ["https://www.instagram.com/sync.estudio/"]
+			}
+		</script>
 	</head>
 
 	<body
