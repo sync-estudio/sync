@@ -5,33 +5,43 @@ import Button from "../../components/button.astro";
 
 <div
     id="hero"
-    class="lg:px-32 pt-32 lg:pt-24 h-full container mx-auto flex flex-col gap-12 lg:gap-0 lg:flex-row lg:justify-between lg:items-center overflow-hidden"
+    class="container mx-auto p-6 lg:px-24 min-h-screen pt-[5rem] grid grid-cols-1 lg:grid-cols-2 items-center justify-center"
 >
-    <div class="flex flex-col text-center gap-8 lg:text-start lg:my-auto">
+    <div
+        class="flex flex-col text-center gap-6 md:gap-8 lg:text-start lg:my-auto"
+    >
         <div class="text-zinc-800">
-            <h1 class="text-5xl font-extrabold mb-4">
+            <h1
+                class="text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-extrabold mb-3 md:mb-4 leading-tight"
+            >
                 Tu empresa, funcionando <span
                     class="font-[ibm-plex-serif] font-bold italic text-zinc-700"
                     >en internet</span
                 >
             </h1>
-            <p class="font-medium">
+            <p class="text-base md:text-lg font-medium px-2 md:px-0">
                 Haz crecer tu negocio. Vende más, trabaja menos y automatiza lo
                 que te quita tiempo.
             </p>
         </div>
 
-        <div class="mx-auto flex gap-2 lg:mx-0">
-            <Button link="/#contact">¿Empezamos hoy?</Button>
-            <Button link="/#projects" variant="outline">Ver más</Button>
+        <div
+            class="mx-auto flex flex-col sm:flex-row gap-3 md:gap-2 lg:mx-0 w-full sm:w-auto"
+        >
+            <Button link="/#contact" style="w-full sm:w-auto"
+                >¿Empezamos hoy?</Button
+            >
+            <Button link="/#projects" variant="outline" style="w-full sm:w-auto"
+                >Ver más</Button
+            >
         </div>
     </div>
 
-    <div class="flex justify-center">
+    <div class="w-full grid place-items-center lg:justify-self-start">
         <img
-            class="h-[500px] lg:h-[700px] rotate-[-6deg] object-contain transform-gpu origin-center"
-            src="/hero_mockup.webp"
-            alt="Mockup de sitio web en dispositivos"
+            class="object-fit transform-gpu origin-center"
+            src="/hero-image.webp"
+            alt="SYNC Estudio - Tu empresa, funcionando en internet"
         />
     </div>
 </div>

@@ -1,0 +1,63 @@
+---
+import "../styles/global.css";
+import Layout from "../layouts/Layout.astro";
+import projects from "../lib/projects";
+import ProjectFeature from "../components/project-feature.astro";
+
+const name = Astro.url.searchParams.get("name");
+const project = projects.find((project) => project.name === name);
+console.log(project);
+---
+
+<Layout>
+    <section
+        class="min-h-screen flex items-center justify-center py-20 md:py-24 px-4 md:px-0"
+    >
+        <div
+            class="container mx-auto py-8 md:py-12 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12"
+        >
+            <div
+                class="flex flex-col justify-center items-start gap-3 md:gap-4 order-2 md:order-1"
+            >
+                <p class="text-base md:text-lg text-zinc-500">
+                    {project?.year}
+                </p>
+                <h1
+                    class="text-3xl md:text-4xl lg:text-5xl font-bold font-[ibm-plex-serif] italic text-emerald-900"
+                >
+                    <a href={project?.url} target="_blank" class="hover:underline transition-all duration-300 ease-in-out">
+                        {project?.name}
+                    </a>
+                </h1>
+
+                <p class="text-base md:text-lg text-zinc-800 leading-relaxed">
+                    {project?.description}
+                </p>
+
+                <div class="mt-6 md:mt-10 w-full">
+                    <h3
+                        class="text-xl md:text-2xl font-bold font-[ibm-plex-serif] text-zinc-600 mb-3 md:mb-4"
+                    >
+                        Características:
+                    </h3>
+                    <ul class="list-none w-full">
+                        {
+                            project?.keypoints?.map((keypoint) => (
+                                <ProjectFeature keypoint={keypoint} />
+                            ))
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div
+                class="flex justify-center items-center order-1 md:order-2 w-full"
+            >
+                <img
+                    class="object-cover w-fit max-w-md md:max-w-lg lg:max-w-xl max-h-[100%] md:max-h-[600px] lg:max-h-[800px]"
+                    src={project?.thumbnail}
+                    alt={project?.name}
+                />
+            </div>
+        </div>
+    </section>
+</Layout>

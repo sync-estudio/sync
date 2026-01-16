@@ -7,6 +7,9 @@ export default {
         manrope: ["Manrope", "sans-serif"],
         "ibm-plex-serif": ["IBM Plex Serif", "serif"],
       },
+      colors: {
+        sync: "#1c5534", // hsl(157, 43%, 21%)
+      },
     },
   },
   plugins: [],

@@ -1,0 +1,76 @@
+---
+import { type Keypoint } from "../lib/projects";
+import { ChevronDown } from "@lucide/astro";
+
+interface Props {
+    keypoint: Keypoint;
+}
+
+const { keypoint } = Astro.props;
+---
+
+<li
+    class="project-feature list-none text-sm md:text-base text-zinc-500 border-b border-zinc-200 py-4 md:py-6"
+>
+    <button
+        class="feature-button w-full text-left cursor-pointer focus:outline-none rounded transition-all"
+        aria-expanded="false"
+    >
+        <div class="flex items-center justify-between gap-4">
+            <h3 class="text-sm md:text-base font-bold text-zinc-600 leading-normal">
+                {keypoint.title}
+            </h3>
+            <ChevronDown
+                class="feature-chevron w-4 h-4 md:w-5 md:h-5 text-zinc-400 transition-transform duration-200 flex-shrink-0"
+            />
+        </div>
+    </button>
+    <div
+        class="feature-description text-sm md:text-base text-zinc-500 overflow-hidden transition-all duration-300 ease-in-out"
+        style="max-height: 0; opacity: 0;"
+    >
+        <p class="pt-2 md:pt-3">{keypoint.description}</p>
+    </div>
+</li>
+
+<script is:inline>
+    (function () {
+        if (window.__featureHandlersInitialized) return;
+        window.__featureHandlersInitialized = true;
+
+        function handleFeatureClick(e) {
+            const target = e.target;
+            const button = target.closest(".feature-button");
+            if (!button) return;
+
+            const feature = button.closest(".project-feature");
+            if (!feature) return;
+
+            const description = feature.querySelector(".feature-description");
+            const chevron = feature.querySelector(".feature-chevron");
+            if (!description || !chevron) return;
+
+            const isExpanded = button.getAttribute("aria-expanded") === "true";
+
+            if (isExpanded) {
+                description.style.maxHeight = "0";
+                description.style.opacity = "0";
+                chevron.style.transform = "rotate(0deg)";
+                button.setAttribute("aria-expanded", "false");
+            } else {
+                description.style.maxHeight = description.scrollHeight + "px";
+                description.style.opacity = "1";
+                chevron.style.transform = "rotate(180deg)";
+                button.setAttribute("aria-expanded", "true");
+            }
+        }
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", function () {
+                document.addEventListener("click", handleFeatureClick);
+            });
+        } else {
+            document.addEventListener("click", handleFeatureClick);
+        }
+    })();
+</script>

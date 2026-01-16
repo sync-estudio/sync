@@ -3,28 +3,32 @@ export interface Props {
     image: string;
     style?: string;
     data: {
-        name: string,
-        year: string,
-        development?: boolean
-    }
+        name: string;
+        year: string;
+        development?: boolean;
+    };
 }
 
 const { image, style = "", data } = Astro.props;
 ---
 
-<div class="text-start">
-    <div
-        class="bg-emerald-50 w-90 h-90 rounded-2xl flex justify-center items-center overflow-hidden transition-all duration-300 ease-in-out hover:scale-[103%] hover:translate-y-[-.5rem]"
-    >
-        <img
-            class={`${style} transition-all duration-300 ease-in-out`}
-            src={image}
-            alt={`${data.name} (${data.year})`}
-        />
-    </div>
-    <div class="mt-4">
-        <h4 class="font-semibold">{data.name}</h4>
-        <p class="text-zinc-500">{data.year}</p>
-        <span class="italic text-zinc-400 font-light">{data.development ? '(En desarrollo)' : ''}</span>
-    </div>
-</div>
+<article class="text-start w-full sm:w-auto">
+    <a href={`/project-details?name=${data.name}`}>
+        <div
+            class="bg-emerald-50 w-full sm:w-80 md:w-90 h-64 sm:h-80 md:h-90 rounded-2xl flex justify-center items-center overflow-hidden transition-all duration-300 ease-in-out hover:scale-[103%] hover:translate-y-[-.5rem]"
+        >
+            <img
+                class={`${style} transition-all duration-300 ease-in-out max-w-full max-h-full object-contain`}
+                src={image}
+                alt={`${data.name} (${data.year})`}
+            />
+        </div>
+        <div class="mt-3 md:mt-4">
+            <h4 class="font-semibold text-base md:text-lg">{data.name}</h4>
+            <p class="text-sm md:text-base text-zinc-500">{data.year}</p>
+            <span class="italic text-xs md:text-sm text-zinc-400 font-light"
+                >{data.development ? "(En desarrollo)" : ""}</span
+            >
+        </div>
+    </a>
+</article>

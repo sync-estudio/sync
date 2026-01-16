@@ -3,15 +3,15 @@ import "../../styles/global.css";
 import Button from "../../components/button.astro";
 ---
 
-<section id="contact" class="container mx-auto text-center p-4 mt-32">
-    <div class="bg-gray-50 rounded-2xl p-8 py-12">
+<section id="contact" class="container mx-auto text-center px-4 md:px-0 mt-20 md:mt-32">
+    <div class="bg-gray-50 rounded-2xl p-6 md:p-8 lg:py-12">
         <div class="font-normal">
             <h3
-                class="font-[ibm-plex-serif] text-xl font-bold italic text-emerald-900"
+                class="font-[ibm-plex-serif] text-lg md:text-xl font-bold italic text-emerald-900"
             >
                 Contacto:
             </h3>
-            <p class="text-3xl">
+            <p class="text-2xl md:text-3xl leading-tight px-2 md:px-0">
                 ¿Listo para empezar tu
                 <span
                     class="font-[ibm-plex-serif] italic font-semibold text-zinc-700"
@@ -20,12 +20,12 @@ import Button from "../../components/button.astro";
             </p>
         </div>
 
-        <div class="mt-8">
-            <p class="mb-6">
+        <div class="mt-6 md:mt-8">
+            <p class="mb-4 md:mb-6 text-sm md:text-base px-2 md:px-0">
                 Cuéntanos sobre tu proyecto y te ayudaremos a llevarlo al siguiente nivel.
             </p>
             
-            <form id="contactForm" class="max-w-md mx-auto space-y-4 mb-6" novalidate>
+            <form id="contactForm" class="max-w-md mx-auto space-y-3 md:space-y-4 mb-4 md:mb-6" novalidate>
                 <div>
                     <input 
                         type="text" 
@@ -82,7 +82,7 @@ import Button from "../../components/button.astro";
                         Enviar Mensaje
                     </Button>
                     <span class="text-gray-500">o</span>
-                    <Button variant="outline" blank link="https://wa.me/522221065533?text=Hola%2C%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20sus%20servicios.">Envíanos un WhatsApp</Button>
+                    <Button variant="outline" blank link="https://wa.me/522228230805?text=Hola%2C%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20sus%20servicios.">Envíanos un WhatsApp</Button>
                 </div>
             </form>
         </div>
