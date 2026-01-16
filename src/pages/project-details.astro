@@ -11,13 +11,13 @@ console.log(project);
 
 <Layout>
     <section
-        class="min-h-screen flex items-center justify-center py-20 md:py-24 px-4 md:px-0"
+        class="min-h-screen py-20 md:py-24 px-4 md:px-0 flex justify-center items-center"
     >
         <div
-            class="container mx-auto py-8 md:py-12 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12"
+            class="container mx-auto py-8 md:py-12 grid justify-center items-center grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12"
         >
             <div
-                class="flex flex-col justify-center items-start gap-3 md:gap-4 order-2 md:order-1"
+                class="flex flex-col justify-start items-start gap-3 md:gap-4 order-2 md:order-1"
             >
                 <p class="text-base md:text-lg text-zinc-500">
                     {project?.year}
@@ -49,15 +49,11 @@ console.log(project);
                     </ul>
                 </div>
             </div>
-            <div
-                class="flex justify-center items-center order-1 md:order-2 w-full"
-            >
                 <img
-                    class="object-cover w-fit max-w-md md:max-w-lg lg:max-w-xl max-h-[100%] md:max-h-[600px] lg:max-h-[800px]"
+                    class="object-contain w-full max-h-[400px] md:max-h-[600px] bg-emerald-50 rounded-2xl px-4 py-12"
                     src={project?.thumbnail}
                     alt={project?.name}
                 />
-            </div>
         </div>
     </section>
 </Layout>
