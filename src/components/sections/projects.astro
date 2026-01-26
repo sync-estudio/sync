@@ -1,5 +1,6 @@
 ---
 import ProjectCard from "../project-card.astro";
+import ProjectCardReact from "../react/project-card";
 ---
 
 <section id="projects" class="h-fit container mx-auto text-center px-4 md:px-0">
@@ -12,23 +13,28 @@ import ProjectCard from "../project-card.astro";
         <p class="text-2xl md:text-3xl">Nuestro trabajo</p>
     </div>
 
-    <div class="flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-8">
-        <ProjectCard
+    <div
+        class="flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-8 overflow-y-hidden"
+    >
+        <ProjectCardReact
+            client:load
             data={{ name: "Hauzzo", year: "2024" }}
             image="/hauzzo_project.webp"
         />
-        <ProjectCard
+        <ProjectCardReact
+            client:load
             data={{ name: "The Royal Barber", year: "2024" }}
             style="sm:w-60 md:translate-y-20"
             image="/the_royal_project.webp"
         />
-        <ProjectCard
+        <ProjectCardReact
+            client:load
             data={{ name: "Sky HR", year: "2025", development: true }}
             style="md:w-full md:translate-y-2"
             image="/sky_hr_project.webp"
         />
-
-        <ProjectCard
+        <ProjectCardReact
+            client:load
             data={{ name: "GZG Seguros", year: "2025" }}
             image="/gzg_project.webp"
         />
