@@ -105,6 +105,14 @@ const projects = [
             }
         ],
         url: "https://gzg.com.mx"
+    },
+    {
+        name: "IMA Cloud",
+        year: "2025",
+        development: true,
+        thumbnail: "/mockups/ima/browser.webp",
+        images: ["/mockups/ima/browser.webp"],
+        description: "IMA Cloud es una plataforma en desarrollo orientada a centralizar operaciones y flujos internos en una experiencia web clara y accesible."
     }
 ]
 
