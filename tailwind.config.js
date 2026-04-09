@@ -2,6 +2,14 @@
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
+    container: {
+      padding: {
+        DEFAULT: "1rem",
+        sm: "1.5rem",
+        lg: "2rem",
+        xl: "3rem",
+      },
+    },
     extend: {
       fontFamily: {
         manrope: ["Manrope", "sans-serif"],

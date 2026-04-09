@@ -13,6 +13,8 @@ html, body {
 }
 
 /* Contenedor principal sin desbordamiento */
-.container {
-  overflow-x: hidden;
+@layer components {
+  .container {
+    overflow-x: hidden;
+  }
 }
