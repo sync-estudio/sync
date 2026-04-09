@@ -5,44 +5,44 @@ import Button from "../../components/button.astro";
 
 <div
     id="hero"
-    class="container mx-auto flex flex-col justify-center items-center min-h-screen h-fit pt-20 md:pt-24 lg:pt-16 px-4 sm:px-6 lg:px-8"
+    class="min-h-[90vh] py-20 md:py-24 container mx-auto flex justify-center items-center"
 >
     <div
-        class="flex flex-col text-center gap-6 sm:gap-7 md:gap-8 lg:gap-10 w-full max-w-4xl lg:my-auto pt-0 lg:pt-20"
+        class="flex flex-col gap-6 sm:gap-7 md:gap-8 lg:gap-10 w-full max-w-8xl lg:my-auto pt-0 lg:pt-20"
     >
-        <div class="text-zinc-800 text-center">
+        <div class="text-zinc-800 text-start">
             <h1
-                class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-3 sm:mb-4 md:mb-5 leading-tight px-2 sm:px-4"
+                class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold mb-3 sm:mb-4 md:mb-5 leading-tight px-2 sm:px-4"
             >
-                Tu empresa, funcionando <br class="hidden sm:block"> <span
+                Software a medida para empresas en operación, enfocado en <br
+                    class="hidden sm:block"
+                />
+                <span
                     class="font-[ibm-plex-serif] font-bold italic text-emerald-900 relative inline-block px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2"
-                    ><span class="absolute inset-0 bg-emerald-200/60 -rotate-1 transform origin-center rounded-sm -mx-1"></span><span class="relative z-10">en internet</span></span
+                    ><span
+                        class="absolute inset-0 bg-emerald-200/60 -rotate-1 transform origin-center rounded-sm -mx-1"
+                    ></span><span class="relative z-10">resultados reales.</span
+                    ></span
                 >
             </h1>
-            <p class="text-sm sm:text-base md:text-lg lg:text-xl font-medium px-2 sm:px-4 md:px-6 lg:px-0 mt-2 sm:mt-3 md:mt-4 max-w-2xl mx-auto">
-                Haz crecer tu negocio. Vende más, trabaja menos y automatiza lo
-                que te quita tiempo.
-            </p>
         </div>
 
         <div
-        class="mx-auto flex justify-center flex-col sm:flex-row gap-3 sm:gap-4 md:gap-5 w-full sm:w-auto px-4 sm:px-0"
+            class="flex justify-start flex-col sm:flex-row gap-3 sm:gap-4 md:gap-5 w-full sm:w-auto px-4 sm:px-0"
         >
-            <Button link="/#contact" style="w-full sm:w-auto text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3"
+            <Button
+                link="/#contact"
+                style="w-full sm:w-auto text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3"
                 >¿Empezamos hoy?</Button
             >
-            <Button link="/#projects" variant="outline" style="w-full sm:w-auto text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3"
+            <Button
+                link="/#projects"
+                variant="outline"
+                style="w-full sm:w-auto text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3"
                 >Ver más</Button
             >
         </div>
     </div>
-
-        <img
-            class="object-contain transform-gpu origin-center w-full max-w-6xl mt-8 sm:mt-10 md:mt-12 lg:mt-16 h-auto"
-            style="height: auto; max-height: 600px; min-height: 300px;"
-            src="/hero-image.webp"
-            alt="SYNC Estudio - Tu empresa, funcionando en internet"
-        />
 </div>
 
 <style>
@@ -52,21 +52,21 @@ import Button from "../../components/button.astro";
             min-height: 400px;
         }
     }
-    
+
     @media (min-width: 768px) {
         #hero img {
             max-height: 700px;
             min-height: 500px;
         }
     }
-    
+
     @media (min-width: 1024px) {
         #hero img {
             max-height: 800px;
             min-height: 600px;
         }
     }
-    
+
     @media (min-width: 1280px) {
         #hero img {
             max-height: 900px;
