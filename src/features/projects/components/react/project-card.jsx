@@ -29,6 +29,9 @@ export default function ProjectCard({ image, style = "", data }) {
                         className={`${style} transition-all duration-300 ease-in-out max-w-full max-h-full object-contain`}
                         src={image}
                         alt={`${data.name} (${data.year})`}
+                        loading="lazy"
+                        decoding="async"
+                        fetchPriority="low"
                     />
                 </div>
                 <div className="mt-3 md:mt-4">
