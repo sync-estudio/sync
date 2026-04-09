@@ -13,3 +13,13 @@
 
 - Never parse, infer, cast, or rewrite a TypeScript type as `any` unless the code is explicitly modeling a generic that requires it.
 - Prefer concrete DOM types, unions, generics, `unknown`, or narrow type guards instead of `any`.
+
+### Import Conventions
+
+- Prefer aliases for cross-folder imports:
+  - `@app/*` -> `src/app/*`
+  - `@features/*` -> `src/features/*`
+  - `@shared/*` -> `src/shared/*`
+  - `@assets/*` -> `src/assets/*`
+- Avoid deep relative imports (`../`, `../../`, `../../../`) when crossing feature boundaries.
+- Keep relative imports only for same-folder files when it improves readability.

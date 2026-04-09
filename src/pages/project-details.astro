@@ -1,8 +1,8 @@
 ---
-import "../styles/global.css";
-import Layout from "../layouts/Layout.astro";
-import projects from "../lib/projects";
-import ProjectFeature from "../components/project-feature.astro";
+import "@app/styles/global.css";
+import Layout from "@app/layouts/Layout.astro";
+import projects from "@features/projects/data/projects";
+import ProjectFeature from "@features/projects/components/project-feature.astro";
 
 const name = Astro.url.searchParams.get("name");
 const project = projects.find((project) => project.name === name);
