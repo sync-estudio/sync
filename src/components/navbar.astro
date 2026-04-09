@@ -4,83 +4,32 @@ const linkWrapper =
 
 const logoWrapper =
     "before:min-w-full before:left-0 before:top-1/2 before:-translate-y-1/2 before:py-2 before:px-2 before:absolute before:block before:opacity-0 hover:before:opacity-40 relative";
-
-// Get current pathname to check if we're on home page
-const currentPath = Astro.url.pathname;
-const isHomePage = currentPath === '/';
 ---
 
 <nav
+    data-site-nav
     class="w-full px-4 md:px-8 lg:px-0 py-4 md:py-8 fixed justify-between bg-white/10 backdrop-blur-sm border-b border-white/20 z-50 overflow-x-hidden overflow-y-hidden"
 >
     <div class="container mx-auto flex justify-between items-center">
-        <div class="relative w-fit max-w-[4rem]">
-            <a class={logoWrapper} href="/" data-section="hero" aria-label="Inicio">
-                <img src="/sync_logo.svg" alt="SYNC Estudio" class="h-8 md:h-auto" />
+        <div class="relative w-12 h-12">
+            <a class={logoWrapper} href="/#hero" aria-label="Inicio">
+                <img src="/sync_squared.png" alt="SYNC Estudio" class="h-full w-full object-contain" />
             </a>
         </div>
 
         <ul class="flex gap-3 md:gap-6 lg:gap-12 text-sm md:text-base" role="menubar" aria-label="Navegación principal">
             <li class="relative">
-                <a class={linkWrapper} href="/" data-section="hero" role="menuitem">Inicio</a>
+                <a class={linkWrapper} href="/#hero" role="menuitem">Inicio</a>
             </li>
             <li class="relative">
-                <a class={linkWrapper} href="/" data-section="about" role="menuitem">Nosotros</a>
+                <a class={linkWrapper} href="/#about" role="menuitem">Nosotros</a>
             </li>
             <li class="relative">
-                <a class={linkWrapper} href="/" data-section="projects" role="menuitem">Proyectos</a>
+                <a class={linkWrapper} href="/#projects" role="menuitem">Proyectos</a>
             </li>
             <li class="relative">
-                <a class={linkWrapper} href="/" data-section="contact" role="menuitem">Contacto</a>
+                <a class={linkWrapper} href="/#contact" role="menuitem">Contacto</a>
             </li>
         </ul>
     </div>
 </nav>
-
-<script>
-    // Handle navigation with smooth scroll from any page
-    document.addEventListener('DOMContentLoaded', () => {
-        const navLinks = document.querySelectorAll('nav a[data-section]');
-        
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                const section = link.getAttribute('data-section');
-                const currentPath = window.location.pathname;
-                
-                // If we're not on the home page, navigate first then scroll
-                if (currentPath !== '/') {
-                    e.preventDefault();
-                    // Navigate to home page with hash
-                    window.location.href = `/#${section}`;
-                } else {
-                    // If we're on home page, handle smooth scroll
-                    e.preventDefault();
-                    const targetElement = document.getElementById(section || '');
-                    if (targetElement) {
-                        targetElement.scrollIntoView({ 
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                        // Update URL hash without scrolling again
-                        history.pushState(null, '', `#${section}`);
-                    }
-                }
-            });
-        });
-        
-        // Handle hash on page load (for direct navigation or after redirect)
-        if (window.location.hash) {
-            const hash = window.location.hash.substring(1);
-            const targetElement = document.getElementById(hash);
-            if (targetElement) {
-                // Small delay to ensure page is fully loaded
-                setTimeout(() => {
-                    targetElement.scrollIntoView({ 
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }, 100);
-            }
-        }
-    });
-</script>

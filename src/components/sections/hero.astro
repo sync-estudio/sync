@@ -8,17 +8,17 @@ import Button from "../../components/button.astro";
     class="min-h-[90vh] py-20 md:py-24 container mx-auto flex justify-center items-center"
 >
     <div
-        class="flex flex-col gap-6 sm:gap-7 md:gap-8 lg:gap-10 w-full max-w-8xl lg:my-auto pt-0 lg:pt-20"
+        class="flex flex-col gap-8 sm:gap-7 md:gap-8 lg:gap-10 w-full max-w-8xl lg:my-auto pt-0 lg:pt-20"
     >
         <div class="text-zinc-800 text-start">
             <h1
-                class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold mb-3 sm:mb-4 md:mb-5 leading-tight px-2 sm:px-4"
+                class="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold mb-4 sm:mb-4 md:mb-5 leading-tight px-2 sm:px-4"
             >
                 Software a medida para empresas en operación, enfocado en <br
                     class="hidden sm:block"
                 />
                 <span
-                    class="font-[ibm-plex-serif] font-bold italic text-emerald-900 relative inline-block px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2"
+                    class="font-[ibm-plex-serif] font-bold italic text-emerald-900 relative inline-block px-2.5 py-1.5 sm:px-3 sm:py-1.5 md:px-4 md:py-2"
                     ><span
                         class="absolute inset-0 bg-emerald-200/60 -rotate-1 transform origin-center rounded-sm -mx-1"
                     ></span><span class="relative z-10">resultados reales.</span
@@ -28,18 +28,16 @@ import Button from "../../components/button.astro";
         </div>
 
         <div
-            class="flex justify-start flex-col sm:flex-row gap-3 sm:gap-4 md:gap-5 w-full sm:w-auto px-4 sm:px-0"
+            class="flex flex-wrap justify-start gap-4 sm:gap-5 md:gap-6 w-full px-4 sm:px-0"
         >
             <Button
                 link="/#contact"
-                style="w-full sm:w-auto text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3"
-                >¿Empezamos hoy?</Button
+                >Solicitar consultoría inicial</Button
             >
             <Button
-                link="/#projects"
-                variant="outline"
-                style="w-full sm:w-auto text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3"
-                >Ver más</Button
+                link="/#contact"
+                variant="ghost"
+                >Explorar soluciones</Button
             >
         </div>
     </div>

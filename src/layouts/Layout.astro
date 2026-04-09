@@ -49,6 +49,16 @@ import Footer from "../components/footer.astro";
 				"sameAs": ["https://www.instagram.com/sync.estudio/"]
 			}
 		</script>
+		<style is:global>
+			:root {
+				--anchor-scroll-offset: 0px;
+				--anchor-scroll-gap: 16px;
+			}
+
+			:where(#hero, #about, #projects, #contact) {
+				scroll-margin-top: calc(var(--anchor-scroll-offset) + var(--anchor-scroll-gap));
+			}
+		</style>
 	</head>
 
 	<body
@@ -62,33 +72,102 @@ import Footer from "../components/footer.astro";
 		
 		<Footer />
 		<script>
-			// Scroll suave para enlaces de anclas con offset para navbar fijo
-			document.addEventListener('DOMContentLoaded', () => {
-				const anchorLinks = document.querySelectorAll('a[href^="/#"]');
-				
-				// Función para obtener la altura del navbar según el dispositivo
-				const getNavbarHeight = () => {
-					return window.innerWidth <= 768 ? 20 : 80; // 20px en móvil, 80px en desktop
+			document.addEventListener("DOMContentLoaded", () => {
+				const anchorGap = 16;
+				const sectionPath = "/";
+				let resizeFrame = 0;
+
+				const getNavbarOffset = () => {
+					const navbar = document.querySelector("[data-site-nav]");
+					const navbarHeight = navbar instanceof HTMLElement ? navbar.getBoundingClientRect().height : 0;
+
+					return Math.max(0, Math.ceil(navbarHeight));
 				};
-				
-				anchorLinks.forEach(link => {
-					link.addEventListener('click', (e) => {
-						e.preventDefault();
-						
-						const href = link.getAttribute('href');
-						if (href && href.startsWith('/#')) {
-							const targetId = href.substring(2); // Remover "/#"
-							const targetElement = document.getElementById(targetId);
-							
-							if (targetElement) {
-								const navbarHeight = getNavbarHeight();
-								const targetPosition = targetElement.offsetTop - navbarHeight;
-								
-								window.scrollTo({
-									top: targetPosition,
-									behavior: 'smooth'
-								});
-							}
+
+				const syncAnchorOffset = () => {
+					document.documentElement.style.setProperty("--anchor-scroll-offset", `${getNavbarOffset()}px`);
+				};
+
+				const getSectionElement = (hash: string) => {
+					const sectionId = decodeURIComponent(hash.replace(/^#/, ""));
+
+					if (!sectionId) {
+						return null;
+					}
+
+					return document.getElementById(sectionId);
+				};
+
+				const scrollToHash = (hash: string, behavior: ScrollBehavior) => {
+					const targetElement = getSectionElement(hash);
+
+					if (!targetElement) {
+						return;
+					}
+
+					const targetPosition = window.scrollY + targetElement.getBoundingClientRect().top - getNavbarOffset() - anchorGap;
+
+					window.scrollTo({
+						top: Math.max(0, targetPosition),
+						behavior
+					});
+				};
+
+				syncAnchorOffset();
+
+				document.addEventListener("click", (event) => {
+					const target = event.target;
+					const link = target instanceof Element ? target.closest('a[href^="/#"]') : null;
+
+					if (!(link instanceof HTMLAnchorElement)) {
+						return;
+					}
+
+					const url = new URL(link.href, window.location.origin);
+
+					if (url.pathname !== sectionPath || window.location.pathname !== sectionPath) {
+						return;
+					}
+
+					const targetElement = getSectionElement(url.hash);
+
+					if (!targetElement) {
+						return;
+					}
+
+					event.preventDefault();
+					syncAnchorOffset();
+					scrollToHash(url.hash, "smooth");
+
+					if (window.location.hash !== url.hash) {
+						history.pushState(null, "", `${sectionPath}${url.hash}`);
+					}
+				});
+
+				window.addEventListener("load", () => {
+					syncAnchorOffset();
+
+					if (window.location.pathname === sectionPath && window.location.hash) {
+						scrollToHash(window.location.hash, "auto");
+					}
+				});
+
+				window.addEventListener("hashchange", () => {
+					if (window.location.pathname !== sectionPath || !window.location.hash) {
+						return;
+					}
+
+					syncAnchorOffset();
+					scrollToHash(window.location.hash, "auto");
+				});
+
+				window.addEventListener("resize", () => {
+					cancelAnimationFrame(resizeFrame);
+					resizeFrame = window.requestAnimationFrame(() => {
+						syncAnchorOffset();
+
+						if (window.location.pathname === sectionPath && window.location.hash) {
+							scrollToHash(window.location.hash, "auto");
 						}
 					});
 				});
