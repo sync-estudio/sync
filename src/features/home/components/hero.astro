@@ -52,11 +52,11 @@ import Button from "@shared/components/ui/button.astro";
     }
 
     .hero-line-1 {
-        animation: heroLineEnter 760ms cubic-bezier(0.22, 1, 0.36, 1) 100ms forwards;
+        animation: heroLineEnter 760ms cubic-bezier(0.22, 1, 0.36, 1) 100ms both;
     }
 
     .hero-line-2 {
-        animation: heroLineEnterFar 640ms cubic-bezier(0.22, 1, 0.36, 1) 320ms forwards;
+        animation: heroLineEnter 760ms cubic-bezier(0.22, 1, 0.36, 1) 100ms both;
     }
 
     .hero-actions-enter {
@@ -68,15 +68,6 @@ import Button from "@shared/components/ui/button.astro";
     @keyframes heroLineEnter {
         from {
             transform: translateX(44px);
-        }
-        to {
-            transform: translateX(0);
-        }
-    }
-
-    @keyframes heroLineEnterFar {
-        from {
-            transform: translateX(72px);
         }
         to {
             transform: translateX(0);
