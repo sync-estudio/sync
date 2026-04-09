@@ -1,35 +1,207 @@
 ---
 const linkWrapper =
-    "before:min-w-full before:left-0 before:top-1/2 before:-translate-y-1/2 before:py-2 before:px-2 before:absolute before:block before:opacity-0 hover:before:opacity-40 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 after:ease-in-out after:w-0 hover:after:w-full";
+    "text-zinc-600 hover:text-zinc-900 px-3 py-1.5 rounded-full transition-all duration-300 hover:bg-zinc-100/80 font-medium text-sm md:text-base";
+
+const ctaWrapper =
+    "bg-zinc-900 text-white hover:bg-zinc-800 px-5 py-1.5 rounded-full transition-all duration-300 font-medium text-sm md:text-base shadow-sm hover:shadow-md active:scale-95";
 
 const logoWrapper =
-    "before:min-w-full before:left-0 before:top-1/2 before:-translate-y-1/2 before:py-2 before:px-2 before:absolute before:block before:opacity-0 hover:before:opacity-40 relative";
+    "flex items-center transition-transform hover:scale-105 active:scale-95";
 ---
 
 <nav
     data-site-nav
-    class="w-full px-4 md:px-8 lg:px-0 py-4 md:py-8 fixed justify-between bg-white/10 backdrop-blur-sm border-b border-white/20 z-50 overflow-x-hidden overflow-y-hidden"
+    class="fixed top-4 inset-x-0 flex justify-center z-50 pointer-events-none"
 >
-    <div class="container mx-auto flex justify-between items-center">
-        <div class="relative w-12 h-12">
-            <a class={logoWrapper} href="/#hero" aria-label="Inicio">
-                <img src="/sync_logo.webp" alt="SYNC Estudio" class="h-full w-full object-contain" />
-            </a>
+    <div class="flex w-full flex-col items-center gap-3 relative">
+        <div 
+            class="bg-white/70 backdrop-blur-lg border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.04)] rounded-full px-4 md:px-6 py-2 grid grid-cols-[auto_1fr_auto] items-center gap-3 md:gap-6 pointer-events-auto w-[95%] max-w-5xl navbar-entrance"
+        >
+            <div class="flex items-center shrink-0">
+                <a class={logoWrapper} href="/#hero" aria-label="Inicio">
+                    <img src="/sync.svg" alt="SYNC Estudio" class="h-3 w-auto md:h-4 object-contain" />
+                </a>
+            </div>
+
+            <div class="hidden sm:flex justify-center">
+                <ul class="flex items-center gap-0.5 md:gap-1 overflow-x-auto no-scrollbar" role="menubar" aria-label="Navegación principal">
+                    <li class="relative">
+                        <a class={linkWrapper} href="/#hero" role="menuitem">Inicio</a>
+                    </li>
+                    <li class="relative">
+                        <a class={linkWrapper} href="/#about" role="menuitem">Nosotros</a>
+                    </li>
+                    <li class="relative">
+                        <a class={linkWrapper} href="/#projects" role="menuitem">Proyectos</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="flex items-center justify-end shrink-0 gap-2">
+                <a class={`${ctaWrapper} hidden sm:inline-flex`} href="/#contact" role="menuitem">Contacto</a>
+                <button
+                    type="button"
+                    class="sm:hidden inline-flex items-center justify-center h-9 w-9 rounded-full border border-white/50 bg-white/80 text-zinc-800 shadow-sm transition-all duration-300 hover:bg-white focus:outline-none focus:ring-2 focus:ring-zinc-300 nav-toggle"
+                    aria-label="Abrir menú"
+                    aria-controls="mobile-nav-menu"
+                    aria-expanded="false"
+                    data-site-nav-toggle
+                >
+                    <span class="flex flex-col gap-1 nav-toggle-bars">
+                        <span class="block h-0.5 w-4 bg-zinc-800 rounded-full nav-toggle-bar nav-toggle-bar-top"></span>
+                        <span class="block h-0.5 w-4 bg-zinc-800 rounded-full nav-toggle-bar nav-toggle-bar-mid"></span>
+                        <span class="block h-0.5 w-4 bg-zinc-800 rounded-full nav-toggle-bar nav-toggle-bar-bottom"></span>
+                    </span>
+                </button>
+            </div>
         </div>
 
-        <ul class="flex gap-3 md:gap-6 lg:gap-12 text-sm md:text-base" role="menubar" aria-label="Navegación principal">
-            <li class="relative">
-                <a class={linkWrapper} href="/#hero" role="menuitem">Inicio</a>
-            </li>
-            <li class="relative">
-                <a class={linkWrapper} href="/#about" role="menuitem">Nosotros</a>
-            </li>
-            <li class="relative">
-                <a class={linkWrapper} href="/#projects" role="menuitem">Proyectos</a>
-            </li>
-            <li class="relative">
-                <a class={linkWrapper} href="/#contact" role="menuitem">Contacto</a>
-            </li>
-        </ul>
+        <div class="sm:hidden absolute inset-x-0 top-full mt-3 flex justify-center pointer-events-auto">
+            <div
+                id="mobile-nav-menu"
+                class="mobile-menu w-[95%] max-w-sm bg-white/80 backdrop-blur-lg border border-white/50 shadow-[0_12px_32px_rgba(0,0,0,0.08)] rounded-2xl px-3 py-3"
+                data-site-nav-menu
+                aria-hidden="true"
+            >
+                <ul class="flex flex-col gap-2" role="menu" aria-label="Navegación móvil">
+                    <li>
+                        <a class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70" href="/#hero" role="menuitem">Inicio</a>
+                    </li>
+                    <li>
+                        <a class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70" href="/#about" role="menuitem">Nosotros</a>
+                    </li>
+                    <li>
+                        <a class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70" href="/#projects" role="menuitem">Proyectos</a>
+                    </li>
+                    <li>
+                        <a class="block w-full text-zinc-900 font-medium px-3 py-2 rounded-xl bg-zinc-100/90 hover:bg-zinc-200/80 transition-all duration-200" href="/#contact" role="menuitem">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </nav>
+
+<style>
+    .navbar-entrance {
+        opacity: 0;
+        transform: translateY(-10px);
+        animation: navbarFadeIn 800ms cubic-bezier(0.22, 1, 0.36, 1) 400ms forwards;
+    }
+
+    @keyframes navbarFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .mobile-menu {
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(-8px) scale(0.98);
+        overflow: hidden;
+        pointer-events: none;
+        transition: max-height 240ms cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 180ms ease-out,
+            transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .mobile-menu.is-open {
+        max-height: 360px;
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+    }
+
+    .nav-toggle-bar {
+        transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 180ms ease-out;
+        transform-origin: center;
+    }
+
+    .nav-toggle.is-open .nav-toggle-bar-top {
+        transform: translateY(6px) rotate(45deg);
+    }
+
+    .nav-toggle.is-open .nav-toggle-bar-mid {
+        opacity: 0;
+    }
+
+    .nav-toggle.is-open .nav-toggle-bar-bottom {
+        transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .navbar-entrance {
+            animation: none;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-menu {
+            transition: none;
+            transform: none;
+        }
+
+        .nav-toggle-bar {
+            transition: none;
+        }
+    }
+</style>
+
+<script>
+    const nav = document.querySelector("[data-site-nav]");
+    const toggle = nav?.querySelector("[data-site-nav-toggle]");
+    const menu = nav?.querySelector("[data-site-nav-menu]");
+
+    if (toggle instanceof HTMLButtonElement && menu instanceof HTMLElement) {
+        toggle.addEventListener("click", () => {
+            const willOpen = !menu.classList.contains("is-open");
+            menu.classList.toggle("is-open");
+            toggle.setAttribute("aria-expanded", String(willOpen));
+            menu.setAttribute("aria-hidden", String(!willOpen));
+            toggle.classList.toggle("is-open", willOpen);
+        });
+
+        menu.addEventListener("click", (event) => {
+            const target = event.target;
+            const link = target instanceof Element ? target.closest("a") : null;
+
+            if (!(link instanceof HTMLAnchorElement)) {
+                return;
+            }
+
+            menu.classList.remove("is-open");
+            toggle.setAttribute("aria-expanded", "false");
+            menu.setAttribute("aria-hidden", "true");
+            toggle.classList.remove("is-open");
+        });
+
+        const mediaQuery = window.matchMedia("(min-width: 640px)");
+
+        const syncMenuState = () => {
+            if (mediaQuery.matches) {
+                menu.classList.remove("is-open");
+                toggle.setAttribute("aria-expanded", "false");
+                menu.setAttribute("aria-hidden", "true");
+                toggle.classList.remove("is-open");
+            }
+        };
+
+        syncMenuState();
+        mediaQuery.addEventListener("change", syncMenuState);
+    }
+</script>
