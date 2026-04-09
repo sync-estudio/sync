@@ -19,7 +19,13 @@ const logoWrapper =
         >
             <div class="flex items-center shrink-0">
                 <a class={logoWrapper} href="/#hero" aria-label="Inicio">
-                    <img src="/sync.svg" alt="SYNC Estudio" class="h-3 w-auto md:h-4 object-contain" />
+                    <img
+                        src="/sync.svg"
+                        alt="SYNC Estudio"
+                        width="717"
+                        height="186"
+                        class="h-3 w-auto md:h-4 object-contain"
+                    />
                 </a>
             </div>
 
@@ -62,6 +68,7 @@ const logoWrapper =
                 class="mobile-menu w-[95%] max-w-sm bg-white/80 backdrop-blur-lg border border-white/50 shadow-[0_12px_32px_rgba(0,0,0,0.08)] rounded-2xl px-3 py-3"
                 data-site-nav-menu
                 aria-hidden="true"
+                inert
             >
                 <ul class="flex flex-col gap-2" role="menu" aria-label="Navegación móvil">
                     <li>
@@ -168,12 +175,24 @@ const logoWrapper =
     const menu = nav?.querySelector("[data-site-nav-menu]");
 
     if (toggle instanceof HTMLButtonElement && menu instanceof HTMLElement) {
+        const setMenuState = (isOpen: boolean) => {
+            menu.classList.toggle("is-open", isOpen);
+            toggle.setAttribute("aria-expanded", String(isOpen));
+            menu.setAttribute("aria-hidden", String(!isOpen));
+            toggle.classList.toggle("is-open", isOpen);
+            toggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+
+            if (isOpen) {
+                menu.removeAttribute("inert");
+                return;
+            }
+
+            menu.setAttribute("inert", "");
+        };
+
         toggle.addEventListener("click", () => {
             const willOpen = !menu.classList.contains("is-open");
-            menu.classList.toggle("is-open");
-            toggle.setAttribute("aria-expanded", String(willOpen));
-            menu.setAttribute("aria-hidden", String(!willOpen));
-            toggle.classList.toggle("is-open", willOpen);
+            setMenuState(willOpen);
         });
 
         menu.addEventListener("click", (event) => {
@@ -184,20 +203,14 @@ const logoWrapper =
                 return;
             }
 
-            menu.classList.remove("is-open");
-            toggle.setAttribute("aria-expanded", "false");
-            menu.setAttribute("aria-hidden", "true");
-            toggle.classList.remove("is-open");
+            setMenuState(false);
         });
 
         const mediaQuery = window.matchMedia("(min-width: 640px)");
 
         const syncMenuState = () => {
             if (mediaQuery.matches) {
-                menu.classList.remove("is-open");
-                toggle.setAttribute("aria-expanded", "false");
-                menu.setAttribute("aria-hidden", "true");
-                toggle.classList.remove("is-open");
+                setMenuState(false);
             }
         };
 
