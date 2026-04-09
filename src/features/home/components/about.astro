@@ -2,29 +2,32 @@
 import "@app/styles/global.css";
 ---
 
-<section id="about" class="container mx-auto text-center mt-20 md:mt-32">
-    <div class="bg-gray-50 rounded-2xl p-6 md:p-8 lg:py-12 shadow-lg">
-        <div class="font-normal">
-            <h2
-                class="font-[ibm-plex-serif] text-lg md:text-xl font-bold italic text-emerald-900"
-            >
-                Nosotros:
-            </h2>
-            <p class="text-2xl md:text-3xl leading-tight px-2 md:px-0">
-                Ayudamos a empresas a migrar al
-                <span
-                    class="font-[ibm-plex-serif] italic font-semibold text-zinc-700"
-                    >mundo digital
-                </span>
-            </p>
+<section
+    id="about"
+    class="container mx-auto grid text-center gap-4 md:grid-cols-[33%_1fr]"
+>
+    <article class="flex flex-col text-start text-zinc-600">
+        <div
+            class="max-h-10/12 bg-emerald-50/70 rounded-2xl flex items-center p-6 md:p-8 lg:py-12 overflow-hidden h-full"
+        >
+            <img
+                class="translate-y-1/4"
+                loading="lazy"
+                src="/skyhr.webp"
+                alt=""
+            />
         </div>
 
-        <div class="mt-6 md:mt-8">
-            <h3 class="text-lg md:text-xl italic text-emerald-900 mb-2 md:mb-3">¿Cómo?</h3>
-            <p class="text-sm md:text-base px-2 md:px-0 max-w-2xl mx-auto">
-                Creamos herramientas y productos digitales que impulsen la
-                presencia y capacidad de venta online de empresas mexicanas.
-            </p>
+        <p class="text-zinc-500 mt-4">Skyhr</p>
+        <h3 class="font-semibold">Sistema de control de asistencias.</h3>
+    </article>
+
+    <article class="flex flex-col text-start text-zinc-600">
+        <div class="overflow-hidden bg-emerald-50/70 rounded-2xl p-6 md:p-8 lg:py-12 h-full max-h-10/12 flex items-center justify-center">
+            <img class="translate-y-3/8 translate-x-1/6" loading="lazy" src="/ima-cloud.webp" alt="" />
         </div>
-    </div>
+
+        <p class="text-zinc-500 mt-4">IMA Cloud</p>
+        <h3 class="font-semibold">Automatizacion y gestion de formas.</h3>
+    </article>
 </section>
