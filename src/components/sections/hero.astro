@@ -14,21 +14,22 @@ import Button from "../../components/button.astro";
             <h1
                 class="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold mb-4 sm:mb-4 md:mb-5 leading-tight px-2 sm:px-4"
             >
-                Software a medida para empresas en operación, enfocado en <br
-                    class="hidden sm:block"
-                />
-                <span
-                    class="font-[ibm-plex-serif] font-bold italic text-emerald-900 relative inline-block px-2.5 py-1.5 sm:px-3 sm:py-1.5 md:px-4 md:py-2"
+                <span class="hero-line hero-line-1"
+                    >Software a medida para empresas en operación, enfocado en</span
+                >
+                <span class="hero-line hero-line-2"
                     ><span
-                        class="absolute inset-0 bg-emerald-200/60 -rotate-1 transform origin-center rounded-sm -mx-1"
-                    ></span><span class="relative z-10">resultados reales.</span
+                        class="font-[ibm-plex-serif] font-bold italic text-emerald-900 relative inline-block px-2.5 py-1.5 sm:px-3 sm:py-1.5 md:px-4 md:py-2"
+                        ><span
+                            class="absolute inset-0 bg-emerald-200/60 -rotate-1 transform origin-center rounded-sm -mx-1"
+                        ></span><span class="relative z-10">resultados reales.</span></span
                     ></span
                 >
             </h1>
         </div>
 
         <div
-            class="flex flex-wrap justify-start gap-4 sm:gap-5 md:gap-6 w-full px-4 sm:px-0"
+            class="flex flex-wrap justify-start gap-4 sm:gap-5 md:gap-6 w-full px-4 sm:px-0 hero-actions-enter"
         >
             <Button
                 link="/#contact"
@@ -44,6 +45,71 @@ import Button from "../../components/button.astro";
 </div>
 
 <style>
+    .hero-line {
+        display: block;
+        opacity: 0;
+        transform: translateX(44px);
+        animation: heroLineEnter 760ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .hero-line-1 {
+        animation-delay: 100ms;
+    }
+
+    .hero-line-2 {
+        animation-name: heroLineEnterFar;
+        animation-delay: 320ms;
+        animation-duration: 640ms;
+    }
+
+    .hero-actions-enter {
+        opacity: 0;
+        transform: translateY(24px);
+        animation: heroActionsEnter 760ms cubic-bezier(0.22, 1, 0.36, 1) 100ms forwards;
+    }
+
+    @keyframes heroLineEnter {
+        from {
+            opacity: 0;
+            transform: translateX(44px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes heroLineEnterFar {
+        from {
+            opacity: 0;
+            transform: translateX(72px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes heroActionsEnter {
+        from {
+            opacity: 0;
+            transform: translateY(24px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .hero-line,
+        .hero-actions-enter {
+            animation: none;
+            opacity: 1;
+            transform: none;
+        }
+    }
+
     @media (min-width: 640px) {
         #hero img {
             max-height: 600px;
