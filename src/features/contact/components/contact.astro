@@ -6,60 +6,68 @@ import Button from "@shared/components/ui/button.astro";
 <section id="contact" class="container mx-auto mt-20 md:mt-32 px-4 md:px-6">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start overflow-visible">
         <!-- Columna Izquierda: Contenido -->
-        <div class="text-left space-y-8">
-            <div class="space-y-4">
-                <span class="text-xs md:text-sm font-semibold uppercase tracking-widest text-emerald-700 font-[ibm-plex-serif] italic">Habla con nosotros</span>
-                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-zinc-900">
-                    Convierte ideas en <span class="text-emerald-900">realidades digitales</span>
+        <div class="text-left space-y-8 md:space-y-10">
+            <div class="space-y-4 md:space-y-6">
+                <h2
+                    class="font-[ibm-plex-serif] text-lg md:text-xl font-bold italic text-emerald-900"
+                >
+                    Habla con nosotros
                 </h2>
-                <p class="text-lg md:text-xl text-zinc-600 leading-relaxed max-w-xl">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight text-zinc-800">
+                    Convierte ideas en 
+                    <span class="font-[ibm-plex-serif] font-bold italic text-emerald-900 relative inline-block px-1">
+                        <span class="absolute inset-0 bg-emerald-200/60 -rotate-1 transform origin-center rounded-sm -mx-1"></span>
+                        <span class="relative z-10">realidades digitales.</span>
+                    </span>
+                </h1>
+                <p class="text-lg md:text-xl text-zinc-500 leading-relaxed max-w-xl">
                     Conéctate con nuestro equipo para ver cómo podemos unificar tus procesos, potenciar tu presencia y escalar tu negocio con soluciones tecnológicas a medida.
                 </p>
             </div>
 
-            <ul class="space-y-6">
-                <li class="flex items-start gap-4">
-                    <div class="mt-1 bg-emerald-100 p-1.5 rounded-md">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <ul class="space-y-8">
+                <li class="flex items-start gap-4 transition-all duration-300 ease-in-out hover:translate-x-1">
+                    <div class="mt-1.5 flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-emerald-50 text-emerald-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
                         </svg>
                     </div>
                     <div>
-                        <h3 class="font-bold text-zinc-800">Consultoría estratégica</h3>
-                        <p class="text-zinc-600 text-sm">Compartiremos tus objetivos y retos para trazar el camino tecnológico ideal para tu empresa.</p>
+                        <h3 class="font-semibold text-zinc-800 text-lg">Consultoría estratégica</h3>
+                        <p class="text-zinc-500 text-sm md:text-base leading-relaxed mt-1">Compartiremos tus objetivos y retos para trazar el camino tecnológico ideal para tu empresa.</p>
                     </div>
                 </li>
-                <li class="flex items-start gap-4">
-                    <div class="mt-1 bg-emerald-100 p-1.5 rounded-md">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <li class="flex items-start gap-4 transition-all duration-300 ease-in-out hover:translate-x-1">
+                    <div class="mt-1.5 flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-emerald-50 text-emerald-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
                         </svg>
                     </div>
                     <div>
-                        <h3 class="font-bold text-zinc-800">Soluciones personalizadas</h3>
-                        <p class="text-zinc-600 text-sm">Te mostraremos las capacidades técnicas y creativas más relevantes para tu organización.</p>
+                        <h3 class="font-semibold text-zinc-800 text-lg">Soluciones personalizadas</h3>
+                        <p class="text-zinc-500 text-sm md:text-base leading-relaxed mt-1">Te mostraremos las capacidades técnicas y creativas más relevantes para tu organización.</p>
                     </div>
                 </li>
-                <li class="flex items-start gap-4">
-                    <div class="mt-1 bg-emerald-100 p-1.5 rounded-md">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <li class="flex items-start gap-4 transition-all duration-300 ease-in-out hover:translate-x-1">
+                    <div class="mt-1.5 flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-emerald-50 text-emerald-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
                         </svg>
                     </div>
                     <div>
-                        <h3 class="font-bold text-zinc-800">Preparados para escalar</h3>
-                        <p class="text-zinc-600 text-sm">Hablamos sobre seguridad, cumplimiento y escalabilidad con total confianza.</p>
+                        <h3 class="font-semibold text-zinc-800 text-lg">Preparados para escalar</h3>
+                        <p class="text-zinc-500 text-sm md:text-base leading-relaxed mt-1">Hablamos sobre seguridad, cumplimiento y escalabilidad con total confianza.</p>
                     </div>
                 </li>
-                <li class="flex items-start gap-4">
-                    <div class="mt-1 bg-emerald-100 p-1.5 rounded-md">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <li class="flex items-start gap-4 transition-all duration-300 ease-in-out hover:translate-x-1">
+                    <div class="mt-1.5 flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-emerald-50 text-emerald-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
                         </svg>
                     </div>
                     <div>
-                        <h3 class="font-bold text-zinc-800">Valor medible</h3>
-                        <p class="text-zinc-600 text-sm">Obtén métricas claras y resultados tangibles desde las primeras etapas del proyecto.</p>
+                        <h3 class="font-semibold text-zinc-800 text-lg">Valor medible</h3>
+                        <p class="text-zinc-500 text-sm md:text-base leading-relaxed mt-1">Obtén métricas claras y resultados tangibles desde las primeras etapas del proyecto.</p>
                     </div>
                 </li>
             </ul>
@@ -67,7 +75,7 @@ import Button from "@shared/components/ui/button.astro";
 
         <!-- Columna Derecha: Formulario -->
         <div class="p-1 md:p-2 overflow-visible">
-            <div class="bg-zinc-900 rounded-3xl p-8 md:p-10 shadow-2xl border border-zinc-800 transition-all duration-300 ease-in-out hover:scale-[101%] hover:translate-y-[-0.25rem] hover:shadow-emerald-900/20 will-change-transform">
+            <div class="bg-zinc-900 rounded-3xl p-8 md:p-10 shadow-2xl border border-zinc-800 transition-all duration-300 ease-in-out hover:scale-[101%] hover:translate-y-[-0.25rem] hover:shadow-emerald-900/10 will-change-transform">
                 <form id="contactForm" class="space-y-6" novalidate>
                     <div class="space-y-1.5">
                         <label for="email" class="text-sm font-medium text-zinc-300">Email*</label>
