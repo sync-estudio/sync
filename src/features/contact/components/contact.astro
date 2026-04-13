@@ -3,86 +3,203 @@ import "@app/styles/global.css";
 import Button from "@shared/components/ui/button.astro";
 ---
 
-<section id="contact" class="container mx-auto text-center mt-20 md:mt-32">
-    <div class="bg-gray-50 rounded-2xl p-6 md:p-8 lg:py-12">
-        <div class="font-normal">
-            <h2
-                class="font-[ibm-plex-serif] text-lg md:text-xl font-bold italic text-emerald-900"
-            >
-                Contacto:
-            </h2>
-            <p class="text-2xl md:text-3xl leading-tight px-2 md:px-0">
-                ¿Listo para empezar tu
-                <span
-                    class="font-[ibm-plex-serif] italic font-semibold text-zinc-700"
-                    >transformación digital?</span
-                >
-            </p>
+<section id="contact" class="container mx-auto mt-20 md:mt-32 px-4 md:px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+        <!-- Columna Izquierda: Contenido -->
+        <div class="text-left space-y-8">
+            <div class="space-y-4">
+                <span class="text-xs md:text-sm font-semibold uppercase tracking-widest text-emerald-700">Habla con nosotros</span>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-zinc-900 font-[ibm-plex-serif] italic">
+                    Convierte ideas en <span class="text-emerald-900">realidades digitales</span>
+                </h2>
+                <p class="text-lg md:text-xl text-zinc-600 leading-relaxed max-w-xl">
+                    Conéctate con nuestro equipo para ver cómo podemos unificar tus procesos, potenciar tu presencia y escalar tu negocio con soluciones tecnológicas a medida.
+                </p>
+            </div>
+
+            <ul class="space-y-6">
+                <li class="flex items-start gap-4">
+                    <div class="mt-1 bg-emerald-100 p-1.5 rounded-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-zinc-800">Consultoría estratégica</h3>
+                        <p class="text-zinc-600 text-sm">Compartiremos tus objetivos y retos para trazar el camino tecnológico ideal para tu empresa.</p>
+                    </div>
+                </li>
+                <li class="flex items-start gap-4">
+                    <div class="mt-1 bg-emerald-100 p-1.5 rounded-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-zinc-800">Soluciones personalizadas</h3>
+                        <p class="text-zinc-600 text-sm">Te mostraremos las capacidades técnicas y creativas más relevantes para tu organización.</p>
+                    </div>
+                </li>
+                <li class="flex items-start gap-4">
+                    <div class="mt-1 bg-emerald-100 p-1.5 rounded-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-zinc-800">Preparados para escalar</h3>
+                        <p class="text-zinc-600 text-sm">Hablamos sobre seguridad, cumplimiento y escalabilidad con total confianza.</p>
+                    </div>
+                </li>
+                <li class="flex items-start gap-4">
+                    <div class="mt-1 bg-emerald-100 p-1.5 rounded-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-zinc-800">Valor medible</h3>
+                        <p class="text-zinc-600 text-sm">Obtén métricas claras y resultados tangibles desde las primeras etapas del proyecto.</p>
+                    </div>
+                </li>
+            </ul>
         </div>
 
-        <div class="mt-6 md:mt-8">
-            <p class="mb-4 md:mb-6 text-sm md:text-base px-2 md:px-0">
-                Cuéntanos sobre tu proyecto y te ayudaremos a llevarlo al siguiente nivel.
-            </p>
-            
-            <form id="contactForm" class="max-w-md mx-auto space-y-3 md:space-y-4 mb-4 md:mb-6" novalidate>
-                <div>
-                    <input 
-                        type="text" 
-                        id="name" 
-                        name="name" 
-                        placeholder="Tu nombre" 
-                        aria-label="Nombre"
-                        autocomplete="name"
-                        required
-                        minlength="2"
-                        maxlength="50"
-                        pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors duration-200"
-                        data-valid="false"
-                    >
-                    <div id="nameError" class="hidden text-left mt-1 text-sm text-red-600"></div>
-                </div>
-                <div>
+        <!-- Columna Derecha: Formulario -->
+        <div class="bg-zinc-900 rounded-3xl p-8 md:p-10 shadow-2xl border border-zinc-800">
+            <form id="contactForm" class="space-y-6" novalidate>
+                <div class="space-y-1.5">
+                    <label for="email" class="text-sm font-medium text-zinc-300">Email*</label>
                     <input 
                         type="email" 
                         id="email" 
                         name="email" 
-                        placeholder="Tu email" 
-                        aria-label="Correo electrónico"
-                        autocomplete="email"
+                        placeholder="tu@email.com" 
                         required
                         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors duration-200"
+                        class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-500 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
                         data-valid="false"
                     >
-                    <div id="emailError" class="hidden text-left mt-1 text-sm text-red-600"></div>
+                    <div id="emailError" class="hidden text-left mt-1 text-xs text-red-500"></div>
                 </div>
-                <div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-1.5">
+                        <label for="firstName" class="text-sm font-medium text-zinc-300">Nombre*</label>
+                        <input 
+                            type="text" 
+                            id="firstName" 
+                            name="firstName" 
+                            placeholder="Tu nombre" 
+                            required
+                            minlength="2"
+                            class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-500 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
+                            data-valid="false"
+                        >
+                        <div id="firstNameError" class="hidden text-left mt-1 text-xs text-red-500"></div>
+                    </div>
+                    <div class="space-y-1.5">
+                        <label for="lastName" class="text-sm font-medium text-zinc-300">Apellido*</label>
+                        <input 
+                            type="text" 
+                            id="lastName" 
+                            name="lastName" 
+                            placeholder="Tu apellido" 
+                            required
+                            minlength="2"
+                            class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-500 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
+                            data-valid="false"
+                        >
+                        <div id="lastNameError" class="hidden text-left mt-1 text-xs text-red-500"></div>
+                    </div>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label for="companyName" class="text-sm font-medium text-zinc-300">Nombre de la empresa*</label>
+                    <input 
+                        type="text" 
+                        id="companyName" 
+                        name="companyName" 
+                        placeholder="Sync Estudio Inc." 
+                        required
+                        class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-500 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
+                        data-valid="false"
+                    >
+                    <div id="companyNameError" class="hidden text-left mt-1 text-xs text-red-500"></div>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label for="jobTitle" class="text-sm font-medium text-zinc-300">Cargo*</label>
+                    <input 
+                        type="text" 
+                        id="jobTitle" 
+                        name="jobTitle" 
+                        placeholder="Director de Producto" 
+                        required
+                        class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-500 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
+                        data-valid="false"
+                    >
+                    <div id="jobTitleError" class="hidden text-left mt-1 text-xs text-red-500"></div>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label for="companySize" class="text-sm font-medium text-zinc-300">Tamaño de la empresa*</label>
+                    <select 
+                        id="companySize" 
+                        name="companySize" 
+                        required
+                        class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none appearance-none"
+                        data-valid="false"
+                    >
+                        <option value="" disabled selected class="bg-zinc-900">Selecciona una opción</option>
+                        <option value="1-10" class="bg-zinc-900">1-10 empleados</option>
+                        <option value="11-50" class="bg-zinc-900">11-50 empleados</option>
+                        <option value="51-200" class="bg-zinc-900">51-200 empleados</option>
+                        <option value="201-1000" class="bg-zinc-900">201-1000 empleados</option>
+                        <option value="1000+" class="bg-zinc-900">1000+ empleados</option>
+                    </select>
+                    <div id="companySizeError" class="hidden text-left mt-1 text-xs text-red-500"></div>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label for="phone" class="text-sm font-medium text-zinc-300">Número de teléfono</label>
+                    <input 
+                        type="tel" 
+                        id="phone" 
+                        name="phone" 
+                        placeholder="+52 ..." 
+                        class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-500 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
+                    >
+                </div>
+
+                <div class="space-y-1.5">
+                    <label for="message" class="text-sm font-medium text-zinc-300">¿Hay algo más que te gustaría compartir con nosotros?</label>
                     <textarea 
                         id="message" 
                         name="message" 
-                        placeholder="Cuéntanos sobre tu proyecto" 
-                        aria-label="Mensaje"
-                        autocomplete="off"
+                        placeholder="Cuéntanos sobre tu proyecto..." 
                         rows="4" 
-                        required
-                        minlength="10"
-                        maxlength="500"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 resize-none transition-colors duration-200"
-                        data-valid="false"
+                        class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-500 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 resize-none transition-all duration-200 outline-none"
+                        maxlength="1000"
                     ></textarea>
-                    <div id="messageError" class="hidden text-left mt-1 text-sm text-red-600"></div>
-                    <div class="text-right mt-1 text-xs text-gray-500">
-                        <span id="messageCount">0</span>/500 caracteres
+                    <div class="text-right mt-1 text-[10px] text-zinc-500 uppercase tracking-wider">
+                        <span id="messageCount">0</span>/1000 caracteres
                     </div>
                 </div>
-                <div class="flex flex-col items-center gap-4">
-                    <Button style="w-full transition-all duration-200 ease-in-out hover:bg-emerald-700 hover:scale-[1.02] hover:shadow-md active:scale-[0.98] active:bg-emerald-800 focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:outline-none">
-                        Enviar Mensaje
+
+                <div class="pt-4">
+                    <p class="text-[10px] text-zinc-500 mb-6 leading-relaxed">
+                        Sync necesita la información de contacto que nos proporcionas para comunicarnos contigo acerca de nuestros productos y servicios. Puedes darte de baja de estas comunicaciones en cualquier momento. Para obtener información, consulta nuestros <a href="/terms" class="text-zinc-300 underline underline-offset-2 hover:text-emerald-500">Términos de Servicio</a> y <a href="/privacy" class="text-zinc-300 underline underline-offset-2 hover:text-emerald-500">Política de Privacidad</a>.
+                    </p>
+                    <Button style="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition-all duration-300 rounded-xl">
+                        Enviar solicitud
                     </Button>
-                    <span class="text-gray-500">o</span>
-                    <Button variant="outline" blank link="https://wa.me/522228230805?text=Hola%2C%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20sus%20servicios.">Envíanos un WhatsApp</Button>
+                    <div class="mt-4 text-center">
+                        <a href="https://wa.me/522228230805?text=Hola%2C%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20sus%20servicios." target="_blank" class="text-sm text-zinc-400 hover:text-emerald-500 transition-colors inline-flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            O envíanos un WhatsApp
+                        </a>
+                    </div>
                 </div>
             </form>
         </div>
@@ -92,26 +209,31 @@ import Button from "@shared/components/ui/button.astro";
 <script>
 // Validaciones
 const validations: Record<string, Record<string, string>> = {
-    name: {
-        required: 'El nombre es requerido',
-        minlength: 'El nombre debe tener al menos 2 caracteres',
-        maxlength: 'El nombre no puede exceder 50 caracteres',
-        pattern: 'El nombre solo puede contener letras y espacios'
-    },
     email: {
         required: 'El email es requerido',
         pattern: 'Por favor ingresa un email válido'
     },
-    message: {
-        required: 'El mensaje es requerido',
-        minlength: 'El mensaje debe tener al menos 10 caracteres',
-        maxlength: 'El mensaje no puede exceder 500 caracteres'
+    firstName: {
+        required: 'El nombre es requerido',
+        minlength: 'El nombre debe tener al menos 2 caracteres'
+    },
+    lastName: {
+        required: 'El apellido es requerido',
+        minlength: 'El apellido debe tener al menos 2 caracteres'
+    },
+    companyName: {
+        required: 'El nombre de la empresa es requerido'
+    },
+    jobTitle: {
+        required: 'El cargo es requerido'
+    },
+    companySize: {
+        required: 'El tamaño de la empresa es requerido'
     }
 };
 
-// Función para mostrar errores
 function showError(fieldId: string, message: string): void {
-    const field = document.getElementById(fieldId) as HTMLInputElement | HTMLTextAreaElement;
+    const field = document.getElementById(fieldId) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
     const errorDiv = document.getElementById(fieldId + 'Error');
     
     if (errorDiv) {
@@ -120,15 +242,14 @@ function showError(fieldId: string, message: string): void {
     }
     
     if (field) {
-        field.classList.remove('border-gray-300', 'focus:ring-emerald-500', 'focus:border-emerald-500');
+        field.classList.remove('border-zinc-700', 'focus:ring-emerald-500', 'focus:border-emerald-500');
         field.classList.add('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
         field.setAttribute('data-valid', 'false');
     }
 }
 
-// Función para ocultar errores
 function hideError(fieldId: string): void {
-    const field = document.getElementById(fieldId) as HTMLInputElement | HTMLTextAreaElement;
+    const field = document.getElementById(fieldId) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
     const errorDiv = document.getElementById(fieldId + 'Error');
     
     if (errorDiv) {
@@ -137,39 +258,30 @@ function hideError(fieldId: string): void {
     
     if (field) {
         field.classList.remove('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
-        field.classList.add('border-gray-300', 'focus:ring-emerald-500', 'focus:border-emerald-500');
+        field.classList.add('border-zinc-700', 'focus:ring-emerald-500', 'focus:border-emerald-500');
         field.setAttribute('data-valid', 'true');
     }
 }
 
-// Función para validar un campo
 function validateField(fieldId: string): boolean {
-    const field = document.getElementById(fieldId) as HTMLInputElement | HTMLTextAreaElement;
-    if (!field) return false;
+    const field = document.getElementById(fieldId) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+    if (!field) return true;
     
     const value = field.value.trim();
     const rules = validations[fieldId];
+    if (!rules) return true;
     
-    // Validación required
     if (rules.required && !value) {
         showError(fieldId, rules.required);
         return false;
     }
     
-    // Validación minlength
     if (rules.minlength && value.length < parseInt(field.getAttribute('minlength') || '0')) {
         showError(fieldId, rules.minlength);
         return false;
     }
     
-    // Validación maxlength
-    if (rules.maxlength && value.length > parseInt(field.getAttribute('maxlength') || '0')) {
-        showError(fieldId, rules.maxlength);
-        return false;
-    }
-    
-    // Validación pattern
-    if (rules.pattern && field.getAttribute('pattern')) {
+    if (rules.pattern) {
         const pattern = field.getAttribute('pattern');
         if (pattern) {
             const regex = new RegExp(pattern);
@@ -184,9 +296,8 @@ function validateField(fieldId: string): boolean {
     return true;
 }
 
-// Función para validar todo el formulario
 function validateForm(): boolean {
-    const fields = ['name', 'email', 'message'];
+    const fields = Object.keys(validations);
     let isValid = true;
     
     fields.forEach(fieldId => {
@@ -198,7 +309,6 @@ function validateForm(): boolean {
     return isValid;
 }
 
-// Función para actualizar contador de caracteres
 function updateMessageCount(): void {
     const messageField = document.getElementById('message') as HTMLTextAreaElement;
     const countElement = document.getElementById('messageCount');
@@ -207,85 +317,62 @@ function updateMessageCount(): void {
         const count = messageField.value.length;
         countElement.textContent = count.toString();
         
-        // Cambiar color según la longitud
-        if (count > 450) {
+        if (count > 900) {
             countElement.classList.add('text-red-500');
-            countElement.classList.remove('text-gray-500');
-        } else if (count > 400) {
-            countElement.classList.add('text-yellow-500');
-            countElement.classList.remove('text-gray-500', 'text-red-500');
+            countElement.classList.remove('text-zinc-500');
         } else {
-            countElement.classList.remove('text-red-500', 'text-yellow-500');
-            countElement.classList.add('text-gray-500');
+            countElement.classList.remove('text-red-500');
+            countElement.classList.add('text-zinc-500');
         }
     }
 }
 
-// Event listeners para validación en tiempo real
 document.addEventListener('DOMContentLoaded', () => {
-    const nameField = document.getElementById('name') as HTMLInputElement;
-    const emailField = document.getElementById('email') as HTMLInputElement;
+    const fields = ['email', 'firstName', 'lastName', 'companyName', 'jobTitle', 'companySize'];
     const messageField = document.getElementById('message') as HTMLTextAreaElement;
     const submitBtn = document.querySelector('#contactForm button');
     
-    // Validación en tiempo real para nombre
-    nameField?.addEventListener('input', () => {
-        validateField('name');
+    fields.forEach(fieldId => {
+        const element = document.getElementById(fieldId);
+        element?.addEventListener('input', () => validateField(fieldId));
+        element?.addEventListener('blur', () => validateField(fieldId));
     });
-    
-    nameField?.addEventListener('blur', () => {
-        validateField('name');
-    });
-    
-    // Validación en tiempo real para email
-    emailField?.addEventListener('input', () => {
-        validateField('email');
-    });
-    
-    emailField?.addEventListener('blur', () => {
-        validateField('email');
-    });
-    
-    // Validación en tiempo real para mensaje
+
     messageField?.addEventListener('input', () => {
-        validateField('message');
         updateMessageCount();
     });
     
-    messageField?.addEventListener('blur', () => {
-        validateField('message');
-    });
-    
-    // Agregar el atributo type="submit" al botón
     if (submitBtn) {
         submitBtn.setAttribute('type', 'submit');
     }
 });
 
-// Manejo del envío del formulario
 document.getElementById('contactForm')?.addEventListener('submit', async (e) => {
     e.preventDefault();
     
-    // Validar antes de enviar
     if (!validateForm()) {
-        // Encontrar el primer campo con error y hacer focus
-        const fields = ['name', 'email', 'message'];
-        for (const fieldId of fields) {
-            const field = document.getElementById(fieldId) as HTMLInputElement | HTMLTextAreaElement;
-            if (field && field.getAttribute('data-valid') === 'false') {
-                field.focus();
-                break;
-            }
-        }
+        const firstError = document.querySelector('[data-valid="false"]') as HTMLElement;
+        firstError?.focus();
         return;
     }
     
     const target = e.target as HTMLFormElement;
     const formData = new FormData(target);
+    
+    // Concatenamos la información adicional para el backend que espera 'message'
+    const additionalInfo = `
+Empresa: ${formData.get('companyName')}
+Cargo: ${formData.get('jobTitle')}
+Tamaño: ${formData.get('companySize')}
+Teléfono: ${formData.get('phone') || 'N/A'}
+---
+Mensaje: ${formData.get('message')}
+    `.trim();
+
     const data = {
-        name: formData.get('name'),
+        name: `${formData.get('firstName')} ${formData.get('lastName')}`,
         email: formData.get('email'),
-        message: formData.get('message')
+        message: additionalInfo
     };
     
     const submitButton = target.querySelector('button') as HTMLButtonElement;
@@ -307,15 +394,8 @@ document.getElementById('contactForm')?.addEventListener('submit', async (e) => 
         if (result.success) {
             alert('¡Mensaje enviado con éxito! Te contactaremos pronto.');
             target.reset();
-            // Resetear contador y estados de validación
             updateMessageCount();
-            ['name', 'email', 'message'].forEach(fieldId => {
-                hideError(fieldId);
-                const field = document.getElementById(fieldId) as HTMLInputElement | HTMLTextAreaElement;
-                if (field) {
-                    field.setAttribute('data-valid', 'false');
-                }
-            });
+            Object.keys(validations).forEach(hideError);
         } else {
             alert('Error al enviar el mensaje. Por favor, intenta de nuevo.');
         }
