@@ -4,7 +4,7 @@ import "@app/styles/global.css";
 
 <section
     id="about"
-    class="container mx-auto grid text-center gap-4 md:grid-cols-[33%_1fr]"
+    class="container mx-auto grid grid-cols-1 text-center gap-4 md:grid-cols-6 [&>article]:md:col-span-4 [&>article:nth-child(4n+1)]:md:col-span-2 [&>article:nth-child(4n)]:md:col-span-2"
 >
     <article class="flex flex-col text-start text-zinc-600 transition-all duration-300 ease-in-out hover:scale-[101%] hover:translate-y-[-.5rem]">
         <div
@@ -29,5 +29,14 @@ import "@app/styles/global.css";
 
         <p class="text-zinc-500 mt-4">IMA Cloud</p>
         <h3 class="font-semibold">Automatizacion y gestion de formas.</h3>
+    </article>
+
+    <article class="flex flex-col text-start text-zinc-600 transition-all duration-300 ease-in-out hover:scale-[101%] hover:translate-y-[-.5rem]">
+        <div class="overflow-hidden bg-emerald-50/70 rounded-2xl p-6 md:p-8 lg:py-12 h-full max-h-10/12 flex items-center justify-center">
+            <img class="w-full max-w-[180px] md:max-w-[220px] mx-auto" loading="lazy" src="/butaqueando.webp" alt="" />
+        </div>
+
+        <p class="text-zinc-500 mt-4">Butaqueando</p>
+        <h3 class="font-semibold">Plataforma para descubrir y seguir obras teatrales.</h3>
     </article>
 </section>

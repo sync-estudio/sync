@@ -84,6 +84,7 @@ const googleFontsUrl =
 				const anchorGap = 16;
 				const sectionPath = "/";
 				let resizeFrame = 0;
+				let lastViewportWidth = window.innerWidth;
 
 				const getNavbarOffset = () => {
 					const navbar = document.querySelector("[data-site-nav]");
@@ -173,8 +174,11 @@ const googleFontsUrl =
 					cancelAnimationFrame(resizeFrame);
 					resizeFrame = window.requestAnimationFrame(() => {
 						syncAnchorOffset();
+						const currentViewportWidth = window.innerWidth;
+						const didViewportWidthChange = currentViewportWidth !== lastViewportWidth;
+						lastViewportWidth = currentViewportWidth;
 
-						if (window.location.pathname === sectionPath && window.location.hash) {
+						if (didViewportWidthChange && window.location.pathname === sectionPath && window.location.hash) {
 							scrollToHash(window.location.hash, "auto");
 						}
 					});
