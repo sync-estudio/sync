@@ -14,7 +14,7 @@ const logoWrapper =
     class="fixed top-4 inset-x-0 flex justify-center z-50 pointer-events-none"
 >
     <div class="flex w-full flex-col items-center gap-3 relative">
-        <div 
+        <div
             class="bg-white/70 backdrop-blur-lg border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.04)] rounded-full px-4 md:px-6 py-2 grid grid-cols-[auto_1fr_auto] items-center gap-3 md:gap-6 pointer-events-auto w-[95%] max-w-5xl navbar-entrance"
         >
             <div class="flex items-center shrink-0">
@@ -30,21 +30,41 @@ const logoWrapper =
             </div>
 
             <div class="hidden sm:flex justify-center">
-                <ul class="flex items-center gap-0.5 md:gap-1 overflow-x-auto no-scrollbar" role="menubar" aria-label="Navegación principal">
+                <ul
+                    class="flex items-center gap-0.5 md:gap-1 overflow-x-auto no-scrollbar"
+                    role="menubar"
+                    aria-label="Navegación principal"
+                >
                     <li class="relative">
-                        <a class={linkWrapper} href="/#hero" role="menuitem">Inicio</a>
+                        <a class={linkWrapper} href="/#hero" role="menuitem"
+                            >Inicio</a
+                        >
+                    </li>
+
+                    <li class="relative">
+                        <a class={linkWrapper} href="/#projects" role="menuitem"
+                            >Proyectos</a
+                        >
                     </li>
                     <li class="relative">
-                        <a class={linkWrapper} href="/#about" role="menuitem">Nosotros</a>
+                        <a class={linkWrapper} href="/#about" role="menuitem"
+                            >Nosotros</a
+                        >
                     </li>
                     <li class="relative">
-                        <a class={linkWrapper} href="/#projects" role="menuitem">Proyectos</a>
+                        <a class={linkWrapper} href="/#services" role="menuitem"
+                            >Soluciones</a
+                        >
                     </li>
                 </ul>
             </div>
 
             <div class="flex items-center justify-end shrink-0 gap-2">
-                <a class={`${ctaWrapper} hidden sm:inline-flex`} href="/contact" role="menuitem">Contacto</a>
+                <a
+                    class={`${ctaWrapper} hidden sm:inline-flex`}
+                    href="/contact"
+                    role="menuitem">Contacto</a
+                >
                 <button
                     type="button"
                     class="sm:hidden inline-flex items-center justify-center h-9 w-9 rounded-full border border-white/50 bg-white/80 text-zinc-800 shadow-sm transition-all duration-300 hover:bg-white focus:outline-none focus:ring-2 focus:ring-zinc-300 nav-toggle"
@@ -54,15 +74,23 @@ const logoWrapper =
                     data-site-nav-toggle
                 >
                     <span class="flex flex-col gap-1 nav-toggle-bars">
-                        <span class="block h-0.5 w-4 bg-zinc-800 rounded-full nav-toggle-bar nav-toggle-bar-top"></span>
-                        <span class="block h-0.5 w-4 bg-zinc-800 rounded-full nav-toggle-bar nav-toggle-bar-mid"></span>
-                        <span class="block h-0.5 w-4 bg-zinc-800 rounded-full nav-toggle-bar nav-toggle-bar-bottom"></span>
+                        <span
+                            class="block h-0.5 w-4 bg-zinc-800 rounded-full nav-toggle-bar nav-toggle-bar-top"
+                        ></span>
+                        <span
+                            class="block h-0.5 w-4 bg-zinc-800 rounded-full nav-toggle-bar nav-toggle-bar-mid"
+                        ></span>
+                        <span
+                            class="block h-0.5 w-4 bg-zinc-800 rounded-full nav-toggle-bar nav-toggle-bar-bottom"
+                        ></span>
                     </span>
                 </button>
             </div>
         </div>
 
-        <div class="sm:hidden absolute inset-x-0 top-full mt-3 flex justify-center pointer-events-auto">
+        <div
+            class="sm:hidden absolute inset-x-0 top-full mt-3 flex justify-center pointer-events-auto"
+        >
             <div
                 id="mobile-nav-menu"
                 class="mobile-menu w-[95%] max-w-sm bg-white/80 backdrop-blur-lg border border-white/50 shadow-[0_12px_32px_rgba(0,0,0,0.08)] rounded-2xl px-3 py-3"
@@ -70,18 +98,45 @@ const logoWrapper =
                 aria-hidden="true"
                 inert
             >
-                <ul class="flex flex-col gap-2" role="menu" aria-label="Navegación móvil">
+                <ul
+                    class="flex flex-col gap-2"
+                    role="menu"
+                    aria-label="Navegación móvil"
+                >
                     <li>
-                        <a class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70" href="/#hero" role="menuitem">Inicio</a>
+                        <a
+                            class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70"
+                            href="/#hero"
+                            role="menuitem">Inicio</a
+                        >
                     </li>
                     <li>
-                        <a class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70" href="/#about" role="menuitem">Nosotros</a>
+                        <a
+                            class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70"
+                            href="/#about"
+                            role="menuitem">Nosotros</a
+                        >
                     </li>
                     <li>
-                        <a class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70" href="/#projects" role="menuitem">Proyectos</a>
+                        <a
+                            class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70"
+                            href="/#projects"
+                            role="menuitem">Proyectos</a
+                        >
                     </li>
                     <li>
-                        <a class="block w-full text-zinc-900 font-medium px-3 py-2 rounded-xl bg-zinc-100/90 hover:bg-zinc-200/80 transition-all duration-200" href="/contact" role="menuitem">Contacto</a>
+                        <a
+                            class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70"
+                            href="/#services"
+                            role="menuitem">Soluciones</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            class="block w-full text-zinc-900 font-medium px-3 py-2 rounded-xl bg-zinc-100/90 hover:bg-zinc-200/80 transition-all duration-200"
+                            href="/contact"
+                            role="menuitem">Contacto</a
+                        >
                     </li>
                 </ul>
             </div>
@@ -93,7 +148,8 @@ const logoWrapper =
     .navbar-entrance {
         opacity: 0;
         transform: translateY(-10px);
-        animation: navbarFadeIn 800ms cubic-bezier(0.22, 1, 0.36, 1) 400ms forwards;
+        animation: navbarFadeIn 800ms cubic-bezier(0.22, 1, 0.36, 1) 400ms
+            forwards;
     }
 
     @keyframes navbarFadeIn {
@@ -113,7 +169,8 @@ const logoWrapper =
         transform: translateY(-8px) scale(0.98);
         overflow: hidden;
         pointer-events: none;
-        transition: max-height 240ms cubic-bezier(0.22, 1, 0.36, 1),
+        transition:
+            max-height 240ms cubic-bezier(0.22, 1, 0.36, 1),
             opacity 180ms ease-out,
             transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
     }
@@ -126,7 +183,8 @@ const logoWrapper =
     }
 
     .nav-toggle-bar {
-        transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+        transition:
+            transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
             opacity 180ms ease-out;
         transform-origin: center;
     }
@@ -180,7 +238,10 @@ const logoWrapper =
             toggle.setAttribute("aria-expanded", String(isOpen));
             menu.setAttribute("aria-hidden", String(!isOpen));
             toggle.classList.toggle("is-open", isOpen);
-            toggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+            toggle.setAttribute(
+                "aria-label",
+                isOpen ? "Cerrar menú" : "Abrir menú",
+            );
 
             if (isOpen) {
                 menu.removeAttribute("inert");
