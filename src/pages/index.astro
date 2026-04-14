@@ -2,13 +2,14 @@
 import "@app/styles/global.css";
 import Layout from "@app/layouts/Layout.astro";
 import Hero from "@features/home/components/hero.astro";
+import Featured from "@features/home/components/featured.astro";
 import About from "@features/home/components/about.astro";
-import Projects from "@features/projects/components/projects.astro";
 ---
 
 <Layout>
 	<div class="min-h-screen">
 		<Hero />
+		<Featured />
 		<About />
 	</div>
 </Layout>
