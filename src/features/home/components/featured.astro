@@ -22,9 +22,17 @@ import "@app/styles/global.css";
         <h3 class="font-semibold">Sistema de control de asistencias.</h3>
     </article>
 
-    <article class="flex flex-col text-start text-zinc-600 transition-all duration-300 ease-in-out hover:scale-[101%] hover:translate-y-[-.5rem]">
+    <article class="relative flex flex-col text-start text-zinc-600 transition-all duration-300 ease-in-out hover:scale-[101%] hover:translate-y-[-.5rem]">
+        <a
+            href="/study-cases/ima-cloud"
+            aria-label="Ver caso de estudio de IMA Cloud"
+            class="absolute inset-0 z-10 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700/40"
+        >
+            <span class="sr-only">Ver caso de estudio de IMA Cloud</span>
+        </a>
+
         <div class="overflow-hidden bg-emerald-50/70 rounded-2xl p-6 md:p-8 lg:py-12 h-full max-h-10/12 flex items-center justify-center">
-            <img class="translate-y-3/8 translate-x-1/6" loading="lazy" src="/ima-cloud.webp" alt="" />
+            <img class="translate-y-3/8 translate-x-1/6" loading="lazy" src="/ima-cloud.webp" alt="IMA Cloud" />
         </div>
 
         <p class="text-zinc-500 mt-4">IMA Cloud</p>
