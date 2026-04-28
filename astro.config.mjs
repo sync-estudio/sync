@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import tailwindcss from "@tailwindcss/vite";
 
 import node from "@astrojs/node";
+import mdx from "@astrojs/mdx";
 
 import react from "@astrojs/react";
 
@@ -27,12 +28,12 @@ export default defineConfig({
   },
 
   server: {
-    host: '0.0.0.0'
+    host: "0.0.0.0",
   },
 
   adapter: node({
     mode: "standalone",
   }),
 
-  integrations: [react()],
+  integrations: [react(), mdx()],
 });
