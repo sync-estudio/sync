@@ -23,7 +23,7 @@ import { CodeXml, Zap, ChartBar, ArrowRight } from "@lucide/astro";
     <div class="flex flex-col gap-6 md:gap-8">
         <article class="services-card relative isolate overflow-hidden rounded-3xl p-8 md:p-12 lg:p-16 min-h-[20rem] md:min-h-[22rem] text-emerald-50 transition-transform duration-300 ease-in-out hover:translate-y-[-.5rem]">
             <div class="services-mesh services-mesh--primary absolute inset-0 -z-10"></div>
-            <CodeXml class="absolute right-8 md:right-12 bottom-8 md:bottom-12 w-40 h-40 md:w-52 md:h-52 text-white/[0.07] -z-10" stroke-width={1} />
+            <div class="services-pattern services-pattern--stripes absolute inset-0 -z-10"></div>
             <div class="relative z-10 max-w-xl flex flex-col gap-4 md:gap-5">
                 <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-white/15 backdrop-blur-sm">
                     <CodeXml class="w-6 h-6 text-white" stroke-width="1.5" />
@@ -39,7 +39,7 @@ import { CodeXml, Zap, ChartBar, ArrowRight } from "@lucide/astro";
 
         <article class="services-card relative isolate overflow-hidden rounded-3xl p-8 md:p-12 lg:p-16 min-h-[20rem] md:min-h-[22rem] transition-transform duration-300 ease-in-out hover:translate-y-[-.5rem]">
             <div class="services-mesh services-mesh--mint absolute inset-0 -z-10"></div>
-            <Zap class="absolute right-8 md:right-12 bottom-8 md:bottom-12 w-40 h-40 md:w-52 md:h-52 text-emerald-900/[0.06] -z-10" stroke-width={1} />
+            <div class="services-pattern services-pattern--waves absolute inset-0 -z-10"></div>
             <div class="relative z-10 max-w-xl flex flex-col gap-4 md:gap-5">
                 <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-white/70 backdrop-blur-sm text-emerald-700">
                     <Zap class="w-6 h-6" stroke-width="1.5" />
@@ -55,7 +55,7 @@ import { CodeXml, Zap, ChartBar, ArrowRight } from "@lucide/astro";
 
         <article class="services-card relative isolate overflow-hidden rounded-3xl p-8 md:p-12 lg:p-16 min-h-[20rem] md:min-h-[22rem] transition-transform duration-300 ease-in-out hover:translate-y-[-.5rem]">
             <div class="services-mesh services-mesh--sand absolute inset-0 -z-10"></div>
-            <ChartBar class="absolute right-8 md:right-12 bottom-8 md:bottom-12 w-40 h-40 md:w-52 md:h-52 text-emerald-900/[0.06] -z-10" stroke-width={1} />
+            <div class="services-pattern services-pattern--dots absolute inset-0 -z-10"></div>
             <div class="relative z-10 max-w-xl flex flex-col gap-4 md:gap-5">
                 <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-white/70 backdrop-blur-sm text-emerald-700">
                     <ChartBar class="w-6 h-6" stroke-width="1.5" />
@@ -95,5 +95,32 @@ import { CodeXml, Zap, ChartBar, ArrowRight } from "@lucide/astro";
         background-image:
             radial-gradient(ellipse 65% 60% at 5% 0%, hsla(160, 60%, 92%, 0.6) 0%, transparent 75%),
             radial-gradient(ellipse 70% 60% at 95% 100%, hsla(200, 55%, 92%, 0.45) 0%, transparent 75%);
+    }
+
+    .services-pattern {
+        pointer-events: none;
+        -webkit-mask-image: radial-gradient(ellipse 75% 80% at 100% 100%, black 0%, transparent 70%);
+        mask-image: radial-gradient(ellipse 75% 80% at 100% 100%, black 0%, transparent 70%);
+    }
+
+    .services-pattern--stripes {
+        background-image: repeating-linear-gradient(
+            45deg,
+            rgba(255, 255, 255, 0.09) 0,
+            rgba(255, 255, 255, 0.09) 1px,
+            transparent 1px,
+            transparent 12px
+        );
+    }
+
+    .services-pattern--waves {
+        background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20 Q 50 0 100 20 T 200 20' fill='none' stroke='%23047857' stroke-width='1.2' opacity='0.22'/%3E%3C/svg%3E");
+        background-size: 180px 36px;
+        background-repeat: repeat;
+    }
+
+    .services-pattern--dots {
+        background-image: radial-gradient(circle, rgba(4, 120, 87, 0.22) 1.4px, transparent 1.6px);
+        background-size: 18px 18px;
     }
 </style>
