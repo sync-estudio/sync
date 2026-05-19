@@ -1,6 +1,87 @@
 ---
 import "@app/styles/global.css";
-import { CodeXml, Zap, ChartBar, ArrowRight } from "@lucide/astro";
+import { CodeXml, Zap, ChartBar, ArrowRight, Maximize2, X } from "@lucide/astro";
+
+const serviceModals = [
+    {
+        id: "software",
+        icon: CodeXml,
+        title: "Software a medida",
+        intro: "Construimos aplicaciones diseñadas para los procesos únicos de tu empresa: herramientas internas, paneles de control, integraciones entre sistemas y plataformas que crecen contigo, sin atarte a soluciones genéricas.",
+        sections: [
+            {
+                title: "Qué construimos",
+                items: [
+                    "Aplicaciones web internas y dashboards a la medida",
+                    "Integraciones entre ERPs, CRMs y APIs externas",
+                    "Portales para clientes, proveedores o tu equipo interno",
+                    "Modernización de software legacy",
+                ],
+            },
+            {
+                title: "Cómo trabajamos",
+                items: [
+                    "Descubrimiento profundo de tus procesos reales",
+                    "Prototipado y validación con quienes lo usarán",
+                    "Entregas iterativas, sin sorpresas al final",
+                    "Despliegue, capacitación y acompañamiento continuo",
+                ],
+            },
+        ],
+    },
+    {
+        id: "automation",
+        icon: Zap,
+        title: "Automatización",
+        intro: "Eliminamos el trabajo repetitivo conectando tus sistemas y automatizando los flujos que hoy consumen horas de tu equipo. Menos errores, más velocidad, y personas enfocadas en lo que realmente importa.",
+        sections: [
+            {
+                title: "Qué automatizamos",
+                items: [
+                    "Flujos entre herramientas (ERP, CRM, hojas de cálculo, email)",
+                    "Generación y envío de reportes recurrentes",
+                    "Procesos de onboarding, facturación y notificaciones",
+                    "Sincronización de datos entre sistemas",
+                ],
+            },
+            {
+                title: "Cómo trabajamos",
+                items: [
+                    "Mapeamos los procesos donde se está perdiendo tiempo",
+                    "Diseñamos el flujo automatizado y lo validamos contigo",
+                    "Implementamos con herramientas robustas y scripts a medida",
+                    "Monitoreamos y ajustamos según evoluciona el proceso",
+                ],
+            },
+        ],
+    },
+    {
+        id: "consulting",
+        icon: ChartBar,
+        title: "Consultoría estratégica",
+        intro: "Analizamos tu operación tecnológica y construimos un roadmap claro para priorizar lo que mueve la aguja de tu negocio. Decisiones basadas en datos, no en intuiciones.",
+        sections: [
+            {
+                title: "Qué entregamos",
+                items: [
+                    "Diagnóstico técnico y de procesos",
+                    "Roadmap priorizado por impacto y esfuerzo",
+                    "Recomendaciones de arquitectura y stack",
+                    "Evaluación de proveedores y herramientas",
+                ],
+            },
+            {
+                title: "Cómo trabajamos",
+                items: [
+                    "Sesiones de descubrimiento con tu equipo y stakeholders",
+                    "Análisis de tu stack actual y sus cuellos de botella",
+                    "Talleres para priorizar iniciativas",
+                    "Entregables ejecutables, no documentos genéricos",
+                ],
+            },
+        ],
+    },
+];
 ---
 
 <section id="services" class="container mx-auto py-20 md:py-24 lg:py-28">
@@ -24,6 +105,14 @@ import { CodeXml, Zap, ChartBar, ArrowRight } from "@lucide/astro";
         <article class="services-card relative isolate overflow-hidden rounded-3xl p-8 md:p-12 lg:p-16 min-h-[20rem] md:min-h-[22rem] text-emerald-50 transition-transform duration-300 ease-in-out hover:translate-y-[-.5rem]">
             <div class="services-mesh services-mesh--primary absolute inset-0 -z-10"></div>
             <div class="services-pattern services-pattern--light absolute inset-0 -z-10"></div>
+            <button
+                type="button"
+                data-service-trigger="software"
+                aria-label="Ver más sobre Software a medida"
+                class="services-expand services-expand--light absolute top-6 right-6 md:top-8 md:right-8 z-20"
+            >
+                <Maximize2 class="w-4 h-4" stroke-width={2} />
+            </button>
             <div class="relative z-10 max-w-xl flex flex-col gap-4 md:gap-5">
                 <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-white/15 backdrop-blur-sm">
                     <CodeXml class="w-6 h-6 text-white" stroke-width="1.5" />
@@ -40,6 +129,14 @@ import { CodeXml, Zap, ChartBar, ArrowRight } from "@lucide/astro";
         <article class="services-card relative isolate overflow-hidden rounded-3xl p-8 md:p-12 lg:p-16 min-h-[20rem] md:min-h-[22rem] transition-transform duration-300 ease-in-out hover:translate-y-[-.5rem]">
             <div class="services-mesh services-mesh--mint absolute inset-0 -z-10"></div>
             <div class="services-pattern services-pattern--dark absolute inset-0 -z-10"></div>
+            <button
+                type="button"
+                data-service-trigger="automation"
+                aria-label="Ver más sobre Automatización"
+                class="services-expand services-expand--dark absolute top-6 right-6 md:top-8 md:right-8 z-20"
+            >
+                <Maximize2 class="w-4 h-4" stroke-width={2} />
+            </button>
             <div class="relative z-10 max-w-xl flex flex-col gap-4 md:gap-5">
                 <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-white/70 backdrop-blur-sm text-emerald-700">
                     <Zap class="w-6 h-6" stroke-width="1.5" />
@@ -56,6 +153,14 @@ import { CodeXml, Zap, ChartBar, ArrowRight } from "@lucide/astro";
         <article class="services-card relative isolate overflow-hidden rounded-3xl p-8 md:p-12 lg:p-16 min-h-[20rem] md:min-h-[22rem] transition-transform duration-300 ease-in-out hover:translate-y-[-.5rem]">
             <div class="services-mesh services-mesh--sand absolute inset-0 -z-10"></div>
             <div class="services-pattern services-pattern--dark absolute inset-0 -z-10"></div>
+            <button
+                type="button"
+                data-service-trigger="consulting"
+                aria-label="Ver más sobre Consultoría estratégica"
+                class="services-expand services-expand--dark absolute top-6 right-6 md:top-8 md:right-8 z-20"
+            >
+                <Maximize2 class="w-4 h-4" stroke-width={2} />
+            </button>
             <div class="relative z-10 max-w-xl flex flex-col gap-4 md:gap-5">
                 <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-white/70 backdrop-blur-sm text-emerald-700">
                     <ChartBar class="w-6 h-6" stroke-width="1.5" />
@@ -70,6 +175,69 @@ import { CodeXml, Zap, ChartBar, ArrowRight } from "@lucide/astro";
         </article>
     </div>
 </section>
+
+{
+    serviceModals.map((modal) => {
+        const Icon = modal.icon;
+        return (
+            <dialog
+                data-service-modal={modal.id}
+                aria-labelledby={`services-modal-${modal.id}-title`}
+                class="services-modal"
+            >
+                <div data-service-panel class="services-panel">
+                    <button
+                        type="button"
+                        data-service-close
+                        aria-label="Cerrar"
+                        class="services-close absolute top-5 right-5 md:top-6 md:right-6 z-10 w-10 h-10 flex items-center justify-center rounded-full text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
+                    >
+                        <X class="w-5 h-5" stroke-width={2} />
+                    </button>
+                    <div class="flex flex-col gap-6 md:gap-8 p-8 pt-16 md:p-12 md:pt-16">
+                        <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
+                            <Icon class="w-6 h-6" stroke-width={1.5} />
+                        </div>
+                        <h3
+                            id={`services-modal-${modal.id}-title`}
+                            class="text-3xl md:text-4xl font-semibold leading-tight text-zinc-900"
+                        >
+                            {modal.title}
+                        </h3>
+                        <p class="text-zinc-600 text-base md:text-lg leading-relaxed">
+                            {modal.intro}
+                        </p>
+                        {modal.sections.map((section) => (
+                            <div class="flex flex-col gap-3">
+                                <h4 class="text-xs font-semibold uppercase tracking-wider text-emerald-700">
+                                    {section.title}
+                                </h4>
+                                <ul class="flex flex-col gap-2.5">
+                                    {section.items.map((item) => (
+                                        <li class="flex gap-3 text-zinc-700 text-sm md:text-base leading-relaxed">
+                                            <span class="mt-2 shrink-0 w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                        <a
+                            href="/contact"
+                            class="group inline-flex items-center gap-2 mt-2 text-emerald-700 font-semibold text-sm md:text-base transition-colors hover:text-emerald-900"
+                        >
+                            Solicitar consultoría
+                            <ArrowRight
+                                class="w-4 h-4 transition-transform group-hover:translate-x-1"
+                                stroke-width={2}
+                            />
+                        </a>
+                    </div>
+                </div>
+            </dialog>
+        );
+    })
+}
 
 <style>
     .services-mesh {
@@ -103,4 +271,153 @@ import { CodeXml, Zap, ChartBar, ArrowRight } from "@lucide/astro";
     .services-pattern--dark {
         background-image: radial-gradient(circle, rgba(4, 120, 87, 0.14) 1px, transparent 1.2px);
     }
+
+    .services-expand {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 0.75rem;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        cursor: pointer;
+        transition: background-color 200ms ease, transform 200ms ease;
+    }
+
+    .services-expand:hover {
+        transform: scale(1.05);
+    }
+
+    .services-expand--light {
+        background-color: rgba(255, 255, 255, 0.15);
+        color: rgba(255, 255, 255, 0.95);
+    }
+
+    .services-expand--light:hover {
+        background-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .services-expand--dark {
+        background-color: rgba(255, 255, 255, 0.75);
+        color: #047857;
+    }
+
+    .services-expand--dark:hover {
+        background-color: rgba(255, 255, 255, 1);
+    }
+
+    dialog.services-modal {
+        width: 100%;
+        max-width: none;
+        height: 100%;
+        max-height: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        background: transparent;
+        overflow: hidden;
+    }
+
+    dialog.services-modal::backdrop {
+        background-color: rgba(24, 24, 27, 0.5);
+        -webkit-backdrop-filter: blur(4px);
+        backdrop-filter: blur(4px);
+        opacity: 0;
+        transition: opacity 300ms ease;
+    }
+
+    dialog.services-modal[open]::backdrop {
+        opacity: 1;
+    }
+
+    .services-panel {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        max-width: 36rem;
+        background-color: #ffffff;
+        box-shadow: -20px 0 60px -20px rgba(0, 0, 0, 0.25);
+        overflow-y: auto;
+        transform: translateX(100%);
+        transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: transform;
+    }
+
+    dialog.services-modal[data-open] .services-panel {
+        transform: translateX(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .services-panel,
+        dialog.services-modal::backdrop {
+            transition: none;
+        }
+    }
 </style>
+
+<script>
+    const dialogs = document.querySelectorAll<HTMLDialogElement>(
+        "dialog[data-service-modal]"
+    );
+    const triggers = document.querySelectorAll<HTMLButtonElement>(
+        "[data-service-trigger]"
+    );
+
+    function getDialog(id: string): HTMLDialogElement | null {
+        return document.querySelector<HTMLDialogElement>(
+            `dialog[data-service-modal="${id}"]`
+        );
+    }
+
+    function openDialog(dialog: HTMLDialogElement) {
+        dialog.showModal();
+        document.body.style.overflow = "hidden";
+        requestAnimationFrame(() => {
+            dialog.setAttribute("data-open", "");
+        });
+    }
+
+    function closeDialog(dialog: HTMLDialogElement) {
+        const panel = dialog.querySelector<HTMLElement>("[data-service-panel]");
+        dialog.removeAttribute("data-open");
+        const finish = () => {
+            dialog.close();
+            document.body.style.overflow = "";
+            panel?.removeEventListener("transitionend", finish);
+        };
+        if (panel) {
+            panel.addEventListener("transitionend", finish, { once: true });
+        } else {
+            finish();
+        }
+    }
+
+    triggers.forEach((trigger) => {
+        trigger.addEventListener("click", () => {
+            const id = trigger.dataset.serviceTrigger;
+            if (!id) return;
+            const dialog = getDialog(id);
+            if (dialog) openDialog(dialog);
+        });
+    });
+
+    dialogs.forEach((dialog) => {
+        dialog.addEventListener("click", (event) => {
+            if (event.target === dialog) closeDialog(dialog);
+        });
+
+        dialog.addEventListener("cancel", (event) => {
+            event.preventDefault();
+            closeDialog(dialog);
+        });
+
+        dialog
+            .querySelectorAll<HTMLButtonElement>("[data-service-close]")
+            .forEach((btn) => {
+                btn.addEventListener("click", () => closeDialog(dialog));
+            });
+    });
+</script>
