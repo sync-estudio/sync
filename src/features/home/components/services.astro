@@ -186,6 +186,7 @@ const serviceModals = [
                 class="services-modal"
             >
                 <div data-service-panel class="services-panel">
+                    <div class="services-handle md:hidden" aria-hidden="true"></div>
                     <button
                         type="button"
                         data-service-close
@@ -194,7 +195,7 @@ const serviceModals = [
                     >
                         <X class="w-5 h-5" stroke-width={2} />
                     </button>
-                    <div class="flex flex-col gap-6 md:gap-8 p-8 pt-16 md:p-12 md:pt-16">
+                    <div class="flex flex-col gap-6 md:gap-8 p-8 pt-12 md:p-12 md:pt-16">
                         <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
                             <Icon class="w-6 h-6" stroke-width={1.5} />
                         </div>
@@ -317,6 +318,7 @@ const serviceModals = [
         margin: 0;
         background: transparent;
         overflow: hidden;
+        display: flex;
     }
 
     dialog.services-modal::backdrop {
@@ -324,30 +326,74 @@ const serviceModals = [
         -webkit-backdrop-filter: blur(4px);
         backdrop-filter: blur(4px);
         opacity: 0;
-        transition: opacity 300ms ease;
+        transition: opacity 320ms ease;
     }
 
-    dialog.services-modal[open]::backdrop {
+    dialog.services-modal[data-open]::backdrop {
         opacity: 1;
     }
 
     .services-panel {
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 100%;
-        width: 100%;
-        max-width: 36rem;
+        position: relative;
         background-color: #ffffff;
-        box-shadow: -20px 0 60px -20px rgba(0, 0, 0, 0.25);
         overflow-y: auto;
-        transform: translateX(100%);
-        transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
-        will-change: transform;
+        will-change: transform, opacity;
     }
 
-    dialog.services-modal[data-open] .services-panel {
-        transform: translateX(0);
+    .services-handle {
+        margin: 0.625rem auto 0;
+        width: 2.5rem;
+        height: 0.3125rem;
+        border-radius: 9999px;
+        background-color: #d4d4d8;
+    }
+
+    /* Mobile: iOS-style bottom sheet */
+    @media (max-width: 767px) {
+        dialog.services-modal {
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .services-panel {
+            width: 100%;
+            max-height: 92vh;
+            border-radius: 1.5rem 1.5rem 0 0;
+            box-shadow: 0 -10px 40px -10px rgba(0, 0, 0, 0.2);
+            transform: translateY(100%);
+            transition: transform 380ms cubic-bezier(0.32, 0.72, 0, 1);
+        }
+
+        dialog.services-modal[data-open] .services-panel {
+            transform: translateY(0);
+        }
+    }
+
+    /* Desktop: centered modal */
+    @media (min-width: 768px) {
+        dialog.services-modal {
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .services-panel {
+            width: 100%;
+            max-width: 40rem;
+            max-height: 85vh;
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: scale(0.96);
+            transition:
+                opacity 240ms ease,
+                transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        dialog.services-modal[data-open] .services-panel {
+            opacity: 1;
+            transform: scale(1);
+        }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -380,19 +426,14 @@ const serviceModals = [
         });
     }
 
+    const CLOSE_DURATION_MS = 400;
+
     function closeDialog(dialog: HTMLDialogElement) {
-        const panel = dialog.querySelector<HTMLElement>("[data-service-panel]");
         dialog.removeAttribute("data-open");
-        const finish = () => {
+        window.setTimeout(() => {
             dialog.close();
             document.body.style.overflow = "";
-            panel?.removeEventListener("transitionend", finish);
-        };
-        if (panel) {
-            panel.addEventListener("transitionend", finish, { once: true });
-        } else {
-            finish();
-        }
+        }, CLOSE_DURATION_MS);
     }
 
     triggers.forEach((trigger) => {
