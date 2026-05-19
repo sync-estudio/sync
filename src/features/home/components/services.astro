@@ -21,52 +21,49 @@ import { CodeXml, Zap, ChartBar, ArrowRight } from "@lucide/astro";
     </div>
 
     <div class="flex flex-col gap-6 md:gap-8">
-        <article class="services-card services-card--primary relative overflow-hidden rounded-3xl p-8 md:p-12 lg:p-16 min-h-[26rem] md:min-h-[30rem] bg-emerald-700 text-emerald-100 transition-transform duration-300 ease-in-out hover:translate-y-[-.5rem]">
-            <div class="services-dots services-dots--light absolute inset-0"></div>
-            <div class="absolute -bottom-24 -right-16 w-[28rem] h-[28rem] rounded-full bg-emerald-300/30 blur-3xl"></div>
-            <CodeXml class="absolute right-6 md:right-10 bottom-6 md:bottom-10 w-48 h-48 md:w-64 md:h-64 text-emerald-100/10" stroke-width={1} />
+        <article class="services-card relative isolate overflow-hidden rounded-3xl p-8 md:p-12 lg:p-16 min-h-[26rem] md:min-h-[30rem] text-emerald-50 transition-transform duration-300 ease-in-out hover:translate-y-[-.5rem]">
+            <div class="services-mesh services-mesh--primary absolute inset-0 -z-10"></div>
+            <CodeXml class="absolute right-6 md:right-10 bottom-6 md:bottom-10 w-48 h-48 md:w-64 md:h-64 text-white/10 -z-10" stroke-width={1} />
             <div class="relative z-10 max-w-xl flex flex-col gap-4 md:gap-5">
-                <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-emerald-100/15">
-                    <CodeXml class="w-6 h-6 text-emerald-100" stroke-width="1.5" />
+                <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-white/15 backdrop-blur-sm">
+                    <CodeXml class="w-6 h-6 text-white" stroke-width="1.5" />
                 </div>
-                <h3 class="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight">
+                <h3 class="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight text-white">
                     Software a medida
                 </h3>
-                <p class="text-emerald-100/80 text-base md:text-lg leading-relaxed">
+                <p class="text-emerald-50/85 text-base md:text-lg leading-relaxed">
                     Soluciones personalizadas que se adaptan a los procesos únicos de tu negocio.
                 </p>
             </div>
         </article>
 
-        <article class="services-card relative overflow-hidden rounded-3xl p-8 md:p-12 lg:p-16 min-h-[26rem] md:min-h-[30rem] bg-emerald-50/70 transition-transform duration-300 ease-in-out hover:translate-y-[-.5rem]">
-            <div class="services-dots services-dots--dark absolute inset-0"></div>
-            <div class="absolute -top-20 -right-20 w-[24rem] h-[24rem] rounded-full bg-emerald-300/40 blur-3xl"></div>
-            <Zap class="absolute right-6 md:right-10 bottom-6 md:bottom-10 w-48 h-48 md:w-64 md:h-64 text-emerald-700/10" stroke-width={1} />
+        <article class="services-card relative isolate overflow-hidden rounded-3xl p-8 md:p-12 lg:p-16 min-h-[26rem] md:min-h-[30rem] transition-transform duration-300 ease-in-out hover:translate-y-[-.5rem]">
+            <div class="services-mesh services-mesh--mint absolute inset-0 -z-10"></div>
+            <Zap class="absolute right-6 md:right-10 bottom-6 md:bottom-10 w-48 h-48 md:w-64 md:h-64 text-emerald-800/10 -z-10" stroke-width={1} />
             <div class="relative z-10 max-w-xl flex flex-col gap-4 md:gap-5">
-                <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-emerald-100 text-emerald-700">
+                <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-white/70 backdrop-blur-sm text-emerald-700">
                     <Zap class="w-6 h-6" stroke-width="1.5" />
                 </div>
-                <h3 class="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight text-zinc-800">
+                <h3 class="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight text-zinc-900">
                     Automatización
                 </h3>
-                <p class="text-zinc-600 text-base md:text-lg leading-relaxed">
+                <p class="text-zinc-700 text-base md:text-lg leading-relaxed">
                     Flujos automatizados que eliminan trabajo repetitivo y reducen errores.
                 </p>
             </div>
         </article>
 
-        <article class="services-card relative overflow-hidden rounded-3xl p-8 md:p-12 lg:p-16 min-h-[26rem] md:min-h-[30rem] bg-zinc-50 transition-transform duration-300 ease-in-out hover:translate-y-[-.5rem]">
-            <div class="services-dots services-dots--dark absolute inset-0"></div>
-            <div class="absolute -bottom-24 -left-16 w-[26rem] h-[26rem] rounded-full bg-emerald-200/50 blur-3xl"></div>
-            <ChartBar class="absolute right-6 md:right-10 bottom-6 md:bottom-10 w-48 h-48 md:w-64 md:h-64 text-emerald-700/10" stroke-width={1} />
+        <article class="services-card relative isolate overflow-hidden rounded-3xl p-8 md:p-12 lg:p-16 min-h-[26rem] md:min-h-[30rem] transition-transform duration-300 ease-in-out hover:translate-y-[-.5rem]">
+            <div class="services-mesh services-mesh--sand absolute inset-0 -z-10"></div>
+            <ChartBar class="absolute right-6 md:right-10 bottom-6 md:bottom-10 w-48 h-48 md:w-64 md:h-64 text-emerald-800/10 -z-10" stroke-width={1} />
             <div class="relative z-10 max-w-xl flex flex-col gap-4 md:gap-5">
-                <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-emerald-100 text-emerald-700">
+                <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-white/70 backdrop-blur-sm text-emerald-700">
                     <ChartBar class="w-6 h-6" stroke-width="1.5" />
                 </div>
-                <h3 class="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight text-zinc-800">
+                <h3 class="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight text-zinc-900">
                     Consultoría estratégica
                 </h3>
-                <p class="text-zinc-600 text-base md:text-lg leading-relaxed">
+                <p class="text-zinc-700 text-base md:text-lg leading-relaxed">
                     Análisis y roadmap técnico para priorizar lo que mueve la aguja de tu negocio.
                 </p>
             </div>
@@ -75,19 +72,40 @@ import { CodeXml, Zap, ChartBar, ArrowRight } from "@lucide/astro";
 </section>
 
 <style>
-    .services-dots {
-        background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
-        background-size: 22px 22px;
-        -webkit-mask-image: radial-gradient(ellipse 70% 70% at 80% 80%, black 0%, transparent 70%);
-        mask-image: radial-gradient(ellipse 70% 70% at 80% 80%, black 0%, transparent 70%);
+    .services-mesh {
         pointer-events: none;
     }
 
-    .services-dots--light {
-        color: rgba(209, 250, 229, 0.18);
+    .services-mesh--primary {
+        background-color: #022c22;
+        background-image:
+            radial-gradient(at 18% 22%, hsla(160, 84%, 45%, 0.65) 0px, transparent 55%),
+            radial-gradient(at 88% 12%, hsla(178, 78%, 42%, 0.55) 0px, transparent 55%),
+            radial-gradient(at 72% 88%, hsla(94, 70%, 55%, 0.45) 0px, transparent 55%),
+            radial-gradient(at 12% 78%, hsla(165, 96%, 24%, 0.85) 0px, transparent 60%),
+            radial-gradient(at 96% 52%, hsla(150, 80%, 38%, 0.55) 0px, transparent 55%),
+            radial-gradient(at 40% 50%, hsla(175, 80%, 32%, 0.45) 0px, transparent 55%);
     }
 
-    .services-dots--dark {
-        color: rgba(4, 120, 87, 0.12);
+    .services-mesh--mint {
+        background-color: #f0fdf4;
+        background-image:
+            radial-gradient(at 16% 24%, hsla(160, 90%, 76%, 0.7) 0px, transparent 55%),
+            radial-gradient(at 90% 12%, hsla(178, 82%, 80%, 0.65) 0px, transparent 55%),
+            radial-gradient(at 78% 92%, hsla(95, 86%, 78%, 0.6) 0px, transparent 55%),
+            radial-gradient(at 8% 82%, hsla(168, 80%, 78%, 0.6) 0px, transparent 55%),
+            radial-gradient(at 96% 58%, hsla(35, 92%, 86%, 0.55) 0px, transparent 55%),
+            radial-gradient(at 42% 48%, hsla(160, 100%, 92%, 0.7) 0px, transparent 55%);
+    }
+
+    .services-mesh--sand {
+        background-color: #fafafa;
+        background-image:
+            radial-gradient(at 82% 8%, hsla(160, 70%, 86%, 0.7) 0px, transparent 55%),
+            radial-gradient(at 6% 42%, hsla(200, 75%, 88%, 0.6) 0px, transparent 55%),
+            radial-gradient(at 82% 96%, hsla(150, 88%, 84%, 0.65) 0px, transparent 55%),
+            radial-gradient(at 4% 6%, hsla(35, 76%, 92%, 0.55) 0px, transparent 55%),
+            radial-gradient(at 96% 52%, hsla(175, 82%, 90%, 0.6) 0px, transparent 55%),
+            radial-gradient(at 48% 60%, hsla(155, 70%, 94%, 0.7) 0px, transparent 55%);
     }
 </style>
