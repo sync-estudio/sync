@@ -25,7 +25,7 @@ const heroImage = project?.thumbnail || project?.images[0];
                     <img
                         class="h-full max-h-full w-full object-contain object-center"
                         src={heroImage}
-                        alt={project?.name}
+                        alt={project ? `${project.name} — ${project.description ?? 'vista previa del proyecto'}` : 'Vista previa del proyecto'}
                     />
                 </div>
             </div>

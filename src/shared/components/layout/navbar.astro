@@ -1,9 +1,9 @@
 ---
 const linkWrapper =
-    "text-zinc-600 hover:text-zinc-900 px-3 py-1.5 rounded-full transition-all duration-300 hover:bg-zinc-100/80 font-medium text-sm md:text-base";
+    "text-zinc-600 hover:text-zinc-900 px-3 py-1.5 rounded-full transition-all duration-300 hover:bg-zinc-100/80 font-medium text-sm md:text-base focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white";
 
 const ctaWrapper =
-    "bg-zinc-900 text-white hover:bg-zinc-800 px-5 py-1.5 rounded-full transition-all duration-300 font-medium text-sm md:text-base shadow-sm hover:shadow-md active:scale-95";
+    "bg-zinc-900 text-white hover:bg-zinc-800 px-5 py-1.5 rounded-full transition-all duration-300 font-medium text-sm md:text-base shadow-sm hover:shadow-md active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white";
 
 const logoWrapper =
     "flex items-center transition-transform hover:scale-105 active:scale-95";
@@ -67,7 +67,7 @@ const logoWrapper =
                 >
                 <button
                     type="button"
-                    class="sm:hidden inline-flex items-center justify-center h-9 w-9 rounded-full border border-white/50 bg-white/80 text-zinc-800 shadow-sm transition-all duration-300 hover:bg-white focus:outline-none focus:ring-2 focus:ring-zinc-300 nav-toggle"
+                    class="sm:hidden inline-flex items-center justify-center h-10 w-10 rounded-full border border-white/50 bg-white/80 text-zinc-800 shadow-sm transition-all duration-300 hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white nav-toggle"
                     aria-label="Abrir menú"
                     aria-controls="mobile-nav-menu"
                     aria-expanded="false"
@@ -105,35 +105,35 @@ const logoWrapper =
                 >
                     <li>
                         <a
-                            class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70"
+                            class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
                             href="/#hero"
                             role="menuitem">Inicio</a
                         >
                     </li>
                     <li>
                         <a
-                            class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70"
+                            class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
                             href="/#about"
                             role="menuitem">Nosotros</a
                         >
                     </li>
                     <li>
                         <a
-                            class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70"
+                            class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
                             href="/#projects"
                             role="menuitem">Proyectos</a
                         >
                     </li>
                     <li>
                         <a
-                            class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70"
+                            class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
                             href="/#services"
                             role="menuitem">Soluciones</a
                         >
                     </li>
                     <li>
                         <a
-                            class="block w-full text-zinc-900 font-medium px-3 py-2 rounded-xl bg-zinc-100/90 hover:bg-zinc-200/80 transition-all duration-200"
+                            class="block w-full text-zinc-900 font-medium px-3 py-2 rounded-xl bg-zinc-100/90 hover:bg-zinc-200/80 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
                             href="/contact"
                             role="menuitem">Contacto</a
                         >
@@ -148,19 +148,7 @@ const logoWrapper =
     .navbar-entrance {
         opacity: 0;
         transform: translateY(-10px);
-        animation: navbarFadeIn 800ms cubic-bezier(0.22, 1, 0.36, 1) 400ms
-            forwards;
-    }
-
-    @keyframes navbarFadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(-10px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        will-change: opacity, transform;
     }
 
     .mobile-menu {
@@ -169,16 +157,10 @@ const logoWrapper =
         transform: translateY(-8px) scale(0.98);
         overflow: hidden;
         pointer-events: none;
-        transition:
-            max-height 240ms cubic-bezier(0.22, 1, 0.36, 1),
-            opacity 180ms ease-out,
-            transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: opacity, transform, max-height;
     }
 
     .mobile-menu.is-open {
-        max-height: 360px;
-        opacity: 1;
-        transform: translateY(0) scale(1);
         pointer-events: auto;
     }
 
@@ -210,15 +192,11 @@ const logoWrapper =
     }
 
     @media (prefers-reduced-motion: reduce) {
-        .navbar-entrance {
-            animation: none;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .mobile-menu {
-            transition: none;
-            transform: none;
+        .navbar-entrance,
+        .mobile-menu.is-open {
+            opacity: 1 !important;
+            transform: none !important;
+            max-height: none !important;
         }
 
         .nav-toggle-bar {
@@ -228,12 +206,77 @@ const logoWrapper =
 </style>
 
 <script>
+    import { animate } from "framer-motion";
+
+    const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
     const nav = document.querySelector("[data-site-nav]");
+    const entrance = nav?.querySelector<HTMLElement>(".navbar-entrance");
     const toggle = nav?.querySelector("[data-site-nav-toggle]");
     const menu = nav?.querySelector("[data-site-nav-menu]");
 
+    if (entrance) {
+        if (prefersReducedMotion) {
+            entrance.style.opacity = "1";
+            entrance.style.transform = "none";
+        } else {
+            animate(
+                entrance,
+                { opacity: [0, 1], transform: ["translateY(-10px)", "translateY(0px)"] },
+                { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.4 }
+            );
+        }
+    }
+
     if (toggle instanceof HTMLButtonElement && menu instanceof HTMLElement) {
+        const EASE = [0.22, 1, 0.36, 1] as const;
+
+        const animateMenuOpen = () => {
+            if (prefersReducedMotion) {
+                menu.style.opacity = "1";
+                menu.style.transform = "none";
+                menu.style.maxHeight = "none";
+                return;
+            }
+            animate(
+                menu,
+                {
+                    opacity: [0, 1],
+                    transform: [
+                        "translateY(-8px) scale(0.98)",
+                        "translateY(0px) scale(1)",
+                    ],
+                    maxHeight: ["0px", "360px"],
+                },
+                { duration: 0.28, ease: EASE }
+            );
+        };
+
+        const animateMenuClose = () => {
+            if (prefersReducedMotion) {
+                menu.style.opacity = "0";
+                menu.style.transform = "translateY(-8px) scale(0.98)";
+                menu.style.maxHeight = "0px";
+                return;
+            }
+            animate(
+                menu,
+                {
+                    opacity: [1, 0],
+                    transform: [
+                        "translateY(0px) scale(1)",
+                        "translateY(-8px) scale(0.98)",
+                    ],
+                    maxHeight: ["360px", "0px"],
+                },
+                { duration: 0.22, ease: EASE }
+            );
+        };
+
         const setMenuState = (isOpen: boolean) => {
+            const wasOpen = menu.classList.contains("is-open");
             menu.classList.toggle("is-open", isOpen);
             toggle.setAttribute("aria-expanded", String(isOpen));
             menu.setAttribute("aria-hidden", String(!isOpen));
@@ -245,10 +288,11 @@ const logoWrapper =
 
             if (isOpen) {
                 menu.removeAttribute("inert");
-                return;
+                animateMenuOpen();
+            } else {
+                menu.setAttribute("inert", "");
+                if (wasOpen) animateMenuClose();
             }
-
-            menu.setAttribute("inert", "");
         };
 
         toggle.addEventListener("click", () => {
