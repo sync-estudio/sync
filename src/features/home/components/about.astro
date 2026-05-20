@@ -1,18 +1,36 @@
 ---
 import "@app/styles/global.css";
+import { Compass, Workflow, TrendingUp } from "@lucide/astro";
+
+const pillars = [
+    {
+        icon: Compass,
+        title: "Enfoque",
+        body: "Entendemos tus procesos reales antes de escribir una línea de código.",
+    },
+    {
+        icon: Workflow,
+        title: "Método",
+        body: "Iteramos junto a tu equipo, con entregas frecuentes y sin sorpresas al final.",
+    },
+    {
+        icon: TrendingUp,
+        title: "Resultados",
+        body: "Métricas claras desde la primera entrega para validar el impacto en tu operación.",
+    },
+];
 ---
 
 <section
     id="about"
-    class="min-h-[70dvh] md:min-h-[80dvh] py-20 md:py-24 container mx-auto flex justify-center items-center"
+    class="py-20 md:py-24 container mx-auto"
 >
-    <div
-        class="flex flex-col gap-6 sm:gap-7 md:gap-8 w-full max-w-8xl text-center"
-    >
+    <div class="flex flex-col gap-12 md:gap-16 w-full max-w-8xl">
         <h2
-            class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight px-2 sm:px-4 text-zinc-800"
+            data-about-heading
+            class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight md:leading-[1.15] tracking-tight px-2 sm:px-4 text-center text-zinc-800 max-w-4xl mx-auto opacity-0"
         >
-            Nuestra misión, es transformar los retos diarios de tu empresa en
+            Nuestra misión es transformar los retos diarios de tu empresa en
             <span
                 class="font-[ibm-plex-serif] font-bold italic text-emerald-900 relative inline-block px-2.5 py-1.5 sm:px-3 sm:py-1.5 md:px-4 md:py-2"
                 ><span
@@ -23,5 +41,87 @@ import "@app/styles/global.css";
             >
             que ayuden a operar mejor y crecer con orden.
         </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8" data-about-pillars>
+            {
+                pillars.map((pillar) => {
+                    const Icon = pillar.icon;
+                    return (
+                        <article
+                            data-about-pillar
+                            class="flex flex-col gap-4 p-6 md:p-8 rounded-2xl border border-zinc-200/70 bg-white/40 backdrop-blur-sm opacity-0"
+                        >
+                            <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
+                                <Icon class="w-6 h-6" stroke-width={1.75} />
+                            </div>
+                            <h3 class="text-lg md:text-xl font-semibold text-zinc-900 tracking-tight">
+                                {pillar.title}
+                            </h3>
+                            <p class="text-zinc-600 text-sm md:text-base leading-relaxed">
+                                {pillar.body}
+                            </p>
+                        </article>
+                    );
+                })
+            }
+        </div>
     </div>
 </section>
+
+<script>
+    import { animate, inView, stagger } from "framer-motion";
+
+    const heading = document.querySelector<HTMLElement>("[data-about-heading]");
+    const pillars = document.querySelectorAll<HTMLElement>("[data-about-pillar]");
+    const pillarsContainer = document.querySelector<HTMLElement>("[data-about-pillars]");
+
+    const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (prefersReducedMotion) {
+        heading?.style.setProperty("opacity", "1");
+        pillars.forEach((el) => el.style.setProperty("opacity", "1"));
+    } else {
+        if (heading) {
+            inView(
+                heading,
+                () => {
+                    animate(
+                        heading,
+                        { opacity: [0, 1], transform: ["translateY(20px)", "translateY(0px)"] },
+                        { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
+                    );
+                },
+                { amount: 0.4 }
+            );
+        }
+
+        if (pillarsContainer && pillars.length) {
+            inView(
+                pillarsContainer,
+                () => {
+                    animate(
+                        pillars,
+                        { opacity: [0, 1], transform: ["translateY(24px)", "translateY(0px)"] },
+                        {
+                            duration: 0.55,
+                            ease: [0.22, 1, 0.36, 1],
+                            delay: stagger(0.09),
+                        }
+                    );
+                },
+                { amount: 0.25 }
+            );
+        }
+    }
+</script>
+
+<style>
+    @media (prefers-reduced-motion: reduce) {
+        [data-about-heading],
+        [data-about-pillar] {
+            opacity: 1 !important;
+        }
+    }
+</style>

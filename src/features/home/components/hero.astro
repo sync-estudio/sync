@@ -12,12 +12,12 @@ import Button from "@shared/components/ui/button.astro";
     >
         <div class="text-zinc-800 text-start">
             <h1
-                class="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold mb-4 sm:mb-4 md:mb-5 leading-tight px-2 sm:px-4"
+                class="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold mb-4 sm:mb-4 md:mb-5 leading-tight md:leading-[1.1] px-2 sm:px-4 tracking-tight"
             >
-                <span class="hero-line hero-line-1"
+                <span data-hero-line class="hero-line"
                     >Software a medida para empresas en operación, enfocado en</span
                 >
-                <span class="hero-line hero-line-2"
+                <span data-hero-line class="hero-line"
                     ><span
                         class="font-[ibm-plex-serif] font-bold italic text-emerald-900 relative inline-block px-2.5 py-1.5 sm:px-3 sm:py-1.5 md:px-4 md:py-2"
                         ><span
@@ -29,17 +29,11 @@ import Button from "@shared/components/ui/button.astro";
         </div>
 
         <div
-            class="flex flex-wrap justify-start gap-4 sm:gap-5 md:gap-6 w-full px-4 sm:px-0 hero-actions-enter"
+            data-hero-actions
+            class="flex flex-wrap justify-start gap-4 sm:gap-5 md:gap-6 w-full px-4 sm:px-0 hero-actions"
         >
-            <Button
-                link="/contact"
-                >Solicitar consultoría inicial</Button
-            >
-            <Button
-                link="/contact"
-                variant="ghost"
-                >Explorar soluciones</Button
-            >
+            <Button link="/contact">Solicitar consultoría inicial</Button>
+            <Button link="/contact" variant="ghost">Explorar soluciones</Button>
         </div>
     </div>
 </div>
@@ -47,50 +41,22 @@ import Button from "@shared/components/ui/button.astro";
 <style>
     .hero-line {
         display: block;
-        transform: translateX(0);
-        will-change: transform;
+        opacity: 0;
+        transform: translateX(44px);
+        will-change: transform, opacity;
     }
 
-    .hero-line-1 {
-        animation: heroLineEnter 760ms cubic-bezier(0.22, 1, 0.36, 1) 100ms both;
-    }
-
-    .hero-line-2 {
-        animation: heroLineEnter 760ms cubic-bezier(0.22, 1, 0.36, 1) 100ms both;
-    }
-
-    .hero-actions-enter {
+    .hero-actions {
         opacity: 0;
         transform: translateY(24px);
-        animation: heroActionsEnter 760ms cubic-bezier(0.22, 1, 0.36, 1) 100ms forwards;
-    }
-
-    @keyframes heroLineEnter {
-        from {
-            transform: translateX(44px);
-        }
-        to {
-            transform: translateX(0);
-        }
-    }
-
-    @keyframes heroActionsEnter {
-        from {
-            opacity: 0;
-            transform: translateY(24px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        will-change: transform, opacity;
     }
 
     @media (prefers-reduced-motion: reduce) {
         .hero-line,
-        .hero-actions-enter {
-            animation: none;
-            opacity: 1;
-            transform: none;
+        .hero-actions {
+            opacity: 1 !important;
+            transform: none !important;
         }
     }
 
@@ -122,3 +88,45 @@ import Button from "@shared/components/ui/button.astro";
         }
     }
 </style>
+
+<script>
+    import { animate, stagger } from "framer-motion";
+
+    const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const lines = document.querySelectorAll<HTMLElement>("[data-hero-line]");
+    const actions = document.querySelector<HTMLElement>("[data-hero-actions]");
+
+    if (prefersReducedMotion) {
+        lines.forEach((el) => {
+            el.style.opacity = "1";
+            el.style.transform = "none";
+        });
+        if (actions) {
+            actions.style.opacity = "1";
+            actions.style.transform = "none";
+        }
+    } else {
+        if (lines.length) {
+            animate(
+                lines,
+                { opacity: [0, 1], transform: ["translateX(44px)", "translateX(0px)"] },
+                {
+                    duration: 0.76,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: stagger(0.08, { startDelay: 0.1 }),
+                }
+            );
+        }
+
+        if (actions) {
+            animate(
+                actions,
+                { opacity: [0, 1], transform: ["translateY(24px)", "translateY(0px)"] },
+                { duration: 0.76, ease: [0.22, 1, 0.36, 1], delay: 0.35 }
+            );
+        }
+    }
+</script>
