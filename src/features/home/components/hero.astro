@@ -5,27 +5,32 @@ import Button from "@shared/components/ui/button.astro";
 
 <div
     id="hero"
-    class="min-h-[90vh] py-20 md:py-24 container mx-auto flex justify-center items-center"
+    class="pt-20 md:pt-20 pb-8 md:pb-12 container mx-auto flex justify-center items-center px-4 sm:px-6"
 >
     <div
-        class="flex flex-col gap-8 sm:gap-7 md:gap-8 lg:gap-10 w-full max-w-8xl lg:my-auto pt-0 lg:pt-20"
+        class="hero-card relative w-full min-h-[80vh] rounded-2xl md:rounded-3xl overflow-hidden border border-zinc-200 flex justify-center items-center px-6 sm:px-10 md:px-14 lg:px-20 py-20 md:py-24"
+    >
+    <div
+        class="flex flex-col gap-8 sm:gap-7 md:gap-8 lg:gap-10 w-full max-w-8xl lg:my-auto pt-0 lg:pt-20 relative z-10"
     >
         <div class="text-zinc-800 text-start">
             <h1
                 class="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold mb-4 sm:mb-4 md:mb-5 leading-tight md:leading-[1.1] px-2 sm:px-4 tracking-tight"
             >
                 <span data-hero-line class="hero-line"
-                    >Software a medida para empresas en operación, enfocado en</span
-                >
-                <span data-hero-line class="hero-line"
-                    ><span
+                    >Software e <span
                         class="font-[ibm-plex-serif] font-bold italic text-emerald-900 relative inline-block px-2.5 py-1.5 sm:px-3 sm:py-1.5 md:px-4 md:py-2"
                         ><span
                             class="absolute inset-0 bg-emerald-200/60 -rotate-1 transform origin-center rounded-sm -mx-1"
-                        ></span><span class="relative z-10">resultados reales.</span></span
-                    ></span
+                        ></span><span class="relative z-10">IA</span></span> a medida para empresas en operación.</span
                 >
             </h1>
+            <p
+                data-hero-line
+                class="hero-line text-lg sm:text-xl md:text-2xl text-zinc-600 px-2 sm:px-4 max-w-3xl leading-snug"
+            >
+                Construimos las herramientas, rediseñamos los flujos y formamos a tu equipo.
+            </p>
         </div>
 
         <div
@@ -36,9 +41,16 @@ import Button from "@shared/components/ui/button.astro";
             <Button link="/contact" variant="ghost">Explorar soluciones</Button>
         </div>
     </div>
+    </div>
 </div>
 
 <style>
+    .hero-card {
+        background-image: url('/bg_texture.png');
+        background-size: 150px;
+        background-repeat: repeat;
+    }
+
     .hero-line {
         display: block;
         opacity: 0;

@@ -11,11 +11,12 @@ const logoWrapper =
 
 <nav
     data-site-nav
-    class="fixed top-4 inset-x-0 flex justify-center z-50 pointer-events-none"
+    class="nav-root fixed inset-x-0 flex justify-center z-50 pointer-events-none"
 >
     <div class="flex w-full flex-col items-center gap-3 relative">
         <div
-            class="bg-white/70 backdrop-blur-lg border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.04)] rounded-full px-4 md:px-6 py-2 grid grid-cols-[auto_1fr_auto] items-center gap-3 md:gap-6 pointer-events-auto w-[95%] max-w-5xl navbar-entrance"
+            data-nav-pill
+            class="navbar-pill px-4 md:px-6 grid grid-cols-[auto_1fr_auto] items-center gap-3 md:gap-6 pointer-events-auto w-[95%] max-w-5xl navbar-entrance"
         >
             <div class="flex items-center shrink-0">
                 <a class={logoWrapper} href="/#hero" aria-label="Inicio">
@@ -145,6 +146,52 @@ const logoWrapper =
 </nav>
 
 <style>
+    .nav-root {
+        top: 0;
+        transition: top 280ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .nav-root.is-scrolled {
+        top: 1rem;
+    }
+
+    .navbar-pill {
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: 9999px;
+        box-shadow: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem;
+        transition:
+            background-color 280ms ease,
+            border-color 280ms ease,
+            box-shadow 280ms ease,
+            backdrop-filter 280ms ease,
+            padding 280ms ease;
+    }
+
+    @media (min-width: 768px) {
+        .navbar-pill {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+    }
+
+    .navbar-pill.is-scrolled {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .navbar-pill.is-scrolled {
+        background-color: rgba(255, 255, 255, 0.7);
+        border-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+    }
+
     .navbar-entrance {
         opacity: 0;
         transform: translateY(-10px);
@@ -213,9 +260,21 @@ const logoWrapper =
     ).matches;
 
     const nav = document.querySelector("[data-site-nav]");
+    const pill = nav?.querySelector<HTMLElement>("[data-nav-pill]");
     const entrance = nav?.querySelector<HTMLElement>(".navbar-entrance");
     const toggle = nav?.querySelector("[data-site-nav-toggle]");
     const menu = nav?.querySelector("[data-site-nav-menu]");
+
+    if (nav instanceof HTMLElement && pill instanceof HTMLElement) {
+        const SCROLL_THRESHOLD = 8;
+        const applyScrollState = () => {
+            const scrolled = window.scrollY > SCROLL_THRESHOLD;
+            nav.classList.toggle("is-scrolled", scrolled);
+            pill.classList.toggle("is-scrolled", scrolled);
+        };
+        applyScrollState();
+        window.addEventListener("scroll", applyScrollState, { passive: true });
+    }
 
     if (entrance) {
         if (prefersReducedMotion) {
