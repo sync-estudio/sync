@@ -46,9 +46,22 @@ import Button from "@shared/components/ui/button.astro";
 
 <style>
     .hero-card {
+        position: relative;
         background-image: url('/bg_texture.png');
         background-size: 150px;
         background-repeat: repeat;
+    }
+
+    .hero-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url('/bg_texture.png');
+        background-size: 150px;
+        background-repeat: repeat;
+        background-position: 60px 60px;
+        pointer-events: none;
+        z-index: 0;
     }
 
     .hero-line {
