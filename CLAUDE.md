@@ -4,11 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-- `npm run dev` — Astro dev server (localhost:4321, host 0.0.0.0).
-- `npm run build` — production build to `./dist/` (SSR via `@astrojs/node` standalone).
-- `npm start` — run built SSR server: `node ./dist/server/entry.mjs`.
-- `npm run preview` — preview production build locally.
-- `npm run astro -- check` — type-check Astro + TS (no separate lint/test setup).
+Use **pnpm** (preferred over npm).
+
+- `pnpm dev` — Astro dev server (localhost:4321, host 0.0.0.0).
+- `pnpm build` — production build to `./dist/` (SSR via `@astrojs/node` standalone).
+- `pnpm start` — run built SSR server: `node ./dist/server/entry.mjs`.
+- `pnpm preview` — preview production build locally.
+- `pnpm astro -- check` — type-check Astro + TS (no separate lint/test setup).
 
 No test framework configured. No linter configured.
 
