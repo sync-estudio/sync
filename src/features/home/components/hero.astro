@@ -59,10 +59,10 @@ import Button from "@shared/components/ui/button.astro";
         z-index: 0;
         background-image: radial-gradient(
             circle,
-            rgba(4, 120, 87, 0.7) 1.2px,
-            transparent 1.6px
+            rgba(4, 120, 87, 0.7) 0.9px,
+            transparent 1.2px
         );
-        background-size: 18px 18px;
+        background-size: 13px 13px;
     }
 
     .hero-dots-base {
@@ -72,10 +72,10 @@ import Button from "@shared/components/ui/button.astro";
     .hero-dots-active {
         background-image: radial-gradient(
             circle,
-            rgba(4, 120, 87, 0.6) 1.3px,
-            transparent 1.7px
+            rgba(4, 120, 87, 0.6) 1px,
+            transparent 1.3px
         );
-        background-size: 18px 18px;
+        background-size: 13px 13px;
         mask-image: radial-gradient(
             circle 260px at var(--hero-mouse-x, 100%) var(--hero-mouse-y, 100%),
             #000 0%,
@@ -112,6 +112,24 @@ import Button from "@shared/components/ui/button.astro";
     }
 
     @media (min-width: 640px) {
+        .hero-dots {
+            background-image: radial-gradient(
+                circle,
+                rgba(4, 120, 87, 0.7) 1.2px,
+                transparent 1.6px
+            );
+            background-size: 18px 18px;
+        }
+
+        .hero-dots-active {
+            background-image: radial-gradient(
+                circle,
+                rgba(4, 120, 87, 0.6) 1.3px,
+                transparent 1.7px
+            );
+            background-size: 18px 18px;
+        }
+
         #hero img {
             max-height: 600px;
             min-height: 400px;
