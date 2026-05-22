@@ -42,7 +42,22 @@ const faqs: Faq[] = [
         link: { href: "/contacto", label: "Ir a contacto" },
     },
 ];
+
+const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: {
+            "@type": "Answer",
+            text: f.a,
+        },
+    })),
+};
 ---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
 <section id="preguntas" class="container mx-auto px-4 sm:px-6 py-24 md:py-32">
     <div class="mx-auto w-full max-w-4xl flex flex-col gap-10 md:gap-14">

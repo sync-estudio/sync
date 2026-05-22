@@ -70,13 +70,17 @@ const logoAbs = new URL("/sync_logo.svg", siteUrl).href;
 		<meta name="twitter:image:alt" content="SYNC Estudio — Software e IA a medida para empresas en operación" />
 
 		<!-- Structured Data: Organization -->
-		<script type="application/ld+json" set:html={JSON.stringify({
+		<script is:inline type="application/ld+json" set:html={JSON.stringify({
 			"@context": "https://schema.org",
 			"@type": "Organization",
 			"name": "SYNC Estudio",
 			"url": siteUrl,
 			"logo": logoAbs,
-			"sameAs": ["https://www.instagram.com/sync.estudio/"]
+			"description": "Software e IA a medida para empresas en operación. Construimos las herramientas, rediseñamos los flujos y formamos al equipo, con mantenimiento continuo.",
+			"sameAs": [
+				"https://www.instagram.com/sync.estudio/",
+				"https://www.linkedin.com/company/syncestudio/"
+			]
 		})} />
 		<style is:global>
 			:root {
