@@ -1,0 +1,252 @@
+---
+import "@app/styles/global.css";
+import Layout from "@app/layouts/Layout.astro";
+import Button from "@shared/components/ui/button.astro";
+
+const phases = [
+    {
+        number: "01",
+        title: "Diagnóstico",
+        timing: "2-3 semanas · Precio fijo",
+        body: "Mapeo de procesos y stack actual, pain points priorizados y roadmap por fases. Es el único punto de entrada: sin Diagnóstico no construimos.",
+        items: [
+            "Precio fijo desde el primer día",
+            "Entregable: roadmap operativo y técnico",
+            "Si decides no seguir, el roadmap se queda contigo",
+        ],
+    },
+    {
+        number: "02",
+        title: "Desarrollo",
+        timing: "Sprints de 1-2 semanas · Precio fijo",
+        body: "Precio fijo cerrado al final del Diagnóstico, no estimaciones por hora. El número se calcula sobre el alcance acordado, ponderado por complejidad técnica, urgencia, tamaño y claridad de requerimientos.",
+        items: [
+            "Esquema estándar 40/30/30 (inicio, mitad, entrega)",
+            "Proyectos pequeños: 50/50",
+            "Iteraciones por sprint hasta cierre del alcance acordado",
+        ],
+    },
+    {
+        number: "03",
+        title: "Plan de Acompañamiento",
+        timing: "Mensual · Mínimo 12 meses",
+        body: "Mantenimiento, soporte y evolución del sistema en producción. Obligatorio para todos los proyectos: sin acompañamiento, el software se vuelve deuda en 6 meses.",
+        items: [
+            "Tres tiers según volumen y frecuencia de soporte",
+            "Cubre roles nuevos, ajustes operativos y mantenimiento",
+            "Revisiones trimestrales para priorizar lo que no rinde",
+        ],
+    },
+];
+
+const paymentTerms = [
+    "Diagnóstico: 100% al inicio. Precio fijo cerrado en la propuesta.",
+    "Desarrollo (estándar): 40% al inicio, 30% a la mitad del alcance, 30% contra entrega.",
+    "Desarrollo (proyectos pequeños): 50% al inicio, 50% contra entrega.",
+    "Plan de Acompañamiento: mensual por adelantado, mínimo 12 meses.",
+];
+
+const faqs = [
+    {
+        q: "¿Por qué el Plan de Acompañamiento es obligatorio?",
+        a: "Software operativo sin mantenimiento se vuelve deuda en pocos meses: integraciones que se rompen, roles nuevos sin onboarding, procesos que evolucionan más rápido que la documentación. El acompañamiento mantiene el sistema vivo y útil; sin él, lo que entregamos hoy se vuelve un problema mañana.",
+    },
+    {
+        q: "¿Por qué mínimo 12 meses?",
+        a: "Los primeros meses son adopción, no estado estable. La operación cambia, salen ajustes y el equipo necesita acompañamiento real. Doce meses es el horizonte mínimo para que el sistema deje de ser proyecto y se vuelva parte de la operación.",
+    },
+    {
+        q: "¿Cómo se calcula el precio del Desarrollo?",
+        a: "Al final del Diagnóstico estimamos horas por entregable y aplicamos una tarifa con multiplicadores por complejidad técnica, urgencia, tamaño del alcance y claridad de requerimientos. El resultado es un número fijo, no una estimación por hora con tope abierto.",
+    },
+    {
+        q: "¿Cobran en USD o MXN?",
+        a: "Por defecto, MXN. Para clientes fuera de México facturamos en USD al tipo de cambio del día de la propuesta.",
+    },
+];
+---
+
+<Layout
+    title="Cómo cobramos | Sync Estudio"
+    description="Cómo estructuramos precios y pagos en Diagnóstico, Desarrollo y Plan de Acompañamiento mensual. Precio fijo cerrado al cierre del Diagnóstico, sin estimaciones por hora con tope abierto."
+>
+    <article class="min-h-screen container mx-auto pt-32 pb-16 md:pt-40 md:pb-24">
+        <div class="mx-auto w-full max-w-4xl">
+            <header
+                class="mb-16 border-b border-zinc-200 pb-12 flex flex-col items-center text-center gap-6 max-w-3xl mx-auto"
+            >
+                <span
+                    class="text-xs tracking-[0.2em] text-emerald-700 font-semibold"
+                >
+                    Modelo de precios
+                </span>
+
+                <h1
+                    class="text-balance font-semibold leading-[1.05] tracking-[-0.02em] text-zinc-900"
+                    style="font-size: clamp(30px, 6vw, 60px);"
+                >
+                    Cómo
+                    <span
+                        class="font-[ibm-plex-serif] font-bold italic text-emerald-900 relative inline-block px-2.5 py-1 sm:px-3 md:px-4"
+                    >
+                        <span
+                            class="absolute inset-0 bg-emerald-200/60 -rotate-1 transform origin-center rounded-sm -mx-1"
+                        ></span>
+                        <span class="relative z-10">cobramos</span>
+                    </span>
+                </h1>
+
+                <p class="text-lg md:text-xl leading-relaxed text-zinc-600 max-w-2xl">
+                    Esta página describe el modelo: cómo estructuramos precios y pagos en cada fase, sin números cerrados. El monto exacto se define al cierre del Diagnóstico, con alcance acordado y precio fijo, no estimaciones por hora con tope abierto.
+                </p>
+
+                <span class="text-sm text-zinc-500">
+                    ¿Necesitas un número? Empieza por el Diagnóstico.
+                </span>
+
+                <div
+                    class="mt-2 flex flex-wrap items-center justify-center gap-3"
+                >
+                    <Button variant="default" link="/contacto">
+                        Solicitar diagnóstico
+                    </Button>
+                </div>
+            </header>
+
+            <div class="flex flex-col gap-6 md:gap-8 mb-20">
+                {
+                    phases.map((phase) => (
+                        <section class="rounded-2xl md:rounded-3xl border border-zinc-200 bg-white p-8 md:p-10 flex flex-col gap-5">
+                            <div class="flex items-center gap-4">
+                                <span class="inline-flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-full bg-emerald-50 border border-emerald-200/60 font-[ibm-plex-serif] italic font-bold text-emerald-900 text-base md:text-lg">
+                                    {phase.number}
+                                </span>
+                                <div class="flex flex-col gap-1">
+                                    <h2 class="text-xl md:text-2xl font-semibold tracking-tight text-zinc-900">
+                                        {phase.title}
+                                    </h2>
+                                    <span class="text-xs md:text-sm text-emerald-800 font-medium">
+                                        {phase.timing}
+                                    </span>
+                                </div>
+                            </div>
+                            <p class="text-[15px] md:text-base leading-relaxed text-zinc-600 max-w-2xl">
+                                {phase.body}
+                            </p>
+                            <ul class="flex flex-col gap-2.5">
+                                {phase.items.map((item) => (
+                                    <li class="flex gap-3 text-sm md:text-[15px] text-zinc-700 leading-relaxed">
+                                        <span
+                                            aria-hidden="true"
+                                            class="mt-[9px] h-1.5 w-1.5 rounded-full bg-emerald-700 shrink-0"
+                                        />
+                                        <span>{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </section>
+                    ))
+                }
+            </div>
+
+            <div class="mb-12 md:mb-16 border-t border-zinc-200" aria-hidden="true"></div>
+
+            <section class="mb-20 rounded-2xl md:rounded-3xl border border-zinc-200 bg-white p-8 md:p-10 flex flex-col gap-5">
+                <div class="flex flex-col gap-3">
+                    <span class="text-xs tracking-[0.2em] text-emerald-700 font-semibold">
+                        Planes de Acompañamiento
+                    </span>
+                    <h2 class="text-xl md:text-2xl font-semibold tracking-tight text-zinc-900">
+                        ¿Qué incluye?
+                    </h2>
+                </div>
+
+                <p class="text-[15px] md:text-base leading-relaxed text-zinc-600 max-w-2xl">
+                    Mantenimiento del sistema en producción, soporte para tu equipo, bolsa mensual de horas para ajustes y nuevas funcionalidades, y revisiones periódicas para priorizar lo que no rinde. El alcance exacto depende del tamaño del sistema y de la frecuencia de cambios esperada.
+                </p>
+
+                <p class="text-[15px] md:text-base leading-relaxed text-zinc-600 max-w-2xl">
+                    Manejamos tres niveles: Esenciales, Crecimiento y Premium. El nivel adecuado se define al cierre del Diagnóstico, una vez que conocemos la operación.
+                </p>
+            </section>
+
+            <section
+                class="mb-20 rounded-2xl md:rounded-3xl bg-[#defbed] p-8 md:p-10 flex flex-col gap-5"
+            >
+                <span class="text-xs tracking-wide font-medium text-emerald-800">
+                    Esquema de pago
+                </span>
+                <h2
+                    class="text-xl md:text-2xl font-semibold tracking-tight text-zinc-900"
+                >
+                    ¿Cómo se cobra?
+                </h2>
+                <ul class="flex flex-col gap-2.5 mt-1">
+                    {
+                        paymentTerms.map((item) => (
+                            <li class="flex gap-3 text-sm md:text-[15px] text-zinc-800 leading-relaxed">
+                                <span
+                                    aria-hidden="true"
+                                    class="mt-[9px] h-1.5 w-1.5 rounded-full bg-emerald-700 shrink-0"
+                                />
+                                <span>{item}</span>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </section>
+
+            <section class="mb-20">
+                <header class="mb-8 flex flex-col gap-3">
+                    <span
+                        class="text-xs tracking-wide font-medium text-zinc-500"
+                    >
+                        Preguntas frecuentes
+                    </span>
+                    <h2
+                        class="text-2xl md:text-3xl font-semibold tracking-tight text-zinc-900"
+                    >
+                        Lo que casi siempre preguntan
+                    </h2>
+                </header>
+                <div class="flex flex-col gap-3">
+                    {
+                        faqs.map((faq) => (
+                            <details class="group rounded-2xl border border-zinc-200 bg-white p-6 md:p-7 transition-colors hover:border-emerald-700/30 open:border-emerald-700/30">
+                                <summary class="flex items-center justify-between gap-4 cursor-pointer list-none text-base md:text-lg font-medium text-zinc-900">
+                                    <span>{faq.q}</span>
+                                    <span
+                                        aria-hidden="true"
+                                        class="text-emerald-700 text-xl transition-transform group-open:rotate-45"
+                                    >
+                                        +
+                                    </span>
+                                </summary>
+                                <p class="mt-4 text-[15px] md:text-base leading-relaxed text-zinc-600">
+                                    {faq.a}
+                                </p>
+                            </details>
+                        ))
+                    }
+                </div>
+            </section>
+
+            <footer
+                class="border-t border-zinc-200 pt-16 flex flex-wrap justify-center gap-3"
+            >
+                <Button variant="default" link="/contacto">
+                    Solicitar diagnóstico
+                </Button>
+                <Button variant="outline" link="/#soluciones">
+                    Ver soluciones
+                </Button>
+            </footer>
+        </div>
+    </article>
+</Layout>
+
+<style>
+    details > summary::-webkit-details-marker {
+        display: none;
+    }
+</style>

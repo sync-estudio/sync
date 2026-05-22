@@ -53,7 +53,7 @@ export const solutions: Solution[] = [
         timing: "2-3 semanas · Precio fijo",
         sections: [
             {
-                title: "Cómo lo hacemos",
+                title: "¿Cómo lo hacemos?",
                 body: "Dos a tres semanas dentro de tu operación. Entrevistas con operadores, supervisores y dirección. Observación de los flujos reales, no de los manuales. Auditoría de las herramientas y los datos que ya existen.",
                 items: [
                     "Entrevistas por rol, no encuestas masivas",
@@ -63,7 +63,7 @@ export const solutions: Solution[] = [
                 ],
             },
             {
-                title: "Qué entregamos al cierre",
+                title: "¿Qué entregamos al cierre?",
                 items: [
                     "Mapa de procesos con puntos de fricción marcados",
                     "Pain points priorizados por impacto y esfuerzo",
@@ -124,10 +124,10 @@ export const solutions: Solution[] = [
         ],
         deliverable:
             "Soluciones operativas que resuelven problemas concretos, no plataformas genéricas adaptadas a la fuerza.",
-        timing: "Construido a tu medida. Mantenido por nosotros en producción.",
+        timing: "Sprints de 1-2 semanas · Precio fijo cerrado en Diagnóstico",
         sections: [
             {
-                title: "Qué resolvemos",
+                title: "¿Qué resolvemos?",
                 items: [
                     "Procesos manuales que consumen horas y generan errores",
                     "Sistemas que no se hablan y obligan a exportar Excel entre áreas",
@@ -137,7 +137,7 @@ export const solutions: Solution[] = [
                 ],
             },
             {
-                title: "Cómo trabajamos",
+                title: "¿Cómo trabajamos?",
                 body: "Sprints de 1 a 2 semanas con demo en vivo. Cada release pasa por tu equipo antes de cambiar el día a día. El código vive en tu repositorio, no en el nuestro.",
                 items: [
                     "Demos cada sprint con feedback en la sala",
@@ -149,6 +149,14 @@ export const solutions: Solution[] = [
                 title: "Stack que usamos",
                 body: "Adaptamos el stack a lo que tu equipo pueda mantener, no al revés. Trabajamos principalmente con TypeScript, Next.js, Go, Python, Postgres y MongoDB. Si ya tienes preferencias técnicas o restricciones, las respetamos.",
             },
+            {
+                title: "Lo que no hacemos",
+                items: [
+                    "Productos genéricos rebautizados con tu logo",
+                    "Plataformas que tu equipo no podría mantener si nos vamos",
+                    "Software desconectado de los sistemas que ya usas",
+                ],
+            },
         ],
         outcomes: [
             "Herramientas en producción que resuelven el problema real",
@@ -158,7 +166,7 @@ export const solutions: Solution[] = [
         faqs: [
             {
                 q: "¿Cuánto tarda construir?",
-                a: "Depende del alcance acordado en diagnóstico. Damos rangos por fase, no un número inflado al inicio.",
+                a: "Depende del alcance acordado en diagnóstico. Damos rangos por fase, no un número inflado al inicio. Cómo estructuramos los precios en /como-cobramos.",
             },
             {
                 q: "¿Pueden integrarse con nuestros sistemas actuales?",
@@ -166,7 +174,7 @@ export const solutions: Solution[] = [
             },
             {
                 q: "¿Quién mantiene el sistema después del lanzamiento?",
-                a: "Nosotros. Mantenimiento y acompañamiento mensual van incluidos en la fase de Educación, no como add-on.",
+                a: "Nosotros. El Plan de Acompañamiento mensual va incluido en la fase de Educación, no como add-on.",
             },
             {
                 q: "¿Trabajan con nuestros proveedores actuales?",
@@ -189,14 +197,14 @@ export const solutions: Solution[] = [
             "Talleres prácticos por rol (operador, supervisor, dirección)",
             "Documentación operativa y playbooks de uso",
             "Programas de adopción de IA donde aplique",
-            "Acompañamiento posterior mensual y mantenimiento incluido",
+            "Plan de Acompañamiento mensual incluido",
         ],
         deliverable:
             "Capacidad operativa real — no archivos PDF que nadie lee.",
-        timing: "Talleres por rol, documentación operativa, soporte continuo.",
+        timing: "Programa por roles · Plan de Acompañamiento mensual incluido",
         sections: [
             {
-                title: "Cómo entrenamos",
+                title: "¿Cómo entrenamos?",
                 body: "Talleres prácticos con datos reales del sistema, no demos genéricas. Sesiones por rol para no saturar a quien no necesita ese nivel de detalle. Sesiones grabadas para nuevos miembros que se incorporen después.",
                 items: [
                     "Talleres por rol: operador, supervisor, dirección",
@@ -206,7 +214,7 @@ export const solutions: Solution[] = [
                 ],
             },
             {
-                title: "Qué entregamos",
+                title: "¿Qué entregamos?",
                 items: [
                     "Playbooks por rol con escenarios típicos del día a día",
                     "Documentación viva, versionada junto al código",
@@ -215,8 +223,16 @@ export const solutions: Solution[] = [
                 ],
             },
             {
-                title: "Acompañamiento posterior y mantenimiento",
-                body: "Nos quedamos como soporte y mantenimiento del sistema después del cierre. Office hours mensuales, canal directo asíncrono y revisiones trimestrales para ajustar lo que no rinde. Incluido por defecto, no es un add-on.",
+                title: "Plan de Acompañamiento",
+                body: "Nos quedamos como soporte y mantenimiento del sistema después del cierre. Office hours mensuales, canal directo asíncrono y revisiones trimestrales para ajustar lo que no rinde. Incluido por defecto, no es un add-on. Cómo se estructura en /como-cobramos.",
+            },
+            {
+                title: "Lo que no hacemos",
+                items: [
+                    "Manuales PDF que nadie va a leer",
+                    "Charlas genéricas sin conexión a la operación real",
+                    "Capacitación de un solo shot sin acompañamiento posterior",
+                ],
             },
         ],
         outcomes: [
@@ -240,7 +256,7 @@ export const solutions: Solution[] = [
             },
             {
                 q: "¿Qué pasa si rota gente en el equipo?",
-                a: "Las sesiones grabadas y los playbooks están pensados para onboarding futuro. Si necesitas talleres adicionales, el acompañamiento mensual los cubre.",
+                a: "Las sesiones grabadas y los playbooks están pensados para onboarding futuro. Si necesitas talleres adicionales, el Plan de Acompañamiento los cubre.",
             },
         ],
         relatedCaseStudies: ["ima-cloud"],

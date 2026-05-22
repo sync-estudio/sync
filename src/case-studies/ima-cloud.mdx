@@ -152,33 +152,25 @@ La elección de MongoDB permitió manejar estructuras de reportes y documentos c
 
 ## Proceso de trabajo
 
-### 1. Entendimiento del flujo operativo
+### 1. Diagnóstico
 
-El primer paso fue entender cómo se generaban, almacenaban y consultaban los reportes dentro de la operación.
+Mapeamos cómo se generaban, almacenaban y consultaban reportes, documentación e inventario dentro de la operación de IMA.
 
-Esto permitió identificar qué partes del proceso podían digitalizarse sin forzar a la empresa a cambiar radicalmente su forma de trabajo.
-
-### 2. Diseño de una solución flexible
-
-En lugar de construir formularios fijos, se diseñó una estructura capaz de adaptarse a distintos tipos de reportes y documentos.
+Identificamos qué partes del proceso podían digitalizarse sin forzar a la empresa a cambiar radicalmente su forma de trabajo, y diseñamos una estructura capaz de adaptarse a distintos tipos de reportes y documentos.
 
 Esto fue importante porque IMA opera en un entorno técnico donde cada proyecto o actividad puede requerir información distinta.
 
-### 3. Desarrollo del MVP
+### 2. Desarrollo
 
-Se construyó una primera versión funcional enfocada en resolver los flujos principales:
+Construimos una primera versión funcional con un motor dinámico de plantillas para reportes, gestión documental tipo Drive y control inicial de inventario.
 
-- Captura de reportes.
-- Gestión documental.
-- Consulta de información.
-- Administración interna.
-- Control inicial de inventario.
-
-### 4. Iteración y mejora
-
-Conforme el sistema comenzó a usarse, se identificaron oportunidades para mejorar la organización, la experiencia de usuario y la arquitectura del sistema.
+Conforme el sistema comenzó a usarse, iteramos sobre feedback de uso real para mejorar la organización, la experiencia de usuario y la arquitectura.
 
 Esto permitió que IMA Cloud evolucionara de una primera solución funcional hacia una plataforma más sólida para la operación interna.
+
+### 3. Educación
+
+Acompañamos al equipo de IMA en la adopción del sistema y en la documentación de uso, dejando los flujos cubiertos por playbooks operativos y a SYNC como soporte y mantenimiento posterior.
 
 ---
 
@@ -190,12 +182,12 @@ La plataforma ayudó a reducir la dependencia de procesos manuales, ordenar la d
 
 ### Resultados principales
 
-- Centralización de reportes operativos.
-- Digitalización de formatos internos.
-- Mayor orden en documentos y evidencias.
-- Mejor acceso a información histórica.
-- Base tecnológica para escalar nuevos procesos internos.
-- Reducción de fricción administrativa en flujos operativos.
+- Reportes operativos consultables desde un solo sistema en lugar de archivos dispersos.
+- Captura de formatos internos en plantillas digitales dinámicas en lugar de documentos físicos.
+- Evidencias y documentos organizados en un repositorio interno, en lugar de carpetas locales o mensajes.
+- Consulta de información histórica desde la plataforma, sin depender de quién guardó qué archivo.
+- Arquitectura modular lista para incorporar nuevos procesos internos sobre la misma base.
+- Eliminación de capturas duplicadas entre áreas y de pasos manuales para mover información entre herramientas.
 
 ---
 
