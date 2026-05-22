@@ -94,18 +94,35 @@ import Button from "@shared/components/ui/button.astro";
 
     .hero-line {
         display: block;
-        opacity: 0;
-        transform: translateX(44px);
+        animation: hero-line-in 0.76s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+    }
+
+    h1 .hero-line {
+        animation-delay: 0.1s;
+    }
+
+    p.hero-line {
+        animation-delay: 0.18s;
     }
 
     .hero-actions {
-        opacity: 0;
-        transform: translateY(24px);
+        animation: hero-actions-in 0.76s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+    }
+
+    @keyframes hero-line-in {
+        from { opacity: 0; transform: translateX(44px); }
+        to   { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes hero-actions-in {
+        from { opacity: 0; transform: translateY(24px); }
+        to   { opacity: 1; transform: translateY(0); }
     }
 
     @media (prefers-reduced-motion: reduce) {
         .hero-line,
         .hero-actions {
+            animation: none !important;
             opacity: 1 !important;
             transform: none !important;
         }
@@ -159,46 +176,6 @@ import Button from "@shared/components/ui/button.astro";
 </style>
 
 <script>
-    import { animate, stagger } from "framer-motion";
-
-    const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    const lines = document.querySelectorAll<HTMLElement>("[data-hero-line]");
-    const actions = document.querySelector<HTMLElement>("[data-hero-actions]");
-
-    if (prefersReducedMotion) {
-        lines.forEach((el) => {
-            el.style.opacity = "1";
-            el.style.transform = "none";
-        });
-        if (actions) {
-            actions.style.opacity = "1";
-            actions.style.transform = "none";
-        }
-    } else {
-        if (lines.length) {
-            animate(
-                lines,
-                { opacity: [0, 1], transform: ["translateX(44px)", "translateX(0px)"] },
-                {
-                    duration: 0.76,
-                    ease: [0.22, 1, 0.36, 1],
-                    delay: stagger(0.08, { startDelay: 0.1 }),
-                }
-            );
-        }
-
-        if (actions) {
-            animate(
-                actions,
-                { opacity: [0, 1], transform: ["translateY(24px)", "translateY(0px)"] },
-                { duration: 0.76, ease: [0.22, 1, 0.36, 1], delay: 0.35 }
-            );
-        }
-    }
-
     const card = document.querySelector<HTMLElement>("[data-hero-card]");
     const supportsFinePointer = window.matchMedia(
         "(hover: hover) and (pointer: fine)"
