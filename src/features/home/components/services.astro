@@ -177,17 +177,12 @@ const services = [
 
     <div
         data-services-cta
-        class="mt-14 md:mt-20 flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-8 pt-8 border-t border-zinc-200 opacity-0"
+        class="mt-12 md:mt-16 text-start opacity-0"
     >
-        <p class="text-zinc-700 text-base sm:text-lg max-w-xl">
-            Vendemos las tres porque solo las tres juntas funcionan.
+        <p class="text-zinc-600 text-sm md:text-base">
+            Las tres juntas. Entregar solo el software es desplazar el problema,
+            no resolverlo.
         </p>
-        <a
-            href="/como-trabajamos"
-            class="inline-flex items-center gap-2 text-emerald-800 font-semibold hover:text-emerald-900 transition-colors group"
-        >
-            Conocer la metodología completa
-        </a>
     </div>
 </section>
 
@@ -306,7 +301,9 @@ const services = [
         }
     }
 
-    const supportsFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const supportsFinePointer = window.matchMedia(
+        "(hover: hover) and (pointer: fine)",
+    ).matches;
 
     if (supportsFinePointer) {
         cards.forEach((card) => {
