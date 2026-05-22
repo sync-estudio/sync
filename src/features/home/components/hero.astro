@@ -72,8 +72,8 @@ import Button from "@shared/components/ui/button.astro";
     .hero-dots-active {
         background-image: radial-gradient(
             circle,
-            rgba(4, 120, 87, 0.95) 1.2px,
-            transparent 1.6px
+            rgba(4, 120, 87, 0.6) 1px,
+            transparent 1.3px
         );
         background-size: 13px 13px;
         mask-image: radial-gradient(
@@ -130,8 +130,8 @@ import Button from "@shared/components/ui/button.astro";
         .hero-dots-active {
             background-image: radial-gradient(
                 circle,
-                rgba(4, 120, 87, 0.95) 1.6px,
-                transparent 2px
+                rgba(4, 120, 87, 0.6) 1.3px,
+                transparent 1.7px
             );
             background-size: 18px 18px;
         }
@@ -183,15 +183,14 @@ import Button from "@shared/components/ui/button.astro";
         const startLoop = () => {
             if (loopControls || pointerActive || prefersReducedMotion) return;
             card.style.setProperty("--hero-mouse-x", "50%");
-            card.style.setProperty("--hero-mouse-y", "50%");
             loopControls = animate(
                 card,
-                { "--hero-mask-radius": ["180px", "420px"] },
+                { "--hero-mouse-y": ["-15%", "115%"] },
                 {
-                    duration: 3.6,
-                    ease: [0.45, 0, 0.55, 1],
+                    duration: 5,
+                    ease: "linear",
                     repeat: Infinity,
-                    repeatType: "mirror",
+                    repeatType: "loop",
                 }
             );
         };
@@ -232,22 +231,25 @@ import Button from "@shared/components/ui/button.astro";
                 rect = null;
                 pendingX = "100%";
                 pendingY = "100%";
-                if (!rafId) rafId = requestAnimationFrame(apply);
-                if (inViewport) startLoop();
-            };
-
-            const pinRadius = () => {
-                if (pointerActive) {
-                    card.style.setProperty("--hero-mask-radius", "260px");
+                if (rafId) {
+                    cancelAnimationFrame(rafId);
+                    rafId = 0;
+                }
+                if (inViewport) {
+                    startLoop();
+                } else {
+                    rafId = requestAnimationFrame(apply);
                 }
             };
 
-            card.addEventListener("pointerenter", () => {
+            card.addEventListener("pointerenter", (e) => {
                 pointerActive = true;
                 stopLoop();
-                pinRadius();
-                requestAnimationFrame(pinRadius);
                 rect = card.getBoundingClientRect();
+                pendingX = `${((e.clientX - rect.left) / rect.width) * 100}%`;
+                pendingY = `${((e.clientY - rect.top) / rect.height) * 100}%`;
+                apply();
+                rafId = requestAnimationFrame(apply);
             });
 
             card.addEventListener("pointermove", (e) => {
