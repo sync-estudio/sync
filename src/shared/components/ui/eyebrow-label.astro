@@ -1,0 +1,15 @@
+---
+interface Props {
+    tone?: "emerald" | "zinc" | "emerald-soft";
+}
+
+const { tone = "emerald" } = Astro.props;
+
+const toneClass = {
+    emerald: "text-xs tracking-[0.2em] text-emerald-700 font-semibold",
+    zinc: "text-xs tracking-wide font-medium text-zinc-500",
+    "emerald-soft": "text-xs tracking-wide font-medium text-emerald-800",
+}[tone];
+---
+
+<span class={toneClass}><slot /></span>

@@ -1,7 +1,19 @@
 ---
 import "@app/styles/global.css";
 import Layout from "@app/layouts/Layout.astro";
-import Button from "@shared/components/ui/button.astro";
+import ArticleLayout from "@shared/components/layout/article-layout.astro";
+import BackLink from "@shared/components/ui/back-link.astro";
+import PageHeader from "@shared/components/ui/page-header.astro";
+import BulletList from "@shared/components/ui/bullet-list.astro";
+import HighlightedSection from "@shared/components/ui/highlighted-section.astro";
+import SectionHeader from "@shared/components/ui/section-header.astro";
+import FaqItem from "@shared/components/ui/faq-item.astro";
+import ArticleFooter from "@shared/components/ui/article-footer.astro";
+import CardSection from "@shared/components/ui/card-section.astro";
+import CardHeading from "@shared/components/ui/card-heading.astro";
+import EyebrowLabel from "@shared/components/ui/eyebrow-label.astro";
+import InlineLink from "@shared/components/ui/inline-link.astro";
+import ArrowIcon from "@shared/components/ui/arrow-icon.astro";
 import { getEntry } from "astro:content";
 import { solutions, type Solution } from "@features/solutions/data";
 
@@ -23,255 +35,124 @@ const relatedCases = (
         solution.relatedCaseStudies.map((slug) => getEntry("blog", slug)),
     )
 ).filter((entry): entry is NonNullable<typeof entry> => Boolean(entry));
-
-const titleParts = solution.title.split(solution.highlight);
-const hasHighlight = titleParts.length === 2;
 ---
 
 <Layout
     title={`${solution.title} | Soluciones | Sync Estudio`}
     description={solution.lead}
 >
-    <article class="min-h-screen container mx-auto pt-32 pb-16 md:pt-40 md:pb-24">
-        <div class="mx-auto w-full max-w-4xl">
-            <nav class="mb-12">
-                <a
-                    href="/#soluciones"
-                    class="group inline-flex items-center gap-2 text-sm font-medium text-zinc-500 transition-colors hover:text-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 rounded-full"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="transition-transform group-hover:-translate-x-1"
-                    >
-                        <path d="m15 18-6-6 6-6" />
-                    </svg>
-                    Volver a soluciones
-                </a>
-            </nav>
+    <ArticleLayout>
+        <BackLink href="/#soluciones" label="Volver a soluciones" />
 
-            <header class="mb-16 border-b border-zinc-200 pb-12 flex flex-col items-center text-center gap-6 max-w-3xl mx-auto">
-                <span class="text-xs tracking-[0.2em] text-emerald-700 font-semibold">
-                    Solución
-                </span>
+        <PageHeader
+            label="Solución"
+            title={solution.title}
+            highlight={solution.highlight}
+            subtitle={solution.lead}
+            cta={{
+                label: solution.cta?.label ?? "Agendemos un diagnóstico",
+                href: solution.cta?.href ?? "/contacto",
+            }}
+            timing={solution.timing}
+        />
 
-                <h1
-                    class="text-balance font-semibold leading-[1.05] tracking-[-0.02em] text-zinc-900"
-                    style="font-size: clamp(30px, 6vw, 60px);"
-                >
-                    {
-                        hasHighlight ? (
-                            <>
-                                {titleParts[0]}
-                                <span class="font-[ibm-plex-serif] font-bold italic text-emerald-900 relative inline-block px-2.5 py-1 sm:px-3 md:px-4">
-                                    <span class="absolute inset-0 bg-emerald-200/60 -rotate-1 transform origin-center rounded-sm -mx-1" />
-                                    <span class="relative z-10">
-                                        {solution.highlight}
-                                    </span>
-                                </span>
-                                {titleParts[1]}
-                            </>
-                        ) : (
-                            solution.title
-                        )
-                    }
-                </h1>
+        <div class="flex flex-col gap-6 md:gap-8 mb-20">
+            {
+                solution.sections.map((section) => (
+                    <CardSection>
+                        <CardHeading>{section.title}</CardHeading>
+                        {section.body && (
+                            <p class="text-[15px] md:text-base leading-relaxed text-zinc-600 max-w-2xl">
+                                {section.body}
+                                {section.link && (
+                                    <>
+                                        {" "}
+                                        <InlineLink href={section.link.href}>
+                                            {section.link.label}
+                                        </InlineLink>
+                                        .
+                                    </>
+                                )}
+                            </p>
+                        )}
+                        {section.items && <BulletList items={section.items} />}
+                    </CardSection>
+                ))
+            }
+        </div>
 
-                <p class="text-lg md:text-xl leading-relaxed text-zinc-600 max-w-2xl">
-                    {solution.lead}
-                </p>
+        <HighlightedSection
+            label="Resultados"
+            title="¿Qué te llevas al cierre?"
+        >
+            <BulletList items={solution.outcomes} tone="emerald" />
+        </HighlightedSection>
 
-                <div class="mt-4 flex flex-wrap items-center justify-center gap-3">
-                    <Button
-                        variant="default"
-                        link={solution.cta?.href ?? "/contacto"}
-                    >
-                        {solution.cta?.label ?? "Agendemos un diagnóstico"}
-                    </Button>
-                </div>
-
-                <span class="text-sm text-zinc-500">{solution.timing}</span>
-            </header>
-
-            <div class="flex flex-col gap-6 md:gap-8 mb-20">
-                {
-                    solution.sections.map((section) => (
-                        <section class="rounded-2xl md:rounded-3xl border border-zinc-200 bg-white p-8 md:p-10 flex flex-col gap-5">
-                            <h2 class="text-xl md:text-2xl font-semibold tracking-tight text-zinc-900">
-                                {section.title}
-                            </h2>
-                            {section.body && (
-                                <p class="text-[15px] md:text-base leading-relaxed text-zinc-600 max-w-2xl">
-                                    {section.body}
-                                    {section.link && (
+        {
+            solution.faqs.length > 0 && (
+                <section class="mb-20">
+                    <SectionHeader
+                        label="Preguntas frecuentes"
+                        title="Lo que suelen preguntarnos"
+                    />
+                    <div class="flex flex-col gap-3">
+                        {solution.faqs.map((faq) => (
+                            <FaqItem question={faq.q}>
+                                <p class="mt-4 text-[15px] md:text-base leading-relaxed text-zinc-600">
+                                    {faq.a}
+                                    {faq.link && (
                                         <>
                                             {" "}
-                                            <a
-                                                href={section.link.href}
-                                                class="text-emerald-800 underline underline-offset-2 hover:text-emerald-900"
-                                            >
-                                                {section.link.label}
-                                            </a>
+                                            <InlineLink href={faq.link.href}>
+                                                {faq.link.label}
+                                            </InlineLink>
                                             .
                                         </>
                                     )}
                                 </p>
-                            )}
-                            {section.items && (
-                                <ul class="flex flex-col gap-2.5">
-                                    {section.items.map((item) => (
-                                        <li class="flex gap-3 text-sm md:text-[15px] text-zinc-700 leading-relaxed">
-                                            <span
-                                                aria-hidden="true"
-                                                class="mt-[9px] h-1.5 w-1.5 rounded-full bg-emerald-700 shrink-0"
-                                            />
-                                            <span>{item}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
-                        </section>
-                    ))
-                }
-            </div>
+                            </FaqItem>
+                        ))}
+                    </div>
+                </section>
+            )
+        }
 
-            <section class="mb-20 rounded-2xl md:rounded-3xl bg-[#defbed] p-8 md:p-10 flex flex-col gap-5">
-                <span class="text-xs tracking-wide font-medium text-emerald-800">
-                    Resultados
-                </span>
-                <h2 class="text-xl md:text-2xl font-semibold tracking-tight text-zinc-900">
-                    ¿Qué te llevas al cierre?
-                </h2>
-                <ul class="flex flex-col gap-2.5 mt-1">
-                    {
-                        solution.outcomes.map((outcome) => (
-                            <li class="flex gap-3 text-sm md:text-[15px] text-zinc-800 leading-relaxed">
-                                <span
-                                    aria-hidden="true"
-                                    class="mt-[9px] h-1.5 w-1.5 rounded-full bg-emerald-700 shrink-0"
-                                />
-                                <span>{outcome}</span>
-                            </li>
-                        ))
-                    }
-                </ul>
-            </section>
+        {
+            relatedCases.length > 0 && (
+                <section class="mb-20">
+                    <SectionHeader
+                        label="Casos de estudio relacionados"
+                        title="Cómo se ve en operación real"
+                    />
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+                        {relatedCases.map((entry) => (
+                            <a
+                                href={`/casos-de-estudio/${entry.id}`}
+                                class="group rounded-2xl md:rounded-3xl border border-zinc-200 bg-emerald-50 p-8 md:p-10 transition-transform duration-200 hover:-translate-y-1 hover:border-emerald-700/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+                            >
+                                <EyebrowLabel tone="emerald-soft">
+                                    Caso de estudio
+                                </EyebrowLabel>
+                                <CardHeading as="h3" class="mt-3">
+                                    {entry.data.title}
+                                </CardHeading>
+                                <p class="mt-3 text-[15px] leading-relaxed text-zinc-600">
+                                    {entry.data.description}
+                                </p>
+                                <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-emerald-800 group-hover:gap-2.5 transition-all">
+                                    Ver caso
+                                    <ArrowIcon />
+                                </span>
+                            </a>
+                        ))}
+                    </div>
+                </section>
+            )
+        }
 
-            {
-                solution.faqs.length > 0 && (
-                    <section class="mb-20">
-                        <header class="mb-8 flex flex-col gap-3">
-                            <span class="text-xs tracking-wide font-medium text-zinc-500">
-                                Preguntas frecuentes
-                            </span>
-                            <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-zinc-900">
-                                Lo que suelen preguntarnos
-                            </h2>
-                        </header>
-                        <div class="flex flex-col gap-3">
-                            {solution.faqs.map((faq) => (
-                                <details class="group rounded-2xl border border-zinc-200 bg-white p-6 md:p-7 transition-colors hover:border-emerald-700/30 open:border-emerald-700/30">
-                                    <summary class="flex items-center justify-between gap-4 cursor-pointer list-none text-base md:text-lg font-medium text-zinc-900">
-                                        <span>{faq.q}</span>
-                                        <span
-                                            aria-hidden="true"
-                                            class="text-emerald-700 text-xl transition-transform group-open:rotate-45"
-                                        >
-                                            +
-                                        </span>
-                                    </summary>
-                                    <p class="mt-4 text-[15px] md:text-base leading-relaxed text-zinc-600">
-                                        {faq.a}
-                                        {faq.link && (
-                                            <>
-                                                {" "}
-                                                <a
-                                                    href={faq.link.href}
-                                                    class="text-emerald-800 underline underline-offset-2 hover:text-emerald-900"
-                                                >
-                                                    {faq.link.label}
-                                                </a>
-                                                .
-                                            </>
-                                        )}
-                                    </p>
-                                </details>
-                            ))}
-                        </div>
-                    </section>
-                )
-            }
-
-            {
-                relatedCases.length > 0 && (
-                    <section class="mb-20">
-                        <header class="mb-8 flex flex-col gap-3">
-                            <span class="text-xs tracking-wide font-medium text-zinc-500">
-                                Casos de estudio relacionados
-                            </span>
-                            <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-zinc-900">
-                                Cómo se ve en operación real
-                            </h2>
-                        </header>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-                            {relatedCases.map((entry) => (
-                                <a
-                                    href={`/casos-de-estudio/${entry.id}`}
-                                    class="group rounded-2xl md:rounded-3xl border border-zinc-200 bg-emerald-50 p-8 md:p-10 transition-transform duration-200 hover:-translate-y-1 hover:border-emerald-700/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
-                                >
-                                    <span class="text-xs tracking-wide font-medium text-emerald-800">
-                                        Caso de estudio
-                                    </span>
-                                    <h3 class="mt-3 text-xl md:text-2xl font-semibold tracking-tight text-zinc-900">
-                                        {entry.data.title}
-                                    </h3>
-                                    <p class="mt-3 text-[15px] leading-relaxed text-zinc-600">
-                                        {entry.data.description}
-                                    </p>
-                                    <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-emerald-800 group-hover:gap-2.5 transition-all">
-                                        Ver caso
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="16"
-                                            height="16"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                        >
-                                            <path d="m9 18 6-6-6-6" />
-                                        </svg>
-                                    </span>
-                                </a>
-                            ))}
-                        </div>
-                    </section>
-                )
-            }
-
-            <footer class="border-t border-zinc-200 pt-16 flex flex-wrap justify-center gap-3">
-                <Button variant="default" link="/contacto">
-                    Agendemos un diagnóstico
-                </Button>
-                <Button variant="outline" link="/#soluciones">
-                    Ver otras soluciones
-                </Button>
-            </footer>
-        </div>
-    </article>
+        <ArticleFooter
+            primary={{ label: "Agendemos un diagnóstico", href: "/contacto" }}
+            secondary={{ label: "Ver otras soluciones", href: "/#soluciones" }}
+        />
+    </ArticleLayout>
 </Layout>
-
-<style>
-    details > summary::-webkit-details-marker {
-        display: none;
-    }
-</style>

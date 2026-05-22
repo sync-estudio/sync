@@ -1,6 +1,8 @@
 ---
 import "@app/styles/global.css";
 import Button from "@shared/components/ui/button.astro";
+import FaqItem from "@shared/components/ui/faq-item.astro";
+import ArrowIcon from "@shared/components/ui/arrow-icon.astro";
 
 type Faq = {
     q: string;
@@ -42,13 +44,12 @@ const faqs: Faq[] = [
 ];
 ---
 
-<section
-    id="faq"
-    class="container mx-auto px-4 sm:px-6 py-24 md:py-32"
->
+<section id="faq" class="container mx-auto px-4 sm:px-6 py-24 md:py-32">
     <div class="mx-auto w-full max-w-4xl flex flex-col gap-10 md:gap-14">
         <header class="flex flex-col gap-3 max-w-2xl">
-            <span class="text-xs tracking-[0.2em] text-emerald-700 font-semibold">
+            <span
+                class="text-xs tracking-[0.2em] text-emerald-700 font-semibold"
+            >
                 Preguntas frecuentes
             </span>
             <h2
@@ -57,23 +58,15 @@ const faqs: Faq[] = [
                 Lo que casi siempre preguntan
             </h2>
             <p class="text-base sm:text-lg text-zinc-600 leading-relaxed">
-                Respuestas breves a las dudas más recurrentes. Cada una enlaza a la página con el detalle completo.
+                Respuestas breves a las dudas más recurrentes. Cada una enlaza a
+                la página con el detalle completo.
             </p>
         </header>
 
         <div class="flex flex-col gap-3">
             {
                 faqs.map((faq) => (
-                    <details class="group rounded-2xl border border-zinc-200 bg-white p-6 md:p-7 transition-colors hover:border-emerald-700/30 open:border-emerald-700/30">
-                        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none text-base md:text-lg font-medium text-zinc-900">
-                            <span>{faq.q}</span>
-                            <span
-                                aria-hidden="true"
-                                class="text-emerald-700 text-xl transition-transform group-open:rotate-45"
-                            >
-                                +
-                            </span>
-                        </summary>
+                    <FaqItem question={faq.q}>
                         <div class="mt-4 flex flex-col gap-4">
                             <p class="text-[15px] md:text-base leading-relaxed text-zinc-600">
                                 {faq.a}
@@ -83,41 +76,22 @@ const faqs: Faq[] = [
                                 class="group/link inline-flex items-center gap-1.5 text-sm font-medium text-emerald-800 hover:text-emerald-900 self-start"
                             >
                                 {faq.link.label}
-                                <svg
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="14"
-                                    height="14"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
+                                <ArrowIcon
+                                    size={14}
                                     class="transition-transform group-hover/link:translate-x-0.5"
-                                >
-                                    <path d="m9 18 6-6-6-6" />
-                                </svg>
+                                />
                             </a>
                         </div>
-                    </details>
+                    </FaqItem>
                 ))
             }
         </div>
 
-        <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-zinc-200">
-            <p class="text-sm text-zinc-600">
-                ¿Tu duda no está aquí?
-            </p>
-            <Button variant="outline" link="/contacto">
-                Escríbenos
-            </Button>
+        <div
+            class="flex flex-wrap items-center gap-3 pt-4 border-t border-zinc-200"
+        >
+            <p class="text-sm text-zinc-600">¿Tu duda no está aquí?</p>
+            <Button variant="outline" link="/contacto">Escríbenos</Button>
         </div>
     </div>
 </section>
-
-<style>
-    details > summary::-webkit-details-marker {
-        display: none;
-    }
-</style>

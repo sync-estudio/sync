@@ -1,0 +1,14 @@
+---
+interface Props {
+    as?: "h2" | "h3";
+    class?: string;
+}
+
+const { as: Tag = "h2", class: extra = "" } = Astro.props;
+---
+
+<Tag
+    class={`text-xl md:text-2xl font-semibold tracking-tight text-zinc-900 ${extra}`}
+>
+    <slot />
+</Tag>

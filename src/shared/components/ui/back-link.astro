@@ -1,0 +1,23 @@
+---
+import ArrowIcon from "@shared/components/ui/arrow-icon.astro";
+
+interface Props {
+    href: string;
+    label: string;
+}
+
+const { href, label } = Astro.props;
+---
+
+<nav class="mb-12">
+    <a
+        href={href}
+        class="group inline-flex items-center gap-2 text-sm font-medium text-zinc-500 transition-colors hover:text-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 rounded-full"
+    >
+        <ArrowIcon
+            direction="left"
+            class="transition-transform group-hover:-translate-x-1"
+        />
+        {label}
+    </a>
+</nav>

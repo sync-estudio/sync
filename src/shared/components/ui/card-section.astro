@@ -1,0 +1,13 @@
+---
+interface Props {
+    class?: string;
+}
+
+const { class: extra = "" } = Astro.props;
+---
+
+<section
+    class={`rounded-2xl md:rounded-3xl border border-zinc-200 bg-white p-8 md:p-10 flex flex-col gap-5 ${extra}`}
+>
+    <slot />
+</section>

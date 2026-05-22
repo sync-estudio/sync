@@ -1,0 +1,15 @@
+---
+interface Props {
+    maxWidth?: "2xl" | "4xl";
+}
+
+const { maxWidth = "4xl" } = Astro.props;
+
+const widthClass = maxWidth === "2xl" ? "max-w-2xl" : "max-w-4xl";
+---
+
+<article class="min-h-screen container mx-auto pt-32 pb-16 md:pt-40 md:pb-24">
+    <div class={`mx-auto w-full ${widthClass}`}>
+        <slot />
+    </div>
+</article>

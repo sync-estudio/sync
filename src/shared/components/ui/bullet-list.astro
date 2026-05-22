@@ -1,0 +1,26 @@
+---
+interface Props {
+    items: string[];
+    tone?: "zinc" | "emerald";
+}
+
+const { items, tone = "zinc" } = Astro.props;
+
+const textClass = tone === "emerald" ? "text-zinc-800" : "text-zinc-700";
+---
+
+<ul class="flex flex-col gap-2.5">
+    {
+        items.map((item) => (
+            <li
+                class={`flex gap-3 text-sm md:text-[15px] leading-relaxed ${textClass}`}
+            >
+                <span
+                    aria-hidden="true"
+                    class="mt-[9px] h-1.5 w-1.5 rounded-full bg-emerald-700 shrink-0"
+                />
+                <span>{item}</span>
+            </li>
+        ))
+    }
+</ul>
