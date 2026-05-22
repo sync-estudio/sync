@@ -1,4 +1,6 @@
 ---
+import Button from "@shared/components/ui/button.astro";
+
 interface Props {
     imageSrc: string;
     imageAlt: string;
@@ -18,17 +20,7 @@ const {
 } = Astro.props;
 ---
 
-<article class="relative flex flex-col text-start text-zinc-600">
-    {link && (
-        <a
-            href={link}
-            aria-label={`Ver caso de estudio de ${projectName}`}
-            class="absolute inset-0 z-10 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700/40"
-        >
-            <span class="sr-only">Ver caso de estudio de {projectName}</span>
-        </a>
-    )}
-
+<article class="flex flex-col gap-4 text-start text-zinc-600">
     <div
         class="bg-emerald-50/70 rounded-2xl flex items-center justify-center p-8 md:p-12 lg:p-16 overflow-hidden h-[320px] sm:h-[420px] md:h-[520px] lg:h-[600px]"
     >
@@ -40,7 +32,15 @@ const {
         />
     </div>
 
-    <p class="text-zinc-500 mt-4">{projectName}</p>
-    <h3 class="font-semibold text-lg md:text-xl">{description}</h3>
+    <div>
+        <p class="text-zinc-500">{projectName}</p>
+        <h3 class="font-semibold text-lg md:text-xl">{description}</h3>
+    </div>
+
+    {link && (
+        <div>
+            <Button link={link} variant="outline">Leer más</Button>
+        </div>
+    )}
 </article>
 

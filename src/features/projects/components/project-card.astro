@@ -1,4 +1,6 @@
 ---
+import Button from "@shared/components/ui/button.astro";
+
 export interface Props {
     image: string;
     style?: string;
@@ -10,25 +12,27 @@ export interface Props {
 }
 
 const { image, style = "", data } = Astro.props;
+const detailHref = `/project-details?name=${data.name}`;
 ---
 
-<article class="text-start w-full sm:w-auto">
-    <a href={`/project-details?name=${data.name}`}>
-        <div
-            class="bg-emerald-50 w-full sm:w-80 md:w-90 h-64 sm:h-80 md:h-90 rounded-2xl flex justify-center items-center overflow-hidden transition-all duration-300 ease-in-out hover:scale-[103%] hover:translate-y-[-.5rem]"
+<article class="text-start w-full sm:w-auto flex flex-col gap-4">
+    <div
+        class="bg-emerald-50 w-full sm:w-80 md:w-90 h-64 sm:h-80 md:h-90 rounded-2xl flex justify-center items-center overflow-hidden"
+    >
+        <img
+            class={`${style} max-w-full max-h-full object-contain`}
+            src={image}
+            alt={`${data.name} (${data.year})`}
+        />
+    </div>
+    <div>
+        <h4 class="font-semibold text-base md:text-lg">{data.name}</h4>
+        <p class="text-sm md:text-base text-zinc-500">{data.year}</p>
+        <span class="italic text-xs md:text-sm text-zinc-400 font-light"
+            >{data.development ? "(En desarrollo)" : ""}</span
         >
-            <img
-                class={`${style} transition-all duration-300 ease-in-out max-w-full max-h-full object-contain`}
-                src={image}
-                alt={`${data.name} (${data.year})`}
-            />
-        </div>
-        <div class="mt-3 md:mt-4">
-            <h4 class="font-semibold text-base md:text-lg">{data.name}</h4>
-            <p class="text-sm md:text-base text-zinc-500">{data.year}</p>
-            <span class="italic text-xs md:text-sm text-zinc-400 font-light"
-                >{data.development ? "(En desarrollo)" : ""}</span
-            >
-        </div>
-    </a>
+    </div>
+    <div>
+        <Button link={detailHref} variant="outline">Leer más</Button>
+    </div>
 </article>
