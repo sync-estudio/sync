@@ -1,127 +1,105 @@
 ---
 import "@app/styles/global.css";
-import { Compass, Workflow, TrendingUp } from "@lucide/astro";
-
-const pillars = [
-    {
-        icon: Compass,
-        title: "Enfoque",
-        body: "Entendemos tus procesos reales antes de escribir una línea de código.",
-    },
-    {
-        icon: Workflow,
-        title: "Método",
-        body: "Iteramos junto a tu equipo, con entregas frecuentes y sin sorpresas al final.",
-    },
-    {
-        icon: TrendingUp,
-        title: "Resultados",
-        body: "Métricas claras desde la primera entrega para validar el impacto en tu operación.",
-    },
-];
 ---
 
-<section
-    id="about"
-    class="py-20 md:py-24 container mx-auto"
->
-    <div class="flex flex-col gap-12 md:gap-16 w-full max-w-8xl">
-        <h2
-            data-about-heading
-            class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight md:leading-[1.15] tracking-tight px-2 sm:px-4 text-center text-zinc-800 max-w-4xl mx-auto opacity-0"
+<section id="about" class="py-12 md:py-16 container mx-auto px-4 sm:px-6">
+    <div
+        class="about-card relative w-full rounded-2xl md:rounded-3xl overflow-hidden border border-zinc-200 px-6 sm:px-10 md:px-14 lg:px-20 py-20 md:py-28"
+    >
+        <div
+            class="max-w-4xl mx-auto flex flex-col gap-8 md:gap-12 text-center relative z-10"
         >
-            Nuestra misión es transformar los retos diarios de tu empresa en
-            <span
-                class="font-[ibm-plex-serif] font-bold italic text-emerald-900 relative inline-block px-2.5 py-1.5 sm:px-3 sm:py-1.5 md:px-4 md:py-2"
-                ><span
-                    class="absolute inset-0 bg-emerald-200/60 -rotate-1 transform origin-center rounded-sm -mx-1"
-                ></span><span class="relative z-10"
-                    >software, apps y plataformas web</span
-                ></span
+            <h2
+                data-about-heading
+                class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight md:leading-[1.15] tracking-tight text-zinc-800 opacity-0"
             >
-            que ayuden a operar mejor y crecer con orden.
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8" data-about-pillars>
-            {
-                pillars.map((pillar) => {
-                    const Icon = pillar.icon;
-                    return (
-                        <article
-                            data-about-pillar
-                            class="flex flex-col gap-4 p-6 md:p-8 rounded-2xl border border-zinc-200/70 bg-white/40 backdrop-blur-sm opacity-0"
-                        >
-                            <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
-                                <Icon class="w-6 h-6" stroke-width={1.75} />
-                            </div>
-                            <h3 class="text-lg md:text-xl font-semibold text-zinc-900 tracking-tight">
-                                {pillar.title}
-                            </h3>
-                            <p class="text-zinc-600 text-sm md:text-base leading-relaxed">
-                                {pillar.body}
-                            </p>
-                        </article>
-                    );
-                })
-            }
+                ¿Por qué existimos?
+            </h2>
+            <p
+                data-about-body
+                class="text-base sm:text-lg md:text-xl text-zinc-600 leading-relaxed max-w-3xl mx-auto opacity-0"
+            >
+                Porque la mayoría de las agencias venden software que los
+                equipos nunca llegan a operar. Eso no resuelve problemas, los
+                disfraza. <span
+                    class="font-semibold text-emerald-900 relative inline-block px-1.5 py-0.5 sm:px-2 sm:py-1"
+                    ><span
+                        class="absolute inset-0 bg-emerald-200/60 -rotate-1 transform origin-center rounded-sm -mx-1"
+                    ></span><span class="relative z-10">Sync existe para hacer lo opuesto.</span></span> Entendemos la
+           
+                operación real, educamos al equipo sobre sus cuellos de botella,
+                y entregamos soluciones que tu propia gente pueda operar y
+                evolucionar sin nosotros.
+            </p>
         </div>
     </div>
-</section>
 
-<script>
-    import { animate, inView, stagger } from "framer-motion";
+    <script>
+        import { animate, inView } from "framer-motion";
 
-    const heading = document.querySelector<HTMLElement>("[data-about-heading]");
-    const pillars = document.querySelectorAll<HTMLElement>("[data-about-pillar]");
-    const pillarsContainer = document.querySelector<HTMLElement>("[data-about-pillars]");
+        const prefersReducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+        ).matches;
 
-    const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    ).matches;
+        const heading = document.querySelector<HTMLElement>(
+            "[data-about-heading]",
+        );
+        const body = document.querySelector<HTMLElement>("[data-about-body]");
 
-    if (prefersReducedMotion) {
-        heading?.style.setProperty("opacity", "1");
-        pillars.forEach((el) => el.style.setProperty("opacity", "1"));
-    } else {
-        if (heading) {
+        const fadeIn = (el: HTMLElement | null, y = 20, duration = 0.6) => {
+            if (!el) return;
+            if (prefersReducedMotion) {
+                el.style.opacity = "1";
+                return;
+            }
             inView(
-                heading,
+                el,
                 () => {
                     animate(
-                        heading,
-                        { opacity: [0, 1], transform: ["translateY(20px)", "translateY(0px)"] },
-                        { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
-                    );
-                },
-                { amount: 0.4 }
-            );
-        }
-
-        if (pillarsContainer && pillars.length) {
-            inView(
-                pillarsContainer,
-                () => {
-                    animate(
-                        pillars,
-                        { opacity: [0, 1], transform: ["translateY(24px)", "translateY(0px)"] },
+                        el,
                         {
-                            duration: 0.55,
-                            ease: [0.22, 1, 0.36, 1],
-                            delay: stagger(0.09),
-                        }
+                            opacity: [0, 1],
+                            transform: [
+                                `translateY(${y}px)`,
+                                "translateY(0px)",
+                            ],
+                        },
+                        { duration, ease: [0.22, 1, 0.36, 1] },
                     );
                 },
-                { amount: 0.25 }
+                { amount: 0.3 },
             );
-        }
-    }
-</script>
+        };
 
-<style>
-    @media (prefers-reduced-motion: reduce) {
-        [data-about-heading],
-        [data-about-pillar] {
-            opacity: 1 !important;
+        fadeIn(heading, 24);
+        fadeIn(body, 16);
+    </script>
+
+    <style>
+        .about-card {
+            position: relative;
+            background-image: url("/bg_texture.png");
+            background-size: 150px;
+            background-repeat: repeat;
         }
-    }
-</style>
+
+        .about-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url("/bg_texture.png");
+            background-size: 150px;
+            background-repeat: repeat;
+            background-position: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            [data-about-heading],
+            [data-about-body] {
+                opacity: 1 !important;
+            }
+        }
+    </style>
+</section>
