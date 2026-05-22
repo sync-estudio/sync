@@ -96,26 +96,8 @@ import Button from "@shared/components/ui/button.astro";
         display: block;
     }
 
-    h1 .hero-line {
-        animation: hero-line-slide 0.76s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
-    }
-
-    p.hero-line {
-        animation: hero-line-in 0.76s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
-    }
-
     .hero-actions {
         animation: hero-actions-in 0.76s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
-    }
-
-    @keyframes hero-line-slide {
-        from { transform: translateX(44px); }
-        to   { transform: translateX(0); }
-    }
-
-    @keyframes hero-line-in {
-        from { opacity: 0; transform: translateX(44px); }
-        to   { opacity: 1; transform: translateX(0); }
     }
 
     @keyframes hero-actions-in {
@@ -124,7 +106,6 @@ import Button from "@shared/components/ui/button.astro";
     }
 
     @media (prefers-reduced-motion: reduce) {
-        .hero-line,
         .hero-actions {
             animation: none !important;
             opacity: 1 !important;
