@@ -114,26 +114,26 @@ export const solutions: Solution[] = [
         number: "02",
         title: "Desarrollo",
         highlight: "operación",
-        intro: "Construimos las herramientas y los flujos, con tu equipo como aprobador en cada entrega.",
-        lead: "Iteramos sobre el roadmap acordado en diagnóstico. Sprints cortos, releases que pasan por tu equipo antes de tocar producción, código y documentación entregables. Nada se queda en una demo.",
-        bulletsLabel: "Lo que entregamos:",
+        intro: "Software a medida para los problemas operativos que el producto empaquetado no resuelve.",
+        lead: "Construimos las soluciones que tu operación necesita: portales, automatizaciones, integraciones y copilotos de IA pensados alrededor de cómo trabaja tu equipo, no al revés. Iteramos sobre el roadmap acordado en diagnóstico, con tu equipo aprobando cada entrega antes de que toque producción.",
+        bulletsLabel: "Soluciones que entregamos:",
         bullets: [
-            "Software a medida — dashboards, portales, integraciones",
-            "Automatización — workflows, reporting, sincronización",
-            "Implementación de IA — agentes, LLMs, copilotos en herramientas internas",
+            "Software operativo a medida — portales internos, dashboards, herramientas de campo",
+            "Automatización de procesos — workflows, reporting, sincronización entre sistemas",
+            "IA aplicada a la operación — agentes, copilotos y LLMs integrados donde suman",
         ],
         deliverable:
-            "Sistemas que tu operación necesita y que el software empaquetado no resuelve.",
+            "Soluciones operativas que resuelven problemas concretos, no plataformas genéricas adaptadas a la fuerza.",
         timing: "Construido a tu medida. Mantenido por nosotros en producción.",
         sections: [
             {
-                title: "Qué construimos",
+                title: "Qué resolvemos",
                 items: [
-                    "Dashboards y portales internos a medida",
-                    "Integraciones entre sistemas que hoy no se hablan",
-                    "Automatizaciones de workflows operativos y reporting",
-                    "Agentes de IA, LLMs y copilotos integrados en herramientas internas",
-                    "APIs y backends para soportar la operación",
+                    "Procesos manuales que consumen horas y generan errores",
+                    "Sistemas que no se hablan y obligan a exportar Excel entre áreas",
+                    "Reportes que se arman a mano cada semana o cada mes",
+                    "Decisiones operativas tomadas sin datos en tiempo real",
+                    "Tareas repetitivas que un copiloto o agente puede absorber",
                 ],
             },
             {
@@ -143,7 +143,6 @@ export const solutions: Solution[] = [
                     "Demos cada sprint con feedback en la sala",
                     "Aprobación de tu equipo antes de cada release",
                     "Repositorio y documentación entregables desde el día uno",
-                    "Sin vendor-lock: el código y la arquitectura son tuyos",
                 ],
             },
             {
@@ -153,7 +152,6 @@ export const solutions: Solution[] = [
         ],
         outcomes: [
             "Herramientas en producción que resuelven el problema real",
-            "Equipo capaz de cambiar y extender el sistema sin depender de nosotros",
             "Documentación versionada con el código, no PDFs muertos",
             "Integraciones reales, no exportes de Excel manuales",
         ],
@@ -168,7 +166,7 @@ export const solutions: Solution[] = [
             },
             {
                 q: "¿Quién mantiene el sistema después del lanzamiento?",
-                a: "Ofrecemos acompañamiento mensual o handoff completo a tu equipo. Tú decides.",
+                a: "Nosotros. Mantenimiento y acompañamiento mensual van incluidos en la fase de Educación, no como add-on.",
             },
             {
                 q: "¿Trabajan con nuestros proveedores actuales?",
@@ -185,13 +183,13 @@ export const solutions: Solution[] = [
         title: "Educación",
         highlight: "autonomía",
         intro: "Tu equipo aprende a usar software construido alrededor de su operación.",
-        lead: "Capacitación no es enseñar el software. Es asegurar que tu equipo pueda operar, cambiar y evolucionar el sistema cuando no estemos en la llamada. Sin dependencia perpetua del proveedor.",
+        lead: "Capacitación no es enseñar el software. Es asegurar que tu equipo opere el sistema con confianza en el día a día, mientras nosotros lo mantenemos y evolucionamos detrás.",
         bulletsLabel: "Lo que entregamos:",
         bullets: [
             "Talleres prácticos por rol (operador, supervisor, dirección)",
             "Documentación operativa y playbooks de uso",
             "Programas de adopción de IA donde aplique",
-            "Acompañamiento posterior mensual (opcional)",
+            "Acompañamiento posterior mensual y mantenimiento incluido",
         ],
         deliverable:
             "Capacidad operativa real — no archivos PDF que nadie lee.",
@@ -217,12 +215,12 @@ export const solutions: Solution[] = [
                 ],
             },
             {
-                title: "Acompañamiento posterior (opcional)",
-                body: "Si lo necesitas, nos quedamos como soporte por meses después del cierre. Office hours mensuales, canal directo asíncrono y revisiones trimestrales para ajustar lo que no rinde.",
+                title: "Acompañamiento posterior y mantenimiento",
+                body: "Nos quedamos como soporte y mantenimiento del sistema después del cierre. Office hours mensuales, canal directo asíncrono y revisiones trimestrales para ajustar lo que no rinde. Incluido por defecto, no es un add-on.",
             },
         ],
         outcomes: [
-            "Equipo que puede modificar el sistema sin nosotros",
+            "Equipo que opera el sistema con confianza en el día a día",
             "Documentación que sí se mantiene actualizada",
             "Menos tickets por dudas básicas",
             "Adopción real, no fricción contra el software",
