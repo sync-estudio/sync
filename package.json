@@ -34,6 +34,6 @@
     "@tailwindcss/typography": "^0.5.19"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["esbuild", "sharp"]
+    "onlyBuiltDependencies": ["@tailwindcss/oxide", "esbuild", "sharp"]
   }
 }
