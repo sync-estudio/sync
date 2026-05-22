@@ -22,8 +22,8 @@ const phases = [
     },
     {
         number: "02",
-        title: "Construcción",
-        body: "Iteramos en ciclos cortos sobre el roadmap acordado. Cada release pasa por tu equipo antes de tocar su día a día, y se queda en producción sólo si resuelve el problema real.",
+        title: "Desarrollo",
+        body: "Construimos las soluciones que tu operación necesita iterando sobre el roadmap acordado. Cada release pasa por tu equipo antes de tocar su día a día, y se queda en producción sólo si resuelve el problema real.",
         deliverables: [
             "Sprints de 1 a 2 semanas con demo en vivo",
             "Integraciones funcionando en producción, no en slides",
@@ -33,25 +33,14 @@ const phases = [
     },
     {
         number: "03",
-        title: "Capacitación",
-        body: "Antes del cierre, tu gente domina el sistema de adentro: cómo se cambia, qué hacer cuando algo falla y dónde está la documentación que sí se actualiza. Sin dependencia perpetua del proveedor.",
+        title: "Educación",
+        body: "Tu equipo aprende a operar el sistema con confianza en el día a día, mientras nosotros lo mantenemos y evolucionamos detrás. Mantenimiento y acompañamiento mensual incluidos por defecto.",
+        note: "Mantenimiento y acompañamiento incluidos.",
         deliverables: [
             "Talleres prácticos por rol, no charlas genéricas",
-            "Playbooks operativos escritos para el día a día",
-            "Documentación viva, versionada con el código",
-            "Handoff grabado para nuevos miembros del equipo",
-        ],
-    },
-    {
-        number: "04",
-        title: "Acompañamiento",
-        body: "Nos quedamos pendientes después del lanzamiento. Revisamos métricas mes a mes, ajustamos lo que no rinde y priorizamos las siguientes evoluciones con tu equipo, no por nuestra cuenta.",
-        note: "Modelo mensual.",
-        deliverables: [
-            "Monitoreo activo con alertas configuradas",
+            "Playbooks y documentación viva, versionada con el código",
+            "Mantenimiento del sistema en producción del lado nuestro",
             "Iteraciones mensuales priorizadas por impacto",
-            "Reporte mensual de métricas y oportunidades",
-            "Canal directo con el equipo, sin tickets fríos",
         ],
     },
 ];
@@ -79,10 +68,10 @@ const phases = [
                     data-workflow-heading
                     class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight md:leading-[1.1] tracking-tight text-zinc-800 opacity-0"
                 >
-                    Diagnóstico, construcción, capacitación y
+                    Diagnóstico, desarrollo y
                     <span class="font-[ibm-plex-serif] font-bold italic text-emerald-900 relative inline-block px-2.5 py-1 sm:px-3 md:px-4">
                         <span class="absolute inset-0 bg-emerald-200/60 -rotate-1 transform origin-center rounded-sm -mx-1" />
-                        <span class="relative z-10">acompañamiento</span>
+                        <span class="relative z-10">educación</span>
                     </span>
                 </h1>
                 <p
@@ -96,7 +85,7 @@ const phases = [
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+            <div class="flex flex-col gap-5 md:gap-6 max-w-3xl mx-auto w-full">
                 {phases.map((phase) => (
                     <article
                         data-workflow-card
@@ -170,7 +159,7 @@ const phases = [
                         data-workflow-sub
                         class="text-base sm:text-lg text-zinc-600 leading-snug max-w-md opacity-0"
                     >
-                        4 fases, cada una con entregables claros y aprobación de
+                        3 fases, cada una con entregables claros y aprobación de
                         tu equipo antes de avanzar.
                     </p>
 

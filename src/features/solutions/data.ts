@@ -183,7 +183,7 @@ export const solutions: Solution[] = [
         title: "Educación",
         highlight: "autonomía",
         intro: "Tu equipo aprende a usar software construido alrededor de su operación.",
-        lead: "Capacitación no es enseñar el software. Es asegurar que tu equipo opere el sistema con confianza en el día a día, mientras nosotros lo mantenemos y evolucionamos detrás.",
+        lead: "Educación no es enseñar el software. Es asegurar que tu equipo opere el sistema con confianza en el día a día, mientras nosotros lo mantenemos y evolucionamos detrás.",
         bulletsLabel: "Lo que entregamos:",
         bullets: [
             "Talleres prácticos por rol (operador, supervisor, dirección)",
