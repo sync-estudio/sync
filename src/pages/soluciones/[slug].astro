@@ -110,6 +110,18 @@ const hasHighlight = titleParts.length === 2;
                             {section.body && (
                                 <p class="text-[15px] md:text-base leading-relaxed text-zinc-600 max-w-2xl">
                                     {section.body}
+                                    {section.link && (
+                                        <>
+                                            {" "}
+                                            <a
+                                                href={section.link.href}
+                                                class="text-emerald-800 underline underline-offset-2 hover:text-emerald-900"
+                                            >
+                                                {section.link.label}
+                                            </a>
+                                            .
+                                        </>
+                                    )}
                                 </p>
                             )}
                             {section.items && (
@@ -177,6 +189,18 @@ const hasHighlight = titleParts.length === 2;
                                     </summary>
                                     <p class="mt-4 text-[15px] md:text-base leading-relaxed text-zinc-600">
                                         {faq.a}
+                                        {faq.link && (
+                                            <>
+                                                {" "}
+                                                <a
+                                                    href={faq.link.href}
+                                                    class="text-emerald-800 underline underline-offset-2 hover:text-emerald-900"
+                                                >
+                                                    {faq.link.label}
+                                                </a>
+                                                .
+                                            </>
+                                        )}
                                     </p>
                                 </details>
                             ))}

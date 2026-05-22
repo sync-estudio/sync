@@ -1,14 +1,21 @@
 export type SolutionTheme = "dark" | "mid" | "light";
 
+export type SolutionLink = {
+    href: string;
+    label: string;
+};
+
 export type SolutionSection = {
     title: string;
     body?: string;
     items?: string[];
+    link?: SolutionLink;
 };
 
 export type SolutionFaq = {
     q: string;
     a: string;
+    link?: SolutionLink;
 };
 
 export type SolutionCta = {
@@ -166,7 +173,8 @@ export const solutions: Solution[] = [
         faqs: [
             {
                 q: "¿Cuánto tarda construir?",
-                a: "Depende del alcance acordado en diagnóstico. Damos rangos por fase, no un número inflado al inicio. Cómo estructuramos los precios en /como-cobramos.",
+                a: "Depende del alcance acordado en diagnóstico. Damos rangos por fase, no un número inflado al inicio.",
+                link: { href: "/como-cobramos", label: "Cómo estructuramos los precios" },
             },
             {
                 q: "¿Pueden integrarse con nuestros sistemas actuales?",
@@ -224,7 +232,8 @@ export const solutions: Solution[] = [
             },
             {
                 title: "Plan de Acompañamiento",
-                body: "Nos quedamos como soporte y mantenimiento del sistema después del cierre. Office hours mensuales, canal directo asíncrono y revisiones trimestrales para ajustar lo que no rinde. Incluido por defecto, no es un add-on. Cómo se estructura en /como-cobramos.",
+                body: "Nos quedamos como soporte y mantenimiento del sistema después del cierre. Office hours mensuales, canal directo asíncrono y revisiones trimestrales para ajustar lo que no rinde. Incluido por defecto, no es un add-on.",
+                link: { href: "/como-cobramos", label: "Cómo se estructura" },
             },
             {
                 title: "Lo que no hacemos",
