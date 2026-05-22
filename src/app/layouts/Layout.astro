@@ -78,7 +78,7 @@ const googleFontsUrl =
 				--anchor-scroll-gap: 16px;
 			}
 
-			:where(#inicio, #soluciones, #nosotros, #proyectos, #contacto) {
+			:where(#inicio, #soluciones, #nosotros, #proyectos, #metodologia, #preguntas, #contacto) {
 				scroll-margin-top: calc(var(--anchor-scroll-offset) + var(--anchor-scroll-gap));
 			}
 		</style>
@@ -98,18 +98,51 @@ const googleFontsUrl =
 			document.addEventListener("DOMContentLoaded", () => {
 				const anchorGap = 16;
 				const sectionPath = "/";
+				const SCROLL_THRESHOLD = 8;
 				let resizeFrame = 0;
 				let lastViewportWidth = window.innerWidth;
 
-				const getNavbarOffset = () => {
+				const getNavbarBottom = () => {
 					const navbar = document.querySelector("[data-site-nav]");
-					const navbarHeight = navbar instanceof HTMLElement ? navbar.getBoundingClientRect().height : 0;
+					if (!(navbar instanceof HTMLElement)) return 0;
+					return Math.max(0, Math.ceil(navbar.getBoundingClientRect().bottom));
+				};
 
-					return Math.max(0, Math.ceil(navbarHeight));
+				const getNavbarBottomFor = (targetScrollY: number) => {
+					const navbar = document.querySelector("[data-site-nav]");
+					const pill = navbar?.querySelector<HTMLElement>("[data-nav-pill]");
+					if (!(navbar instanceof HTMLElement) || !(pill instanceof HTMLElement)) {
+						return getNavbarBottom();
+					}
+
+					const willBeScrolled = targetScrollY > SCROLL_THRESHOLD;
+					const isScrolledNow = navbar.classList.contains("is-scrolled");
+
+					if (willBeScrolled === isScrolledNow) {
+						return getNavbarBottom();
+					}
+
+					const prevNavTransition = navbar.style.transition;
+					const prevPillTransition = pill.style.transition;
+					navbar.style.transition = "none";
+					pill.style.transition = "none";
+					navbar.classList.toggle("is-scrolled", willBeScrolled);
+					pill.classList.toggle("is-scrolled", willBeScrolled);
+					void navbar.offsetHeight;
+
+					const bottom = Math.max(0, Math.ceil(navbar.getBoundingClientRect().bottom));
+
+					navbar.classList.toggle("is-scrolled", isScrolledNow);
+					pill.classList.toggle("is-scrolled", isScrolledNow);
+					void navbar.offsetHeight;
+					navbar.style.transition = prevNavTransition;
+					pill.style.transition = prevPillTransition;
+
+					return bottom;
 				};
 
 				const syncAnchorOffset = () => {
-					document.documentElement.style.setProperty("--anchor-scroll-offset", `${getNavbarOffset()}px`);
+					document.documentElement.style.setProperty("--anchor-scroll-offset", `${getNavbarBottom()}px`);
 				};
 
 				const getSectionElement = (hash: string) => {
@@ -122,6 +155,13 @@ const googleFontsUrl =
 					return document.getElementById(sectionId);
 				};
 
+				const computeTargetY = (targetElement: HTMLElement) => {
+					const absoluteTop = window.scrollY + targetElement.getBoundingClientRect().top;
+					const provisionalY = Math.max(0, absoluteTop - getNavbarBottom() - anchorGap);
+					const navBottomAtTarget = getNavbarBottomFor(provisionalY);
+					return Math.max(0, absoluteTop - navBottomAtTarget - anchorGap);
+				};
+
 				const scrollToHash = (hash: string, behavior: ScrollBehavior) => {
 					const targetElement = getSectionElement(hash);
 
@@ -129,10 +169,8 @@ const googleFontsUrl =
 						return;
 					}
 
-					const targetPosition = window.scrollY + targetElement.getBoundingClientRect().top - getNavbarOffset() - anchorGap;
-
 					window.scrollTo({
-						top: Math.max(0, targetPosition),
+						top: computeTargetY(targetElement),
 						behavior
 					});
 				};
