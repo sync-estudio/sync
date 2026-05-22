@@ -25,18 +25,28 @@ import "@app/styles/global.css";
                     class="font-semibold text-emerald-900 relative inline-block px-1.5 py-0.5 sm:px-2 sm:py-1"
                     ><span
                         class="absolute inset-0 bg-emerald-200/60 -rotate-1 transform origin-center rounded-sm -mx-1"
-                    ></span><span class="relative z-10">Sync existe para hacer lo opuesto.</span></span> Entendemos la
-           
-                operación real, educamos al equipo sobre sus cuellos de botella,
-                y entregamos soluciones que tu propia gente pueda operar y
-                evolucionar sin nosotros.
+                    ></span><span class="relative z-10"
+                        >Sync existe para hacer lo opuesto.</span
+                    ></span
+                > Entendemos la operación real, educamos al equipo sobre sus cuellos
+                de botella, y entregamos soluciones que tu propia gente pueda operar
+                y evolucionar sin nosotros.
             </p>
         </div>
-
     </div>
-    
-    <p>“En Sync no construimos software para que dependa de nosotros, ni de una sola persona dentro del cliente. Construimos formas de trabajo que el equipo pueda entender, operar y evolucionar con autonomía.”
-        — Yamil Yscapa, Co-founder</p>
+
+    <p
+        data-about-quote
+        class="mt-6 md:mt-8 max-w-3xl text-sm text-zinc-500 leading-relaxed text-left opacity-0"
+    >
+        <span class="italic"
+            >"Empezamos Sync porque nos cansamos de ver agencias entregar software,
+            y equipos que nunca aprendieron a operarlo."</span
+        >
+        <span class="text-zinc-400"> — </span>
+        <span class="font-medium text-emerald-900">Yamil Yscapa</span>,
+        Co-fundador
+    </p>
 
     <script>
         import { animate, inView } from "framer-motion";
@@ -75,8 +85,11 @@ import "@app/styles/global.css";
             );
         };
 
+        const quote = document.querySelector<HTMLElement>("[data-about-quote]");
+
         fadeIn(heading, 24);
         fadeIn(body, 16);
+        fadeIn(quote, 20, 0.7);
     </script>
 
     <style>
@@ -101,7 +114,8 @@ import "@app/styles/global.css";
 
         @media (prefers-reduced-motion: reduce) {
             [data-about-heading],
-            [data-about-body] {
+            [data-about-body],
+            [data-about-quote] {
                 opacity: 1 !important;
             }
         }
