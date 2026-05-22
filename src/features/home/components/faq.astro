@@ -1,0 +1,123 @@
+---
+import "@app/styles/global.css";
+import Button from "@shared/components/ui/button.astro";
+
+type Faq = {
+    q: string;
+    a: string;
+    link: { href: string; label: string };
+};
+
+const faqs: Faq[] = [
+    {
+        q: "¿Cómo trabajan en cada proyecto?",
+        a: "Tres fases con aprobación de tu equipo entre cada una: Diagnóstico para entender la operación y trazar el roadmap, Desarrollo en sprints de 1-2 semanas con demos en vivo, y Educación para que tu equipo opere el sistema con confianza. Cada fase cierra con una decisión: aprueba el siguiente paso o paramos a corregir.",
+        link: { href: "/como-trabajamos", label: "Ver metodología completa" },
+    },
+    {
+        q: "¿Cuánto cuesta un proyecto?",
+        a: "El monto exacto se cierra al final del Diagnóstico, con alcance acordado y precio fijo. No estimamos por hora con tope abierto. El Desarrollo se cobra en esquema 40/30/30 y el Plan de Acompañamiento mensual va incluido en la fase de Educación.",
+        link: { href: "/como-cobramos", label: "Ver cómo cobramos" },
+    },
+    {
+        q: "¿Qué tipo de soluciones construyen?",
+        a: "Software operativo a medida: portales internos, dashboards, herramientas de campo, automatización de procesos, integraciones entre sistemas, y agentes/copilotos de IA aplicados a la operación. No vendemos productos genéricos rebautizados con tu logo.",
+        link: { href: "/soluciones/desarrollo", label: "Ver Desarrollo" },
+    },
+    {
+        q: "¿Quién mantiene el sistema después del lanzamiento?",
+        a: "Nosotros. El Plan de Acompañamiento mensual va incluido en la fase de Educación, no como add-on. Cubre mantenimiento del sistema en producción, soporte para tu equipo, ajustes operativos y revisiones trimestrales para priorizar lo que no rinde.",
+        link: { href: "/soluciones/educacion", label: "Ver Educación" },
+    },
+    {
+        q: "¿Tenemos que empezar por el Diagnóstico?",
+        a: "Sí. Es el único punto de entrada. Sin entender la operación primero, cualquier propuesta es especulativa. Si decides no seguir con nosotros después del Diagnóstico, el roadmap se queda contigo: puedes ejecutarlo internamente o con otro proveedor.",
+        link: { href: "/soluciones/diagnostico", label: "Ver Diagnóstico" },
+    },
+    {
+        q: "¿Cómo empezamos?",
+        a: "Escríbenos contándonos sobre tu operación: qué proceso está costando más de lo que debería, qué intentaste antes y qué resultado esperas. Respondemos en menos de 24h hábiles para agendar la conversación inicial.",
+        link: { href: "/contacto", label: "Ir a contacto" },
+    },
+];
+---
+
+<section
+    id="faq"
+    class="container mx-auto px-4 sm:px-6 py-24 md:py-32"
+>
+    <div class="mx-auto w-full max-w-4xl flex flex-col gap-10 md:gap-14">
+        <header class="flex flex-col gap-3 max-w-2xl">
+            <span class="text-xs tracking-[0.2em] text-emerald-700 font-semibold">
+                Preguntas frecuentes
+            </span>
+            <h2
+                class="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-zinc-800"
+            >
+                Lo que casi siempre preguntan
+            </h2>
+            <p class="text-base sm:text-lg text-zinc-600 leading-relaxed">
+                Respuestas breves a las dudas más recurrentes. Cada una enlaza a la página con el detalle completo.
+            </p>
+        </header>
+
+        <div class="flex flex-col gap-3">
+            {
+                faqs.map((faq) => (
+                    <details class="group rounded-2xl border border-zinc-200 bg-white p-6 md:p-7 transition-colors hover:border-emerald-700/30 open:border-emerald-700/30">
+                        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none text-base md:text-lg font-medium text-zinc-900">
+                            <span>{faq.q}</span>
+                            <span
+                                aria-hidden="true"
+                                class="text-emerald-700 text-xl transition-transform group-open:rotate-45"
+                            >
+                                +
+                            </span>
+                        </summary>
+                        <div class="mt-4 flex flex-col gap-4">
+                            <p class="text-[15px] md:text-base leading-relaxed text-zinc-600">
+                                {faq.a}
+                            </p>
+                            <a
+                                href={faq.link.href}
+                                class="group/link inline-flex items-center gap-1.5 text-sm font-medium text-emerald-800 hover:text-emerald-900 self-start"
+                            >
+                                {faq.link.label}
+                                <svg
+                                    aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="transition-transform group-hover/link:translate-x-0.5"
+                                >
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg>
+                            </a>
+                        </div>
+                    </details>
+                ))
+            }
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-zinc-200">
+            <p class="text-sm text-zinc-600">
+                ¿Tu duda no está aquí?
+            </p>
+            <Button variant="outline" link="/contacto">
+                Escríbenos
+            </Button>
+        </div>
+    </div>
+</section>
+
+<style>
+    details > summary::-webkit-details-marker {
+        display: none;
+    }
+</style>
