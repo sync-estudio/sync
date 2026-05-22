@@ -1,6 +1,7 @@
 ---
 import "@app/styles/global.css";
 import Button from "@shared/components/ui/button.astro";
+import { solutions } from "@features/solutions/data";
 
 const themes = {
     dark: {
@@ -54,59 +55,7 @@ const themes = {
     },
 } as const;
 
-const services = [
-    {
-        id: "diagnostico",
-        number: "01",
-        title: "Diagnóstico",
-        intro: "Entendemos tu operación antes de proponer una solución.",
-        bulletsLabel: "En esta fase:",
-        bullets: [
-            "Mapeo de procesos actuales con tu equipo",
-            "Identificación de cuellos de botella reales",
-            "Mapa de oportunidades priorizado por impacto",
-        ],
-        deliverable: "Un roadmap operativo, no un presupuesto especulativo.",
-        timing: "2-3 semanas · Precio fijo",
-        cta: { label: "Solicitar diagnóstico", href: "/contact" },
-        theme: themes.dark,
-    },
-    {
-        id: "desarrollo",
-        number: "02",
-        title: "Desarrollo",
-        intro: "Construimos las herramientas y los flujos, con tu equipo como aprobador en cada entrega.",
-        bulletsLabel: "Lo que entregamos:",
-        bullets: [
-            "Software a medida — dashboards, portales, integraciones",
-            "Automatización — workflows, reporting, sincronización",
-            "Implementación de IA — agentes, LLMs, copilotos en herramientas internas",
-        ],
-        deliverable:
-            "Sistemas que tu operación necesita y que el software empaquetado no resuelve.",
-        timing: "Construido a tu medida. Mantenido por nosotros en producción.",
-        cta: null,
-        theme: themes.mid,
-    },
-    {
-        id: "educacion",
-        number: "03",
-        title: "Educación",
-        intro: "Tu equipo aprende a usar software construido alrededor de su operación..",
-        bulletsLabel: "Lo que entregamos:",
-        bullets: [
-            "Talleres prácticos por rol (operador, supervisor, dirección)",
-            "Documentación operativa y playbooks de uso",
-            "Programas de adopción de IA donde aplique",
-            "Acompañamiento posterior mensual (opcional)",
-        ],
-        deliverable:
-            "Capacidad operativa real — no archivos PDF que nadie lee.",
-        timing: "Talleres por rol, documentación operativa, soporte continuo.",
-        cta: null,
-        theme: themes.light,
-    },
-];
+const services = solutions.map((s) => ({ ...s, theme: themes[s.themeKey] }));
 ---
 
 <section id="services" class="container mx-auto py-24 md:py-32 px-4 sm:px-6">
@@ -151,21 +100,21 @@ const services = [
                             </p>
                         </div>
 
-                        <div class="relative z-10">
-                            {service.cta ? (
+                        <div class="relative z-10 flex flex-wrap items-center gap-3">
+                            {service.cta && (
                                 <Button
                                     link={service.cta.href}
                                     variant="outline"
                                 >
                                     {service.cta.label}
                                 </Button>
-                            ) : (
-                                <p
-                                    class={`text-xs leading-relaxed ${t.timingBody}`}
-                                >
-                                    {service.timing}
-                                </p>
                             )}
+                            <Button
+                                link={`/soluciones/${service.id}`}
+                                variant="outline"
+                            >
+                                Ver detalle
+                            </Button>
                         </div>
 
                         <div class="services-dots" aria-hidden="true" />
