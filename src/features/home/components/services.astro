@@ -55,7 +55,17 @@ const themes = {
     },
 } as const;
 
-const services = solutions.map((s) => ({ ...s, theme: themes[s.themeKey] }));
+const auraPositions: Record<string, { x: string; y: string }> = {
+    diagnostico: { x: "0%", y: "0%" },
+    desarrollo: { x: "50%", y: "50%" },
+    educacion: { x: "100%", y: "100%" },
+};
+
+const services = solutions.map((s) => ({
+    ...s,
+    theme: themes[s.themeKey],
+    aura: auraPositions[s.id] ?? { x: "100%", y: "100%" },
+}));
 ---
 
 <section id="soluciones" class="container mx-auto py-24 md:py-32 px-4 sm:px-6">
@@ -84,7 +94,9 @@ const services = solutions.map((s) => ({ ...s, theme: themes[s.themeKey] }));
                 return (
                     <article
                         data-services-card
-                        style={`--services-dot-color: ${t.dots};`}
+                        style={`--services-dot-color: ${t.dots}; --services-mouse-x: ${service.aura.x}; --services-mouse-y: ${service.aura.y};`}
+                        data-aura-x={service.aura.x}
+                        data-aura-y={service.aura.y}
                         class={`services-card relative isolate overflow-hidden flex flex-col justify-between gap-10 p-8 md:p-10 rounded-3xl min-h-[22rem] md:min-h-[28rem] ${t.card} opacity-0 transition-transform duration-300 ease-out hover:-translate-y-1`}
                     >
                         <div class="relative z-10 flex flex-col gap-4">
@@ -256,9 +268,11 @@ const services = solutions.map((s) => ({ ...s, theme: themes[s.themeKey] }));
 
     if (supportsFinePointer) {
         cards.forEach((card) => {
+            const defaultX = card.dataset.auraX ?? "100%";
+            const defaultY = card.dataset.auraY ?? "100%";
             let rafId = 0;
-            let pendingX = "100%";
-            let pendingY = "100%";
+            let pendingX = defaultX;
+            let pendingY = defaultY;
             let rect: DOMRect | null = null;
 
             const apply = () => {
@@ -282,8 +296,8 @@ const services = solutions.map((s) => ({ ...s, theme: themes[s.themeKey] }));
 
             card.addEventListener("pointerleave", () => {
                 rect = null;
-                pendingX = "100%";
-                pendingY = "100%";
+                pendingX = defaultX;
+                pendingY = defaultY;
                 if (!rafId) rafId = requestAnimationFrame(apply);
             });
         });
