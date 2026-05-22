@@ -14,7 +14,6 @@ import { motion } from 'framer-motion'
 const EASE = [0.22, 1, 0.36, 1];
 
 export default function ProjectCard({ image, style = "", data }) {
-    const detailHref = `/proyectos/${data.slug}`;
     return (
         <motion.article
             className="text-start w-full sm:w-auto flex flex-col gap-4"
@@ -41,14 +40,6 @@ export default function ProjectCard({ image, style = "", data }) {
                 <span className="italic text-xs md:text-sm text-zinc-400 font-light">
                     {data.development ? "(En desarrollo)" : ""}
                 </span>
-            </div>
-            <div>
-                <a
-                    href={detailHref}
-                    className="inline-flex items-center justify-center rounded-full border border-current/25 px-5 py-2.5 text-sm font-medium text-zinc-800 transition-colors hover:bg-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
-                >
-                    Leer más
-                </a>
             </div>
         </motion.article>
     );

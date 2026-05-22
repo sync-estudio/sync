@@ -1,11 +1,8 @@
 ---
-import Button from "@shared/components/ui/button.astro";
-
 export interface Props {
     image: string;
     style?: string;
     data: {
-        slug: string;
         name: string;
         year: string;
         development?: boolean;
@@ -13,7 +10,6 @@ export interface Props {
 }
 
 const { image, style = "", data } = Astro.props;
-const detailHref = `/proyectos/${data.slug}`;
 ---
 
 <article class="text-start w-full sm:w-auto flex flex-col gap-4">
@@ -32,8 +28,5 @@ const detailHref = `/proyectos/${data.slug}`;
         <span class="italic text-xs md:text-sm text-zinc-400 font-light"
             >{data.development ? "(En desarrollo)" : ""}</span
         >
-    </div>
-    <div>
-        <Button link={detailHref} variant="outline">Leer más</Button>
     </div>
 </article>
