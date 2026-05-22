@@ -1,2 +1,12 @@
+# Sync Estudio — robots.txt
 User-agent: *
 Allow: /
+
+# Block server / admin / API surfaces if added later
+Disallow: /api/
+
+# Block common build / dev artifacts
+Disallow: /_astro/
+Disallow: /404
+
+Sitemap: https://syncestudio.com/sitemap.xml
