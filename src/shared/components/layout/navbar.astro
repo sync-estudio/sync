@@ -1,4 +1,6 @@
 ---
+import { solutions } from "@features/solutions/data";
+
 const linkWrapper =
     "text-zinc-600 hover:text-zinc-900 px-3 py-1.5 rounded-full transition-all duration-300 hover:bg-zinc-100/80 font-medium text-sm md:text-base focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white";
 
@@ -32,7 +34,7 @@ const logoWrapper =
 
             <div class="hidden sm:flex justify-center">
                 <ul
-                    class="flex items-center gap-0.5 md:gap-1 overflow-x-auto no-scrollbar"
+                    class="flex items-center gap-0.5 md:gap-1"
                     role="menubar"
                     aria-label="Navegación principal"
                 >
@@ -41,7 +43,6 @@ const logoWrapper =
                             >Inicio</a
                         >
                     </li>
-
                     <li class="relative">
                         <a class={linkWrapper} href="/#projects" role="menuitem"
                             >Proyectos</a
@@ -53,9 +54,70 @@ const logoWrapper =
                         >
                     </li>
                     <li class="relative">
-                        <a class={linkWrapper} href="/#services" role="menuitem"
-                            >Soluciones</a
+                        <a class={linkWrapper} href="/como-trabajamos" role="menuitem"
+                            >Metodología</a
                         >
+                    </li>
+                    <li class="relative" data-nav-dropdown>
+                        <details class="nav-dropdown group">
+                            <summary
+                                class:list={[
+                                    linkWrapper,
+                                    "list-none cursor-pointer inline-flex items-center gap-1.5",
+                                ]}
+                                role="menuitem"
+                                aria-haspopup="menu"
+                            >
+                                Soluciones
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="12"
+                                    height="12"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="transition-transform duration-200 group-open:rotate-180"
+                                    aria-hidden="true"
+                                >
+                                    <path d="m6 9 6 6 6-6" />
+                                </svg>
+                            </summary>
+                            <div
+                                class="nav-dropdown-panel absolute right-0 top-full mt-3 w-[22rem] bg-white/90 backdrop-blur-lg border border-zinc-200/80 rounded-2xl shadow-[0_12px_32px_rgba(0,0,0,0.08)] p-2 flex flex-col z-50"
+                                role="menu"
+                            >
+                                {solutions.map((s) => (
+                                    <a
+                                        href={`/soluciones/${s.id}`}
+                                        role="menuitem"
+                                        class="flex items-start gap-3 px-3 py-2.5 rounded-xl hover:bg-zinc-100/80 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+                                    >
+                                        <span class="font-[ibm-plex-serif] italic font-bold text-emerald-900 text-sm w-6 shrink-0 mt-0.5">
+                                            {s.number}
+                                        </span>
+                                        <span class="flex flex-col min-w-0">
+                                            <span class="text-sm font-medium text-zinc-900">
+                                                {s.title}
+                                            </span>
+                                            <span class="text-xs text-zinc-500 leading-snug">
+                                                {s.intro}
+                                            </span>
+                                        </span>
+                                    </a>
+                                ))}
+                                <div class="my-1 border-t border-zinc-200/70" />
+                                <a
+                                    href="/#soluciones"
+                                    role="menuitem"
+                                    class="block px-3 py-2 rounded-xl hover:bg-zinc-100/80 text-sm text-zinc-600 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+                                >
+                                    Ver todas las soluciones
+                                </a>
+                            </div>
+                        </details>
                     </li>
                 </ul>
             </div>
@@ -63,8 +125,8 @@ const logoWrapper =
             <div class="flex items-center justify-end shrink-0 gap-2">
                 <a
                     class={`${ctaWrapper} hidden sm:inline-flex`}
-                    href="/contact"
-                    role="menuitem">Contacto</a
+                    href="/contacto"
+                    role="menuitem">Trabajemos juntos</a
                 >
                 <button
                     type="button"
@@ -114,13 +176,6 @@ const logoWrapper =
                     <li>
                         <a
                             class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
-                            href="/#about"
-                            role="menuitem">Nosotros</a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
                             href="/#projects"
                             role="menuitem">Proyectos</a
                         >
@@ -128,15 +183,69 @@ const logoWrapper =
                     <li>
                         <a
                             class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
-                            href="/#services"
-                            role="menuitem">Soluciones</a
+                            href="/#about"
+                            role="menuitem">Nosotros</a
                         >
                     </li>
                     <li>
                         <a
+                            class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+                            href="/como-trabajamos"
+                            role="menuitem">Metodología</a
+                        >
+                    </li>
+                    <li>
+                        <details class="nav-dropdown-mobile group">
+                            <summary
+                                class="list-none cursor-pointer flex items-center justify-between text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+                                role="menuitem"
+                                aria-haspopup="menu"
+                            >
+                                <span>Soluciones</span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="transition-transform duration-200 group-open:rotate-180"
+                                    aria-hidden="true"
+                                >
+                                    <path d="m6 9 6 6 6-6" />
+                                </svg>
+                            </summary>
+                            <div class="mt-1 ml-1 pl-3 border-l border-zinc-200/70 flex flex-col gap-1">
+                                {solutions.map((s) => (
+                                    <a
+                                        href={`/soluciones/${s.id}`}
+                                        role="menuitem"
+                                        class="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-zinc-700 hover:bg-zinc-100/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+                                    >
+                                        <span class="font-[ibm-plex-serif] italic font-bold text-emerald-900 text-xs w-5">
+                                            {s.number}
+                                        </span>
+                                        <span class="text-zinc-800">{s.title}</span>
+                                    </a>
+                                ))}
+                                <a
+                                    href="/#soluciones"
+                                    role="menuitem"
+                                    class="block px-3 py-2 rounded-xl text-xs text-zinc-500 hover:bg-zinc-100/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+                                >
+                                    Ver todas las soluciones
+                                </a>
+                            </div>
+                        </details>
+                    </li>
+                    <li>
+                        <a
                             class="block w-full text-zinc-900 font-medium px-3 py-2 rounded-xl bg-zinc-100/90 hover:bg-zinc-200/80 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
-                            href="/contact"
-                            role="menuitem">Contacto</a
+                            href="/contacto"
+                            role="menuitem">Trabajemos juntos</a
                         >
                     </li>
                 </ul>
@@ -209,6 +318,8 @@ const logoWrapper =
 
     .mobile-menu.is-open {
         pointer-events: auto;
+        max-height: calc(100dvh - 6rem);
+        overflow-y: auto;
     }
 
     .nav-toggle-bar {
@@ -236,6 +347,36 @@ const logoWrapper =
     .no-scrollbar {
         -ms-overflow-style: none;
         scrollbar-width: none;
+    }
+
+    .nav-dropdown > summary::-webkit-details-marker,
+    .nav-dropdown-mobile > summary::-webkit-details-marker {
+        display: none;
+    }
+    .nav-dropdown > summary::marker,
+    .nav-dropdown-mobile > summary::marker {
+        content: "";
+    }
+
+    .nav-dropdown .nav-dropdown-panel {
+        opacity: 0;
+        transform: translateY(-8px);
+        pointer-events: none;
+        transition:
+            opacity 180ms cubic-bezier(0.22, 1, 0.36, 1),
+            transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .nav-dropdown[open] .nav-dropdown-panel {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .nav-dropdown .nav-dropdown-panel {
+            transition: none;
+        }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -297,8 +438,10 @@ const logoWrapper =
                 menu.style.opacity = "1";
                 menu.style.transform = "none";
                 menu.style.maxHeight = "none";
+                menu.style.overflowY = "auto";
                 return;
             }
+            const targetHeight = menu.scrollHeight;
             animate(
                 menu,
                 {
@@ -307,19 +450,24 @@ const logoWrapper =
                         "translateY(-8px) scale(0.98)",
                         "translateY(0px) scale(1)",
                     ],
-                    maxHeight: ["0px", "360px"],
+                    maxHeight: ["0px", `${targetHeight}px`],
                 },
-                { duration: 0.28, ease: EASE }
-            );
+                { duration: 0.28, ease: EASE },
+            ).then(() => {
+                menu.style.maxHeight = "none";
+                menu.style.overflowY = "auto";
+            });
         };
 
         const animateMenuClose = () => {
+            menu.style.overflowY = "hidden";
             if (prefersReducedMotion) {
                 menu.style.opacity = "0";
                 menu.style.transform = "translateY(-8px) scale(0.98)";
                 menu.style.maxHeight = "0px";
                 return;
             }
+            const startHeight = menu.scrollHeight;
             animate(
                 menu,
                 {
@@ -328,9 +476,9 @@ const logoWrapper =
                         "translateY(0px) scale(1)",
                         "translateY(-8px) scale(0.98)",
                     ],
-                    maxHeight: ["360px", "0px"],
+                    maxHeight: [`${startHeight}px`, "0px"],
                 },
-                { duration: 0.22, ease: EASE }
+                { duration: 0.22, ease: EASE },
             );
         };
 
@@ -380,5 +528,36 @@ const logoWrapper =
 
         syncMenuState();
         mediaQuery.addEventListener("change", syncMenuState);
+    }
+
+    const dropdowns = Array.from(
+        document.querySelectorAll<HTMLDetailsElement>(
+            "[data-nav-dropdown] details.nav-dropdown",
+        ),
+    );
+
+    if (dropdowns.length) {
+        document.addEventListener("click", (event) => {
+            const target = event.target;
+            dropdowns.forEach((d) => {
+                if (!d.open) return;
+                if (target instanceof Node && d.contains(target)) {
+                    if (target instanceof HTMLAnchorElement) d.open = false;
+                    return;
+                }
+                d.open = false;
+            });
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key !== "Escape") return;
+            dropdowns.forEach((d) => {
+                if (d.open) {
+                    d.open = false;
+                    const summary = d.querySelector("summary");
+                    if (summary instanceof HTMLElement) summary.focus();
+                }
+            });
+        });
     }
 </script>

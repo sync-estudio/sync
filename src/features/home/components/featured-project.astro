@@ -1,27 +1,46 @@
 ---
+import Button from "@shared/components/ui/button.astro";
+
 interface Props {
     imageSrc: string;
     imageAlt: string;
     projectName: string;
     description: string;
     imageClasses?: string;
+    link?: string;
 }
 
-const { imageSrc, imageAlt, projectName, description, imageClasses = "" } = Astro.props;
+const {
+    imageSrc,
+    imageAlt,
+    projectName,
+    description,
+    imageClasses = "",
+    link,
+} = Astro.props;
 ---
 
-<article class="flex flex-col text-start text-zinc-600 transition-all duration-300 ease-in-out hover:scale-[101%] hover:translate-y-[-.5rem]">
+<article class="flex flex-col gap-4 text-start text-zinc-600">
     <div
-        class="max-h-10/12 bg-emerald-50/70 rounded-2xl flex items-center p-6 md:p-8 lg:py-12 overflow-hidden h-full"
+        class="bg-emerald-50/70 rounded-2xl flex items-center justify-center p-8 md:p-12 lg:p-16 overflow-hidden h-[320px] sm:h-[420px] md:h-[520px] lg:h-[600px]"
     >
         <img
-            class={`w-full max-w-[180px] md:max-w-[280px] mx-auto ${imageClasses}`}
+            class={`max-h-full w-auto max-w-full object-contain ${imageClasses}`}
             loading="lazy"
             src={imageSrc}
             alt={imageAlt}
         />
     </div>
 
-    <p class="text-zinc-500 mt-4">{projectName}</p>
-    <h3 class="font-semibold">{description}</h3>
+    <div>
+        <p class="text-zinc-500">{projectName}</p>
+        <h3 class="font-semibold text-lg md:text-xl">{description}</h3>
+    </div>
+
+    {link && (
+        <div>
+            <Button link={link} variant="outline">Leer más</Button>
+        </div>
+    )}
 </article>
+

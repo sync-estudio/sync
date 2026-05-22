@@ -1,211 +1,361 @@
 ---
 import "@app/styles/global.css";
 import Button from "@shared/components/ui/button.astro";
+
+const pillars = [
+    {
+        number: "01",
+        title: "Diagnóstico",
+        body: "Mapeamos tu operación real y priorizamos por impacto.",
+    },
+    {
+        number: "02",
+        title: "Construcción",
+        body: "Entregas frecuentes con tu equipo como aprobador.",
+    },
+    {
+        number: "03",
+        title: "Capacitación",
+        body: "Tu equipo aprende a operar y evolucionar el sistema.",
+    },
+    {
+        number: "04",
+        title: "Acompañamiento",
+        body: "Monitoreo y evolución para que el sistema crezca contigo.",
+    },
+];
 ---
 
-<section id="contact" class="container mx-auto px-4 md:px-6">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start overflow-visible">
-        <div class="text-left space-y-8 md:space-y-10">
-            <div class="space-y-4 md:space-y-6">
-                <h1 class="text-4xl md:text-5xl font-semibold leading-tight text-zinc-800">
-                    Convierte ideas en <span class="text-emerald-900">realidades digitales.</span>
+<section id="contacto" class="container mx-auto px-4 sm:px-6">
+    <div
+        class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start overflow-visible"
+    >
+        <div
+            data-contact-intro
+            class="lg:col-span-5 lg:sticky lg:top-32 text-left flex flex-col gap-8 md:gap-10"
+        >
+            <div class="flex flex-col gap-5">
+                <span
+                    data-contact-eyebrow
+                    class="text-xs tracking-[0.2em] text-emerald-700 font-semibold opacity-0"
+                    >Contacto</span
+                >
+                <h1
+                    data-contact-heading
+                    class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight md:leading-[1.15] tracking-tight text-zinc-800 opacity-0"
+                >
+                    Empieza por el
+                    <span
+                        class="font-[ibm-plex-serif] font-bold italic text-emerald-900 relative inline-block px-2.5 py-1 sm:px-3 md:px-4"
+                        ><span
+                            class="absolute inset-0 bg-emerald-200/60 -rotate-1 transform origin-center rounded-sm -mx-1"
+                        ></span><span class="relative z-10">diagnóstico</span
+                        ></span
+                    >
                 </h1>
-                <p class="text-md text-zinc-500 leading-relaxed max-w-xl">
-                    Conéctate con nuestro equipo para ver cómo podemos unificar tus procesos, potenciar tu presencia y escalar tu negocio con soluciones tecnológicas a medida.
+                <p
+                    data-contact-sub
+                    class="text-base text-zinc-600 leading-relaxed max-w-md opacity-0"
+                >
+                    No vendemos software que tu equipo no pueda operar.
+                    Cuéntanos sobre tu operación y trazamos el camino.
                 </p>
             </div>
 
-            <ul class="space-y-8">
-                <li class="flex items-start gap-4 transition-all duration-300 ease-in-out hover:translate-x-1">
-                    <div class="mt-1.5 flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-emerald-50 text-emerald-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
-                        </svg>
+            <div data-contact-pillars class="flex flex-col gap-3 opacity-0">
+                <span
+                    class="text-xs tracking-[0.2em] text-emerald-700 font-semibold mb-2"
+                    >Metodología</span
+                >
+                <ol class="flex flex-col gap-4 relative">
+                    <div
+                        class="absolute left-[15px] top-3 bottom-3 w-px bg-zinc-200"
+                        aria-hidden="true"
+                    >
                     </div>
-                    <div>
-                        <h3 class="font-semibold text-zinc-800 text-lg">Consultoría estratégica</h3>
-                        <p class="text-zinc-500 text-sm md:text-base leading-relaxed mt-1">Compartiremos tus objetivos y retos para trazar el camino tecnológico ideal para tu empresa.</p>
-                    </div>
-                </li>
-                <li class="flex items-start gap-4 transition-all duration-300 ease-in-out hover:translate-x-1">
-                    <div class="mt-1.5 flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-emerald-50 text-emerald-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h3 class="font-semibold text-zinc-800 text-lg">Soluciones personalizadas</h3>
-                        <p class="text-zinc-500 text-sm md:text-base leading-relaxed mt-1">Te mostraremos las capacidades técnicas y creativas más relevantes para tu organización.</p>
-                    </div>
-                </li>
-                <li class="flex items-start gap-4 transition-all duration-300 ease-in-out hover:translate-x-1">
-                    <div class="mt-1.5 flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-emerald-50 text-emerald-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h3 class="font-semibold text-zinc-800 text-lg">Preparados para escalar</h3>
-                        <p class="text-zinc-500 text-sm md:text-base leading-relaxed mt-1">Hablamos sobre seguridad, cumplimiento y escalabilidad con total confianza.</p>
-                    </div>
-                </li>
-                <li class="flex items-start gap-4 transition-all duration-300 ease-in-out hover:translate-x-1">
-                    <div class="mt-1.5 flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-emerald-50 text-emerald-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h3 class="font-semibold text-zinc-800 text-lg">Valor medible</h3>
-                        <p class="text-zinc-500 text-sm md:text-base leading-relaxed mt-1">Obtén métricas claras y resultados tangibles desde las primeras etapas del proyecto.</p>
-                    </div>
-                </li>
-            </ul>
+                    {
+                        pillars.map((pillar) => (
+                            <li class="relative pl-12">
+                                <span class="absolute left-0 top-0.5 w-[30px] h-[30px] rounded-full bg-zinc-900 text-white flex items-center justify-center text-[11px] font-semibold tracking-tight z-10">
+                                    {pillar.number}
+                                </span>
+                                <div class="flex flex-col gap-0.5">
+                                    <h3 class="text-sm font-semibold text-zinc-900 tracking-tight">
+                                        {pillar.title}
+                                    </h3>
+                                    <p class="text-sm text-zinc-500 leading-relaxed max-w-sm">
+                                        {pillar.body}
+                                    </p>
+                                </div>
+                            </li>
+                        ))
+                    }
+                </ol>
+            </div>
         </div>
 
-        <!-- Columna Derecha: Formulario -->
-        <div class="overflow-visible">
-            <div class="bg-zinc-900 rounded-3xl p-8 md:p-10 border border-zinc-800 transition-colors duration-300 hover:border-emerald-900/40">
-                <form id="contactForm" class="space-y-6" novalidate>
-                    <div class="space-y-1.5">
-                        <label for="email" class="text-sm font-medium text-zinc-300">Email*</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            placeholder="tu@email.com" 
+        <div
+            data-contact-form
+            class="lg:col-span-6 lg:col-start-7 overflow-visible opacity-0"
+        >
+            <div
+                class="contact-form-card relative bg-zinc-900 rounded-2xl md:rounded-3xl p-6 md:p-7 border border-zinc-800 transition-colors duration-300 hover:border-emerald-900/40 overflow-hidden"
+            >
+                <div class="contact-form-dots" aria-hidden="true"></div>
+                <div class="relative z-10 mb-5">
+                    <h2
+                        class="text-lg md:text-xl font-semibold text-white tracking-tight"
+                    >
+                        Solicita tu diagnóstico
+                    </h2>
+                    <p class="text-xs text-zinc-400 mt-1">
+                        Respondemos en menos de 24h hábiles.
+                    </p>
+                </div>
+                <form
+                    id="contactForm"
+                    class="relative z-10 space-y-4"
+                    novalidate
+                >
+                    <div class="space-y-1">
+                        <label
+                            for="email"
+                            class="text-sm font-medium text-zinc-300"
+                            >Email*</label
+                        >
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="tu@email.com"
                             required
                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                            class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-500 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
+                            class="w-full px-3.5 py-2.5 bg-zinc-800/50 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
                             data-valid="false"
+                        />
+                        <div
+                            id="emailError"
+                            class="hidden text-left mt-1 text-xs text-red-500"
                         >
-                        <div id="emailError" class="hidden text-left mt-1 text-xs text-red-500"></div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="space-y-1.5">
-                            <label for="firstName" class="text-sm font-medium text-zinc-300">Nombre*</label>
-                            <input 
-                                type="text" 
-                                id="firstName" 
-                                name="firstName" 
-                                placeholder="Tu nombre" 
-                                required
-                                minlength="2"
-                                class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-500 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
-                                data-valid="false"
-                            >
-                            <div id="firstNameError" class="hidden text-left mt-1 text-xs text-red-500"></div>
-                        </div>
-                        <div class="space-y-1.5">
-                            <label for="lastName" class="text-sm font-medium text-zinc-300">Apellido*</label>
-                            <input 
-                                type="text" 
-                                id="lastName" 
-                                name="lastName" 
-                                placeholder="Tu apellido" 
-                                required
-                                minlength="2"
-                                class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-500 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
-                                data-valid="false"
-                            >
-                            <div id="lastNameError" class="hidden text-left mt-1 text-xs text-red-500"></div>
                         </div>
                     </div>
 
-                    <div class="space-y-1.5">
-                        <label for="companyName" class="text-sm font-medium text-zinc-300">Nombre de la empresa*</label>
-                        <input 
-                            type="text" 
-                            id="companyName" 
-                            name="companyName" 
-                            placeholder="Sync Estudio Inc." 
-                            required
-                            class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-500 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
-                            data-valid="false"
-                        >
-                        <div id="companyNameError" class="hidden text-left mt-1 text-xs text-red-500"></div>
-                    </div>
-
-                    <div class="space-y-1.5">
-                        <label for="jobTitle" class="text-sm font-medium text-zinc-300">Cargo*</label>
-                        <input 
-                            type="text" 
-                            id="jobTitle" 
-                            name="jobTitle" 
-                            placeholder="Director de Producto" 
-                            required
-                            class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-500 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
-                            data-valid="false"
-                        >
-                        <div id="jobTitleError" class="hidden text-left mt-1 text-xs text-red-500"></div>
-                    </div>
-
-                    <div class="space-y-1.5">
-                        <label for="companySize" class="text-sm font-medium text-zinc-300">Tamaño de la empresa*</label>
-                        <div class="relative">
-                            <select 
-                                id="companySize" 
-                                name="companySize" 
-                                required
-                                class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none appearance-none"
-                                data-valid="false"
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label
+                                for="firstName"
+                                class="text-sm font-medium text-zinc-300"
+                                >Nombre*</label
                             >
-                                <option value="" disabled selected class="bg-zinc-900">Selecciona una opción</option>
-                                <option value="1-10" class="bg-zinc-900">1-10 empleados</option>
-                                <option value="11-50" class="bg-zinc-900">11-50 empleados</option>
-                                <option value="51-200" class="bg-zinc-900">51-200 empleados</option>
-                                <option value="201-1000" class="bg-zinc-900">201-1000 empleados</option>
-                                <option value="1000+" class="bg-zinc-900">1000+ empleados</option>
-                            </select>
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-zinc-500">
-                                <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            <input
+                                type="text"
+                                id="firstName"
+                                name="firstName"
+                                placeholder="Tu nombre"
+                                required
+                                minlength="2"
+                                class="w-full px-3.5 py-2.5 bg-zinc-800/50 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
+                                data-valid="false"
+                            />
+                            <div
+                                id="firstNameError"
+                                class="hidden text-left mt-1 text-xs text-red-500"
+                            >
                             </div>
                         </div>
-                        <div id="companySizeError" class="hidden text-left mt-1 text-xs text-red-500"></div>
+                        <div class="space-y-1">
+                            <label
+                                for="lastName"
+                                class="text-sm font-medium text-zinc-300"
+                                >Apellido*</label
+                            >
+                            <input
+                                type="text"
+                                id="lastName"
+                                name="lastName"
+                                placeholder="Tu apellido"
+                                required
+                                minlength="2"
+                                class="w-full px-3.5 py-2.5 bg-zinc-800/50 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
+                                data-valid="false"
+                            />
+                            <div
+                                id="lastNameError"
+                                class="hidden text-left mt-1 text-xs text-red-500"
+                            >
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="space-y-1.5">
-                        <label for="phone" class="text-sm font-medium text-zinc-300">Número de teléfono</label>
-                        <input 
-                            type="tel" 
-                            id="phone" 
-                            name="phone" 
-                            placeholder="+52 ..." 
-                            class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-500 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
+                    <div class="space-y-1">
+                        <label
+                            for="companyName"
+                            class="text-sm font-medium text-zinc-300"
+                            >Nombre de la empresa*</label
                         >
+                        <input
+                            type="text"
+                            id="companyName"
+                            name="companyName"
+                            placeholder="Sync Estudio Inc."
+                            required
+                            class="w-full px-3.5 py-2.5 bg-zinc-800/50 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
+                            data-valid="false"
+                        />
+                        <div
+                            id="companyNameError"
+                            class="hidden text-left mt-1 text-xs text-red-500"
+                        >
+                        </div>
                     </div>
 
-                    <div class="space-y-1.5">
-                        <label for="message" class="text-sm font-medium text-zinc-300">¿Hay algo más que te gustaría compartir con nosotros?</label>
-                        <textarea 
-                            id="message" 
-                            name="message" 
-                            placeholder="Cuéntanos sobre tu proyecto..." 
-                            rows="4" 
-                            class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-500 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 resize-none transition-all duration-200 outline-none"
-                            maxlength="1000"
-                        ></textarea>
-                        <div class="text-right mt-1 text-xs text-zinc-400 tracking-wide">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label
+                                for="jobTitle"
+                                class="text-sm font-medium text-zinc-300"
+                                >Cargo*</label
+                            >
+                            <input
+                                type="text"
+                                id="jobTitle"
+                                name="jobTitle"
+                                placeholder="Director de Producto"
+                                required
+                                class="w-full px-3.5 py-2.5 bg-zinc-800/50 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
+                                data-valid="false"
+                            />
+                            <div
+                                id="jobTitleError"
+                                class="hidden text-left mt-1 text-xs text-red-500"
+                            >
+                            </div>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label
+                                for="companySize"
+                                class="text-sm font-medium text-zinc-300"
+                                >Tamaño*</label
+                            >
+                            <div class="relative">
+                                <select
+                                    id="companySize"
+                                    name="companySize"
+                                    required
+                                    class="w-full px-3.5 py-2.5 bg-zinc-800/50 border border-zinc-700 rounded-lg text-white text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none appearance-none"
+                                    data-valid="false"
+                                >
+                                    <option
+                                        value=""
+                                        disabled
+                                        selected
+                                        class="bg-zinc-900"
+                                        >Selecciona una opción</option
+                                    >
+                                    <option value="1-10" class="bg-zinc-900"
+                                        >1-10 empleados</option
+                                    >
+                                    <option value="11-50" class="bg-zinc-900"
+                                        >11-50 empleados</option
+                                    >
+                                    <option value="51-200" class="bg-zinc-900"
+                                        >51-200 empleados</option
+                                    >
+                                    <option value="201-1000" class="bg-zinc-900"
+                                        >201-1000 empleados</option
+                                    >
+                                    <option value="1000+" class="bg-zinc-900"
+                                        >1000+ empleados</option
+                                    >
+                                </select>
+                                <div
+                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5 text-zinc-500"
+                                >
+                                    <svg
+                                        class="h-4 w-4 fill-current"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20"
+                                        ><path
+                                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                        ></path></svg
+                                    >
+                                </div>
+                            </div>
+                            <div
+                                id="companySizeError"
+                                class="hidden text-left mt-1 text-xs text-red-500"
+                            >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1">
+                        <label
+                            for="phone"
+                            class="text-sm font-medium text-zinc-300"
+                            >Teléfono</label
+                        >
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="+52 ..."
+                            class="w-full px-3.5 py-2.5 bg-zinc-800/50 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
+                        />
+                    </div>
+
+                    <div class="space-y-1">
+                        <label
+                            for="message"
+                            class="text-sm font-medium text-zinc-300"
+                            >Cuéntanos sobre tu operación</label
+                        >
+                        <textarea
+                            id="message"
+                            name="message"
+                            placeholder="¿Qué proceso te está costando más de lo que debería?"
+                            rows="3"
+                            class="w-full px-3.5 py-2.5 bg-zinc-800/50 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 resize-none transition-all duration-200 outline-none"
+                            maxlength="1000"></textarea>
+                        <div
+                            class="text-right mt-1 text-xs text-zinc-400 tracking-wide"
+                        >
                             <span id="messageCount">0</span>/1000 caracteres
                         </div>
                     </div>
 
                     <div class="pt-4">
-                        <p class="text-xs text-zinc-500 mb-6 leading-relaxed">
-                            Sync necesita la información de contacto que nos proporcionas para comunicarnos contigo acerca de nuestros productos y servicios. Puedes darte de baja de estas comunicaciones en cualquier momento. Para obtener información, consulta nuestros <a href="/terms" class="text-zinc-300 underline underline-offset-2 hover:text-emerald-500">Términos de Servicio</a> y <a href="/privacy" class="text-zinc-300 underline underline-offset-2 hover:text-emerald-500">Política de Privacidad</a>.
+                        <p class="text-xs text-zinc-500 mb-4 leading-relaxed">
+                            Al enviar aceptas nuestros <a
+                                href="/terms"
+                                class="text-zinc-300 underline underline-offset-2 hover:text-emerald-500"
+                                >Términos</a
+                            > y <a
+                                href="/privacy"
+                                class="text-zinc-300 underline underline-offset-2 hover:text-emerald-500"
+                                >Política de Privacidad</a
+                            >.
                         </p>
                         <Button variant="default" style="w-full">
-                            Enviar solicitud
+                            Solicitar diagnóstico estratégico
                         </Button>
                         <div class="mt-4 text-center">
-                            <Button 
-                                variant="ghost" 
-                                link="https://wa.me/522228230805?text=Hola%2C%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20sus%20servicios." 
-                                blank 
+                            <Button
+                                variant="ghost"
+                                link="https://wa.me/522228230805?text=Hola%2C%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20sus%20servicios."
+                                blank
                                 style="text-sm text-white hover:text-white focus:text-emerald-900 transition-colors inline-flex items-center gap-2 p-0 bg-transparent hover:bg-transparent"
                             >
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="w-4 h-4"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                    ><path
+                                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                                    ></path></svg
+                                >
                                 O envíanos un WhatsApp
                             </Button>
                         </div>
@@ -216,205 +366,337 @@ import Button from "@shared/components/ui/button.astro";
     </div>
 </section>
 
+<style>
+    .contact-form-dots {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background-image: radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.08) 1px,
+            transparent 1.4px
+        );
+        background-size: 14px 14px;
+        background-position: bottom right;
+        mask-image: radial-gradient(
+            ellipse 90% 110% at bottom right,
+            #000 0%,
+            rgba(0, 0, 0, 0.55) 35%,
+            rgba(0, 0, 0, 0.2) 70%,
+            rgba(0, 0, 0, 0.08) 100%
+        );
+        -webkit-mask-image: radial-gradient(
+            ellipse 90% 110% at bottom right,
+            #000 0%,
+            rgba(0, 0, 0, 0.55) 35%,
+            rgba(0, 0, 0, 0.2) 70%,
+            rgba(0, 0, 0, 0.08) 100%
+        );
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        [data-contact-eyebrow],
+        [data-contact-heading],
+        [data-contact-sub],
+        [data-contact-pillars],
+        [data-contact-form] {
+            opacity: 1 !important;
+        }
+    }
+</style>
+
 <script>
-// Validaciones
-const validations: Record<string, Record<string, string>> = {
-    email: {
-        required: 'El email es requerido',
-        pattern: 'Por favor ingresa un email válido'
-    },
-    firstName: {
-        required: 'El nombre es requerido',
-        minlength: 'El nombre debe tener al menos 2 caracteres'
-    },
-    lastName: {
-        required: 'El apellido es requerido',
-        minlength: 'El apellido debe tener al menos 2 caracteres'
-    },
-    companyName: {
-        required: 'El nombre de la empresa es requerido'
-    },
-    jobTitle: {
-        required: 'El cargo es requerido'
-    },
-    companySize: {
-        required: 'El tamaño de la empresa es requerido'
-    }
-};
+    import { animate, inView } from "framer-motion";
 
-function showError(fieldId: string, message: string): void {
-    const field = document.getElementById(fieldId) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
-    const errorDiv = document.getElementById(fieldId + 'Error');
-    
-    if (errorDiv) {
-        errorDiv.textContent = message;
-        errorDiv.classList.remove('hidden');
-    }
-    
-    if (field) {
-        field.classList.remove('border-zinc-700', 'focus:ring-emerald-500', 'focus:border-emerald-500');
-        field.classList.add('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
-        field.setAttribute('data-valid', 'false');
-    }
-}
+    const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+    ).matches;
 
-function hideError(fieldId: string): void {
-    const field = document.getElementById(fieldId) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
-    const errorDiv = document.getElementById(fieldId + 'Error');
-    
-    if (errorDiv) {
-        errorDiv.classList.add('hidden');
-    }
-    
-    if (field) {
-        field.classList.remove('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
-        field.classList.add('border-zinc-700', 'focus:ring-emerald-500', 'focus:border-emerald-500');
-        field.setAttribute('data-valid', 'true');
-    }
-}
+    const fadeUp = (selector: string, delay = 0, distance = 20) => {
+        const el = document.querySelector<HTMLElement>(selector);
+        if (!el) return;
+        if (prefersReducedMotion) {
+            el.style.opacity = "1";
+            el.style.transform = "none";
+            return;
+        }
+        inView(
+            el,
+            () => {
+                animate(
+                    el,
+                    {
+                        opacity: [0, 1],
+                        transform: [
+                            `translateY(${distance}px)`,
+                            "translateY(0px)",
+                        ],
+                    },
+                    { duration: 0.7, ease: [0.22, 1, 0.36, 1], delay },
+                );
+            },
+            { amount: 0.2 },
+        );
+    };
 
-function validateField(fieldId: string): boolean {
-    const field = document.getElementById(fieldId) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
-    if (!field) return true;
-    
-    const value = field.value.trim();
-    const rules = validations[fieldId];
-    if (!rules) return true;
-    
-    if (rules.required && !value) {
-        showError(fieldId, rules.required);
-        return false;
+    fadeUp("[data-contact-eyebrow]", 0, 12);
+    fadeUp("[data-contact-heading]", 0.05, 24);
+    fadeUp("[data-contact-sub]", 0.12, 20);
+    fadeUp("[data-contact-pillars]", 0.2, 24);
+    fadeUp("[data-contact-mission]", 0.3, 16);
+    fadeUp("[data-contact-form]", 0.15, 24);
+</script>
+
+<script>
+    const validations: Record<string, Record<string, string>> = {
+        email: {
+            required: "El email es requerido",
+            pattern: "Por favor ingresa un email válido",
+        },
+        firstName: {
+            required: "El nombre es requerido",
+            minlength: "El nombre debe tener al menos 2 caracteres",
+        },
+        lastName: {
+            required: "El apellido es requerido",
+            minlength: "El apellido debe tener al menos 2 caracteres",
+        },
+        companyName: {
+            required: "El nombre de la empresa es requerido",
+        },
+        jobTitle: {
+            required: "El cargo es requerido",
+        },
+        companySize: {
+            required: "El tamaño de la empresa es requerido",
+        },
+    };
+
+    function showError(fieldId: string, message: string): void {
+        const field = document.getElementById(fieldId) as
+            | HTMLInputElement
+            | HTMLSelectElement
+            | HTMLTextAreaElement;
+        const errorDiv = document.getElementById(fieldId + "Error");
+
+        if (errorDiv) {
+            errorDiv.textContent = message;
+            errorDiv.classList.remove("hidden");
+        }
+
+        if (field) {
+            field.classList.remove(
+                "border-zinc-700",
+                "focus:ring-emerald-500",
+                "focus:border-emerald-500",
+            );
+            field.classList.add(
+                "border-red-500",
+                "focus:ring-red-500",
+                "focus:border-red-500",
+            );
+            field.setAttribute("data-valid", "false");
+        }
     }
-    
-    if (rules.minlength && value.length < parseInt(field.getAttribute('minlength') || '0')) {
-        showError(fieldId, rules.minlength);
-        return false;
+
+    function hideError(fieldId: string): void {
+        const field = document.getElementById(fieldId) as
+            | HTMLInputElement
+            | HTMLSelectElement
+            | HTMLTextAreaElement;
+        const errorDiv = document.getElementById(fieldId + "Error");
+
+        if (errorDiv) {
+            errorDiv.classList.add("hidden");
+        }
+
+        if (field) {
+            field.classList.remove(
+                "border-red-500",
+                "focus:ring-red-500",
+                "focus:border-red-500",
+            );
+            field.classList.add(
+                "border-zinc-700",
+                "focus:ring-emerald-500",
+                "focus:border-emerald-500",
+            );
+            field.setAttribute("data-valid", "true");
+        }
     }
-    
-    if (rules.pattern) {
-        const pattern = field.getAttribute('pattern');
-        if (pattern) {
-            const regex = new RegExp(pattern);
-            if (!regex.test(value)) {
-                showError(fieldId, rules.pattern);
-                return false;
+
+    function validateField(fieldId: string): boolean {
+        const field = document.getElementById(fieldId) as
+            | HTMLInputElement
+            | HTMLSelectElement
+            | HTMLTextAreaElement;
+        if (!field) return true;
+
+        const value = field.value.trim();
+        const rules = validations[fieldId];
+        if (!rules) return true;
+
+        if (rules.required && !value) {
+            showError(fieldId, rules.required);
+            return false;
+        }
+
+        if (
+            rules.minlength &&
+            value.length < parseInt(field.getAttribute("minlength") || "0")
+        ) {
+            showError(fieldId, rules.minlength);
+            return false;
+        }
+
+        if (rules.pattern) {
+            const pattern = field.getAttribute("pattern");
+            if (pattern) {
+                const regex = new RegExp(pattern);
+                if (!regex.test(value)) {
+                    showError(fieldId, rules.pattern);
+                    return false;
+                }
+            }
+        }
+
+        hideError(fieldId);
+        return true;
+    }
+
+    function validateForm(): boolean {
+        const fields = Object.keys(validations);
+        let isValid = true;
+
+        fields.forEach((fieldId) => {
+            if (!validateField(fieldId)) {
+                isValid = false;
+            }
+        });
+
+        return isValid;
+    }
+
+    function updateMessageCount(): void {
+        const messageField = document.getElementById(
+            "message",
+        ) as HTMLTextAreaElement;
+        const countElement = document.getElementById("messageCount");
+
+        if (messageField && countElement) {
+            const count = messageField.value.length;
+            countElement.textContent = count.toString();
+
+            if (count > 900) {
+                countElement.classList.add("text-red-500");
+                countElement.classList.remove("text-zinc-500");
+            } else {
+                countElement.classList.remove("text-red-500");
+                countElement.classList.add("text-zinc-500");
             }
         }
     }
-    
-    hideError(fieldId);
-    return true;
-}
 
-function validateForm(): boolean {
-    const fields = Object.keys(validations);
-    let isValid = true;
-    
-    fields.forEach(fieldId => {
-        if (!validateField(fieldId)) {
-            isValid = false;
+    document.addEventListener("DOMContentLoaded", () => {
+        const fields = [
+            "email",
+            "firstName",
+            "lastName",
+            "companyName",
+            "jobTitle",
+            "companySize",
+        ];
+        const messageField = document.getElementById(
+            "message",
+        ) as HTMLTextAreaElement;
+        const submitBtn = document.querySelector("#contactForm button");
+
+        fields.forEach((fieldId) => {
+            const element = document.getElementById(fieldId);
+            element?.addEventListener("input", () => validateField(fieldId));
+            element?.addEventListener("blur", () => validateField(fieldId));
+        });
+
+        messageField?.addEventListener("input", () => {
+            updateMessageCount();
+        });
+
+        if (submitBtn) {
+            submitBtn.setAttribute("type", "submit");
         }
     });
-    
-    return isValid;
-}
 
-function updateMessageCount(): void {
-    const messageField = document.getElementById('message') as HTMLTextAreaElement;
-    const countElement = document.getElementById('messageCount');
-    
-    if (messageField && countElement) {
-        const count = messageField.value.length;
-        countElement.textContent = count.toString();
-        
-        if (count > 900) {
-            countElement.classList.add('text-red-500');
-            countElement.classList.remove('text-zinc-500');
-        } else {
-            countElement.classList.remove('text-red-500');
-            countElement.classList.add('text-zinc-500');
-        }
-    }
-}
+    document
+        .getElementById("contactForm")
+        ?.addEventListener("submit", async (e) => {
+            e.preventDefault();
 
-document.addEventListener('DOMContentLoaded', () => {
-    const fields = ['email', 'firstName', 'lastName', 'companyName', 'jobTitle', 'companySize'];
-    const messageField = document.getElementById('message') as HTMLTextAreaElement;
-    const submitBtn = document.querySelector('#contactForm button');
-    
-    fields.forEach(fieldId => {
-        const element = document.getElementById(fieldId);
-        element?.addEventListener('input', () => validateField(fieldId));
-        element?.addEventListener('blur', () => validateField(fieldId));
-    });
+            if (!validateForm()) {
+                const firstError = document.querySelector(
+                    '[data-valid="false"]',
+                ) as HTMLElement;
+                firstError?.focus();
+                return;
+            }
 
-    messageField?.addEventListener('input', () => {
-        updateMessageCount();
-    });
-    
-    if (submitBtn) {
-        submitBtn.setAttribute('type', 'submit');
-    }
-});
+            const target = e.target as HTMLFormElement;
+            const formData = new FormData(target);
 
-document.getElementById('contactForm')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    if (!validateForm()) {
-        const firstError = document.querySelector('[data-valid="false"]') as HTMLElement;
-        firstError?.focus();
-        return;
-    }
-    
-    const target = e.target as HTMLFormElement;
-    const formData = new FormData(target);
-    
-    // Concatenamos la información adicional para el backend que espera 'message'
-    const additionalInfo = `
-Empresa: ${formData.get('companyName')}
-Cargo: ${formData.get('jobTitle')}
-Tamaño: ${formData.get('companySize')}
-Teléfono: ${formData.get('phone') || 'N/A'}
+            const additionalInfo = `
+Empresa: ${formData.get("companyName")}
+Cargo: ${formData.get("jobTitle")}
+Tamaño: ${formData.get("companySize")}
+Teléfono: ${formData.get("phone") || "N/A"}
 ---
-Mensaje: ${formData.get('message')}
+Mensaje: ${formData.get("message")}
     `.trim();
 
-    const data = {
-        name: `${formData.get('firstName')} ${formData.get('lastName')}`,
-        email: formData.get('email'),
-        message: additionalInfo
-    };
-    
-    const submitButton = target.querySelector('button') as HTMLButtonElement;
-    const originalText = submitButton.textContent;
-    submitButton.textContent = 'Enviando...';
-    submitButton.disabled = true;
-    
-    try {
-        const response = await fetch('https://mail.syncestudio.com/send', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
+            const data = {
+                name: `${formData.get("firstName")} ${formData.get("lastName")}`,
+                email: formData.get("email"),
+                message: additionalInfo,
+            };
+
+            const submitButton = target.querySelector(
+                "button",
+            ) as HTMLButtonElement;
+            const originalText = submitButton.textContent;
+            submitButton.textContent = "Enviando...";
+            submitButton.disabled = true;
+
+            try {
+                const response = await fetch(
+                    "https://mail.syncestudio.com/send",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(data),
+                    },
+                );
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert(
+                        "¡Mensaje enviado con éxito! Te contactaremos pronto.",
+                    );
+                    target.reset();
+                    updateMessageCount();
+                    Object.keys(validations).forEach(hideError);
+                } else {
+                    alert(
+                        "Error al enviar el mensaje. Por favor, intenta de nuevo.",
+                    );
+                }
+            } catch (error) {
+                alert("Error de conexión. Por favor, intenta de nuevo.");
+                console.error("Error:", error);
+            } finally {
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            }
         });
-        
-        const result = await response.json();
-        
-        if (result.success) {
-            alert('¡Mensaje enviado con éxito! Te contactaremos pronto.');
-            target.reset();
-            updateMessageCount();
-            Object.keys(validations).forEach(hideError);
-        } else {
-            alert('Error al enviar el mensaje. Por favor, intenta de nuevo.');
-        }
-    } catch (error) {
-        alert('Error de conexión. Por favor, intenta de nuevo.');
-        console.error('Error:', error);
-    } finally {
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
-    }
-});
 </script>
