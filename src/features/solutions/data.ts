@@ -106,7 +106,7 @@ export const solutions: Solution[] = [
             },
         ],
         relatedCaseStudies: ["ima-cloud"],
-        cta: { label: "Solicitar diagnóstico", href: "/contact" },
+        cta: { label: "Solicitar diagnóstico", href: "/contacto" },
         themeKey: "dark",
     },
     {

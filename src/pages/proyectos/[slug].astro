@@ -1,0 +1,89 @@
+---
+import "@app/styles/global.css";
+import Layout from "@app/layouts/Layout.astro";
+import projects, { type Project } from "@features/projects/data/projects";
+import ProjectFeature from "@features/projects/components/project-feature.astro";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+    return projects.map((project) => ({
+        params: { slug: project.slug },
+        props: { project },
+    }));
+}
+
+type Props = { project: Project };
+
+const { project } = Astro.props;
+const heroImage = project.thumbnail || project.images[0];
+---
+
+<Layout
+    title={`${project.name} | Sync Estudio`}
+    description={project.description ??
+        "Proyecto Sync Estudio — software e IA a medida para empresas en operación."}
+>
+    <section
+        class="min-h-screen px-4 py-16 md:px-0 md:py-20 flex justify-center items-start"
+    >
+        <div
+            class="container mx-auto py-4 md:py-8 grid justify-center items-start grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12"
+        >
+            <div class="order-1 lg:order-2 w-full">
+                <div
+                    class="w-full aspect-[4/3] lg:aspect-[5/4] overflow-hidden rounded-2xl bg-emerald-50 px-4 py-4 sm:px-6 sm:py-5 md:px-8 md:py-6 flex items-center justify-center"
+                >
+                    <img
+                        class="h-full max-h-full w-full object-contain object-center"
+                        src={heroImage}
+                        alt={`${project.name} — ${project.description ?? "vista previa del proyecto"}`}
+                    />
+                </div>
+            </div>
+            <div
+                class="flex flex-col justify-start items-start gap-3 md:gap-4 order-2 lg:order-1"
+            >
+                <p class="text-base md:text-lg text-zinc-500">
+                    {project.year}
+                </p>
+                <h1
+                    class="text-3xl md:text-4xl lg:text-5xl font-bold font-[ibm-plex-serif] italic text-emerald-900"
+                >
+                    {
+                        project.url ? (
+                            <a
+                                href={project.url}
+                                target="_blank"
+                                class="hover:underline transition-all duration-300 ease-in-out"
+                            >
+                                {project.name}
+                            </a>
+                        ) : (
+                            project.name
+                        )
+                    }
+                </h1>
+
+                <p class="text-base md:text-lg text-zinc-800 leading-relaxed">
+                    {project.description}
+                </p>
+
+                {
+                    project.keypoints && project.keypoints.length > 0 && (
+                        <div class="mt-6 md:mt-10 w-full">
+                            <h3 class="text-xl md:text-2xl font-bold font-[ibm-plex-serif] text-zinc-600 mb-3 md:mb-4">
+                                Características:
+                            </h3>
+                            <ul class="list-none w-full">
+                                {project.keypoints.map((keypoint) => (
+                                    <ProjectFeature keypoint={keypoint} />
+                                ))}
+                            </ul>
+                        </div>
+                    )
+                }
+            </div>
+        </div>
+    </section>
+</Layout>

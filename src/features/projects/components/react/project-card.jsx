@@ -14,7 +14,7 @@ import { motion } from 'framer-motion'
 const EASE = [0.22, 1, 0.36, 1];
 
 export default function ProjectCard({ image, style = "", data }) {
-    const detailHref = `/project-details?name=${data.name}`;
+    const detailHref = `/proyectos/${data.slug}`;
     return (
         <motion.article
             className="text-start w-full sm:w-auto flex flex-col gap-4"

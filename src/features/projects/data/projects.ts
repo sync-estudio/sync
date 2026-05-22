@@ -4,6 +4,7 @@ export interface Keypoint {
 }
 
 export interface Project {
+  slug: string;
   name: string;
   year: string;
   development: boolean;
@@ -14,8 +15,9 @@ export interface Project {
   url?: string;
 }
 
-const projects = [
+const projects: Project[] = [
   {
+    slug: "hauzzo",
     name: "Hauzzo",
     year: "2024",
     development: false,
@@ -48,6 +50,7 @@ const projects = [
     url: "https://hauzzo.com",
   },
   {
+    slug: "the-royal-barber",
     name: "The Royal Barber",
     year: "2024",
     development: false,
@@ -75,6 +78,7 @@ const projects = [
     url: "https://theroyalbarber.com",
   },
   {
+    slug: "sky-hr",
     name: "Sky HR",
     year: "2025",
     development: true,
@@ -106,6 +110,7 @@ const projects = [
     ],
   },
   {
+    slug: "gzg-seguros",
     name: "GZG Seguros",
     year: "2025",
     development: false,
@@ -122,6 +127,7 @@ const projects = [
     url: "https://gzg.com.mx",
   },
   {
+    slug: "ima-cloud",
     name: "IMA Cloud",
     year: "2025",
     development: true,

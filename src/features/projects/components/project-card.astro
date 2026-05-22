@@ -5,6 +5,7 @@ export interface Props {
     image: string;
     style?: string;
     data: {
+        slug: string;
         name: string;
         year: string;
         development?: boolean;
@@ -12,7 +13,7 @@ export interface Props {
 }
 
 const { image, style = "", data } = Astro.props;
-const detailHref = `/project-details?name=${data.name}`;
+const detailHref = `/proyectos/${data.slug}`;
 ---
 
 <article class="text-start w-full sm:w-auto flex flex-col gap-4">
