@@ -60,6 +60,18 @@ const { Content } = await render(entry);
             )}
         </header>
 
+        {entry.data.cover && (
+            <figure class="mb-12 md:mb-16">
+                <img
+                    src={entry.data.cover}
+                    alt={entry.data.title}
+                    loading="eager"
+                    decoding="async"
+                    class="w-full h-auto rounded-2xl md:rounded-3xl border border-zinc-200/70"
+                />
+            </figure>
+        )}
+
         <section class="prose prose-zinc case-study-prose max-w-none">
             <Content />
         </section>
