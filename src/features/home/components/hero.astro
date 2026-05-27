@@ -69,6 +69,12 @@ import Button from "@shared/components/ui/button.astro";
         opacity: .4;
     }
 
+    @property --hero-aura-r {
+        syntax: "<length>";
+        inherits: false;
+        initial-value: 240px;
+    }
+
     .hero-dots-active {
         background-image: radial-gradient(
             circle,
@@ -77,19 +83,25 @@ import Button from "@shared/components/ui/button.astro";
         );
         background-size: 13px 13px;
         mask-image: radial-gradient(
-            circle var(--hero-mask-radius, 260px) at var(--hero-mouse-x, 100%) var(--hero-mouse-y, 100%),
+            circle var(--hero-aura-r) at 100% 100%,
             #000 0%,
             rgba(0, 0, 0, 0.55) 35%,
             rgba(0, 0, 0, 0.2) 80%,
             transparent 100%
         );
         -webkit-mask-image: radial-gradient(
-            circle var(--hero-mask-radius, 260px) at var(--hero-mouse-x, 100%) var(--hero-mouse-y, 100%),
+            circle var(--hero-aura-r) at 100% 100%,
             #000 0%,
             rgba(0, 0, 0, 0.55) 35%,
             rgba(0, 0, 0, 0.2) 80%,
             transparent 100%
         );
+        animation: hero-aura-breath 6.5s ease-in-out infinite;
+    }
+
+    @keyframes hero-aura-breath {
+        0%, 100% { --hero-aura-r: 240px; }
+        50%      { --hero-aura-r: 720px; }
     }
 
     .hero-line {
@@ -113,7 +125,7 @@ import Button from "@shared/components/ui/button.astro";
         }
 
         .hero-dots-active {
-            --hero-mask-radius: 260px;
+            animation: none !important;
         }
     }
 
@@ -164,105 +176,3 @@ import Button from "@shared/components/ui/button.astro";
     }
 </style>
 
-<script>
-    import { animate, inView } from "framer-motion";
-
-    const card = document.querySelector<HTMLElement>("[data-hero-card]");
-    const supportsFinePointer = window.matchMedia(
-        "(hover: hover) and (pointer: fine)"
-    ).matches;
-    const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    if (card) {
-        let loopControls: ReturnType<typeof animate> | null = null;
-        let pointerActive = false;
-        let inViewport = false;
-
-        const startLoop = () => {
-            if (loopControls || pointerActive || prefersReducedMotion) return;
-            card.style.setProperty("--hero-mouse-x", "50%");
-            loopControls = animate(
-                card,
-                { "--hero-mouse-y": ["-15%", "115%"] },
-                {
-                    duration: 2.4,
-                    ease: "linear",
-                    repeat: Infinity,
-                    repeatType: "loop",
-                }
-            );
-        };
-
-        const stopLoop = () => {
-            if (!loopControls) return;
-            loopControls.stop();
-            loopControls = null;
-        };
-
-        inView(
-            card,
-            () => {
-                inViewport = true;
-                startLoop();
-                return () => {
-                    inViewport = false;
-                    stopLoop();
-                };
-            },
-            { amount: 0.2 }
-        );
-
-        if (supportsFinePointer) {
-            let rafId = 0;
-            let pendingX = "100%";
-            let pendingY = "100%";
-            let rect: DOMRect | null = null;
-
-            const apply = () => {
-                rafId = 0;
-                card.style.setProperty("--hero-mouse-x", pendingX);
-                card.style.setProperty("--hero-mouse-y", pendingY);
-            };
-
-            const releasePointer = () => {
-                pointerActive = false;
-                rect = null;
-                pendingX = "100%";
-                pendingY = "100%";
-                if (rafId) {
-                    cancelAnimationFrame(rafId);
-                    rafId = 0;
-                }
-                if (inViewport) {
-                    startLoop();
-                } else {
-                    rafId = requestAnimationFrame(apply);
-                }
-            };
-
-            card.addEventListener("pointerenter", (e) => {
-                pointerActive = true;
-                stopLoop();
-                rect = card.getBoundingClientRect();
-                pendingX = `${((e.clientX - rect.left) / rect.width) * 100}%`;
-                pendingY = `${((e.clientY - rect.top) / rect.height) * 100}%`;
-                apply();
-                rafId = requestAnimationFrame(apply);
-            });
-
-            card.addEventListener("pointermove", (e) => {
-                if (!rect) rect = card.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                const y = ((e.clientY - rect.top) / rect.height) * 100;
-                pendingX = `${x}%`;
-                pendingY = `${y}%`;
-                if (!rafId) rafId = requestAnimationFrame(apply);
-            });
-
-            card.addEventListener("pointerleave", releasePointer);
-            card.addEventListener("pointercancel", releasePointer);
-        }
-    }
-</script>
