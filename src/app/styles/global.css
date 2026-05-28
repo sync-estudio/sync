@@ -51,13 +51,13 @@ html, body {
 
   @media (min-width: 1024px) {
     .container {
-      padding-inline: 4rem;
+      padding-inline: 1.5rem;
     }
   }
 
   @media (min-width: 1280px) {
     .container {
-      padding-inline: 6rem;
+      padding-inline: 1.75rem;
     }
   }
 
