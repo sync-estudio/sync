@@ -11,7 +11,6 @@ import Button from "@shared/components/ui/button.astro";
         data-hero-card
         class="hero-card relative isolate w-full min-h-[80vh] rounded-2xl md:rounded-3xl overflow-hidden border border-zinc-200 flex justify-center items-center px-6 sm:px-10 md:px-14 lg:px-20 py-20 md:py-24"
     >
-    <div class="hero-dots hero-dots-base" aria-hidden="true"></div>
     <div class="hero-dots hero-dots-active" aria-hidden="true"></div>
     <div
         class="flex flex-col gap-5 sm:gap-5 md:gap-6 lg:gap-7 w-full max-w-8xl lg:my-auto pt-0 lg:pt-20 relative z-10"
@@ -65,16 +64,6 @@ import Button from "@shared/components/ui/button.astro";
         background-size: 13px 13px;
     }
 
-    .hero-dots-base {
-        opacity: .4;
-    }
-
-    @property --hero-aura-r {
-        syntax: "<length>";
-        inherits: false;
-        initial-value: 240px;
-    }
-
     .hero-dots-active {
         background-image: radial-gradient(
             circle,
@@ -83,25 +72,19 @@ import Button from "@shared/components/ui/button.astro";
         );
         background-size: 13px 13px;
         mask-image: radial-gradient(
-            circle var(--hero-aura-r) at 100% 100%,
+            circle 480px at 100% 100%,
             #000 0%,
             rgba(0, 0, 0, 0.55) 35%,
             rgba(0, 0, 0, 0.2) 80%,
             transparent 100%
         );
         -webkit-mask-image: radial-gradient(
-            circle var(--hero-aura-r) at 100% 100%,
+            circle 480px at 100% 100%,
             #000 0%,
             rgba(0, 0, 0, 0.55) 35%,
             rgba(0, 0, 0, 0.2) 80%,
             transparent 100%
         );
-        animation: hero-aura-breath 6.5s ease-in-out infinite;
-    }
-
-    @keyframes hero-aura-breath {
-        0%, 100% { --hero-aura-r: 240px; }
-        50%      { --hero-aura-r: 720px; }
     }
 
     .hero-line {
@@ -122,10 +105,6 @@ import Button from "@shared/components/ui/button.astro";
             animation: none !important;
             opacity: 1 !important;
             transform: none !important;
-        }
-
-        .hero-dots-active {
-            animation: none !important;
         }
     }
 
@@ -166,12 +145,46 @@ import Button from "@shared/components/ui/button.astro";
             max-height: 800px;
             min-height: 600px;
         }
+
+        .hero-dots-active {
+            mask-image: radial-gradient(
+                circle 760px at 100% 100%,
+                #000 0%,
+                rgba(0, 0, 0, 0.55) 35%,
+                rgba(0, 0, 0, 0.2) 80%,
+                transparent 100%
+            );
+            -webkit-mask-image: radial-gradient(
+                circle 760px at 100% 100%,
+                #000 0%,
+                rgba(0, 0, 0, 0.55) 35%,
+                rgba(0, 0, 0, 0.2) 80%,
+                transparent 100%
+            );
+        }
     }
 
     @media (min-width: 1280px) {
         #inicio img {
             max-height: 900px;
             min-height: 700px;
+        }
+
+        .hero-dots-active {
+            mask-image: radial-gradient(
+                circle 980px at 100% 100%,
+                #000 0%,
+                rgba(0, 0, 0, 0.55) 35%,
+                rgba(0, 0, 0, 0.2) 80%,
+                transparent 100%
+            );
+            -webkit-mask-image: radial-gradient(
+                circle 980px at 100% 100%,
+                #000 0%,
+                rgba(0, 0, 0, 0.55) 35%,
+                rgba(0, 0, 0, 0.2) 80%,
+                transparent 100%
+            );
         }
     }
 </style>
