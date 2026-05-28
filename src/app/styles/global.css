@@ -34,30 +34,21 @@ html, body {
 @layer components {
   .container {
     overflow-x: clip;
-    padding-inline: 1.25rem;
+    width: 95%;
+    max-width: 1800px;
+    padding-inline: 0;
   }
 
-  @media (min-width: 640px) {
+  @media (max-width: 767px) {
+    .container {
+      width: auto;
+      padding-inline: 1.25rem;
+    }
+  }
+
+  @media (min-width: 640px) and (max-width: 767px) {
     .container {
       padding-inline: 1.5rem;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .container {
-      padding-inline: 2rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .container {
-      padding-inline: 1.5rem;
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .container {
-      padding-inline: 1.75rem;
     }
   }
 
