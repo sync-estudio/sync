@@ -9,60 +9,44 @@ import Button from "@shared/components/ui/button.astro";
 >
     <div
         data-hero-card
-        class="hero-card relative isolate w-full min-h-[80vh] rounded-2xl md:rounded-3xl overflow-hidden bg-zinc-900 border border-zinc-800 flex justify-center items-center px-6 sm:px-10 md:px-14 lg:px-20 py-20 md:py-24"
+        class="hero-card relative isolate w-full min-h-[80vh] rounded-2xl md:rounded-3xl overflow-hidden border border-zinc-200 flex justify-center items-center px-6 sm:px-10 md:px-14 lg:px-20 py-20 md:py-24"
     >
     <div class="hero-dots hero-dots-active" aria-hidden="true"></div>
 
-    <div class="hero-emblem" aria-hidden="true">
-        <span class="hero-emblem-glow"></span>
+    <div class="hero-blocks" aria-hidden="true">
         <svg
-            class="hero-emblem-svg"
-            viewBox="0 0 11 9"
-            fill="none"
+            class="hero-blocks-svg"
+            width="100%"
+            height="100%"
             xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="xMidYMid meet"
         >
-            <!-- Symmetric blocky "pixel-invader" emblem on an 11x9 grid. -->
-            <!-- row 0 -->
-            <rect x="2" y="0" width="1" height="1" rx="0.18" />
-            <rect x="8" y="0" width="1" height="1" rx="0.18" />
-            <!-- row 1 -->
-            <rect x="3" y="1" width="1" height="1" rx="0.18" />
-            <rect x="7" y="1" width="1" height="1" rx="0.18" />
-            <!-- row 2 -->
-            <rect x="2" y="2" width="7" height="1" rx="0.18" />
-            <!-- row 3 -->
-            <rect x="1" y="3" width="2" height="1" rx="0.18" />
-            <rect x="4" y="3" width="3" height="1" rx="0.18" />
-            <rect x="8" y="3" width="2" height="1" rx="0.18" />
-            <!-- row 4 -->
-            <rect x="0" y="4" width="11" height="1" rx="0.18" />
-            <!-- row 5 -->
-            <rect x="0" y="5" width="1" height="1" rx="0.18" />
-            <rect x="2" y="5" width="7" height="1" rx="0.18" />
-            <rect x="10" y="5" width="1" height="1" rx="0.18" />
-            <!-- row 6 -->
-            <rect x="0" y="6" width="1" height="1" rx="0.18" />
-            <rect x="2" y="6" width="1" height="1" rx="0.18" />
-            <rect x="8" y="6" width="1" height="1" rx="0.18" />
-            <rect x="10" y="6" width="1" height="1" rx="0.18" />
-            <!-- row 7 -->
-            <rect x="3" y="7" width="1" height="1" rx="0.18" />
-            <rect x="7" y="7" width="1" height="1" rx="0.18" />
-            <!-- row 8 -->
-            <rect x="2" y="8" width="1" height="1" rx="0.18" />
-            <rect x="8" y="8" width="1" height="1" rx="0.18" />
+            <defs>
+                <pattern
+                    id="hero-blocks-pattern"
+                    width="30"
+                    height="30"
+                    patternUnits="userSpaceOnUse"
+                >
+                    <rect
+                        x="4"
+                        y="4"
+                        width="22"
+                        height="22"
+                        rx="6"
+                        fill="rgba(4, 120, 87, 0.5)"
+                    ></rect>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#hero-blocks-pattern)"></rect>
         </svg>
     </div>
-
-    <div class="hero-scrim" aria-hidden="true"></div>
 
     <div
         class="flex flex-col gap-5 sm:gap-5 md:gap-6 lg:gap-7 w-full max-w-8xl lg:my-auto pt-0 lg:pt-20 relative z-10"
     >
-        <div class="text-zinc-100 text-center md:text-start">
+        <div class="text-zinc-800 text-center md:text-start">
             <h1
-                class="text-[30px] sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold mb-3 sm:mb-3 md:mb-4 leading-[1.15] md:leading-[1.1] px-0 sm:px-4 tracking-tight text-white"
+                class="text-[30px] sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold mb-3 sm:mb-3 md:mb-4 leading-[1.15] md:leading-[1.1] px-0 sm:px-4 tracking-tight"
             >
                 <span data-hero-line class="hero-line"
                     >Software e <span
@@ -74,7 +58,7 @@ import Button from "@shared/components/ui/button.astro";
             </h1>
             <p
                 data-hero-line
-                class="hero-line text-base sm:text-base md:text-lg text-zinc-300 px-0 sm:px-4 max-w-3xl mx-auto md:mx-0 leading-snug"
+                class="hero-line text-base sm:text-base md:text-lg text-zinc-600 px-0 sm:px-4 max-w-3xl mx-auto md:mx-0 leading-snug"
             >
                 Construimos las herramientas, rediseñamos los flujos y formamos a tu equipo.
             </p>
@@ -84,7 +68,7 @@ import Button from "@shared/components/ui/button.astro";
             data-hero-actions
             class="flex flex-wrap justify-center md:justify-start gap-3 sm:gap-3 md:gap-4 w-full px-4 sm:px-0 hero-actions"
         >
-            <Button link="/contacto" variant="outline" style="w-full sm:w-auto">Solicitar diagnóstico estratégico</Button>
+            <Button link="/contacto" style="w-full sm:w-auto">Solicitar diagnóstico estratégico</Button>
             <Button link="/#metodologia" variant="outline" style="w-full sm:w-auto">Conocer la metodología</Button>
         </div>
     </div>
@@ -103,7 +87,7 @@ import Button from "@shared/components/ui/button.astro";
         z-index: 0;
         background-image: radial-gradient(
             circle,
-            rgba(16, 185, 129, 0.32) 0.9px,
+            rgba(4, 120, 87, 0.7) 0.9px,
             transparent 1.2px
         );
         background-size: 13px 13px;
@@ -112,19 +96,19 @@ import Button from "@shared/components/ui/button.astro";
     .hero-dots-active {
         background-image: radial-gradient(
             circle,
-            rgba(16, 185, 129, 0.55) 1px,
+            rgba(4, 120, 87, 0.6) 1px,
             transparent 1.3px
         );
         background-size: 13px 13px;
         mask-image: radial-gradient(
-            circle 480px at var(--hero-mouse-x, 50%) var(--hero-mouse-y, 50%),
+            circle 480px at 100% 100%,
             #000 0%,
             rgba(0, 0, 0, 0.55) 35%,
             rgba(0, 0, 0, 0.2) 80%,
             transparent 100%
         );
         -webkit-mask-image: radial-gradient(
-            circle 480px at var(--hero-mouse-x, 50%) var(--hero-mouse-y, 50%),
+            circle 480px at 100% 100%,
             #000 0%,
             rgba(0, 0, 0, 0.55) 35%,
             rgba(0, 0, 0, 0.2) 80%,
@@ -132,51 +116,35 @@ import Button from "@shared/components/ui/button.astro";
         );
     }
 
-    /* Pixel-block emblem behind the text */
-    .hero-emblem {
+    /*
+     * Big rounded-block texture, clustered at the bottom-right corner so it
+     * reads as a highlight that dissolves outward into the finer dot field.
+     * Same emerald voltage as the dots — denser core, soft falloff.
+     */
+    .hero-blocks {
         position: absolute;
         inset: 0;
         z-index: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         pointer-events: none;
-        animation: hero-emblem-in 0.76s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
-    }
-
-    .hero-emblem-svg {
-        width: clamp(280px, 60vw, 720px);
-        height: auto;
-        fill: #10b981;
-        opacity: 0.2;
-    }
-
-    .hero-emblem-glow {
-        position: absolute;
-        width: clamp(260px, 55vw, 640px);
-        aspect-ratio: 1;
-        border-radius: 9999px;
-        background: radial-gradient(
-            circle,
-            rgba(16, 185, 129, 0.28) 0%,
-            rgba(16, 185, 129, 0.1) 45%,
-            transparent 72%
+        mask-image: radial-gradient(
+            circle 280px at 100% 100%,
+            #000 0%,
+            rgba(0, 0, 0, 0.6) 45%,
+            transparent 100%
         );
-        filter: blur(40px);
+        -webkit-mask-image: radial-gradient(
+            circle 280px at 100% 100%,
+            #000 0%,
+            rgba(0, 0, 0, 0.6) 45%,
+            transparent 100%
+        );
+        animation: hero-blocks-in 0.76s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
     }
 
-    /* Dark radial scrim keeps the headline legible over the emblem */
-    .hero-scrim {
-        position: absolute;
-        inset: 0;
-        z-index: 1;
-        pointer-events: none;
-        background: radial-gradient(
-            circle at center,
-            rgba(24, 24, 27, 0.6) 0%,
-            rgba(24, 24, 27, 0.25) 45%,
-            transparent 75%
-        );
+    .hero-blocks-svg {
+        display: block;
+        width: 100%;
+        height: 100%;
     }
 
     .hero-line {
@@ -192,14 +160,14 @@ import Button from "@shared/components/ui/button.astro";
         to   { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes hero-emblem-in {
-        from { opacity: 0; transform: scale(0.94); }
-        to   { opacity: 1; transform: scale(1); }
+    @keyframes hero-blocks-in {
+        from { opacity: 0; }
+        to   { opacity: 1; }
     }
 
     @media (prefers-reduced-motion: reduce) {
         .hero-actions,
-        .hero-emblem {
+        .hero-blocks {
             animation: none !important;
             opacity: 1 !important;
             transform: none !important;
@@ -210,7 +178,7 @@ import Button from "@shared/components/ui/button.astro";
         .hero-dots {
             background-image: radial-gradient(
                 circle,
-                rgba(16, 185, 129, 0.32) 1.2px,
+                rgba(4, 120, 87, 0.7) 1.2px,
                 transparent 1.6px
             );
             background-size: 18px 18px;
@@ -219,7 +187,7 @@ import Button from "@shared/components/ui/button.astro";
         .hero-dots-active {
             background-image: radial-gradient(
                 circle,
-                rgba(16, 185, 129, 0.55) 1.3px,
+                rgba(4, 120, 87, 0.6) 1.3px,
                 transparent 1.7px
             );
             background-size: 18px 18px;
@@ -229,17 +197,32 @@ import Button from "@shared/components/ui/button.astro";
     @media (min-width: 1024px) {
         .hero-dots-active {
             mask-image: radial-gradient(
-                circle 760px at var(--hero-mouse-x, 50%) var(--hero-mouse-y, 50%),
+                circle 760px at 100% 100%,
                 #000 0%,
                 rgba(0, 0, 0, 0.55) 35%,
                 rgba(0, 0, 0, 0.2) 80%,
                 transparent 100%
             );
             -webkit-mask-image: radial-gradient(
-                circle 760px at var(--hero-mouse-x, 50%) var(--hero-mouse-y, 50%),
+                circle 760px at 100% 100%,
                 #000 0%,
                 rgba(0, 0, 0, 0.55) 35%,
                 rgba(0, 0, 0, 0.2) 80%,
+                transparent 100%
+            );
+        }
+
+        .hero-blocks {
+            mask-image: radial-gradient(
+                circle 420px at 100% 100%,
+                #000 0%,
+                rgba(0, 0, 0, 0.6) 45%,
+                transparent 100%
+            );
+            -webkit-mask-image: radial-gradient(
+                circle 420px at 100% 100%,
+                #000 0%,
+                rgba(0, 0, 0, 0.6) 45%,
                 transparent 100%
             );
         }
@@ -248,62 +231,34 @@ import Button from "@shared/components/ui/button.astro";
     @media (min-width: 1280px) {
         .hero-dots-active {
             mask-image: radial-gradient(
-                circle 980px at var(--hero-mouse-x, 50%) var(--hero-mouse-y, 50%),
+                circle 980px at 100% 100%,
                 #000 0%,
                 rgba(0, 0, 0, 0.55) 35%,
                 rgba(0, 0, 0, 0.2) 80%,
                 transparent 100%
             );
             -webkit-mask-image: radial-gradient(
-                circle 980px at var(--hero-mouse-x, 50%) var(--hero-mouse-y, 50%),
+                circle 980px at 100% 100%,
                 #000 0%,
                 rgba(0, 0, 0, 0.55) 35%,
                 rgba(0, 0, 0, 0.2) 80%,
                 transparent 100%
             );
         }
-    }
-</style>
 
-<script>
-    const card = document.querySelector<HTMLElement>("[data-hero-card]");
-
-    if (card) {
-        const supportsFinePointer = window.matchMedia(
-            "(hover: hover) and (pointer: fine)",
-        ).matches;
-
-        if (supportsFinePointer) {
-            let rafId = 0;
-            let pendingX = "50%";
-            let pendingY = "50%";
-            let rect: DOMRect | null = null;
-
-            const apply = () => {
-                rafId = 0;
-                card.style.setProperty("--hero-mouse-x", pendingX);
-                card.style.setProperty("--hero-mouse-y", pendingY);
-            };
-
-            card.addEventListener("pointerenter", () => {
-                rect = card.getBoundingClientRect();
-            });
-
-            card.addEventListener("pointermove", (e) => {
-                if (!rect) rect = card.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                const y = ((e.clientY - rect.top) / rect.height) * 100;
-                pendingX = `${x}%`;
-                pendingY = `${y}%`;
-                if (!rafId) rafId = requestAnimationFrame(apply);
-            });
-
-            card.addEventListener("pointerleave", () => {
-                rect = null;
-                pendingX = "50%";
-                pendingY = "50%";
-                if (!rafId) rafId = requestAnimationFrame(apply);
-            });
+        .hero-blocks {
+            mask-image: radial-gradient(
+                circle 540px at 100% 100%,
+                #000 0%,
+                rgba(0, 0, 0, 0.6) 45%,
+                transparent 100%
+            );
+            -webkit-mask-image: radial-gradient(
+                circle 540px at 100% 100%,
+                #000 0%,
+                rgba(0, 0, 0, 0.6) 45%,
+                transparent 100%
+            );
         }
     }
-</script>
+</style>
