@@ -12,6 +12,35 @@ import Button from "@shared/components/ui/button.astro";
         class="hero-card relative isolate w-full min-h-[80vh] rounded-2xl md:rounded-3xl overflow-hidden border border-zinc-200 flex justify-center items-center px-6 sm:px-10 md:px-14 lg:px-20 py-20 md:py-24"
     >
     <div class="hero-dots hero-dots-active" aria-hidden="true"></div>
+
+    <div class="hero-blocks" aria-hidden="true">
+        <svg
+            class="hero-blocks-svg"
+            width="100%"
+            height="100%"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <defs>
+                <pattern
+                    id="hero-blocks-pattern"
+                    width="30"
+                    height="30"
+                    patternUnits="userSpaceOnUse"
+                >
+                    <rect
+                        x="4"
+                        y="4"
+                        width="22"
+                        height="22"
+                        rx="6"
+                        fill="rgba(4, 120, 87, 0.5)"
+                    ></rect>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#hero-blocks-pattern)"></rect>
+        </svg>
+    </div>
+
     <div
         class="flex flex-col gap-5 sm:gap-5 md:gap-6 lg:gap-7 w-full max-w-8xl lg:my-auto pt-0 lg:pt-20 relative z-10"
     >
@@ -87,6 +116,37 @@ import Button from "@shared/components/ui/button.astro";
         );
     }
 
+    /*
+     * Big rounded-block texture, clustered at the bottom-right corner so it
+     * reads as a highlight that dissolves outward into the finer dot field.
+     * Same emerald voltage as the dots — denser core, soft falloff.
+     */
+    .hero-blocks {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        mask-image: radial-gradient(
+            circle 280px at 100% 100%,
+            #000 0%,
+            rgba(0, 0, 0, 0.6) 45%,
+            transparent 100%
+        );
+        -webkit-mask-image: radial-gradient(
+            circle 280px at 100% 100%,
+            #000 0%,
+            rgba(0, 0, 0, 0.6) 45%,
+            transparent 100%
+        );
+        animation: hero-blocks-in 0.76s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+    }
+
+    .hero-blocks-svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
     .hero-line {
         display: block;
     }
@@ -100,8 +160,14 @@ import Button from "@shared/components/ui/button.astro";
         to   { opacity: 1; transform: translateY(0); }
     }
 
+    @keyframes hero-blocks-in {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
-        .hero-actions {
+        .hero-actions,
+        .hero-blocks {
             animation: none !important;
             opacity: 1 !important;
             transform: none !important;
@@ -126,26 +192,9 @@ import Button from "@shared/components/ui/button.astro";
             );
             background-size: 18px 18px;
         }
-
-        #inicio img {
-            max-height: 600px;
-            min-height: 400px;
-        }
-    }
-
-    @media (min-width: 768px) {
-        #inicio img {
-            max-height: 700px;
-            min-height: 500px;
-        }
     }
 
     @media (min-width: 1024px) {
-        #inicio img {
-            max-height: 800px;
-            min-height: 600px;
-        }
-
         .hero-dots-active {
             mask-image: radial-gradient(
                 circle 760px at 100% 100%,
@@ -159,17 +208,27 @@ import Button from "@shared/components/ui/button.astro";
                 #000 0%,
                 rgba(0, 0, 0, 0.55) 35%,
                 rgba(0, 0, 0, 0.2) 80%,
+                transparent 100%
+            );
+        }
+
+        .hero-blocks {
+            mask-image: radial-gradient(
+                circle 420px at 100% 100%,
+                #000 0%,
+                rgba(0, 0, 0, 0.6) 45%,
+                transparent 100%
+            );
+            -webkit-mask-image: radial-gradient(
+                circle 420px at 100% 100%,
+                #000 0%,
+                rgba(0, 0, 0, 0.6) 45%,
                 transparent 100%
             );
         }
     }
 
     @media (min-width: 1280px) {
-        #inicio img {
-            max-height: 900px;
-            min-height: 700px;
-        }
-
         .hero-dots-active {
             mask-image: radial-gradient(
                 circle 980px at 100% 100%,
@@ -186,6 +245,20 @@ import Button from "@shared/components/ui/button.astro";
                 transparent 100%
             );
         }
+
+        .hero-blocks {
+            mask-image: radial-gradient(
+                circle 540px at 100% 100%,
+                #000 0%,
+                rgba(0, 0, 0, 0.6) 45%,
+                transparent 100%
+            );
+            -webkit-mask-image: radial-gradient(
+                circle 540px at 100% 100%,
+                #000 0%,
+                rgba(0, 0, 0, 0.6) 45%,
+                transparent 100%
+            );
+        }
     }
 </style>
-
