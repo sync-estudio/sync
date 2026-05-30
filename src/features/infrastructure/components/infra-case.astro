@@ -1,0 +1,62 @@
+---
+import "@app/styles/global.css";
+import { getEntry } from "astro:content";
+import Button from "@shared/components/ui/button.astro";
+import BulletList from "@shared/components/ui/bullet-list.astro";
+import EyebrowLabel from "@shared/components/ui/eyebrow-label.astro";
+
+const caseStudy = await getEntry("blog", "ima-cloud");
+
+const cover = caseStudy?.data.cover ?? "/case-studies/ima/dashboard.jpeg";
+const title = caseStudy?.data.title ?? "IMA Cloud";
+const client = caseStudy?.data.client ?? "IMA Soluciones";
+const industry =
+    caseStudy?.data.industry ??
+    "Electrificación ferroviaria, energía y telecomunicaciones";
+
+const outcomes = [
+    "Reportes operativos en un solo sistema, no en archivos dispersos.",
+    "Evidencias y documentos consultables desde cualquier área.",
+    "Inventario integrado a la operación, no como hoja de cálculo aparte.",
+    "Base modular lista para sumar nuevos procesos sin reinventar todo.",
+];
+---
+
+<section id="proyectos" class="container mx-auto py-24 md:py-32">
+    <div
+        class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center rounded-2xl md:rounded-3xl border border-zinc-200 overflow-hidden bg-white"
+    >
+        <div class="relative bg-emerald-800 h-full min-h-[18rem] lg:min-h-[28rem]">
+            <img
+                src={cover}
+                alt={`Plataforma ${title} para ${client}`}
+                loading="lazy"
+                class="h-full w-full object-cover"
+            />
+        </div>
+
+        <div class="flex flex-col gap-6 p-8 sm:p-10 md:p-12 lg:pr-16">
+            <div class="flex flex-col gap-3">
+                <EyebrowLabel tone="emerald">Caso de estudio · {industry}</EyebrowLabel>
+                <h2
+                    class="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-zinc-900"
+                >
+                    {title} — digitalización operativa para una empresa de
+                    electrificación ferroviaria
+                </h2>
+                <p class="text-base md:text-lg text-zinc-600 leading-relaxed">
+                    {client} tenía más de 20 años de operación técnica con la
+                    información viviendo entre archivos sueltos. Construimos una
+                    plataforma interna alrededor de cómo el equipo realmente
+                    trabaja — y se quedó porque la operan todos los días.
+                </p>
+            </div>
+
+            <BulletList items={outcomes} />
+
+            <div class="flex flex-wrap items-center gap-3 pt-1">
+                <Button link="/casos-de-estudio/ima-cloud">Leer el caso completo</Button>
+            </div>
+        </div>
+    </div>
+</section>

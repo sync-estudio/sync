@@ -1,0 +1,28 @@
+---
+export const prerender = true;
+
+import "@app/styles/global.css";
+import Layout from "@app/layouts/Layout.astro";
+import InfraHero from "@features/infrastructure/components/infra-hero.astro";
+import InfraChallenges from "@features/infrastructure/components/infra-challenges.astro";
+import InfraCase from "@features/infrastructure/components/infra-case.astro";
+import Workflow from "@features/home/components/workflow.astro";
+import Services from "@features/home/components/services.astro";
+import InfraFaq from "@features/infrastructure/components/infra-faq.astro";
+---
+
+<Layout
+    title="Software a medida para empresas de infraestructura y ferroviarias | Sync Estudio"
+    description="Digitalización operativa para electrificación ferroviaria, energía y telecomunicaciones. Centralizamos reportes, documentación e inventario, conectamos a tus equipos en campo y formamos a tu equipo — con mantenimiento del lado nuestro."
+    ogTitle="Software a medida para infraestructura y ferroviarias | Sync Estudio"
+    ogDescription="Centralizamos la operación de empresas de infraestructura: reportes, documentación e inventario en un solo sistema, diseñado alrededor de cómo tu equipo realmente trabaja."
+>
+    <div class="min-h-screen">
+        <InfraHero />
+        <InfraChallenges />
+        <InfraCase />
+        <Workflow />
+        <Services />
+        <InfraFaq />
+    </div>
+</Layout>

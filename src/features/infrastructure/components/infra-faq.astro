@@ -1,0 +1,107 @@
+---
+import "@app/styles/global.css";
+import Button from "@shared/components/ui/button.astro";
+import FaqItem from "@shared/components/ui/faq-item.astro";
+import ArrowIcon from "@shared/components/ui/arrow-icon.astro";
+
+type Faq = {
+    q: string;
+    a: string;
+    link: { href: string; label: string };
+};
+
+const faqs: Faq[] = [
+    {
+        q: "¿Trabajan con equipos en campo y obra?",
+        a: "Sí. Diseñamos las herramientas alrededor de cómo trabajan las cuadrillas: captura digital en plantillas adaptadas a cada tipo de reporte, evidencias por proyecto y consulta desde cualquier dispositivo. La meta es eliminar la doble captura entre campo y oficina.",
+        link: { href: "/soluciones/desarrollo", label: "Ver Desarrollo" },
+    },
+    {
+        q: "¿Se integra con nuestros sistemas de inventario o ERP?",
+        a: "El Diagnóstico mapea qué sistemas ya usas y dónde se rompe el flujo. A partir de ahí construimos integraciones para que inventario, reportes y documentación vivan conectados a la operación, no en hojas de cálculo separadas.",
+        link: { href: "/soluciones/diagnostico", label: "Ver Diagnóstico" },
+    },
+    {
+        q: "¿Cómo manejan la documentación técnica y las evidencias?",
+        a: "Con un repositorio interno tipo Drive: carga y organización por carpetas, centralización de evidencias por proyecto y consulta rápida desde cualquier área. La documentación crítica deja de vivir entre carpetas locales y mensajería.",
+        link: { href: "/casos-de-estudio/ima-cloud", label: "Ver el caso IMA Cloud" },
+    },
+    {
+        q: "¿Quién mantiene y opera el sistema después?",
+        a: "Nosotros mantenemos el sistema en producción y tu equipo aprende a operarlo. El Plan de Acompañamiento mensual va incluido en la fase de Educación: talleres por rol, playbooks versionados y soporte continuo del lado nuestro.",
+        link: { href: "/soluciones/educacion", label: "Ver Educación" },
+    },
+    {
+        q: "¿Cuánto cuesta y cómo arranca un proyecto?",
+        a: "El monto exacto se cierra al final del Diagnóstico, con alcance acordado y precio fijo. El único punto de entrada es el Diagnóstico: sin entender la operación primero, cualquier propuesta es especulativa.",
+        link: { href: "/como-cobramos", label: "Ver cómo cobramos" },
+    },
+];
+
+const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: {
+            "@type": "Answer",
+            text: f.a,
+        },
+    })),
+};
+---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<section id="preguntas" class="container mx-auto py-24 md:py-32">
+    <div class="mx-auto w-full max-w-7xl flex flex-col gap-10 md:gap-14">
+        <header class="flex flex-col gap-3 max-w-2xl">
+            <span
+                class="text-xs tracking-[0.2em] text-emerald-700 font-semibold"
+            >
+                Preguntas frecuentes
+            </span>
+            <h2
+                class="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-zinc-800"
+            >
+                Lo que casi siempre preguntan en infraestructura
+            </h2>
+            <p class="text-base sm:text-lg text-zinc-600 leading-relaxed">
+                Respuestas breves a las dudas más recurrentes del sector. Cada
+                una enlaza a la página con el detalle completo.
+            </p>
+        </header>
+
+        <div class="flex flex-col gap-3">
+            {
+                faqs.map((faq) => (
+                    <FaqItem question={faq.q}>
+                        <div class="mt-4 flex flex-col gap-4">
+                            <p class="text-[15px] md:text-base leading-relaxed text-zinc-600">
+                                {faq.a}
+                            </p>
+                            <a
+                                href={faq.link.href}
+                                class="group/link inline-flex items-center gap-1.5 text-sm font-medium text-emerald-800 hover:text-emerald-900 self-start"
+                            >
+                                {faq.link.label}
+                                <ArrowIcon
+                                    size={14}
+                                    class="transition-transform group-hover/link:translate-x-0.5"
+                                />
+                            </a>
+                        </div>
+                    </FaqItem>
+                ))
+            }
+        </div>
+
+        <div
+            class="flex flex-wrap items-center gap-3 pt-4 border-t border-zinc-200"
+        >
+            <p class="text-sm text-zinc-600">¿Tu duda no está aquí?</p>
+            <Button variant="outline" link="/contacto">Escríbenos</Button>
+        </div>
+    </div>
+</section>

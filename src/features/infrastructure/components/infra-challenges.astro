@@ -1,0 +1,74 @@
+---
+import "@app/styles/global.css";
+import SectionHeader from "@shared/components/ui/section-header.astro";
+import BulletList from "@shared/components/ui/bullet-list.astro";
+
+type Challenge = {
+    title: string;
+    body: string;
+    items: string[];
+};
+
+const challenges: Challenge[] = [
+    {
+        title: "Documentación dispersa",
+        body: "Evidencias, reportes y planos repartidos entre carpetas locales, mensajería interna y formatos en papel.",
+        items: [
+            "Captura repetida entre áreas y proyectos",
+            "Historial difícil de encontrar cuando se necesita",
+            "Información que depende de quién la guardó",
+        ],
+    },
+    {
+        title: "Operación en campo desconectada",
+        body: "Cuadrillas y técnicos trabajando fuera de oficina, capturando en papel lo que luego alguien transcribe.",
+        items: [
+            "Doble captura entre campo y oficina",
+            "Reportes que llegan tarde a quien decide",
+            "Procesos imposibles de escalar al ritmo de la obra",
+        ],
+    },
+    {
+        title: "Decisiones sin datos a tiempo",
+        body: "Inventario y avance de proyecto viviendo en hojas de cálculo separadas de la operación real.",
+        items: [
+            "Inventario aparte de reportes y documentación",
+            "Avance de proyecto poco trazable",
+            "Sin visibilidad consolidada para planear",
+        ],
+    },
+];
+---
+
+<section class="container mx-auto py-24 md:py-32">
+    <div class="mx-auto w-full max-w-3xl text-center mb-12 md:mb-16">
+        <SectionHeader
+            label="El reto del sector"
+            title="La operación está viva — la información, dispersa"
+            labelTone="emerald"
+        />
+        <p class="text-base sm:text-lg text-zinc-600 leading-relaxed -mt-4">
+            En electrificación ferroviaria, energía y telecomunicaciones, el
+            trabajo técnico avanza más rápido que los sistemas que deberían
+            sostenerlo. Estos son los cuellos de botella que vemos una y otra vez.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+        {
+            challenges.map((challenge) => (
+                <article class="flex flex-col gap-5 p-8 md:p-10 rounded-3xl border border-zinc-200 bg-white">
+                    <div class="flex flex-col gap-3">
+                        <h3 class="text-xl md:text-2xl font-semibold tracking-tight text-zinc-900">
+                            {challenge.title}
+                        </h3>
+                        <p class="text-base leading-snug text-zinc-600">
+                            {challenge.body}
+                        </p>
+                    </div>
+                    <BulletList items={challenge.items} />
+                </article>
+            ))
+        }
+    </div>
+</section>
