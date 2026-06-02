@@ -17,11 +17,11 @@ import Button from "@shared/components/ui/button.astro";
     >
         <div class="text-zinc-800 text-center">
             <h1
-                class="text-[30px] sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold mb-3 sm:mb-3 md:mb-4 leading-[1.15] md:leading-[1.1] px-0 sm:px-4 tracking-tight"
+                class="text-[24px] sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold mb-3 sm:mb-3 md:mb-4 leading-[1.2] md:leading-[1.1] px-0 sm:px-4 tracking-tight"
             >
                 <span data-hero-line class="hero-line"
                     >Software e <span
-                        class="font-[ibm-plex-serif] font-bold italic text-emerald-900 relative inline-block px-1.5 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2"
+                        class="font-[ibm-plex-serif] font-bold italic text-emerald-900 relative inline-block px-1.5 py-0.5 sm:px-3 sm:py-1.5 md:px-4 md:py-2"
                         ><span
                             class="absolute inset-0 bg-emerald-200/60 -rotate-1 transform origin-center rounded-sm -mx-1"
                         ></span><span class="relative z-10">IA</span></span> a medida para empresas en operación.</span
@@ -29,7 +29,7 @@ import Button from "@shared/components/ui/button.astro";
             </h1>
             <p
                 data-hero-line
-                class="hero-line text-base sm:text-base md:text-lg text-zinc-600 px-0 sm:px-4 max-w-3xl mx-auto leading-snug"
+                class="hero-line text-sm sm:text-base md:text-lg text-zinc-600 px-0 sm:px-4 max-w-3xl mx-auto leading-snug"
             >
                 Construimos las herramientas, rediseñamos los flujos y formamos a tu equipo.
             </p>
@@ -146,6 +146,12 @@ import Button from "@shared/components/ui/button.astro";
         let cols = 0;
         let rows = 0;
         let frame = 0;
+        let base = 0;
+        let ampA = 0;
+        let ampB = 0;
+        let thickness = 1;
+        let freqA = 7;
+        let freqB = 13;
 
         el.style.fontSize = FONT_PX + "px";
 
@@ -153,14 +159,20 @@ import Button from "@shared/components/ui/button.astro";
             const rect = card.getBoundingClientRect();
             cols = Math.max(1, Math.floor(rect.width / CELL_W));
             rows = Math.max(1, Math.floor(rect.height / CELL_H));
+
+            // Keep wavelength ~constant in px: ~one crest per 640px.
+            const cycles = Math.max(1, rect.width / 640);
+            freqA = cycles * Math.PI * 2;
+            freqB = freqA * 1.85;
+
+            base = rows * 0.5;
+            // Cap amplitude by width so narrow/tall mobile cards stay gentle.
+            ampA = Math.min(rows * 0.26, cols * 0.14);
+            ampB = ampA * 0.5;
+            thickness = Math.max(2, rows * 0.14);
         }
 
         function render(t: number) {
-            // Ribbon centerline biased toward lower-center, like reference.
-            const base = rows * 0.5;
-            const ampA = rows * 0.26;
-            const ampB = rows * 0.13;
-            const thickness = rows * 0.14;
             const out: string[] = [];
 
             for (let y = 0; y < rows; y++) {
@@ -169,8 +181,8 @@ import Button from "@shared/components/ui/button.astro";
                     const u = x / cols;
                     const center =
                         base +
-                        ampA * Math.sin(u * 7.0 + t) +
-                        ampB * Math.sin(u * 13.0 - t * 0.7);
+                        ampA * Math.sin(u * freqA + t) +
+                        ampB * Math.sin(u * freqB - t * 0.7);
                     const d = Math.abs(y - center) / thickness;
                     // smooth bell falloff for gentle edges, constant along x
                     const intensity = Math.exp(-d * d * 1.4);
