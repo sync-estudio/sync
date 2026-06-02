@@ -165,7 +165,8 @@ import Button from "@shared/components/ui/button.astro";
             freqA = cycles * Math.PI * 2;
             freqB = freqA * 1.85;
 
-            base = rows * 0.5;
+            // Push wave below the text on narrow screens.
+            base = rect.width < 640 ? rows * 0.72 : rows * 0.5;
             // Cap amplitude by width so narrow/tall mobile cards stay gentle.
             ampA = Math.min(rows * 0.26, cols * 0.14);
             ampB = ampA * 0.5;
@@ -207,11 +208,19 @@ import Button from "@shared/components/ui/button.astro";
             requestAnimationFrame(loop);
         }
 
-        resize();
-        window.addEventListener("resize", () => {
+        let lastW = -1;
+        function onResize() {
+            const w = Math.round(card.getBoundingClientRect().width);
+            // Ignore height-only changes (mobile address-bar show/hide on scroll).
+            if (w === lastW) return;
+            lastW = w;
             resize();
             if (reduce) render(0);
-        });
+        }
+
+        onResize();
+        window.addEventListener("resize", onResize);
+        window.addEventListener("orientationchange", onResize);
 
         if (reduce) {
             render(0);
