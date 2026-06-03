@@ -32,18 +32,39 @@ const linkBase =
                     </p>
                 </div>
 
-                <nav
-                    class="flex flex-wrap gap-x-6 gap-y-2 text-sm md:text-base"
-                    aria-label="Enlaces del sitio"
-                >
-                    <a href="/#nosotros" class={linkBase}>Nosotros</a>
-                    <a href="/#soluciones" class={linkBase}>Soluciones</a>
-                    <a href="/#proyectos" class={linkBase}>Proyectos</a>
-                    <a href="/#preguntas" class={linkBase}>Preguntas</a>
-                    <a href="/como-trabajamos" class={linkBase}>Metodología</a>
-                    <a href="/como-cobramos" class={linkBase}>Cómo cobramos</a>
-                    <a href="/contacto" class={linkBase}>Contacto</a>
-                </nav>
+                <div class="flex flex-col sm:flex-row gap-8 sm:gap-12">
+                    <nav
+                        class="flex flex-col gap-2 text-sm md:text-base"
+                        aria-label="Servicios"
+                    >
+                        <span class="text-xs uppercase tracking-wide text-zinc-500">
+                            Servicios
+                        </span>
+                        <a href="/desarrollo-de-software" class={linkBase}>
+                            Desarrollo de software
+                        </a>
+                        <a href="/desarrollo-de-apps" class={linkBase}>
+                            Desarrollo de apps
+                        </a>
+                        <a href="/inteligencia-artificial" class={linkBase}>
+                            Inteligencia artificial
+                        </a>
+                    </nav>
+
+                    <nav
+                        class="flex flex-col gap-2 text-sm md:text-base"
+                        aria-label="Enlaces del sitio"
+                    >
+                        <span class="text-xs uppercase tracking-wide text-zinc-500">
+                            Navegación
+                        </span>
+                        <a href="/#soluciones" class={linkBase}>Soluciones</a>
+                        <a href="/#proyectos" class={linkBase}>Proyectos</a>
+                        <a href="/como-trabajamos" class={linkBase}>Metodología</a>
+                        <a href="/como-cobramos" class={linkBase}>Cómo cobramos</a>
+                        <a href="/contacto" class={linkBase}>Contacto</a>
+                    </nav>
+                </div>
             </div>
 
             <div
