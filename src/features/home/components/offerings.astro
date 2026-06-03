@@ -1,0 +1,253 @@
+---
+import "@app/styles/global.css";
+import Button from "@shared/components/ui/button.astro";
+
+// Placeholder copy + media — voz "del lado nuestro". Editar libremente.
+// Para media real: reemplazar el bloque .step-media-art por <img>/<video>.
+const steps = [
+    {
+        id: "mvp",
+        number: "01",
+        title: "MVP Scaffolding",
+        desc: "Del problema validado al producto en manos de usuarios reales, sin sobre-construir lo que todavía nadie pidió.",
+        media: "from-emerald-50 to-emerald-100 text-emerald-900",
+    },
+    {
+        id: "ai",
+        number: "02",
+        title: "Agentes de IA",
+        desc: "Automatizamos el trabajo repetitivo con agentes, harnesses y workflows que tu equipo entiende y controla.",
+        media: "from-emerald-700 to-emerald-900 text-emerald-50",
+    },
+    {
+        id: "platforms",
+        number: "03",
+        title: "Software a medida",
+        desc: "Plataformas internas y sistemas enterprise que se ajustan a cómo opera tu empresa hoy, no al revés.",
+        media: "from-zinc-900 to-emerald-950 text-emerald-100",
+    },
+];
+---
+
+<section
+    id="servicios"
+    data-offer-steps
+    data-step-count={steps.length}
+    class="relative"
+    style={`height: ${steps.length * 100}vh;`}
+>
+    <div class="sticky top-0 h-screen flex items-center overflow-hidden">
+        <div class="container mx-auto w-full">
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center"
+            >
+                {/* Media — pinned, crossfades per step */}
+                <div class="relative aspect-square w-full max-w-xl rounded-3xl overflow-hidden">
+                    {
+                        steps.map((step, i) => (
+                            <div
+                                data-step-media
+                                data-index={i}
+                                data-active={i === 0 ? "true" : "false"}
+                                class={`step-media absolute inset-0 bg-gradient-to-br ${step.media} flex flex-col justify-between p-8 md:p-10`}
+                            >
+                                <div class="step-media-art flex items-start justify-between">
+                                    <span class="font-mono text-sm opacity-70">
+                                        {step.number}
+                                    </span>
+                                    <span class="h-2 w-2 rounded-full bg-current opacity-60" />
+                                </div>
+                                <span class="text-3xl md:text-4xl font-semibold tracking-tight">
+                                    {step.title}
+                                </span>
+                                <div class="step-dots" aria-hidden="true" />
+                            </div>
+                        ))
+                    }
+                </div>
+
+                {/* Steps list — active goes solid, reveals desc */}
+                <ol class="flex flex-col gap-5 md:gap-6">
+                    {
+                        steps.map((step, i) => (
+                            <li>
+                                <button
+                                    type="button"
+                                    data-step-item
+                                    data-index={i}
+                                    data-active={i === 0 ? "true" : "false"}
+                                    class="step-item group block w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 rounded-lg"
+                                >
+                                    <span class="step-title block text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight">
+                                        {step.title}
+                                    </span>
+                                    <span class="step-desc block text-base md:text-lg text-zinc-600 leading-relaxed max-w-md">
+                                        {step.desc}
+                                    </span>
+                                </button>
+                            </li>
+                        ))
+                    }
+
+                    <li class="mt-2">
+                        <Button link="/contacto">Solicitar diagnóstico</Button>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .step-media {
+        opacity: 0;
+        transition:
+            opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+            transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        transform: scale(1.04);
+    }
+    .step-media[data-active="true"] {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .step-dots {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image: radial-gradient(
+            circle,
+            currentColor 1px,
+            transparent 1.4px
+        );
+        background-size: 18px 18px;
+        background-position: bottom right;
+        opacity: 0.12;
+        mask-image: radial-gradient(
+            circle 260px at 100% 100%,
+            #000 0%,
+            transparent 100%
+        );
+        -webkit-mask-image: radial-gradient(
+            circle 260px at 100% 100%,
+            #000 0%,
+            transparent 100%
+        );
+    }
+
+    .step-title {
+        color: rgb(212 212 216); /* zinc-300 */
+        transition: color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .step-item[data-active="true"] .step-title,
+    .step-item:hover .step-title {
+        color: rgb(24 24 27); /* zinc-900 */
+    }
+
+    .step-desc {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition:
+            max-height 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 0.4s ease,
+            margin-top 0.4s ease;
+    }
+    .step-item[data-active="true"] .step-desc {
+        max-height: 14rem;
+        opacity: 1;
+        margin-top: 0.75rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .step-media {
+            transition: opacity 0.01ms;
+            transform: none;
+        }
+        .step-desc,
+        .step-title {
+            transition: none;
+        }
+    }
+</style>
+
+<script>
+    const section = document.querySelector<HTMLElement>("[data-offer-steps]");
+
+    if (section) {
+        const count = Number(section.dataset.stepCount ?? "0");
+        const medias = Array.from(
+            section.querySelectorAll<HTMLElement>("[data-step-media]"),
+        );
+        const items = Array.from(
+            section.querySelectorAll<HTMLElement>("[data-step-item]"),
+        );
+
+        let active = -1;
+        let ticking = false;
+
+        const setActive = (index: number) => {
+            const next = Math.max(0, Math.min(count - 1, index));
+            if (next === active) return;
+            active = next;
+            medias.forEach((el) =>
+                el.setAttribute(
+                    "data-active",
+                    el.dataset.index === String(next) ? "true" : "false",
+                ),
+            );
+            items.forEach((el) =>
+                el.setAttribute(
+                    "data-active",
+                    el.dataset.index === String(next) ? "true" : "false",
+                ),
+            );
+        };
+
+        const update = () => {
+            ticking = false;
+            const rect = section.getBoundingClientRect();
+            const scrollable = section.offsetHeight - window.innerHeight;
+            if (scrollable <= 0) {
+                setActive(0);
+                return;
+            }
+            // progress 0→1 across the pinned scroll distance
+            const progress = Math.min(
+                1,
+                Math.max(0, -rect.top / scrollable),
+            );
+            setActive(Math.floor(progress * count - 0.0001));
+        };
+
+        const onScroll = () => {
+            if (!ticking) {
+                ticking = true;
+                requestAnimationFrame(update);
+            }
+        };
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
+        update();
+
+        // Click a title → scroll to that step
+        items.forEach((item) => {
+            item.addEventListener("click", () => {
+                const i = Number(item.dataset.index ?? "0");
+                const scrollable = section.offsetHeight - window.innerHeight;
+                const top =
+                    section.offsetTop +
+                    (scrollable * (i + 0.5)) / count;
+                window.scrollTo({
+                    top,
+                    behavior: window.matchMedia(
+                        "(prefers-reduced-motion: reduce)",
+                    ).matches
+                        ? "auto"
+                        : "smooth",
+                });
+            });
+        });
+    }
+</script>
