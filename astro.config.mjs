@@ -18,6 +18,7 @@ const aliases = {
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://syncestudio.com",
   output: "server",
 
   vite: {
