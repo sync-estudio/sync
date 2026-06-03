@@ -1,0 +1,10 @@
+---
+import LandingTemplate from "@features/landing/components/landing-template.astro";
+import { getLandingPage } from "@features/landing/data";
+
+export const prerender = true;
+
+const page = getLandingPage("desarrollo-de-software")!;
+---
+
+<LandingTemplate page={page} />

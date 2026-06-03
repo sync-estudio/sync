@@ -1,0 +1,178 @@
+---
+// Reusable animated ASCII wave overlay — the home-page signature, extracted so
+// interior routes echo it without duplicating the render loop. Drop inside any
+// `relative isolate overflow-hidden` container; it fills the nearest positioned
+// ancestor as a pointer-events-none decorative layer.
+//
+// One hoisted script drives every `[data-ascii-wave]` on the page, reading its
+// config from data attributes. Honors prefers-reduced-motion (renders a single
+// static frame instead of animating).
+interface Props {
+    /** Wave color (any CSS color). Light surfaces: emerald rgba; dark: white rgba. */
+    color?: string;
+    /** Vertical placement of the crest. */
+    position?: "top" | "center" | "bottom";
+    /** "soft" = quiet texture (interior), "normal" = hero strength. */
+    intensity?: "soft" | "normal";
+    class?: string;
+}
+
+const {
+    color = "rgba(4, 120, 87, 0.28)",
+    position = "bottom",
+    intensity = "soft",
+    class: extra = "",
+} = Astro.props;
+---
+
+<pre
+    data-ascii-wave
+    data-pos={position}
+    data-intensity={intensity}
+    class:list={["ascii-wave", extra]}
+    style={`--ascii-wave-color: ${color};`}
+    aria-hidden="true"></pre>
+
+<style>
+    .ascii-wave {
+        position: absolute;
+        inset: 0;
+        margin: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        font-weight: 700;
+        color: var(--ascii-wave-color);
+        white-space: pre;
+        user-select: none;
+        line-height: 1;
+        letter-spacing: 0.4em;
+        mask-image: linear-gradient(
+            90deg,
+            transparent 0%,
+            #000 3%,
+            #000 97%,
+            transparent 100%
+        );
+        -webkit-mask-image: linear-gradient(
+            90deg,
+            transparent 0%,
+            #000 3%,
+            #000 97%,
+            transparent 100%
+        );
+    }
+</style>
+
+<script>
+    const RAMP = "  ···";
+    const FONT_PX = 13;
+
+    function initWave(el: HTMLElement) {
+        const card = el.parentElement as HTMLElement | null;
+        if (!card) return;
+
+        const reduce = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+        ).matches;
+        const soft = el.dataset.intensity !== "normal";
+        const pos = el.dataset.pos ?? "bottom";
+        const step = soft ? 0.004 : 0.005;
+
+        let cols = 0;
+        let rows = 0;
+        let frame = 0;
+        let base = 0;
+        let ampA = 0;
+        let ampB = 0;
+        let thickness = 1;
+        let freqA = 7;
+        let freqB = 13;
+
+        el.style.fontSize = FONT_PX + "px";
+
+        function resize() {
+            const rect = card!.getBoundingClientRect();
+            cols = Math.max(1, Math.floor(rect.width / FONT_PX));
+            rows = Math.max(1, Math.floor(rect.height / FONT_PX));
+
+            // Keep wavelength ~constant in px: ~one crest per 640px.
+            const cycles = Math.max(1, rect.width / 640);
+            freqA = cycles * Math.PI * 2;
+            freqB = freqA * 1.85;
+
+            // Crest placement per data-pos.
+            base =
+                pos === "top"
+                    ? rows * 0.12
+                    : pos === "center"
+                      ? rows * 0.72
+                      : rows * 0.9;
+
+            // Hero ("normal") swings wider; interior ("soft") stays a texture.
+            const ampScale = soft ? 0.16 : 0.26;
+            const colScale = soft ? 0.09 : 0.14;
+            ampA = Math.min(rows * ampScale, cols * colScale);
+            ampB = ampA * 0.5;
+            thickness = Math.max(2, rows * (soft ? 0.1 : 0.14));
+        }
+
+        function render(t: number) {
+            const out: string[] = [];
+            for (let y = 0; y < rows; y++) {
+                let line = "";
+                for (let x = 0; x < cols; x++) {
+                    const u = x / cols;
+                    const center =
+                        base +
+                        ampA * Math.sin(u * freqA + t) +
+                        ampB * Math.sin(u * freqB - t * 0.7);
+                    const d = Math.abs(y - center) / thickness;
+                    const intensity = Math.exp(-d * d * 1.4);
+                    if (intensity <= 0.06) {
+                        line += " ";
+                    } else {
+                        const idx = Math.min(
+                            RAMP.length - 1,
+                            Math.round(intensity * (RAMP.length - 1)),
+                        );
+                        line += RAMP[idx];
+                    }
+                }
+                out.push(line);
+            }
+            el.textContent = out.join("\n");
+        }
+
+        function loop() {
+            frame += step;
+            render(frame);
+            requestAnimationFrame(loop);
+        }
+
+        let lastW = -1;
+        function onResize() {
+            const w = Math.round(card!.getBoundingClientRect().width);
+            // Ignore height-only changes (mobile address-bar show/hide on scroll).
+            if (w === lastW) return;
+            lastW = w;
+            resize();
+            if (reduce) render(0);
+        }
+
+        onResize();
+        window.addEventListener("resize", onResize);
+        window.addEventListener("orientationchange", onResize);
+
+        if (reduce) {
+            render(0);
+        } else {
+            requestAnimationFrame(loop);
+        }
+    }
+
+    document
+        .querySelectorAll<HTMLElement>("[data-ascii-wave]")
+        .forEach(initWave);
+</script>

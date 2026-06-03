@@ -2,28 +2,46 @@
 import "@app/styles/global.css";
 import Navbar from "@shared/components/layout/navbar.astro";
 import Footer from "@shared/components/layout/footer.astro";
+import {
+	SITE_URL,
+	organizationSchema,
+	websiteSchema,
+	localBusinessSchema,
+	type JsonLd,
+} from "@shared/seo/schema";
 
 interface Props {
 	title?: string;
 	description?: string;
 	ogTitle?: string;
 	ogDescription?: string;
+	/** Page-specific JSON-LD nodes appended to the default graph. */
+	schema?: JsonLd[];
 }
 
 const {
-	title = "SYNC Estudio — Software e IA a medida para empresas en operación",
-	description = "Construimos software e IA a medida para empresas en operación: rediseñamos flujos, formamos al equipo y mantenemos las herramientas de nuestro lado.",
-	ogTitle = "SYNC Estudio — Software e IA a medida para empresas en operación",
-	ogDescription = "Software e IA a medida para empresas en operación. Construimos las herramientas, rediseñamos los flujos y formamos a tu equipo — con mantenimiento continuo de nuestro lado.",
+	title = "Desarrollo de software, apps e IA en México | SYNC Estudio",
+	description = "Desarrollo de software, aplicaciones e inteligencia artificial a medida para empresas en México. Rediseñamos flujos, formamos a tu equipo y mantenemos las herramientas del lado nuestro.",
+	ogTitle = "Desarrollo de software, apps e IA a medida en México | SYNC Estudio",
+	ogDescription = "Software, aplicaciones e IA a medida para empresas en operación en México. Construimos las herramientas, rediseñamos los flujos y formamos a tu equipo — con mantenimiento continuo de nuestro lado.",
+	schema = [],
 } = Astro.props;
 
 const googleFontsUrl =
-	"https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@1,700&display=swap";
+	"https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap";
 
-const siteUrl = "https://syncestudio.com";
+const siteUrl = SITE_URL;
 const canonicalHref = new URL(Astro.url.pathname, siteUrl).href;
 const ogImageAbs = new URL("/share_image.webp", siteUrl).href;
-const logoAbs = new URL("/sync_logo.svg", siteUrl).href;
+
+// Default graph on every page + any page-specific nodes (Service, FAQPage,
+// BreadcrumbList, Article) passed via the `schema` prop.
+const jsonLdGraph: JsonLd[] = [
+	organizationSchema(),
+	websiteSchema(),
+	localBusinessSchema(),
+	...schema,
+];
 ---
 
 <!doctype html>
@@ -39,6 +57,8 @@ const logoAbs = new URL("/sync_logo.svg", siteUrl).href;
 		<meta name="theme-color" content="#10b981" />
 		<meta name="robots" content="index,follow" />
 		<link rel="canonical" href={canonicalHref} />
+		<link rel="alternate" hreflang="es-MX" href={canonicalHref} />
+		<link rel="alternate" hreflang="x-default" href={canonicalHref} />
 
 		<!-- Preconnect for Google Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -54,7 +74,7 @@ const logoAbs = new URL("/sync_logo.svg", siteUrl).href;
 		<meta property="og:site_name" content="SYNC Estudio" />
 		<meta property="og:title" content={ogTitle} />
 		<meta property="og:description" content={ogDescription} />
-		<meta property="og:locale" content="es" />
+		<meta property="og:locale" content="es_MX" />
 		<meta property="og:url" content={canonicalHref} />
 		<meta property="og:image" content={ogImageAbs} />
 		<meta property="og:image:type" content="image/webp" />
@@ -69,19 +89,15 @@ const logoAbs = new URL("/sync_logo.svg", siteUrl).href;
 		<meta name="twitter:image" content={ogImageAbs} />
 		<meta name="twitter:image:alt" content="SYNC Estudio — Software e IA a medida para empresas en operación" />
 
-		<!-- Structured Data: Organization -->
-		<script is:inline type="application/ld+json" set:html={JSON.stringify({
-			"@context": "https://schema.org",
-			"@type": "Organization",
-			"name": "SYNC Estudio",
-			"url": siteUrl,
-			"logo": logoAbs,
-			"description": "Software e IA a medida para empresas en operación. Construimos las herramientas, rediseñamos los flujos y formamos al equipo, con mantenimiento continuo.",
-			"sameAs": [
-				"https://www.instagram.com/sync.estudio/",
-				"https://www.linkedin.com/company/syncestudio/"
-			]
-		})} />
+		<!-- Structured Data: Organization + WebSite + LocalBusiness + page nodes -->
+		{jsonLdGraph.map((node) => (
+			<script is:inline type="application/ld+json" set:html={JSON.stringify(node)} />
+		))}
+		<!-- Mark JS early so [data-reveal] elements can hide pre-paint without
+		     risking invisible content when JS is disabled. -->
+		<script is:inline>
+			document.documentElement.classList.add("js-reveal");
+		</script>
 		<style is:global>
 			:root {
 				--anchor-scroll-offset: 0px;
@@ -90,6 +106,18 @@ const logoAbs = new URL("/sync_logo.svg", siteUrl).href;
 
 			:where(#inicio, #soluciones, #nosotros, #proyectos, #metodologia, #preguntas, #contacto) {
 				scroll-margin-top: calc(var(--anchor-scroll-offset) + var(--anchor-scroll-gap));
+			}
+
+			/* Scroll-reveal: hidden only when JS ran early. Reduced motion and
+			   no-JS both leave content fully visible. */
+			.js-reveal [data-reveal] {
+				opacity: 0;
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				.js-reveal [data-reveal] {
+					opacity: 1;
+				}
 			}
 		</style>
 	</head>
@@ -104,6 +132,52 @@ const logoAbs = new URL("/sync_logo.svg", siteUrl).href;
 		</main>
 
 		<Footer />
+		<script>
+			// Site-wide scroll-reveal. Any element with [data-reveal] fades +
+			// rises into place once it enters the viewport. Optional
+			// data-reveal-delay (ms) staggers siblings. Reduced motion shows
+			// everything immediately (CSS already keeps it visible).
+			(() => {
+				const reduce = window.matchMedia(
+					"(prefers-reduced-motion: reduce)",
+				).matches;
+				const els = Array.from(
+					document.querySelectorAll<HTMLElement>("[data-reveal]"),
+				);
+				if (!els.length) return;
+
+				if (reduce || !("IntersectionObserver" in window)) {
+					els.forEach((el) => (el.style.opacity = "1"));
+					return;
+				}
+
+				const io = new IntersectionObserver(
+					(entries, obs) => {
+						entries.forEach((entry) => {
+							if (!entry.isIntersecting) return;
+							const el = entry.target as HTMLElement;
+							obs.unobserve(el);
+							const delay = Number(el.dataset.revealDelay ?? 0);
+							el.animate(
+								[
+									{ opacity: 0, transform: "translateY(20px)" },
+									{ opacity: 1, transform: "translateY(0)" },
+								],
+								{
+									duration: 600,
+									easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+									delay,
+									fill: "both",
+								},
+							);
+						});
+					},
+					{ rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
+				);
+
+				els.forEach((el) => io.observe(el));
+			})();
+		</script>
 		<script>
 			document.addEventListener("DOMContentLoaded", () => {
 				const anchorGap = 16;
@@ -165,11 +239,34 @@ const logoAbs = new URL("/sync_logo.svg", siteUrl).href;
 					return document.getElementById(sectionId);
 				};
 
+				const getScrollAnchor = (section: HTMLElement) => {
+					const content = section.firstElementChild;
+					return content instanceof HTMLElement ? content : section;
+				};
+
+				const isCenteredSection = (section: HTMLElement) => {
+					const style = getComputedStyle(section);
+					return style.display.includes("flex") && style.alignItems === "center";
+				};
+
 				const computeTargetY = (targetElement: HTMLElement) => {
-					const absoluteTop = window.scrollY + targetElement.getBoundingClientRect().top;
+					const anchorElement = getScrollAnchor(targetElement);
+					const rect = anchorElement.getBoundingClientRect();
+					const absoluteTop = window.scrollY + rect.top;
 					const provisionalY = Math.max(0, absoluteTop - getNavbarBottom() - anchorGap);
 					const navBottomAtTarget = getNavbarBottomFor(provisionalY);
-					return Math.max(0, absoluteTop - navBottomAtTarget - anchorGap);
+
+					// Full-height centered sections (flex + items-center) keep their
+					// content centered in the viewport below the navbar when it fits.
+					// Everything else lands its content top just below the navbar.
+					const viewportBelowNav = window.innerHeight - navBottomAtTarget;
+					const slack = viewportBelowNav - rect.height;
+					const offset =
+						isCenteredSection(targetElement) && slack > anchorGap * 2
+							? slack / 2
+							: anchorGap;
+
+					return Math.max(0, absoluteTop - navBottomAtTarget - offset);
 				};
 
 				const scrollToHash = (hash: string, behavior: ScrollBehavior) => {

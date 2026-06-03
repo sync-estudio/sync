@@ -1,7 +1,7 @@
 ---
-version: alpha
+version: beta
 name: Sync-Estudio-design-analysis
-description: A calm, editorial maintenance-studio site anchored on a paper-white canvas with deep emerald accents (`{colors.brand-700}` — #1c5534) and a single high-contrast zinc-900 dark surface used for services, contact form, and footer. Type pairs Manrope (UI/body/display) with IBM Plex Serif italic used exclusively as inline highlight spans on signature words ("IA", brand emphasis) — wrapped in a hand-skewed (-1°) emerald-200/60 marker swatch. Geometry stays soft: cards and panels are `rounded-2xl md:rounded-3xl`, every button is `rounded-full`. The decorative signature is a pointer-aware emerald dot pattern — radial dots at 18px spacing whose visibility is unmasked by a 260px radial gradient that follows the cursor, used on hero/about/services/contact/footer with per-surface dot colors. Motion is restrained and stagger-led (Framer Motion, 0.55–0.76s ease-out-soft, prefers-reduced-motion respected). Spanish-language site; voice is "mantenimiento del lado nuestro" — quiet, hand-crafted, anti-SaaS-flash.
+description: A calm, editorial software-studio site on a paper-white canvas with a single deep emerald brand voltage (`{colors.brand-700}` — #1c5534) and high-contrast zinc-900 dark surfaces used for accent panels, service cards, and footer. Type is Manrope for everything — one typeface, no serif. Inline emphasis is a plain emerald color accent (`text-emerald-700`), never a marker swatch or italic. Geometry stays soft: cards/panels `rounded-2xl md:rounded-3xl`, every button `rounded-full`. The home page is built from full-viewport scroll-coupled sections — the decorative signature is an animated ASCII monospace wave (hero + offerings), a GSAP scroll-driven per-word color fill (about), and GSAP pin-stacked panels (offerings). The ASCII wave is used sparingly — at most one per page, behind the hero only. A pointer-tracked emerald dot pattern survives on the service cards and footer. Motion is restrained and scroll-led (GSAP ScrollTrigger for scroll coupling, Framer Motion + a dependency-free `data-reveal` observer for on-scroll reveals, CSS keyframes for entry; prefers-reduced-motion flattens everything to 0.01ms). Spanish-language site; voice is "del lado nuestro" — quiet, accountable, anti-SaaS-flash.
 
 colors:
   brand-900: "#064e3b"
@@ -29,568 +29,503 @@ colors:
   zinc-700: "#3f3f46"
   zinc-800: "#27272a"
   zinc-900: "#18181b"
-  dot-emerald: "rgba(4, 120, 87, 0.7)"
+  wave-emerald: "rgba(4, 120, 87, 0.45)"
+  wave-emerald-soft: "rgba(4, 120, 87, 0.28)"
+  dot-emerald: "rgba(4, 120, 87, 0.35)"
   dot-on-dark: "rgba(255, 255, 255, 0.18)"
-  dot-on-dark-soft: "rgba(255, 255, 255, 0.08)"
-  marker-highlight: "rgba(167, 243, 208, 0.6)"
-  scrim-card: "rgba(0, 0, 0, 0.08)"
+  fill-dim: "#d4d4d8"
+  fill-ink: "#27272a"
+  fill-accent: "#047857"
+  accent-emerald: "#047857 (text-emerald-700) — inline highlight color"
 
 typography:
-  display-xl:
+  hero-h1:
     fontFamily: "Manrope, sans-serif"
-    fontSize: "clamp(30px, 6vw, 60px)"
+    fontSize: "text-4xl → lg:text-7xl (36 → 72px)"
+    fontWeight: 700
+    lineHeight: 1.05
+    letterSpacing: "-0.025em (tracking-tight)"
+  panel-h2:
+    fontFamily: "Manrope, sans-serif"
+    fontSize: "text-4xl → lg:text-7xl (36 → 72px)"
     fontWeight: 600
     lineHeight: 1.05
-    letterSpacing: "-0.02em"
-  display-lg:
-    fontFamily: "Manrope, sans-serif"
-    fontSize: "clamp(24px, 5vw, 48px)"
-    fontWeight: 600
-    lineHeight: 1.1
-    letterSpacing: "-0.015em"
-  display-highlight:
-    fontFamily: "'IBM Plex Serif', serif"
-    fontStyle: italic
-    fontWeight: 500
-    lineHeight: 1.05
+    letterSpacing: "tracking-tight"
   section-h2:
     fontFamily: "Manrope, sans-serif"
-    fontSize: "clamp(24px, 4.5vw, 48px)"
-    fontWeight: 600
-    lineHeight: 1.15
-    letterSpacing: "-0.015em"
-  phase-h3:
+    fontSize: "text-2xl → lg:text-5xl (24 → 48px)"
+    fontWeight: 600-700
+    lineHeight: 1.1
+    letterSpacing: "tracking-tight"
+  about-statement:
     fontFamily: "Manrope, sans-serif"
-    fontSize: "18px → 20px"
-    fontWeight: 600
+    fontSize: "text-2xl → md:text-4xl (24 → 36px)"
+    fontWeight: 400
     lineHeight: 1.3
+    letterSpacing: "tracking-tight"
+  card-h3:
+    fontFamily: "Manrope, sans-serif"
+    fontSize: "text-xl → md:text-2xl (20 → 24px)"
+    fontWeight: 600
+    lineHeight: 1.2
   body-lg:
     fontFamily: "Manrope, sans-serif"
-    fontSize: "18px"
+    fontSize: "text-lg → md:text-xl (18 → 20px)"
     fontWeight: 400
-    lineHeight: 1.8
+    lineHeight: 1.6
   body-md:
     fontFamily: "Manrope, sans-serif"
-    fontSize: "16px → 18px"
+    fontSize: "text-base → md:text-lg (16 → 18px)"
     fontWeight: 400
     lineHeight: 1.55
   body-sm:
     fontFamily: "Manrope, sans-serif"
-    fontSize: "14px"
+    fontSize: "14 → 15px"
     fontWeight: 400
     lineHeight: 1.5
-  eyebrow:
+  eyebrow-plain:
+    fontFamily: "Manrope, sans-serif"
+    fontSize: "14 → 16px (text-sm → md:text-base)"
+    fontWeight: 400
+    color: "{colors.zinc-500}"
+    note: "Home sections use a plain, sentence-case lead label (e.g. '¿Por qué existimos?'), NOT the uppercase wide-tracked eyebrow."
+  eyebrow-tracked:
     fontFamily: "Manrope, sans-serif"
     fontSize: "12px"
-    fontWeight: 500
-    lineHeight: 1.2
+    fontWeight: 600
     letterSpacing: "0.2em"
     textTransform: uppercase
-  button-md:
+    note: "The uppercase 0.2em-tracked eyebrow survives on the FAQ section ('Preguntas frecuentes', emerald-700) and interior routes."
+  inline-accent:
+    fontFamily: "Manrope, sans-serif (inherits heading)"
+    color: "{colors.accent-emerald} (text-emerald-700)"
+    note: "Inline emphasis = color only. A single word inside a heading turns emerald; weight/size inherit. No serif, no italic, no swatch."
+  prose-body:
     fontFamily: "Manrope, sans-serif"
-    fontSize: "14px"
-    fontWeight: 500
-    lineHeight: 1
-  button-sm:
-    fontFamily: "Manrope, sans-serif"
-    fontSize: "12px"
-    fontWeight: 500
-    lineHeight: 1
-  prose-h2:
-    fontFamily: "Manrope, sans-serif"
-    fontSize: "30px"
+    fontSize: "18px"
+    lineHeight: 1.8
+  ascii-wave:
+    fontFamily: "ui-monospace, 'SF Mono', Menlo, Consolas, monospace"
+    fontSize: "13px"
     fontWeight: 700
-    lineHeight: 1.3
-    letterSpacing: "-0.01em"
-  prose-h3:
-    fontFamily: "Manrope, sans-serif"
-    fontSize: "24px"
-    fontWeight: 700
-    lineHeight: 1.3
-  prose-quote:
-    fontFamily: "Manrope, sans-serif"
-    fontSize: "20px"
-    fontWeight: 400
-    lineHeight: 1.6
+    letterSpacing: "0.4em"
+    note: "Decorative animated character field — not reading type."
 
 rounded:
   none: 0px
   sm: 6px
-  md: 8px
   lg: 12px
-  xl: 16px
   "2xl": 16px
   "3xl": 24px
   full: 9999px
 
 spacing:
-  xs: 4px
-  sm: 8px
-  md: 12px
-  base: 16px
-  lg: 24px
-  xl: 32px
-  "2xl": 40px
-  "3xl": 48px
-  section-y: "64px → 96px"
-  section-y-lg: "80px → 128px"
-  card-pad: "32px → 40px"
-  card-pad-lg: "px 24–80px / py 80–112px"
-  container-x: "20px → 96px"
+  panel-h: "100dvh (hero/about/offerings panels)"
+  section-y: "py-16 md:py-24 (64 → 96px) — featured"
+  section-y-lg: "py-24 md:py-32 (96 → 128px) — services, faq"
+  section-y-xl: "py-28 md:py-40 (112 → 160px) — about"
+  card-pad: "p-8 md:p-10 (32 → 40px) — service cards"
+  card-pad-sm: "p-6 md:p-7 (24 → 28px) — faq items"
+  container-x-mobile: "1.25rem (20px), 1.5rem (24px) at sm"
+  grid-gap: "gap-5 md:gap-6 (services), gap-6 md:gap-8 (featured)"
 
 motion:
   duration-fast: 150ms
   duration-normal: 300ms
   duration-slow: 600ms
   ease-out-soft: "cubic-bezier(0.22, 1, 0.36, 1)"
-  hero-stagger: 0.08s
-  hero-duration: 0.76s
-  hero-translate-x: 44px
-  card-reveal-duration: 0.55s
-  card-reveal-stagger: 0.09s
-  card-reveal-translate-y: 24px
-  navbar-collapse: 280ms
+  hero-actions-in: "0.76s ease-out-soft, 0.35s delay, translateY(24px) → 0 (CSS keyframe)"
+  wave-frame-step: "hero 0.005 / offerings 0.004 per rAF"
+  about-fill: "GSAP ScrollTrigger scrub:0.5, stagger 1, start 'top 85%' end 'center center'"
+  offerings-pin: "GSAP ScrollTrigger pin, pinSpacing:false, anticipatePin:1 (last panel unpinned)"
+  services-reveal: "Framer Motion, 0.55s, translateY(24px), stagger 0.09s, inView amount 0.25"
+  services-aura: "pointer-tracked 320px radial mask over dot field, rAF-throttled"
 
 components:
-  button-primary:
+  button-default:
     backgroundColor: "{colors.zinc-800}"
     textColor: "{colors.canvas}"
-    typography: "{typography.button-md}"
     rounded: "{rounded.full}"
-    padding: "10px 20px"
-    border: "1px solid transparent"
+    padding: "px-5 py-2.5"
+    fontWeight: 600
+    fontSize: "14px"
     hoverBackground: "{colors.zinc-700}"
-    focusRing: "2px {colors.emerald-500} + 2px {colors.canvas} offset"
+    activeBackground: "{colors.zinc-900}"
+    focusRing: "2px {colors.emerald-500} + 2px offset"
     transition: "colors 200ms ease-in-out"
   button-outline:
     backgroundColor: transparent
     textColor: currentColor
-    typography: "{typography.button-md}"
     rounded: "{rounded.full}"
-    padding: "10px 20px"
+    padding: "px-5 py-2.5"
     border: "1px solid currentColor / 25% opacity"
-    hoverBackground: "currentColor / 10% opacity"
+    hoverBackground: "currentColor / 10%"
   button-small:
     backgroundColor: transparent
     textColor: currentColor
-    typography: "{typography.button-sm}"
     rounded: "{rounded.full}"
-    padding: "6px 14px"
-    border: "1px solid currentColor / 25% opacity"
-    gap: 6px
+    padding: "px-3.5 py-1.5"
+    fontSize: "12px"
+    border: "1px solid currentColor / 25%"
   button-ghost:
     backgroundColor: transparent
     textColor: "{colors.zinc-700}"
-    typography: "{typography.button-md}"
     rounded: "{rounded.full}"
-    padding: "10px 12px"
-    border: "1px solid currentColor / 25% opacity"
     hoverBackground: "{colors.zinc-100}"
     hoverTransform: "scale(1.02)"
+  hero:
+    layout: "full-viewport (min-h-screen), no card/border, centered text"
+    decoration: "{component.ascii-wave-pointer}"
+    headlineAccent: "single word in {colors.emerald-700} (plain, no marker swatch)"
+    entry: "CSS keyframe hero-actions-in on the button row"
+  ascii-wave:
+    element: "<pre> overlay, pointer-events:none, z-0"
+    typography: "{typography.ascii-wave}"
+    color: "{colors.wave-emerald} (hero) / {colors.wave-emerald-soft} (offerings)"
+    field: "monospace char grid (cells 13px) animated as a stacked sine wave (two sines), rendered per requestAnimationFrame"
+    ramp: "'  ···' (space → middot density ramp)"
+    edgeMask: "linear-gradient transparent→black 3%..97%→transparent (fades left/right edges)"
+    position: "hero centered-low (base rows*0.72); offerings top or bottom via data-pos"
+  about:
+    layout: "full-viewport centered statement, no card, no dots"
+    decoration: "{component.scroll-word-fill}"
+    signature: "founder credit line below the statement"
+  scroll-word-fill:
+    technique: "paragraph split into per-word <span>s; GSAP ScrollTrigger scrubs each word's color from {colors.fill-dim} → {colors.fill-ink} left-to-right as the section crosses the viewport"
+    accentWord: "'Sync' fills to {colors.fill-accent} instead of ink"
+    a11y: "sr-only full sentence + aria-hidden decorative word spans"
+    reducedMotion: "words render at final ink color immediately, no GSAP load"
+  offerings-panel:
+    layout: "stack of full-viewport (100dvh) panels, alternating {colors.canvas} / {colors.zinc-900}"
+    pinning: "{motion.offerings-pin} — each panel pins at top so the next scrolls up over it; layered reveal"
+    alignment: "panels alternate left / right text alignment"
+    decoration: "{component.ascii-wave} on the light panels (top/bottom edge)"
+  service-card:
+    sharedShape: "rounded-3xl, min-h-[22rem] md:min-h-[28rem], p-8 md:p-10, 3-col grid (md)"
+    dataSource: "@features/solutions/data.ts (solutions[].themeKey)"
+    hover: "-translate-y-1 (transform 300ms ease-out)"
+    decoration: "{component.dot-pattern-aura}"
+    themes:
+      dark: "bg-zinc-900 text-zinc-100 — solution 'diagnostico'"
+      mid: "bg-emerald-800 text-emerald-50 — solution 'desarrollo'"
+      light: "bg-[#defbed] text-zinc-800 — solution 'educacion'"
+  dot-pattern-aura:
+    fill: "radial-gradient(circle, var(--dot-color) 1.2px, transparent 1.6px) / 14px 14px, positioned bottom-right"
+    dotColor: "rgba(255,255,255,0.18) on dark/mid · rgba(4,120,87,0.35) on light"
+    mask: "320px radial-gradient that tracks the pointer (--services-mouse-x/y), rAF-throttled; rests at a per-card default position"
+  dot-pattern-dark:
+    fill: "radial-gradient white dots / 14px, masked to a corner ellipse"
+    use: "footer (and any static dark accent panel)"
+  faq-item:
+    element: "native <details>/<summary> accordion"
+    surface: "{colors.canvas}, rounded-2xl, 1px {colors.zinc-200} border"
+    padding: "p-6 md:p-7"
+    affordance: "+ glyph in {colors.emerald-700} rotating 45° on open; border tints emerald-700/30 on hover/open"
+  featured-project:
+    media: "bg-emerald-50/70 frame, rounded-2xl md:rounded-3xl, object-contain image, h-72 md:h-96"
+    grid: "1 → sm:2 → lg:3 cols; bento via per-item spanClass (e.g. lg:col-span-2)"
+    cta: "outline Button"
+  inline-accent:
+    rendering: "<span class='text-emerald-700'>word</span> — color only"
+    component: "shared/components/ui/highlight-badge.astro (renders the plain emerald span; name kept for back-compat)"
+    scope: "site-wide — home and interior identical"
   navbar-pill:
     backgroundColor: transparent
-    scrolledBackground: "rgba(255,255,255,0.7)"
-    scrolledBorder: "1px solid rgba(255,255,255,0.4)"
-    backdropFilter: "blur(16px)"
+    scrolledBackground: "rgba(255,255,255,0.7) + backdrop-blur(16px)"
     rounded: "{rounded.full}"
-    padding: "8px"
-    position: "fixed top: 1rem"
-    zIndex: 50
-    transition: "all 300ms"
-  navbar-cta:
-    backgroundColor: "{colors.zinc-800}"
-    textColor: "{colors.canvas}"
-    rounded: "{rounded.full}"
-    shadow: "shadow-sm"
-    hoverShadow: "shadow-md"
-  mobile-menu-sheet:
-    backgroundColor: "{colors.canvas}"
-    rounded: "{rounded.2xl}"
-    shadow: "0 12px 32px rgba(0,0,0,0.08)"
-    openDuration: "280ms ease-out-soft"
-    closeDuration: "220ms ease-out-soft"
-  hero-card:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.3xl}"
-    border: "1px solid {colors.zinc-200}"
-    minHeight: "80vh"
-    padding: "{spacing.card-pad-lg}"
-    maxInnerWidth: "max-w-8xl"
-    decoration: "{component.dot-pattern-pointer}"
-  dot-pattern-pointer:
-    baseLayer: "radial-gradient(circle, {colors.dot-emerald} 1.2px, transparent 1.6px) 18px 18px"
-    baseOpacity: 0.4
-    activeLayer: "same dots at full opacity, masked by radial-gradient(circle 260px at var(--hero-mouse-x) var(--hero-mouse-y), black, transparent)"
-    pointerEvents: none
-  dot-pattern-static:
-    fill: "radial-gradient(circle, {colors.dot-emerald} 1.2px, transparent 1.6px) 18px 18px"
-    opacity: 0.4
-  dot-pattern-dark:
-    fill: "radial-gradient(circle, {colors.dot-on-dark} 1.2px, transparent 1.6px) 14px 14px"
-    mask: "radial-gradient(ellipse at bottom right, black, transparent 70%)"
-  highlight-marker:
-    fontFamily: "'IBM Plex Serif', serif"
-    fontStyle: italic
-    backgroundColor: "{colors.marker-highlight}"
-    transform: "rotate(-1deg)"
-    padding: "0 6px"
-    inlineDisplay: "inline-block"
-  about-card:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.3xl}"
-    border: "1px solid {colors.zinc-200}"
-    padding: "px-6 sm:px-10 md:px-14 lg:px-20 py-20 md:py-28"
-    maxInnerWidth: "max-w-4xl"
-    decoration: "{component.dot-pattern-static}"
-  service-card-light:
-    backgroundColor: "{colors.emerald-soft-card}"
-    textColor: "{colors.emerald-950}"
-    rounded: "{rounded.3xl}"
-    padding: "{spacing.card-pad}"
-    minHeight: "22rem → 28rem"
-    dotColor: "rgba(4, 120, 87, 0.55)"
-  service-card-mid:
-    backgroundColor: "{colors.emerald-800}"
-    textColor: "{colors.emerald-50}"
-    rounded: "{rounded.3xl}"
-    padding: "{spacing.card-pad}"
-    minHeight: "22rem → 28rem"
-    dotColor: "rgba(255,255,255,0.18)"
-  service-card-dark:
+    position: "fixed top-1rem"
+  footer:
     backgroundColor: "{colors.zinc-900}"
-    textColor: "{colors.zinc-100}"
-    rounded: "{rounded.3xl}"
-    padding: "{spacing.card-pad}"
-    minHeight: "22rem → 28rem"
-    dotColor: "rgba(255,255,255,0.12)"
-  project-card:
-    backgroundColor: "{colors.emerald-50}"
-    rounded: "{rounded.2xl}"
-    height: "16rem → 22.5rem"
-    hoverTransform: "scale(1.03) translateY(-0.5rem)"
-    transition: "transform 220ms ease-out-soft"
-  contact-form-card:
-    backgroundColor: "{colors.zinc-900}"
-    textColor: "{colors.canvas}"
-    rounded: "{rounded.3xl}"
+    textColor: "{colors.zinc-300}"
+    rounded: "{rounded.2xl} md:{rounded.3xl}"
     border: "1px solid {colors.zinc-800}"
-    padding: "24px → 28px"
     decoration: "{component.dot-pattern-dark}"
   text-input:
     backgroundColor: "{colors.zinc-800}"
     textColor: "{colors.canvas}"
-    typography: "{typography.body-md}"
     rounded: "{rounded.lg}"
-    padding: "12px 14px"
     border: "1px solid {colors.zinc-700}"
-    focusRing: "2px {colors.emerald-500}"
-    focusBorder: "{colors.emerald-500}"
-  eyebrow-label:
-    typography: "{typography.eyebrow}"
-    textColor: "{colors.zinc-500} or {colors.emerald-300} on dark"
-  footer:
-    backgroundColor: "{colors.zinc-900}"
-    textColor: "{colors.zinc-300}"
-    rounded: "{rounded.3xl}"
-    border: "1px solid {colors.zinc-800}"
-    decoration: "{component.dot-pattern-dark}"
+    focus: "2px {colors.emerald-500} ring + border"
+    note: "Contact form lives on the /contacto route, not the home page."
   prose-block:
     bodyColor: "#3f3f46"
     bodySize: "18px"
     bodyLineHeight: 1.8
     h2Color: "{colors.brand-ink}"
     blockquoteBorder: "4px solid {colors.emerald-500}"
-    blockquoteSize: "20px"
     linkColor: "{colors.brand-900}"
-    linkUnderline: "rgba(16,185,129,0.45) underline at 4px offset"
     imageRadius: "{rounded.xl}"
-    imageShadow: "0 10px 30px -15px rgba(0,0,0,0.1)"
 ---
 
 ## Overview
 
-Sync Estudio is a Spanish-language maintenance / build studio site. The visual system is **paper-white editorial with a single deep emerald brand voltage** (`{colors.brand-700}` — #1c5534, with `{colors.brand-900}` — #064e3b as the darker variant). A high-contrast **zinc-900 dark surface** (`{colors.zinc-900}` — #18181b) carries the services, contact form, and footer — the page reads as alternating light → dark editorial bands rather than a single canvas.
+Sync Estudio is a Spanish-language software / AI build studio site. The visual system is **paper-white editorial with a single deep emerald brand voltage** (`{colors.brand-700}` — #1c5534, the Tailwind `sync` alias). High-contrast **zinc-900 dark surfaces** (`{colors.zinc-900}` — #18181b) carry accent panels, the dark service card, and the footer — the page reads as alternating light → dark editorial bands, never a single flat canvas.
 
-Type runs **Manrope** for everything UI/body/display, paired with **IBM Plex Serif italic** used only as an inline highlight span on emphasized words (the canonical example is the word "IA" wrapped in a `{component.highlight-marker}` — italic serif, emerald-200/60 background swatch, skewed -1°, like a hand-pulled marker). There is no serif body or serif headings — the serif is a deliberate punctuation device.
+The home page (`src/pages/index.astro`) is composed of six feature sections in order: **Hero → About → Offerings → Services → Featured → Faq**. Several of these are **full-viewport (`100dvh`) scroll-coupled sections** rather than stacked cards — the page is read as much by scrolling *through* states as by scrolling *past* blocks. This is the defining structural shift of the current design.
 
-The shape language is **soft and consistent**: containers / cards / panels are `{rounded.3xl}` (24px) at desktop, dropping to `{rounded.2xl}` (16px) at mobile; every interactive button is fully pill-shaped (`{rounded.full}`); form inputs sit at `{rounded.lg}` (12px). There are no hard corners.
+Type runs **Manrope** for everything — a single typeface, no serif anywhere. Inline emphasis is a **plain emerald color accent**: one word inside a heading turns `text-emerald-700` while inheriting the heading's weight and size. There is no marker swatch, no italic, no second font. (The old IBM Plex Serif marker has been fully removed — font no longer loaded, no Tailwind family.) `shared/components/ui/highlight-badge.astro` now renders this plain emerald span; home and interior routes are identical.
 
-The decorative signature is the **pointer-aware emerald dot pattern** (`{component.dot-pattern-pointer}`): a static base layer of emerald dots at 18px spacing, sitting at 40% opacity, with a second identical layer at full opacity masked by a 260px radial gradient that tracks the cursor (`--hero-mouse-x` / `--hero-mouse-y` CSS variables driven by JS). The hero, about, services, contact form, and footer each carry a version of this dot system tuned to their surface color (emerald dots on white; white dots on zinc-900).
+The shape language is **soft and consistent**: cards/panels are `{rounded.3xl}` (24px) at desktop dropping to `{rounded.2xl}` (16px) at mobile; every interactive button is fully pill-shaped (`{rounded.full}`); form inputs sit at `{rounded.lg}`. No hard corners.
+
+**The decorative signature is now threefold, all motion-led:**
+
+1. **Animated ASCII wave** (`{component.ascii-wave}`) — a `<pre>` overlay filled with a monospace character grid that renders a stacked two-sine wave per animation frame. Carried by the hero (emerald `{colors.wave-emerald}`, low-centered) and the offerings panels (fainter `{colors.wave-emerald-soft}`, edge-aligned). `pointer-events:none`, edge-masked left/right.
+2. **Scroll word-fill** (`{component.scroll-word-fill}`) — the About statement is split per word and each word's color is scrubbed from dim (`{colors.fill-dim}`) to ink (`{colors.fill-ink}`) by GSAP ScrollTrigger as the reader scrolls; the word "Sync" fills to emerald (`{colors.fill-accent}`).
+3. **Pin-stacked panels** (`{component.offerings-panel}`) — the Offerings section pins each full-viewport panel at the top so the next slides up over it (GSAP `pin`, `pinSpacing:false`).
+
+The earlier **pointer-tracked emerald dot pattern** survives, but only on the **service cards** (`{component.dot-pattern-aura}`, pointer-tracked 320px mask per card) and the **footer** (`{component.dot-pattern-dark}`, static). The hero and about no longer use it.
 
 **Key Characteristics:**
-- **Single brand voltage:** `{colors.brand-700}` (#1c5534, custom Tailwind alias `sync`). Used sparingly — emerald-* utilities carry most accent moments; the literal brand hex appears only in tokenized form for prose link underlines and blockquote borders.
-- **Manrope-only UI** with **IBM Plex Serif italic** as a punctuation highlight. The serif never carries a full headline — only single inline words inside a `{colors.marker-highlight}` (emerald-200/60) marker pill, skewed `-1deg`.
-- **Alternating light/dark bands**: hero (white) → about (white) → services (mix of `{component.service-card-light}` + `{component.service-card-mid}` emerald-800) → workflow (light, sticky-scroll) → contact (form on zinc-900) → footer (zinc-900). The dark surfaces are mid-page, not framing — a deliberate editorial rhythm.
-- **Floating pill navbar** (`{component.navbar-pill}`): fixed top-1rem, transparent at top of page, transitions to `rgba(255,255,255,0.7)` with 16px backdrop-blur and a 1px white/40 border once scrolled. Pill-shaped throughout.
-- **Soft motion palette**: standard easing is `cubic-bezier(0.22, 1, 0.36, 1)` (`--ease-out-soft`), duration tokens at 150/300/600ms. Framer Motion drives staggered hero entry (lines fade + 44px slide, 0.08s stagger, 0.76s total) and on-scroll card reveals (24px translateY, 0.55s, 0.09s stagger). All animation honored by a `prefers-reduced-motion` override that flattens to 0.01ms.
-- **Three service-card themes** (`light`, `mid`, `dark`): same shape and padding, three swappable color skins keyed off a theme prop. Each carries its own dot color for the masked decorative layer.
-- **Sticky scrollable workflow** (`workflow.astro`) with a progressive line-fill driven by scroll position — phases activate and color-transition over 400ms as the marker line crosses them. This is the project's only non-static, scroll-coupled UI element.
-- **Spanish copy, voice "del lado nuestro"** — quiet, accountable, anti-flash. The design supports it: no exclamations, no neon accents, no sales-y badges. The single emphatic moment is the italic serif highlight.
-- **Container model**: there is no fixed max-width container — each section sets its own (`max-w-8xl` hero, `max-w-4xl` about, `max-w-3xl` services intro). Horizontal padding is responsive (`{spacing.container-x}` — 20px mobile → 96px wide desktop) defined in the `.container` component class.
+- **Single brand voltage:** `{colors.brand-700}` (#1c5534, Tailwind alias `sync`). Emerald-* utilities carry accents; the literal brand hex appears tokenized in prose link underlines and blockquote borders.
+- **Manrope-only, site-wide.** One typeface, no serif. Inline emphasis is a plain `text-emerald-700` color accent, identical on home and interior routes.
+- **Full-viewport scroll sections:** hero (white, `min-h-screen`), about (white, `100dvh`), offerings (alternating white/zinc-900 pinned panels, `100dvh` each), then standard-rhythm bands: services, featured, faq.
+- **Floating pill navbar** (`{component.navbar-pill}`): fixed `top-1rem`, transparent at the top of the page, flipping to `rgba(255,255,255,0.7)` with 16px backdrop-blur once scrolled.
+- **Mixed motion stack:** GSAP + ScrollTrigger for all scroll-coupled effects (about fill, offerings pin, ASCII waves run on rAF), Framer Motion for the services on-scroll card reveal, CSS keyframes for the hero button entry. All scroll/animation deferred via IntersectionObserver + dynamic import, and flattened by the global `prefers-reduced-motion` override (0.01ms).
+- **Three service-card themes** (`dark`, `mid`, `light`) keyed off `solutions[].themeKey` in `@features/solutions/data.ts` — the home grid renders the canonical three solutions (diagnostico → dark, desarrollo → mid, educacion → light).
+- **Spanish copy, voice "del lado nuestro"** — quiet, accountable, anti-flash. No exclamations, no neon accents, no sales badges.
+- **Container model:** a single global `.container` (`width: 95%`, `max-width: 1800px`; mobile padding 20–24px) defined in `global.css`. Sections use `container mx-auto` and then cap their own inner content with `max-w-*` (e.g. `max-w-5xl` hero, `max-w-4xl` about, `max-w-3xl` offerings/services intro, `max-w-7xl` faq).
 
 ## Colors
 
 ### Brand
-- **Brand 700** (`{colors.brand-700}` — #1c5534): The signature emerald, defined as both `--color-brand-700` and the Tailwind `sync` alias. The truest "brand color" of the studio, though sparingly used in literal form — most surfaces lean on Tailwind's `emerald-*` scale.
-- **Brand 900** (`{colors.brand-900}` — #064e3b): The deep variant. Used on prose link text and as a darker companion to brand-700 inside long-form case-study copy.
-- **Brand Ink** (`{colors.brand-ink}` — #022c22): Near-black emerald. Used on case-study prose headings (`{component.prose-block}` h2 color).
+- **Brand 700** (`{colors.brand-700}` — #1c5534): The signature emerald, `--color-brand-700` and the Tailwind `sync` alias. Most accent moments use the `emerald-*` scale; the literal hex appears tokenized in prose.
+- **Brand 900** (`{colors.brand-900}` — #064e3b): Deep variant — prose link text.
+- **Brand Ink** (`{colors.brand-ink}` — #022c22): Near-black emerald — case-study prose headings.
 
-### Emerald Scale (decorative & accent)
-- **Emerald 50** (`{colors.emerald-50}` — #ecfdf5): `{component.project-card}` base fill, dark-surface text color.
-- **Emerald 200** (`{colors.emerald-200}` — #a7f3d0): The marker highlight swatch (at 60% opacity → `{colors.marker-highlight}`).
-- **Emerald 300** (`{colors.emerald-300}` — #6ee7b7): Eyebrow text color on dark surfaces (footer, contact form labels).
-- **Emerald 500** (`{colors.emerald-500}` — #10b981): The focus ring color. Every interactive element's `focus-visible:ring` resolves to emerald-500. Also the prose blockquote left border and the prose link underline tint.
-- **Emerald 700** (`{colors.emerald-700}` — #047857): The dot-pattern hex (rgba 4,120,87,X). All emerald dots on light surfaces are this hue at variable opacity.
-- **Emerald 800** (`{colors.emerald-800}` — #065f46): `{component.service-card-mid}` background — the strongest emerald surface in the system.
-- **Emerald Soft Card** (`{colors.emerald-soft-card}` — #defbed): A custom lightened emerald, used as the `{component.service-card-light}` background. Sits one step lighter than `emerald-100` and is the only off-scale emerald in the system.
+### Emerald Scale (accent & decoration)
+- **Emerald 50 / 50-soft** (`{colors.emerald-50}` — #ecfdf5): Featured-project media frame (`bg-emerald-50/70`); light-on-dark text.
+- **Emerald 200** (`{colors.emerald-200}` — #a7f3d0): Soft borders/dots on emerald surfaces (e.g. workflow phase-number rings).
+- **Emerald 300** (`{colors.emerald-300}` — #6ee7b7): Eyebrow / label text on dark and mid service cards.
+- **Emerald 500** (`{colors.emerald-500}` — #10b981): The focus-ring color on every interactive element; prose blockquote border + link underline tint.
+- **Emerald 700** (`{colors.emerald-700}` — #047857): The home-page accent-word color (hero "futuro", services "entregamos", featured "destacados"); the FAQ eyebrow; the dot/wave hex base (rgba 4,120,87,X).
+- **Emerald 800** (`{colors.emerald-800}` — #065f46): The `mid` service-card background — the strongest emerald surface.
+- **Emerald Soft Card** (`{colors.emerald-soft-card}` — #defbed): The `light` service-card background — the only off-scale emerald.
 
 ### Surface
-- **Canvas** (`{colors.canvas}` — #ffffff): The default page floor. Hero, about, workflow, and case-study pages all sit on white.
-- **Zinc 900** (`{colors.zinc-900}` — #18181b): The dark counter-surface. Services dark cards, contact form, footer. Never pure black.
-- **Zinc 100** (`{colors.zinc-100}` — #f4f4f5): Ghost-button hover background.
+- **Canvas** (`{colors.canvas}` — #ffffff): Default floor. Hero, about, light offerings panels, services/featured/faq sections.
+- **Zinc 900** (`{colors.zinc-900}` — #18181b): Dark counter-surface. Dark offerings panel, `dark` service card, footer. Never pure black.
+- **Zinc 100** (`{colors.zinc-100}` — #f4f4f5): Ghost-button hover.
 
 ### Text
-- **Ink** (`{colors.ink}` — #18181b): Default body and headline text on light surfaces. Same hex as zinc-900 — the system treats them interchangeably.
-- **Zinc 600** (`{colors.zinc-600}` — #52525b): Default subtitle / supporting-body color (hero subtitle, services body copy).
-- **Zinc 500** (`{colors.zinc-500}` — #71717a): Eyebrow labels on light surfaces, footer secondary copy.
-- **Zinc 400** (`{colors.zinc-400}` — #a1a1aa): Disabled / tertiary text on dark surfaces.
-- **Zinc 300** (`{colors.zinc-300}` — #d4d4d8): Default body color on dark surfaces (footer paragraph copy).
-- **Emerald 50** on dark: Headline color inside `{component.service-card-mid}` and `{component.service-card-dark}`.
-- **Emerald 300** on dark: Eyebrow color on dark surfaces.
-
-### Borders & Hairlines
-- **Zinc 200** (`{colors.zinc-200}` — #e4e4e7): The single light-surface border tone. Hero card, about card, project cards.
-- **Zinc 700/800**: Borders on dark surfaces (contact form border, footer top border).
-- **Border / Currentcolor at 25% opacity**: All outline / small / ghost buttons use `border-current/25` — the border inherits the parent text color at 25% opacity, allowing the same button component to render correctly on both light and dark surfaces without theming overhead.
+- **Ink / Zinc 800** (#27272a–#18181b): Default headline/body on light surfaces; the About fill target (`{colors.fill-ink}`).
+- **Zinc 600** (`{colors.zinc-600}` — #52525b): Supporting body copy.
+- **Zinc 500** (`{colors.zinc-500}` — #71717a): Home section lead labels (plain, sentence-case), hero subtitle, muted copy.
+- **Zinc 300** (`{colors.zinc-300}` — #d4d4d8): Body on dark surfaces (footer); also the About word-fill *start* color (`{colors.fill-dim}`).
 
 ### Decorative
-- **Dot Emerald** (`{colors.dot-emerald}` — rgba(4,120,87,0.7)): The dot-pattern fill on light surfaces. Always paired with a 40%-opacity outer layer and a pointer-tracked active layer at full opacity.
-- **Dot On Dark** (`{colors.dot-on-dark}` — rgba(255,255,255,0.18)): Dot fill on zinc-900 surfaces (footer base layer).
-- **Dot On Dark Soft** (`{colors.dot-on-dark-soft}` — rgba(255,255,255,0.08)): The contact form's softer dot tone.
-- **Marker Highlight** (`{colors.marker-highlight}` — rgba(167,243,208,0.6)): The emerald-200 swatch behind every IBM Plex Serif italic highlight word. The single most signature visual moment in the system.
+- **Wave Emerald** (`{colors.wave-emerald}` — rgba(4,120,87,0.45)): The hero ASCII wave color.
+- **Wave Emerald Soft** (`{colors.wave-emerald-soft}` — rgba(4,120,87,0.28)): The offerings ASCII wave — quieter so it reads as texture.
+- **Dot Emerald** (`{colors.dot-emerald}` — rgba(4,120,87,0.35)): Dot fill on the light service card.
+- **Dot On Dark** (`{colors.dot-on-dark}` — rgba(255,255,255,0.18)): Dot fill on dark/mid service cards and footer.
+- **Fill Dim / Ink / Accent** (#d4d4d8 / #27272a / #047857): The three states of the About scroll word-fill.
+- **Inline Accent** (`text-emerald-700` — #047857): The single inline emphasis treatment — a word turns emerald inside an otherwise ink heading. No swatch, no serif.
 
 ### Semantic
-- No dedicated error / warning / success palette is defined. Forms rely on emerald-500 focus rings to signal interaction; validation copy uses default text colors.
+- No dedicated error / warning / success palette. Forms (interior routes) rely on emerald-500 focus rings and browser-default validation.
 
 ## Typography
 
 ### Font Families
-- **Manrope** (`fontFamily.manrope`): Used for absolutely everything except inline highlight words. Display weights 600, body 400, eyebrow 500, button 500. Hosted as a Google web font; full weight range (200–800) imported.
-- **IBM Plex Serif** (`fontFamily.ibm-plex-serif`): Used only in italic, only as inline `<span>` highlights inside an `{component.highlight-marker}` wrapper. The serif never carries a full headline or paragraph — it is a single-word punctuation device. Weights imported 100–700, but only the italic-500 is used in practice.
-
-There is no system fallback configuration beyond Tailwind defaults (`sans-serif`, `serif`).
+- **Manrope** (`fontFamily.manrope`): Everything UI/body/display across the whole site. Loaded from Google Fonts at weights 400/500/600/700.
+- **No second font.** Manrope is the only family. The previous IBM Plex Serif has been removed from the Google Fonts request and the Tailwind config — there is no serif token to reach for.
 
 ### Hierarchy
 
-| Token | Size | Weight | Line Height | Tracking | Use |
-|---|---|---|---|---|---|
-| `{typography.display-xl}` | clamp(30, 6vw, 60)px | 600 | 1.05 | -0.02em | Hero h1 ("Mantenimiento … impulsado por IA") |
-| `{typography.display-lg}` | clamp(24, 5vw, 48)px | 600 | 1.1 | -0.015em | About card display lines |
-| `{typography.section-h2}` | clamp(24, 4.5vw, 48)px | 600 | 1.15 | -0.015em | Services intro, contact intro, workflow intro |
-| `{typography.phase-h3}` | 18 → 20px | 600 | 1.3 | 0 | Workflow phase headers, service card titles |
-| `{typography.body-lg}` | 18px | 400 | 1.8 | 0 | Case-study prose body (`.case-study-prose`) |
-| `{typography.body-md}` | 16 → 18px | 400 | 1.55 | 0 | Hero subtitle, services body, about supporting copy |
-| `{typography.body-sm}` | 14px | 400 | 1.5 | 0 | Card meta, form helper text |
-| `{typography.eyebrow}` | 12px | 500 | 1.2 | 0.2em | Section eyebrow labels — uppercase, wide-tracked ("PROYECTO", "SERVICIOS") |
-| `{typography.button-md}` | 14px | 500 | 1 | 0 | Default + outline + ghost button labels |
-| `{typography.button-sm}` | 12px | 500 | 1 | 0 | Small button variant (nav inline links) |
-| `{typography.prose-h2}` | 30px | 700 | 1.3 | -0.01em | Case-study page h2 (`.case-study-prose h2`) |
-| `{typography.prose-h3}` | 24px | 700 | 1.3 | 0 | Case-study page h3 |
-| `{typography.prose-quote}` | 20px | 400 | 1.6 | 0 | Case-study blockquotes |
-| `{typography.display-highlight}` | inherits parent | italic 500 | parent | 0 | IBM Plex Serif italic inside `{component.highlight-marker}` |
+| Token | Size | Weight | Use |
+|---|---|---|---|
+| `{typography.hero-h1}` | 36 → 72px (`text-4xl … lg:text-7xl`) | 700 | Hero h1 ("Construimos el futuro de tu operación.") |
+| `{typography.panel-h2}` | 36 → 72px | 600 | Offerings panel titles ("Software a medida", "Agentes de IA", "MVP") |
+| `{typography.section-h2}` | 24 → 48px | 600–700 | Services / Featured / Faq section headings |
+| `{typography.about-statement}` | 24 → 36px | 400 | The About scroll-fill statement |
+| `{typography.card-h3}` | 20 → 24px | 600 | Service-card + featured-project titles |
+| `{typography.body-lg}` | 18 → 20px | 400 | Offerings panel body, services card intro |
+| `{typography.body-md}` | 16 → 18px | 400 | Hero subtitle, faq answers, supporting copy |
+| `{typography.eyebrow-plain}` | 14 → 16px | 400 | Home section lead labels — sentence-case, zinc-500 ("¿Por qué existimos?", "¿Qué podemos construir?") |
+| `{typography.eyebrow-tracked}` | 12px | 600 | The FAQ eyebrow ("Preguntas frecuentes", emerald-700) + interior routes — uppercase, 0.2em |
+| `{typography.prose-body}` | 18px / lh 1.8 | 400 | Case-study prose (`.case-study-prose`) |
+| `{typography.inline-accent}` | inherits | inherits | One word in `text-emerald-700` inside a heading — color only |
+| `{typography.ascii-wave}` | 13px mono / 0.4em | 700 | Decorative wave character field (not reading type) |
 
 ### Principles
-- **Display sizes use `clamp()`** for fluid scaling between mobile and desktop rather than hard Tailwind breakpoints. The hero h1's `clamp(30px, 6vw, 60px)` produces a perfectly proportional headline at every viewport.
-- **Display weight is 600, not 700+**. The system trusts whitespace and the dot decoration to carry visual weight rather than typographic muscle.
-- **Negative letter-spacing on display only** (`-0.015em` to `-0.02em`). Body, eyebrow, button copy all run at 0 tracking — only eyebrows carry the deliberate `+0.2em` wide-tracking treatment.
-- **Eyebrow is uppercase**, 12px, weight 500, 0.2em letter-spacing. The wide tracking + uppercase combination is the only "loud" typographic treatment used in normal flow.
-- **Inline highlights only**: the IBM Plex Serif italic moment is reserved for one word — usually "IA" or another distinguishing noun — wrapped in `<span class="…italic bg-emerald-200/60 -rotate-1 px-1.5">`. The skew makes it read as a marker swipe rather than as italic emphasis.
+- **Manrope-bold display, no serif anywhere.** Headlines are plain `font-bold tracking-tight` Manrope with a single emerald accent word (`text-emerald-700`). No marker, no italic, no second font.
+- **Home leads are sentence-case, not uppercase eyebrows.** The current home sections introduce themselves with a quiet zinc-500 question label (`text-sm md:text-base`). The wide-tracked uppercase eyebrow now appears only on the FAQ section and interior routes.
+- **Fluid display via Tailwind responsive steps + `text-balance`**, not raw `clamp()` — headlines step `text-4xl → sm → md → lg:text-7xl` and balance their line breaks.
+- **Display weight is 600–700** with `tracking-tight`. Body and labels run at normal tracking.
 
 ### Note on Font Substitutes
-If Manrope is unavailable, **Inter** transfers most cleanly (matching x-height and stroke modulation). For IBM Plex Serif, the closest open substitute is **Source Serif 4 Italic** — adjust the marker padding down by ~2px to compensate for its slightly wider italic cap.
+If Manrope is unavailable, **Inter** transfers most cleanly (matching x-height and stroke modulation). There is no second font to substitute.
 
 ## Layout
 
 ### Spacing System
 - **Base unit:** 4px (Tailwind default).
-- **Tokens in use:** `{spacing.xs}` 4 · `{spacing.sm}` 8 · `{spacing.md}` 12 · `{spacing.base}` 16 · `{spacing.lg}` 24 · `{spacing.xl}` 32 · `{spacing.2xl}` 40 · `{spacing.3xl}` 48.
-- **Vertical section rhythm:** `py-16 md:py-24` (64 → 96px) is the standard band height; the longer about/contact bands use `py-20 md:py-32` (80 → 128px).
-- **Card padding (standard):** `p-8 md:p-10` (32 → 40px) for service cards.
-- **Card padding (editorial):** `px-6 sm:px-10 md:px-14 lg:px-20 py-20 md:py-28` for the about card — the asymmetric horizontal scale matches the editorial-magazine feel.
-- **Form / contact card padding:** `p-6 md:p-7` (24 → 28px) — tighter than service cards because dark surfaces feel heavier.
-- **Gaps:** `gap-3` (12px) between header inline buttons, `gap-5 md:gap-6` between header items, `gap-10 md:gap-16` between grid section columns, `gap-7 md:gap-8` inside list sections.
+- **Full-viewport sections:** hero (`min-h-screen`), about (`min-h-[100dvh]`), each offerings panel (`h-[100dvh]`).
+- **Standard band rhythm:** featured `py-16 md:py-24` (64 → 96px); services + faq `py-24 md:py-32` (96 → 128px); about's inner padding runs the tallest at `py-28 md:py-40`.
+- **Card padding:** service cards `p-8 md:p-10` (32 → 40px); faq items `p-6 md:p-7` (24 → 28px); featured-project media frame `p-4 md:p-6`.
+- **Gaps:** services grid `gap-5 md:gap-6`; featured grid `gap-6 md:gap-8`; faq list `gap-3`.
 
 ### Grid & Container
-- **Container padding (responsive):** 20px (mobile) → 24px (sm) → 32px (md) → 64px (lg) → 96px (xl). Defined in `global.css` `.container` component, not via Tailwind container plugin.
-- **No global max-width.** Each section caps its own inner width:
-  - Hero inner: `max-w-8xl` (88rem / 1408px)
-  - About inner: `max-w-4xl` (56rem / 896px)
-  - Services intro / workflow intro: `max-w-3xl` (48rem / 768px)
-- **Services grid:** 1-col mobile → 2-col desktop, large enough to allow each card to breathe at min-h 22→28rem.
-- **Workflow:** sticky-positioned single column with a vertical phase line on the left.
+- **Global container:** `.container` (in `global.css`) = `width: 95%`, `max-width: 1800px`, centered via `mx-auto`. Mobile (`< 768px`) switches to `width:auto` + `padding-inline: 1.25rem` (1.5rem at sm). This replaces the older "no global max-width" model.
+- **Per-section inner caps:** hero `max-w-5xl`, about `max-w-4xl`, offerings/services intro `max-w-3xl`, faq `max-w-7xl`.
+- **Services grid:** 1-col mobile → **3-col** at `md` (one card per theme).
+- **Featured grid:** 1 → `sm:2` → `lg:3` cols, with bento spans (`lg:col-span-2`) per project.
+- **Offerings:** a single column of pinned full-viewport panels; text alternates left / right alignment per panel.
 
 ### Whitespace Philosophy
-The system runs generous editorial whitespace at section boundaries (64–128px vertical) but compresses within cards — service cards and form fields sit close to their content edges (32–40px). The dot-pattern decoration absorbs visual "noise" inside the otherwise large empty areas, preventing the page from feeling sterile.
+The full-viewport sections trade dense layout for **one idea per screen** — the hero, the about statement, and each offerings panel each own an entire viewport. The animated wave / scroll-fill decoration absorbs the visual "noise" of the otherwise empty space, keeping the large fields from feeling sterile.
 
 ## Elevation
 
-The system runs **two shadow tiers** plus the flat baseline.
+The system stays nearly flat.
 
-- **Flat:** Hero, about, services cards, workflow, contact, footer — every long-form surface. Depth comes from the 1px hairline border (`{colors.zinc-200}` on light, `{colors.zinc-800}` on dark) + the dot decoration, not from shadow.
-- **Navbar CTA float:** `shadow-sm` resting, `shadow-md` on hover. The single button shadow in the system.
-- **Mobile menu sheet:** `box-shadow: 0 12px 32px rgba(0,0,0,0.08)` — the soft-spread shadow used when the mobile hamburger sheet drops down from the pill navbar. This is the heaviest shadow defined.
-- **Case-study image shadow:** `box-shadow: 0 10px 30px -15px rgba(0,0,0,0.1)` — applied to images inside `.case-study-prose`. Combined with `border-radius: 1rem` it produces a soft-floating photo look on long-form pages.
+- **Flat:** Hero, about, offerings panels, services cards, featured, faq, footer. Depth comes from surface-color contrast, the 1px hairline border (`{colors.zinc-200}` light / `{colors.zinc-800}` dark) and the wave/dot decoration — not from shadow.
+- **Subtle button shadow:** hero CTAs carry `shadow-sm`; the navbar CTA floats `shadow-sm → shadow-md` on hover.
+- **Mobile menu sheet:** soft `0 12px 32px rgba(0,0,0,0.08)` drop shadow.
+- **Case-study image shadow:** `0 10px 30px -15px rgba(0,0,0,0.1)` inside `.case-study-prose`.
 
-There are no progressive 6-tier elevation systems. Either flat, or one of three specific moments.
+No progressive multi-tier elevation system.
 
 ## Components
 
-### Buttons (`/Users/yamilyscapa/code/sync/own/web/src/shared/components/ui/button.astro`)
+### Buttons (`src/shared/components/ui/button.astro`)
 
-A single Astro component switches between four variants via a prop. All are pill-shaped (`{rounded.full}`), all carry the same focus-ring contract (`emerald-500` ring + `canvas` offset).
+A single Astro component, prop `variant?: "default" | "outline" | "ghost" | "small"` plus a `style` passthrough for extra classes and `link` / `blank` for anchor rendering. All pill-shaped, all share the `emerald-500` focus-ring contract.
 
-- **`button-primary`** — Zinc-800 fill, white text, transparent border. The most common solid CTA: "Hablemos", "Ver proyectos". Hover flattens to zinc-700.
-- **`button-outline`** — Transparent fill, `currentColor` text and 25%-opacity border. The chameleon variant — works on both light and dark surfaces because it inherits parent color.
-- **`button-small`** — Same as outline but at 12px / px-3.5 py-1.5 / 6px gap. Used on dense nav surfaces.
-- **`button-ghost`** — Transparent fill, zinc-700 text, 25%-opacity border. Hover paints zinc-100 background + 1.02x scale. The lightest-weight CTA in the system.
+- **`default`** — Zinc-800 fill, white text, `font-semibold`. The primary CTA ("Solicitar diagnóstico"). Hover zinc-700, active zinc-900.
+- **`outline`** — Transparent fill, `currentColor` text, 25%-opacity `currentColor` border. The chameleon variant — adapts to any surface.
+- **`small`** — Outline at 12px / `px-3.5 py-1.5`. Dense nav surfaces.
+- **`ghost`** — Transparent, gray-700 text, hover paints gray-100 + 1.02× scale. Lightest CTA.
 
-### Navbar (`navbar.astro`)
-
-- **`navbar-pill`** — Fixed-position floating pill. At top-of-page: fully transparent, blends into hero. Once `scrollY > 16px`: surface flips to `rgba(255,255,255,0.7)` with `backdrop-filter: blur(16px)` and a 1px `rgba(255,255,255,0.4)` border, shrinking horizontally with `padding: 0.5rem`. The transition takes 300ms.
-- **`navbar-cta`** — Zinc-800 pill CTA inside the navbar, `shadow-sm → shadow-md` on hover. The page's primary conversion target.
-- **`mobile-menu-sheet`** — Drops below the navbar at < md breakpoint. White card, `{rounded.2xl}`, 12px-32px soft shadow. Open 280ms / close 220ms with `ease-out-soft`.
+(Note: the primary variant is named `default`, not `primary`.)
 
 ### Hero (`hero.astro`)
 
-- **`hero-card`** — `min-h-[80vh]` white card, `rounded-3xl`, 1px zinc-200 border, `max-w-8xl` inner. The single largest surface on the page.
-- **`dot-pattern-pointer`** — Two overlaid `background-image: radial-gradient(circle, rgba(4,120,87,0.7) 1.2px, transparent 1.6px) 18px 18px`. Base layer at 0.4 opacity; active layer at 1.0 opacity, masked by `radial-gradient(circle 260px at var(--hero-mouse-x) var(--hero-mouse-y), black, transparent)`. JS updates the two custom properties on `pointermove`, producing a soft "spotlight" that brightens the dots under the cursor. `pointer-events: none` keeps it from blocking the underlying text.
-- **`highlight-marker`** — Inline span on the word "IA" (and similar emphatic words). IBM Plex Serif italic, weight 500, emerald-200/60 background, `transform: rotate(-1deg)`, `padding: 0 6px`. The text inside skews back to upright because the span is inline-block.
-- **Hero entry animation** — Framer Motion: each headline line fades from opacity 0 + translateX(-44px) → opacity 1 + translateX(0), staggered 0.08s, 0.76s total per line. Action buttons follow 0.35s later with translateY(24px). All overridden flat by `prefers-reduced-motion`.
+- **Full-viewport, card-less.** `min-h-screen`, centered column, `max-w-5xl` inner. No border, no dot pattern.
+- **`{component.ascii-wave}`** — A `<pre data-hero-wave>` overlay. JS sizes a monospace grid (13px cells) to the card and, per `requestAnimationFrame` (`frame += 0.005`), renders a stacked **two-sine wave** (`ampA·sin(u·freqA + t) + ampB·sin(u·freqB − t·0.7)`) using a `"  ···"` density ramp. Color `{colors.wave-emerald}`, low-centered (`base = rows·0.72`), `pointer-events:none`, left/right edge-masked. Reduced-motion renders one static frame.
+- **Accent word** — single word in `text-emerald-700` (e.g. "futuro"). No serif, no swatch.
+- **Entry** — the button row animates in via CSS keyframe `hero-actions-in` (0.76s ease-out-soft, 0.35s delay, translateY 24px → 0); flattened by reduced-motion.
 
 ### About (`about.astro`)
 
-- **`about-card`** — White card, `{rounded.3xl}`, 1px zinc-200 border, max-w-4xl inner. Padding scales `px-6 → px-20`, `py-20 → py-28` — the asymmetric horizontal scaling is the editorial-magazine signature.
-- Carries `{component.dot-pattern-static}` at 0.4 opacity — same dots as hero but without the pointer mask.
+- **Full-viewport centered statement** (`min-h-[100dvh]`), `max-w-4xl`, no card, no dots.
+- **`{component.scroll-word-fill}`** — JS splits the statement into per-word `<span>`s (color inlined to `{colors.fill-dim}`), then GSAP ScrollTrigger scrubs each word to `{colors.fill-ink}` left-to-right (`start: top 85%`, `end: center center`, `scrub: 0.5`, `stagger: 1`) — the copy "comes into focus" as it passes the viewport. The word **"Sync"** fills to `{colors.fill-accent}` (emerald-700) instead of ink.
+- **Accessibility:** a `sr-only` copy carries the full sentence; the decorative word spans are `aria-hidden`. Reduced-motion renders words at final ink immediately and skips the GSAP load. The GSAP/ScrollTrigger bundle is dynamically imported only when the section nears the viewport (IntersectionObserver, 300px margin).
+- Closes with a founder credit line (zinc-500, name in zinc-700).
+
+### Offerings (`offerings.astro`)
+
+- A stack of **full-viewport (`100dvh`) panels** rendered from a typed `Step[]`, alternating `bg-white` / `bg-zinc-900` surfaces with alternating left/right text alignment (`ml-auto text-right` on the middle dark panel).
+- **`{component.offerings-panel}` pinning** — GSAP ScrollTrigger pins each panel at `top top` with `pinSpacing:false` and `anticipatePin:1`, so the next panel scrolls up and covers the pinned one (a layered, stacking reveal). The **last panel is left unpinned** so it scrolls out cleanly into Services. Reduced-motion skips pinning entirely — panels just stack and scroll.
+- The light panels carry the **`{component.ascii-wave}`** at the panel's top or bottom edge (`data-pos`), in the fainter `{colors.wave-emerald-soft}` and a gentler amplitude (`frame += 0.004`).
+- The final panel carries the primary CTA.
 
 ### Services (`services.astro`)
 
-A grid of cards sharing identical geometry but rendering one of three color themes:
+- A `md:grid-cols-3` grid of cards, **data-driven from `@features/solutions/data.ts`** — each solution's `themeKey` selects one of three skins:
+  - **`dark`** — `bg-zinc-900 text-zinc-100` (solution `diagnostico`).
+  - **`mid`** — `bg-emerald-800 text-emerald-50` (solution `desarrollo`) — strongest emerald surface.
+  - **`light`** — `bg-[#defbed] text-zinc-800` (solution `educacion`) — softest.
+- All share `rounded-3xl`, `min-h-[22rem] md:min-h-[28rem]`, `p-8 md:p-10`, and a `hover:-translate-y-1` lift.
+- **`{component.dot-pattern-aura}`** — each card has a radial dot field (14px, bottom-right) revealed through a **320px radial mask that tracks the pointer** (`--services-mouse-x/y`, rAF-throttled, resting at a per-card default position from `auraPositions`). Dot color is white-18% on dark/mid, emerald-35% on light.
+- **Card reveal:** Framer Motion `inView` (amount 0.25), opacity + translateY(24px), 0.55s, 0.09s stagger. Heading/sub/cta fade in via the same `inView` helper.
 
-- **`service-card-light`** — `#defbed` background, emerald-950 text, dot color `rgba(4,120,87,0.55)`. The "softest" card.
-- **`service-card-mid`** — Emerald-800 background, emerald-50 text, white-18% dots. The "strongest" emerald surface.
-- **`service-card-dark`** — Zinc-900 background, zinc-100 text, white-12% dots. The "quietest" dark card.
+### Featured (`featured.astro` + `featured-project.astro`)
 
-All share: `rounded-3xl`, `min-h-[22rem] md:min-h-[28rem]`, `p-8 md:p-10`. Each card's dot pattern is masked by a 320px radial gradient — similar to the hero but without pointer tracking.
+- Section heading ("Casos de estudio **destacados**", emerald accent word) over a `1 → sm:2 → lg:3` grid; the lead project spans `lg:col-span-2` (bento).
+- **`featured-project`** — an `bg-emerald-50/70` media frame (`rounded-2xl md:rounded-3xl`, `object-contain`, `h-72 md:h-96`) above a title/description block and an optional outline `Button`. No hover-transform on the card itself.
 
-Card reveal: `inView`-triggered Framer Motion, 0.55s duration, 0.09s stagger, translateY(24px).
+### Faq (`faq.astro` + `faq-item.astro`)
 
-### Workflow (`workflow.astro`)
+- Emits **FAQPage JSON-LD** (`<script type="application/ld+json">`) built from the `faqs` array.
+- Uppercase emerald-700 eyebrow ("Preguntas frecuentes") + heading, then a column of accordion items, closing with a "¿Tu duda no está aquí?" outline-CTA row over a `border-t border-zinc-200`.
+- **`faq-item`** — a native `<details>/<summary>` accordion. White card, `rounded-2xl`, 1px zinc-200 border; the `+` glyph (emerald-700) rotates 45° on open and the border tints `emerald-700/30` on hover/open. The default `::-webkit-details-marker` is hidden.
 
-- A sticky-positioned vertical timeline with a phase line on the left and content blocks on the right.
-- Scroll-coupled JS calculates each phase's `progress` based on viewport intersection; the line fills downward as phases activate.
-- Active phase color transitions over 400ms — color shift is the only visual confirmation of step completion.
-- Phase title typography is `{typography.phase-h3}` (18 → 20px, weight 600).
+### Navbar (`shared/components/layout/navbar.astro`)
 
-### Project Cards (`projects/components/project-card.astro`)
-
-- **`project-card`** — `bg-emerald-50` fill, `{rounded.2xl}`, height `h-64 sm:h-80 md:h-90`.
-- Hover: `scale(1.03) translateY(-0.5rem)`, transition 220ms `ease-out-soft`.
-- The only card in the system that uses a hover-transform (not just a color change).
-
-### Contact (`contact/components/contact.astro`)
-
-- **`contact-form-card`** — Zinc-900 card, `{rounded.3xl}`, 1px zinc-800 border, padding 24-28px. Carries `{component.dot-pattern-dark}` masked to bottom-right.
-- **`text-input`** — Zinc-800 fill, white text, `{rounded.lg}` 12px radius, 1px zinc-700 border. On focus: 2px emerald-500 ring + emerald-500 border swap. No glow, no shadow.
-- Eyebrow labels on the dark form surface render in `{colors.emerald-300}` at `{typography.eyebrow}` spec.
+- **`navbar-pill`** — fixed `top-1rem` floating pill. Transparent at the top of the page; once scrolled, `rgba(255,255,255,0.7)` + `backdrop-filter: blur(16px)` + 1px white/40 border, shrinking horizontally. 300ms transition. Houses a zinc-800 CTA and (at `< md`) a hamburger that drops a white `rounded-2xl` sheet.
 
 ### Footer (`shared/components/layout/footer.astro`)
 
-- **`footer`** — Zinc-900 surface, zinc-300 default text, `{rounded.3xl}` top corners, 1px zinc-800 border.
-- Carries `{component.dot-pattern-dark}` — white dots at rgba(255,255,255,0.18) on 14px spacing, masked by a bottom-right ellipse gradient. Tighter spacing than the hero's 18px because the footer is a smaller surface and benefits from the denser texture.
+- **`footer`** — zinc-900 surface, zinc-300 text, `rounded-2xl md:rounded-3xl`, 1px zinc-800 border. Carries the static **`{component.dot-pattern-dark}`** (white dots, corner-masked). Social links are `w-9 h-9` pill buttons (`border-white/15 bg-white/5`).
 
-### Prose Block (`.case-study-prose`, defined in `global.css`)
+### Interior routes (not on home)
 
-Long-form editorial styling for case-study pages.
+- **Solutions** (`pages/soluciones/[slug].astro`, data in `@features/solutions/data.ts`), **Contact** (`@features/contact` — the zinc-900 form card + `text-input`), and **Workflow** (`workflow.astro`) all run on the same Manrope + emerald-accent system as the home page. Inline emphasis is `text-emerald-700` (via `highlight-badge.astro`); phase-number badges are plain Manrope semibold emerald, not serif.
 
-- Body: `#3f3f46` (zinc-700), 18px, line-height 1.8.
-- Headings: `{colors.brand-ink}` (#022c22), weight 700, `-0.01em` tracking.
-- Blockquote: 4px solid `{colors.emerald-500}` left border, 20px text, zinc-800.
-- Inline links: `{colors.brand-900}` text with `rgba(16,185,129,0.45)` underline at 4px offset; underline tightens to full opacity on hover (200ms transition).
-- Images: `{rounded.xl}` (1rem / 16px) corners, soft `0 10px 30px -15px rgba(0,0,0,0.1)` shadow, 2.5em vertical margin.
-- Tables: 1px `rgba(6,78,59,0.15)` border, brand-900 column-head text uppercase 0.05em, zebra-striped via `rgba(244,244,245,0.3)` even rows. Collapses to horizontal-scroll on mobile.
+### Prose Block (`.case-study-prose`, in `global.css`)
+
+Long-form editorial styling for case-study pages — unchanged: body `#3f3f46` 18px/1.8, headings `{colors.brand-ink}` weight 700, blockquote 4px `{colors.emerald-500}` border, links `{colors.brand-900}` with emerald underline, images `rounded-xl` + soft shadow, zebra-striped tables collapsing to horizontal scroll on mobile.
 
 ## Responsive Behavior
 
 | Name | Width | Key Changes |
 |---|---|---|
-| Mobile | < 640px | Container padding 20px. Hero h1 hits clamp floor at 30px. Service grid 1-col. Navbar collapses to logo + hamburger; mobile menu sheet drops below pill. Project cards 1-up at `h-64`. Workflow stays single-column (already is). |
-| Small | 640–767px | Container padding 24px. Hero h1 fluid at ~6vw. Some cards switch to 2-col. Card project height grows to `h-80`. |
-| Medium | 768–1023px | Container padding 32px. Service grid 2-col. About horizontal padding jumps to `px-14`. Hero CTA row drops translation delay tighter. |
-| Large | 1024–1279px | Container padding 64px. About padding `px-20 py-28`. Project cards reach `h-90`. Workflow gets full sticky-rail behavior. |
-| XL | ≥ 1280px | Container padding 96px. Hero h1 caps at 60px via clamp. Inner content widths bounded by per-section `max-w-*`. |
+| Mobile | < 640px | Container `padding-inline: 1.25rem`, `width:auto`. Hero h1 at `text-4xl`. Offerings panels stay full-viewport, text centered. Services 1-col. Featured 1-col. Faq full-width. |
+| Small | 640–767px | Container padding 1.5rem. Hero `text-5xl`. Featured → 2-col. |
+| Medium | 768–1023px | Container flips to `95% / max-1800px`. Hero `text-6xl`. Services → 3-col. Offerings text alignment (left/right) takes effect. |
+| Large | ≥ 1024px | Hero `text-7xl`. Featured → 3-col with bento spans. Full pin/scroll-fill behavior. |
+| XL | ≥ 1280px | Inner widths bounded by per-section `max-w-*`; container caps at 1800px. |
 
 ### Touch Targets
-- Buttons: `px-5 py-2.5` (resolves to ~44px tall) — at WCAG AA threshold.
-- Small button variant: `px-3.5 py-1.5` (~28px tall) — below AA; only used inline inside the navbar where density is needed.
-- Form inputs: 12px-14px padding → 44px+ field height.
-- Mobile menu items: stack at sheet padding ~16px row gap.
+- Buttons `px-5 py-2.5` (~44px) — at WCAG AA. Small variant `px-3.5 py-1.5` (~28px) — nav-only, below AA.
+- Faq `<summary>` rows are full-width tappable.
 
 ### Collapsing Strategy
-- Navbar product links collapse into the hamburger sheet at `< md` (768px).
-- Service grid drops from 2-col to 1-col below `md`.
-- About card horizontal padding scales `px-6 → px-10 → px-14 → px-20` across 4 breakpoints — the most granular responsive treatment in the system.
-- Tables inside case-study prose convert to horizontal scroll below 768px.
-- All typography uses `clamp()` rather than hard breakpoints — sizes scale fluidly with viewport width.
+- Navbar links collapse into the hamburger sheet at `< md`.
+- Services grid 3-col → 1-col below `md`.
+- Featured 3 → 2 → 1 col.
+- **Reduced motion disables the scroll machinery, not just transitions:** offerings pinning is skipped (panels stack normally) and the about word-fill renders at final color with no GSAP — the page degrades to a plain stacked document.
 
 ## Do's and Don'ts
 
 **Do:**
-- Use the `<Button>` component for every CTA — its four variants cover all surfaces without theme overrides.
-- Wrap emphatic single words in `<span class="font-[IBM_Plex_Serif] italic bg-emerald-200/60 inline-block -rotate-1 px-1.5">…</span>` to invoke the marker highlight. Reserve it for one or two words per page maximum.
-- Apply the dot pattern via a `pointer-events-none` overlay layer — never on the surface itself, to keep text interactive.
-- Pair every dark surface with a per-surface eyebrow color (`emerald-300` on zinc-900, `zinc-500` on white).
-- Honor `prefers-reduced-motion`: all transforms/opacity transitions flatten to 0.01ms via the global media query in `global.css`.
+- Use the `<Button>` component for every CTA — its four variants cover all surfaces. The primary is `variant="default"`.
+- Make inline emphasis a plain `text-emerald-700` color accent on a single word — identical on home and interior. Use `highlight-badge.astro` if you want a named component.
+- Use the ASCII wave sparingly: at most one per page, behind the hero. Never stack it on mid-page cards or content blocks.
+- Apply wave / dot decoration as a `pointer-events-none` overlay layer, never on the surface itself.
+- Gate every scroll/animation behind IntersectionObserver + dynamic import (as hero/about/offerings/services do) so GSAP/Framer stay out of the initial load.
+- Honor `prefers-reduced-motion`: scroll-coupled effects must have a static fallback (the about/offerings scripts already early-return), and the global media query flattens transitions to 0.01ms.
 
 **Don't:**
-- Don't introduce a third typeface — the Manrope + IBM-Plex-Serif-as-highlight pairing is intentional.
-- Don't use the IBM Plex Serif italic on full sentences or paragraphs — it's a single-word punctuation device.
-- Don't apply hard corners (`rounded-none`) outside of utility decorations — every UI element in the system is rounded.
-- Don't add a tinted shadow on light surfaces; the dot pattern + 1px hairline carry the depth.
-- Don't use pure black (`#000`) for text or borders; zinc-900 / zinc-200 are the bounds.
-- Don't introduce new accent colors — the brand voltage is emerald, full stop. Any new state colors should sit inside the existing zinc/emerald gradient.
+- Don't reintroduce a second font or a marker swatch — emphasis is color only (`text-emerald-700`), one word at a time.
+- Don't abuse the ASCII wave — one per page behind the hero, never on every section.
+- Don't add hard corners (`rounded-none`) on UI — every element is rounded (`2xl/3xl` panels, `full` buttons, `lg` inputs).
+- Don't add tinted shadows on light surfaces; contrast + hairline + decoration carry the depth.
+- Don't use pure black (`#000`); zinc-900 / zinc-200 are the bounds.
+- Don't introduce a new accent color — the brand voltage is emerald, full stop.
+- Don't ship a scroll-coupled effect without a reduced-motion path — these now drive whole sections, so a missing fallback breaks the page, not just a flourish.
 
 ## Agent Prompt Guide
 
 ### Quick Color Reference
-- Page canvas: `bg-white` (`{colors.canvas}`)
-- Dark canvas: `bg-zinc-900` (`{colors.zinc-900}`)
+- Page canvas: `bg-white` · Dark surface: `bg-zinc-900`
 - Default text: `text-zinc-800` light / `text-zinc-100` dark
-- Subtitle text: `text-zinc-600` light / `text-zinc-400` dark
-- Eyebrow text: `text-zinc-500` light / `text-emerald-300` dark
-- Border: `border-zinc-200` light / `border-zinc-800` dark
+- Muted text: `text-zinc-600` light / `text-zinc-300` dark
+- Home lead label: `text-sm md:text-base text-zinc-500` (sentence-case, no uppercase)
+- FAQ / interior eyebrow: `text-xs tracking-[0.2em] uppercase font-semibold text-emerald-700`
+- Accent word (home): `text-emerald-700`
 - Focus ring: `focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2`
-- Brand emerald: `#1c5534` (Tailwind alias `sync` or use `text-emerald-700/800/900`)
-- Highlight marker bg: `bg-emerald-200/60`
-- Dot fill on light: `radial-gradient(circle, rgba(4,120,87,0.7) 1.2px, transparent 1.6px) / 18px 18px`
-- Dot fill on dark: `radial-gradient(circle, rgba(255,255,255,0.18) 1.2px, transparent 1.6px) / 14px 14px`
+- Brand emerald: `#1c5534` (Tailwind alias `sync` / `text-emerald-700/800`)
+- Hero wave color: `rgba(4,120,87,0.45)` · Offerings wave: `rgba(4,120,87,0.28)`
+- Service dot on light: `rgba(4,120,87,0.35)` · on dark/mid: `rgba(255,255,255,0.18)`
+- Inline emphasis: `text-emerald-700` on one word (color only — no swatch, no serif)
 
 ### Ready-to-Use Prompts
-- **"Add a new section card matching the about style"** → `<section class="rounded-2xl md:rounded-3xl border border-zinc-200 bg-white px-6 sm:px-10 md:px-14 lg:px-20 py-20 md:py-28 max-w-4xl mx-auto">`
-- **"Add an emphatic word inline"** → `<span class="font-[IBM_Plex_Serif] italic bg-emerald-200/60 inline-block -rotate-1 px-1.5">IA</span>`
-- **"New primary CTA"** → `<Button variant="default" href="/contacto">Hablemos</Button>` (resolves to zinc-800 pill with white text)
-- **"New ghost link inside the navbar"** → `<Button variant="small">Trabajos</Button>`
-- **"New dark surface with dot decoration"** → `<div class="relative rounded-3xl bg-zinc-900 p-8 md:p-10 overflow-hidden"><div class="absolute inset-0 pointer-events-none" style="background-image: radial-gradient(circle, rgba(255,255,255,0.18) 1.2px, transparent 1.6px); background-size: 14px 14px; mask-image: radial-gradient(ellipse at bottom right, black, transparent 70%);"></div>…</div>`
-- **"New service card (light theme)"** → `<article class="rounded-3xl bg-[#defbed] text-emerald-950 p-8 md:p-10 min-h-[22rem] md:min-h-[28rem]">`
-- **"New eyebrow label"** → `<p class="text-xs tracking-[0.2em] uppercase font-medium text-zinc-500">Servicios</p>`
+- **"New primary CTA"** → `<Button link="/contacto">Solicitar diagnóstico</Button>` (zinc-800 pill, white text)
+- **"New outline CTA on any surface"** → `<Button variant="outline" link="/...">Ver detalle</Button>` (inherits surface color)
+- **"New home section lead label"** → `<span class="text-sm md:text-base text-zinc-500">¿Por qué existimos?</span>`
+- **"Home headline with accent word"** → `<h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-zinc-800 text-balance">Diagnosticamos, construimos y <span class="text-emerald-700">entregamos</span>.</h2>`
+- **"New service-style card (light theme)"** → `<article class="relative isolate overflow-hidden rounded-3xl bg-[#defbed] text-zinc-800 p-8 md:p-10 min-h-[22rem] md:min-h-[28rem]">…</article>`
+- **"New faq item"** → wrap content in `<FaqItem question="…">…</FaqItem>` (`shared/components/ui/faq-item.astro`)
+- **"New dark accent panel with static dots"** → `<div class="relative overflow-hidden rounded-3xl bg-zinc-900 p-8 md:p-10"><div class="absolute inset-0 pointer-events-none" style="background-image:radial-gradient(circle,rgba(255,255,255,0.18) 1.2px,transparent 1.6px);background-size:14px 14px;mask-image:radial-gradient(ellipse at bottom right,black,transparent 70%)"></div>…</div>`
+- **"Inline emphasis word"** → `<span class="text-emerald-700">verdad</span>` (or `<HighlightBadge>verdad</HighlightBadge>`) — color accent only, inherits heading weight.
 
 ## Known Gaps
 
-- **Error / validation states for forms** are not styled — the contact form relies on browser-default validation. No dedicated error color or helper-text component exists.
-- **Loading / skeleton states** are not defined anywhere in the source.
-- **Dark-mode toggle:** the system uses dark surfaces strategically (services, contact, footer) but has no system-wide light/dark mode toggle. The page is single-mode.
-- **Focus ring on the small button variant** is documented but its 28px height drops below WCAG AA minimum — not yet addressed in code.
-- **Disabled button styling** is implicit (default browser opacity reduction) — no explicit disabled token exists in the button component.
-- **Toast / notification surfaces** are not defined; the only feedback surface is the contact form's submit state.
-- **The `--hero-mouse-x` / `--hero-mouse-y` pointer system** is hero-scoped; about/services/contact/footer use static (non-pointer-tracked) dot variants. If applied site-wide it would need a shared JS controller.
+- **Form error / validation states** are unstyled (contact form is on the interior `/contacto` route; relies on browser-default validation).
+- **Loading / skeleton states** are undefined.
+- **No site-wide light/dark toggle** — dark surfaces are used compositionally (offerings, dark service card, footer); the page is single-mode.
+- **Small-button focus target** (~28px) drops below WCAG AA — nav-only.
+- **Disabled button styling** is implicit (browser opacity) — no explicit token.
+- **Scroll-coupled effects depend on JS** (GSAP). Reduced-motion and IntersectionObserver fallbacks exist, but with JS disabled the offerings panels simply stack and the about copy renders dim-but-readable (sr-only sentence still present).
+- **The ASCII wave and pointer-aura are pointer/JS-driven per surface** — there is no shared controller; each section initializes its own. Applying either to a new surface means porting its script.

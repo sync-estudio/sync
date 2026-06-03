@@ -1,0 +1,278 @@
+---
+import "@app/styles/global.css";
+import Button from "@shared/components/ui/button.astro";
+
+// Copy — voz "del lado nuestro". Editar libremente.
+type Step = {
+    id: string;
+    title: string;
+    desc: string;
+    surface: string;
+    text: string;
+    muted: string;
+    cta?: boolean;
+};
+
+const steps: Step[] = [
+    {
+        id: "platforms",
+        title: "Software a medida",
+        desc: "Sistemas internos que se ajustan a cómo ya trabajas, no al revés. Tu equipo los opera; el mantenimiento queda de nuestro lado.",
+        surface: "bg-white",
+        text: "text-zinc-900",
+        muted: "text-zinc-600",
+    },
+    {
+        id: "ai",
+        title: "Agentes de IA",
+        desc: "Le quitamos a tu equipo el trabajo repetitivo. Hacen la tarea, te avisan cuando algo necesita tu decisión, y siempre ves qué están haciendo y por qué.",
+        surface: "bg-zinc-900",
+        text: "text-white",
+        muted: "text-zinc-300",
+    },
+    {
+        id: "mvp",
+        title: "MVP",
+        desc: "Construimos lo justo para salir al mundo y aprender de gente real. Sin gastar de más: validamos rápido y, desde ahí, crecemos contigo.",
+        surface: "bg-white",
+        text: "text-zinc-900",
+        muted: "text-zinc-600",
+        cta: true,
+    },
+];
+---
+
+<section id="servicios" data-offer class="relative">
+    {
+        steps.map((step) => (
+            <section
+                data-offer-panel
+                class={`offer-panel relative h-[100dvh] w-full overflow-hidden flex items-center ${step.surface} ${step.text}`}
+            >
+                {step.id === "platforms" && (
+                    <pre
+                        data-offer-wave
+                        data-pos="bottom"
+                        class="offer-wave"
+                        aria-hidden="true"
+                    />
+                )}
+                {step.id === "mvp" && (
+                    <pre
+                        data-offer-wave
+                        data-pos="top"
+                        class="offer-wave"
+                        aria-hidden="true"
+                    />
+                )}
+                <div class="container mx-auto w-full relative z-10">
+                    <div class={`max-w-3xl ${step.id === "ai" ? "ml-auto text-right" : ""}`}>
+                        {step.id === "platforms" && (
+                            <span class={`block mb-6 md:mb-8 text-sm md:text-base ${step.muted}`}>
+                                ¿Qué podemos construir?
+                            </span>
+                        )}
+                        <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05]">
+                            {step.title}
+                        </h2>
+                        <p class={`mt-5 md:mt-6 text-lg md:text-xl leading-relaxed ${step.muted}`}>
+                            {step.desc}
+                        </p>
+                        {step.cta && (
+                            <div class="mt-8 md:mt-10">
+                                <Button link="/contacto">Solicitar diagnóstico</Button>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </section>
+        ))
+    }
+</section>
+
+<style>
+    /* Subtle hero-wave variant — sits at the bottom of the first panel. */
+    .offer-wave {
+        position: absolute;
+        inset: 0;
+        margin: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        font-weight: 700;
+        color: rgba(4, 120, 87, 0.28);
+        white-space: pre;
+        user-select: none;
+        line-height: 1;
+        letter-spacing: 0.4em;
+        mask-image: linear-gradient(
+            90deg,
+            transparent 0%,
+            #000 3%,
+            #000 97%,
+            transparent 100%
+        );
+        -webkit-mask-image: linear-gradient(
+            90deg,
+            transparent 0%,
+            #000 3%,
+            #000 97%,
+            transparent 100%
+        );
+    }
+</style>
+
+<script>
+    async function init() {
+        const section = document.querySelector<HTMLElement>("[data-offer]");
+        if (!section) return;
+
+        // Reduced motion: no pinning, panels just stack and scroll normally.
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+            return;
+
+        // Defer the GSAP/ScrollTrigger bundle until the section is near the
+        // viewport — keeps it out of the initial page load.
+        const { default: gsap } = await import("gsap");
+        const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+        gsap.registerPlugin(ScrollTrigger);
+
+        const panels = gsap.utils.toArray<HTMLElement>(
+            section.querySelectorAll("[data-offer-panel]"),
+        );
+        if (panels.length === 0) return;
+
+        // Layered pinning — each panel pins at the top so the next one
+        // scrolls up and covers it. pinSpacing:false makes them stack
+        // instead of pushing each other down. The LAST panel is left
+        // unpinned so it scrolls out cleanly into the following section
+        // instead of staying fixed and overlapping it.
+        panels.slice(0, -1).forEach((panel) => {
+            ScrollTrigger.create({
+                trigger: panel,
+                start: "top top",
+                pin: true,
+                pinSpacing: false,
+                // Engage the pin slightly early (by scroll velocity) so it
+                // doesn't catch a frame late and snap — kills the start jump.
+                anticipatePin: 1,
+            });
+        });
+    }
+
+    const offerSection = document.querySelector<HTMLElement>("[data-offer]");
+    if (offerSection) {
+        const io = new IntersectionObserver(
+            (entries, obs) => {
+                if (entries.some((e) => e.isIntersecting)) {
+                    obs.disconnect();
+                    init();
+                }
+            },
+            // Wider margin than about: pins must exist before the panel
+            // reaches the top of the viewport.
+            { rootMargin: "600px" },
+        );
+        io.observe(offerSection);
+    } else {
+        init();
+    }
+
+    // Subtle animated wave at the bottom of the first panel — a calmer
+    // variant of the hero wave (lower, gentler amplitude, fainter).
+    function initWave(el: HTMLElement) {
+        const card = el.parentElement as HTMLElement;
+        const reduce = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        const RAMP = "  ···";
+        const FONT_PX = 13;
+
+        let cols = 0;
+        let rows = 0;
+        let frame = 0;
+        let base = 0;
+        let ampA = 0;
+        let ampB = 0;
+        let thickness = 1;
+        let freqA = 7;
+        let freqB = 13;
+
+        el.style.fontSize = FONT_PX + "px";
+
+        function resize() {
+            const rect = card.getBoundingClientRect();
+            cols = Math.max(1, Math.floor(rect.width / FONT_PX));
+            rows = Math.max(1, Math.floor(rect.height / FONT_PX));
+
+            const cycles = Math.max(1, rect.width / 640);
+            freqA = cycles * Math.PI * 2;
+            freqB = freqA * 1.85;
+
+            // Place at the top or bottom edge of the panel per data-pos.
+            base = el.dataset.pos === "top" ? rows * 0.1 : rows * 0.9;
+            // Gentler than the hero so it stays a quiet texture.
+            ampA = Math.min(rows * 0.16, cols * 0.09);
+            ampB = ampA * 0.5;
+            thickness = Math.max(2, rows * 0.1);
+        }
+
+        function render(t: number) {
+            const out: string[] = [];
+            for (let y = 0; y < rows; y++) {
+                let line = "";
+                for (let x = 0; x < cols; x++) {
+                    const u = x / cols;
+                    const center =
+                        base +
+                        ampA * Math.sin(u * freqA + t) +
+                        ampB * Math.sin(u * freqB - t * 0.7);
+                    const d = Math.abs(y - center) / thickness;
+                    const intensity = Math.exp(-d * d * 1.4);
+                    if (intensity <= 0.06) {
+                        line += " ";
+                    } else {
+                        const idx = Math.min(
+                            RAMP.length - 1,
+                            Math.round(intensity * (RAMP.length - 1)),
+                        );
+                        line += RAMP[idx];
+                    }
+                }
+                out.push(line);
+            }
+            el.textContent = out.join("\n");
+        }
+
+        function loop() {
+            frame += 0.004;
+            render(frame);
+            requestAnimationFrame(loop);
+        }
+
+        let lastW = -1;
+        function onResize() {
+            const w = Math.round(card.getBoundingClientRect().width);
+            if (w === lastW) return;
+            lastW = w;
+            resize();
+            if (reduce) render(0);
+        }
+
+        onResize();
+        window.addEventListener("resize", onResize);
+        window.addEventListener("orientationchange", onResize);
+
+        if (reduce) {
+            render(0);
+        } else {
+            requestAnimationFrame(loop);
+        }
+    }
+
+    document
+        .querySelectorAll<HTMLElement>("[data-offer-wave]")
+        .forEach(initWave);
+</script>

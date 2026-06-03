@@ -4,28 +4,40 @@ import Button from "@shared/components/ui/button.astro";
 interface Props {
     imageSrc: string;
     imageAlt: string;
-    projectName: string;
+    title: string;
     description: string;
     imageClasses?: string;
     link?: string;
+    linkLabel?: string;
+    spanClass?: string;
 }
 
 const {
     imageSrc,
     imageAlt,
-    projectName,
+    title,
     description,
     imageClasses = "",
     link,
+    linkLabel = "Ver caso de estudio",
+    spanClass = "",
 } = Astro.props;
 ---
 
-<article class="flex flex-col gap-4 text-start text-zinc-600">
+<article
+    class:list={[
+        "flex flex-col h-full text-start text-zinc-600",
+        spanClass,
+    ]}
+>
     <div
-        class="bg-emerald-50/70 rounded-2xl flex items-center justify-center p-8 md:p-12 lg:p-16 overflow-hidden h-[320px] sm:h-[420px] md:h-[520px] lg:h-[600px]"
+        class="bg-emerald-50/70 rounded-2xl md:rounded-3xl flex items-center justify-center p-4 md:p-6 overflow-hidden h-72 md:h-96"
     >
         <img
-            class={`max-h-full w-auto max-w-full object-contain ${imageClasses}`}
+            class:list={[
+                "max-h-full w-auto max-w-full object-contain",
+                imageClasses,
+            ]}
             loading="lazy"
             decoding="async"
             src={imageSrc}
@@ -33,15 +45,24 @@ const {
         />
     </div>
 
-    <div>
-        <p class="text-zinc-500">{projectName}</p>
-        <h3 class="font-semibold text-lg md:text-xl">{description}</h3>
-    </div>
-
-    {link && (
-        <div>
-            <Button link={link} variant="outline">Leer más</Button>
+    <div class="flex flex-col gap-4 pt-5 flex-1">
+        <div class="flex flex-col gap-2">
+            <h3 class="font-semibold text-xl md:text-2xl leading-tight tracking-tight text-zinc-800">
+                {title}
+            </h3>
+            <p class="text-zinc-500 leading-relaxed text-balance">
+                {description}
+            </p>
         </div>
-    )}
-</article>
 
+        {
+            link && (
+                <div class="mt-auto pt-1">
+                    <Button link={link} variant="outline">
+                        {linkLabel}
+                    </Button>
+                </div>
+            )
+        }
+    </div>
+</article>

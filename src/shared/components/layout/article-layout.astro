@@ -1,4 +1,6 @@
 ---
+import DotBackdrop from "@shared/components/ui/dot-backdrop.astro";
+
 interface Props {
     maxWidth?: "2xl" | "4xl";
 }
@@ -6,9 +8,12 @@ interface Props {
 const { maxWidth = "4xl" } = Astro.props;
 
 const widthClass = maxWidth === "2xl" ? "max-w-2xl" : "max-w-4xl";
+const colHalf = maxWidth === "2xl" ? "21rem" : "28rem";
 ---
 
-<article class="min-h-screen container mx-auto pt-32 pb-16 md:pt-40 md:pb-24">
+<DotBackdrop colHalf={colHalf} />
+
+<article class="relative min-h-screen container mx-auto pt-32 pb-16 md:pt-40 md:pb-24">
     <div class={`mx-auto w-full ${widthClass}`}>
         <slot />
     </div>

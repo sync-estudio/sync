@@ -30,50 +30,81 @@ const parts = hasHighlight ? title.split(highlight as string) : [title];
 ---
 
 <header
-    class="mb-16 border-b border-zinc-200 pb-12 flex flex-col items-center text-center gap-6 max-w-3xl mx-auto"
+    class="mb-16 md:mb-20 border-b border-zinc-200 pt-2 pb-14 md:pb-20"
 >
-    <EyebrowLabel>{label}</EyebrowLabel>
-
-    <h1
-        class="text-balance font-semibold leading-[1.05] tracking-[-0.02em] text-zinc-900"
-        style="font-size: clamp(30px, 6vw, 60px);"
+    <div
+        class="relative z-10 flex flex-col items-center text-center gap-6 max-w-3xl mx-auto"
     >
+        <div data-reveal>
+            <EyebrowLabel>{label}</EyebrowLabel>
+        </div>
+
+        <h1
+            data-reveal
+            data-reveal-delay="60"
+            class="text-balance font-bold leading-[1.05] tracking-tight text-zinc-900 text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
+        >
+            {
+                hasHighlight ? (
+                    <>
+                        {parts[0]}
+                        <HighlightBadge>{highlight}</HighlightBadge>
+                        {parts[1]}
+                    </>
+                ) : (
+                    title
+                )
+            }
+        </h1>
+
         {
-            hasHighlight ? (
-                <>
-                    {parts[0]}
-                    <HighlightBadge>{highlight}</HighlightBadge>
-                    {parts[1]}
-                </>
-            ) : (
-                title
+            subtitle && (
+                <p
+                    data-reveal
+                    data-reveal-delay="120"
+                    class="text-lg md:text-xl leading-relaxed text-zinc-600 max-w-2xl"
+                >
+                    {subtitle}
+                </p>
             )
         }
-    </h1>
 
-    {
-        subtitle && (
-            <p class="text-lg md:text-xl leading-relaxed text-zinc-600 max-w-2xl">
-                {subtitle}
-            </p>
-        )
-    }
+        {
+            helper && (
+                <span
+                    data-reveal
+                    data-reveal-delay="160"
+                    class="text-sm text-zinc-500"
+                >
+                    {helper}
+                </span>
+            )
+        }
 
-    {helper && <span class="text-sm text-zinc-500">{helper}</span>}
+        {
+            cta && (
+                <div
+                    data-reveal
+                    data-reveal-delay="200"
+                    class="mt-2 flex flex-wrap items-center justify-center gap-3"
+                >
+                    <Button variant="default" link={cta.href}>
+                        {cta.label}
+                    </Button>
+                </div>
+            )
+        }
 
-    {
-        cta && (
-            <div class="mt-2 flex flex-wrap items-center justify-center gap-3">
-                <Button variant="default" link={cta.href}>
-                    {cta.label}
-                </Button>
-            </div>
-        )
-    }
-
-    {
-        timing && timingPosition === "bottom" && (
-            <span class="text-sm text-zinc-500">{timing}</span>
-        )
-    }
+        {
+            timing && timingPosition === "bottom" && (
+                <span
+                    data-reveal
+                    data-reveal-delay="240"
+                    class="text-sm text-zinc-500"
+                >
+                    {timing}
+                </span>
+            )
+        }
+    </div>
 </header>
