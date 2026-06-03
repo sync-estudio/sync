@@ -1,42 +1,29 @@
 ---
 import "@app/styles/global.css";
 import Button from "@shared/components/ui/button.astro";
-import PhoneMockup from "./phone-mockup.astro";
-import AgentTerminal from "./agent-terminal.astro";
-import CustomPanel from "./custom-panel.astro";
 
-// Placeholder copy + media — voz "del lado nuestro". Editar libremente.
-// Para media real: reemplazar el gradiente por <img>/<video>.
+// Copy — voz "del lado nuestro". Editar libremente.
 type Step = {
     id: string;
     title: string;
     desc: string;
-    surface: string;
-    dots: string;
 };
 
-// Superficies como las cards de Soluciones: color sólido + patrón de puntos.
 const steps: Step[] = [
     {
         id: "platforms",
         title: "Software a medida",
         desc: "Sistemas internos que se ajustan a cómo ya trabajas, no al revés. Tu equipo los opera; el mantenimiento queda de nuestro lado.",
-        surface: "bg-[#defbed]",
-        dots: "rgba(4,120,87,0.35)",
     },
     {
         id: "ai",
         title: "Agentes de IA",
         desc: "Le quitamos a tu equipo el trabajo repetitivo. Hacen la tarea, te avisan cuando algo necesita tu decisión, y siempre ves qué están haciendo y por qué.",
-        surface: "bg-emerald-800",
-        dots: "rgba(255,255,255,0.18)",
     },
     {
         id: "mvp",
         title: "MVP",
         desc: "Construimos lo justo para salir al mundo y aprender de gente real. Sin gastar de más: validamos rápido y, desde ahí, crecemos contigo.",
-        surface: "bg-zinc-900",
-        dots: "rgba(255,255,255,0.18)",
     },
 ];
 ---
@@ -52,44 +39,16 @@ const steps: Step[] = [
         data-offer-sticky
         class="sticky top-0 h-[100dvh] flex items-center overflow-hidden"
     >
-        <div class="container mx-auto w-full">
-            <div
-                class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center"
-            >
-                {/* Media — pinned, crossfades per step */}
-                <div class="relative aspect-square w-full max-w-xl rounded-3xl overflow-hidden">
-                    {
-                        steps.map((step, i) => (
-                            <div
-                                data-step-media
-                                data-index={i}
-                                data-active={i === 0 ? "true" : "false"}
-                                style={`--offer-dot-color: ${step.dots};`}
-                                class={`step-media absolute inset-0 ${step.surface}`}
-                            >
-                                <div class="offer-dots" aria-hidden="true" />
-                                {step.id === "mvp" && (
-                                    <div class="absolute inset-0 flex items-center justify-center p-6 md:p-10">
-                                        <PhoneMockup />
-                                    </div>
-                                )}
-                                {step.id === "ai" && (
-                                    <div class="absolute inset-0 flex items-center justify-center p-6 md:p-10">
-                                        <AgentTerminal />
-                                    </div>
-                                )}
-                                {step.id === "platforms" && (
-                                    <div class="absolute inset-0 flex items-center justify-center p-6 md:p-10">
-                                        <CustomPanel />
-                                    </div>
-                                )}
-                            </div>
-                        ))
-                    }
-                </div>
-
+        <div class="offer-dots" aria-hidden="true"></div>
+        <div class="container mx-auto w-full relative z-10">
+            <div class="mx-auto max-w-5xl">
+                <h2
+                    class="mb-10 md:mb-14 text-sm md:text-base text-zinc-500"
+                >
+                    ¿Qué podemos construir?
+                </h2>
                 {/* Steps list — active goes solid, reveals desc */}
-                <ol class="flex flex-col gap-5 md:gap-6">
+                <ol class="flex flex-col gap-6 md:gap-8">
                     {
                         steps.map((step, i) => (
                             <li>
@@ -100,10 +59,10 @@ const steps: Step[] = [
                                     data-active={i === 0 ? "true" : "false"}
                                     class="step-item group block w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 rounded-lg"
                                 >
-                                    <span class="step-title block text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight">
+                                    <span class="step-title block text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight">
                                         {step.title}
                                     </span>
-                                    <span class="step-desc block text-base md:text-lg text-zinc-600 leading-relaxed max-w-md">
+                                    <span class="step-desc block text-lg md:text-xl text-zinc-600 leading-relaxed max-w-3xl">
                                         {step.desc}
                                     </span>
                                 </button>
@@ -111,7 +70,7 @@ const steps: Step[] = [
                         ))
                     }
 
-                    <li class="mt-2">
+                    <li class="mt-4">
                         <Button link="/contacto">Solicitar diagnóstico</Button>
                     </li>
                 </ol>
@@ -121,15 +80,6 @@ const steps: Step[] = [
 </section>
 
 <style>
-    .step-media {
-        opacity: 0;
-        transition:
-            opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-            transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-        transform: scale(1.04);
-    }
-
-    /* Patrón de puntos como las cards de Soluciones (estático, esquina inf-der). */
     .offer-dots {
         position: absolute;
         inset: 0;
@@ -137,27 +87,38 @@ const steps: Step[] = [
         z-index: 0;
         background-image: radial-gradient(
             circle,
-            var(--offer-dot-color) 1.2px,
-            transparent 1.6px
+            rgba(4, 120, 87, 0.7) 0.9px,
+            transparent 1.2px
         );
-        background-size: 14px 14px;
-        background-position: bottom right;
-        mask-image: radial-gradient(
-            circle 320px at 100% 100%,
-            #000 0%,
-            rgba(0, 0, 0, 0.2) 70%,
+        background-size: 13px 13px;
+        opacity: 0.4;
+        /* Soft top/bottom edges so the texture blends into neighbor
+           sections instead of cutting hard at the boundary. */
+        mask-image: linear-gradient(
+            180deg,
+            transparent 0%,
+            #000 18%,
+            #000 82%,
             transparent 100%
         );
-        -webkit-mask-image: radial-gradient(
-            circle 320px at 100% 100%,
-            #000 0%,
-            rgba(0, 0, 0, 0.2) 70%,
+        -webkit-mask-image: linear-gradient(
+            180deg,
+            transparent 0%,
+            #000 18%,
+            #000 82%,
             transparent 100%
         );
     }
-    .step-media[data-active="true"] {
-        opacity: 1;
-        transform: scale(1);
+
+    @media (min-width: 640px) {
+        .offer-dots {
+            background-image: radial-gradient(
+                circle,
+                rgba(4, 120, 87, 0.7) 1.2px,
+                transparent 1.6px
+            );
+            background-size: 18px 18px;
+        }
     }
 
     .step-title {
@@ -185,10 +146,6 @@ const steps: Step[] = [
     }
 
     @media (prefers-reduced-motion: reduce) {
-        .step-media {
-            transition: opacity 0.01ms;
-            transform: none;
-        }
         .step-desc,
         .step-title {
             transition: none;
@@ -203,9 +160,6 @@ const steps: Step[] = [
         const count = Number(section.dataset.stepCount ?? "0");
         const sticky =
             section.querySelector<HTMLElement>("[data-offer-sticky]");
-        const medias = Array.from(
-            section.querySelectorAll<HTMLElement>("[data-step-media]"),
-        );
         const items = Array.from(
             section.querySelectorAll<HTMLElement>("[data-step-item]"),
         );
@@ -217,12 +171,6 @@ const steps: Step[] = [
             const next = Math.max(0, Math.min(count - 1, index));
             if (next === active) return;
             active = next;
-            medias.forEach((el) =>
-                el.setAttribute(
-                    "data-active",
-                    el.dataset.index === String(next) ? "true" : "false",
-                ),
-            );
             items.forEach((el) =>
                 el.setAttribute(
                     "data-active",
