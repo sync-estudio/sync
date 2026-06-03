@@ -5,6 +5,11 @@ import ArticleLayout from "@shared/components/layout/article-layout.astro";
 import BackLink from "@shared/components/ui/back-link.astro";
 import ArticleFooter from "@shared/components/ui/article-footer.astro";
 import { getEntry, render } from "astro:content";
+import {
+    articleSchema,
+    breadcrumbSchema,
+    type JsonLd,
+} from "@shared/seo/schema";
 
 const slug = Astro.params.slug;
 
@@ -19,11 +24,31 @@ if (!entry) {
 }
 
 const { Content } = await render(entry);
+
+const pagePath = `/casos-de-estudio/${slug}`;
+const metaDescription =
+    entry.data.description ??
+    "Caso de estudio Sync Estudio — software e IA a medida para empresas en operación en México.";
+const schema: JsonLd[] = [
+    articleSchema({
+        title: entry.data.title,
+        description: metaDescription,
+        url: pagePath,
+        datePublished: entry.data.pubDate.toISOString(),
+        image: entry.data.cover ?? undefined,
+    }),
+    breadcrumbSchema([
+        { name: "Inicio", path: "/" },
+        { name: "Casos de estudio", path: "/#proyectos" },
+        { name: entry.data.title, path: pagePath },
+    ]),
+];
 ---
 
 <Layout
-    title={`${entry.data.title} | Sync Estudio`}
-    description={entry.data.description ?? "Caso de estudio Sync Estudio — software e IA a medida para empresas en operación."}
+    title={`${entry.data.title} | Caso de estudio en México | Sync Estudio`}
+    description={metaDescription}
+    schema={schema}
 >
     <ArticleLayout maxWidth="2xl">
         <BackLink href="/#proyectos" label="Volver a proyectos" />

@@ -16,6 +16,12 @@ import InlineLink from "@shared/components/ui/inline-link.astro";
 import ArrowIcon from "@shared/components/ui/arrow-icon.astro";
 import { getEntry } from "astro:content";
 import { solutions, type Solution } from "@features/solutions/data";
+import {
+    serviceSchema,
+    breadcrumbSchema,
+    faqPageSchema,
+    type JsonLd,
+} from "@shared/seo/schema";
 
 export const prerender = true;
 
@@ -35,11 +41,28 @@ const relatedCases = (
         solution.relatedCaseStudies.map((slug) => getEntry("blog", slug)),
     )
 ).filter((entry): entry is NonNullable<typeof entry> => Boolean(entry));
+
+const pagePath = `/soluciones/${solution.id}`;
+const schema: JsonLd[] = [
+    serviceSchema({
+        name: solution.title,
+        serviceType: solution.title,
+        description: solution.intro,
+        url: pagePath,
+    }),
+    breadcrumbSchema([
+        { name: "Inicio", path: "/" },
+        { name: "Soluciones", path: "/#soluciones" },
+        { name: solution.title, path: pagePath },
+    ]),
+    faqPageSchema(solution.faqs.map((f) => ({ q: f.q, a: f.a }))),
+];
 ---
 
 <Layout
-    title={`${solution.title} | Soluciones | Sync Estudio`}
+    title={`${solution.title} | Software, apps e IA a medida en México | Sync Estudio`}
     description={solution.lead}
+    schema={schema}
 >
     <ArticleLayout>
         <BackLink href="/#soluciones" label="Volver a soluciones" />
