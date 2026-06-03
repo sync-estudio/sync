@@ -1,30 +1,42 @@
 ---
 import "@app/styles/global.css";
 import Button from "@shared/components/ui/button.astro";
+import BrowserStack from "./browser-stack.astro";
+import AgentTerminal from "./agent-terminal.astro";
+import CustomPanel from "./custom-panel.astro";
 
 // Placeholder copy + media — voz "del lado nuestro". Editar libremente.
-// Para media real: reemplazar el bloque .step-media-art por <img>/<video>.
-const steps = [
+// Para media real: reemplazar el gradiente por <img>/<video>.
+type Step = {
+    id: string;
+    title: string;
+    desc: string;
+    surface: string;
+    dots: string;
+};
+
+// Superficies como las cards de Soluciones: color sólido + patrón de puntos.
+const steps: Step[] = [
     {
-        id: "mvp",
-        number: "01",
-        title: "MVP Scaffolding",
-        desc: "Del problema validado al producto en manos de usuarios reales, sin sobre-construir lo que todavía nadie pidió.",
-        media: "from-emerald-50 to-emerald-100 text-emerald-900",
+        id: "platforms",
+        title: "Software a medida",
+        desc: "Sistemas internos que se ajustan a cómo ya trabajas, no al revés. Tu equipo los opera; el mantenimiento queda de nuestro lado.",
+        surface: "bg-[#defbed]",
+        dots: "rgba(4,120,87,0.35)",
     },
     {
         id: "ai",
-        number: "02",
         title: "Agentes de IA",
-        desc: "Automatizamos el trabajo repetitivo con agentes, harnesses y workflows que tu equipo entiende y controla.",
-        media: "from-emerald-700 to-emerald-900 text-emerald-50",
+        desc: "Le quitamos a tu equipo el trabajo repetitivo. Hacen la tarea, te avisan cuando algo necesita tu decisión, y siempre ves qué están haciendo y por qué.",
+        surface: "bg-emerald-800",
+        dots: "rgba(255,255,255,0.18)",
     },
     {
-        id: "platforms",
-        number: "03",
-        title: "Software a medida",
-        desc: "Plataformas internas y sistemas enterprise que se ajustan a cómo opera tu empresa hoy, no al revés.",
-        media: "from-zinc-900 to-emerald-950 text-emerald-100",
+        id: "mvp",
+        title: "MVP",
+        desc: "Construimos lo justo para salir al mundo y aprender de gente real. Sin gastar de más: validamos rápido y, desde ahí, crecemos contigo.",
+        surface: "bg-zinc-900",
+        dots: "rgba(255,255,255,0.18)",
     },
 ];
 ---
@@ -49,18 +61,25 @@ const steps = [
                                 data-step-media
                                 data-index={i}
                                 data-active={i === 0 ? "true" : "false"}
-                                class={`step-media absolute inset-0 bg-gradient-to-br ${step.media} flex flex-col justify-between p-8 md:p-10`}
+                                style={`--offer-dot-color: ${step.dots};`}
+                                class={`step-media absolute inset-0 ${step.surface}`}
                             >
-                                <div class="step-media-art flex items-start justify-between">
-                                    <span class="font-mono text-sm opacity-70">
-                                        {step.number}
-                                    </span>
-                                    <span class="h-2 w-2 rounded-full bg-current opacity-60" />
-                                </div>
-                                <span class="text-3xl md:text-4xl font-semibold tracking-tight">
-                                    {step.title}
-                                </span>
-                                <div class="step-dots" aria-hidden="true" />
+                                <div class="offer-dots" aria-hidden="true" />
+                                {step.id === "mvp" && (
+                                    <div class="absolute inset-0 flex items-center justify-center p-6 md:p-10">
+                                        <BrowserStack />
+                                    </div>
+                                )}
+                                {step.id === "ai" && (
+                                    <div class="absolute inset-0 flex items-center justify-center p-6 md:p-10">
+                                        <AgentTerminal />
+                                    </div>
+                                )}
+                                {step.id === "platforms" && (
+                                    <div class="absolute inset-0 flex items-center justify-center p-6 md:p-10">
+                                        <CustomPanel />
+                                    </div>
+                                )}
                             </div>
                         ))
                     }
@@ -106,33 +125,36 @@ const steps = [
             transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
         transform: scale(1.04);
     }
-    .step-media[data-active="true"] {
-        opacity: 1;
-        transform: scale(1);
-    }
 
-    .step-dots {
+    /* Patrón de puntos como las cards de Soluciones (estático, esquina inf-der). */
+    .offer-dots {
         position: absolute;
         inset: 0;
         pointer-events: none;
+        z-index: 0;
         background-image: radial-gradient(
             circle,
-            currentColor 1px,
-            transparent 1.4px
+            var(--offer-dot-color) 1.2px,
+            transparent 1.6px
         );
-        background-size: 18px 18px;
+        background-size: 14px 14px;
         background-position: bottom right;
-        opacity: 0.12;
         mask-image: radial-gradient(
-            circle 260px at 100% 100%,
+            circle 320px at 100% 100%,
             #000 0%,
+            rgba(0, 0, 0, 0.2) 70%,
             transparent 100%
         );
         -webkit-mask-image: radial-gradient(
-            circle 260px at 100% 100%,
+            circle 320px at 100% 100%,
             #000 0%,
+            rgba(0, 0, 0, 0.2) 70%,
             transparent 100%
         );
+    }
+    .step-media[data-active="true"] {
+        opacity: 1;
+        transform: scale(1);
     }
 
     .step-title {
