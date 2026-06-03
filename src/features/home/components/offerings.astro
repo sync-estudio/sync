@@ -103,6 +103,16 @@ const steps: Step[] = [
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
             return;
 
+        // Touch devices: skip pinning. Pinning forces a per-frame transform on
+        // the main thread, which fights the compositor-driven scroll on mobile
+        // (stutter), and 100dvh + address-bar resize keeps refreshing the pins.
+        // Panels just scroll as normal full-height sections there.
+        if (window.matchMedia("(hover: none) and (pointer: coarse)").matches)
+            return;
+
+        // Don't refresh/jump pins when the mobile toolbar changes the viewport.
+        ScrollTrigger.config({ ignoreMobileResize: true });
+
         // Layered pinning — each panel pins at the top so the next one
         // scrolls up and covers it. pinSpacing:false makes them stack
         // instead of pushing each other down. The LAST panel is left
