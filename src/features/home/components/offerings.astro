@@ -7,6 +7,10 @@ type Step = {
     id: string;
     title: string;
     desc: string;
+    surface: string;
+    text: string;
+    muted: string;
+    cta?: boolean;
 };
 
 const steps: Step[] = [
@@ -14,220 +18,107 @@ const steps: Step[] = [
         id: "platforms",
         title: "Software a medida",
         desc: "Sistemas internos que se ajustan a cómo ya trabajas, no al revés. Tu equipo los opera; el mantenimiento queda de nuestro lado.",
+        surface: "bg-white",
+        text: "text-zinc-900",
+        muted: "text-zinc-600",
     },
     {
         id: "ai",
         title: "Agentes de IA",
         desc: "Le quitamos a tu equipo el trabajo repetitivo. Hacen la tarea, te avisan cuando algo necesita tu decisión, y siempre ves qué están haciendo y por qué.",
+        surface: "bg-zinc-900",
+        text: "text-white",
+        muted: "text-zinc-300",
     },
     {
         id: "mvp",
         title: "MVP",
         desc: "Construimos lo justo para salir al mundo y aprender de gente real. Sin gastar de más: validamos rápido y, desde ahí, crecemos contigo.",
+        surface: "bg-white",
+        text: "text-zinc-900",
+        muted: "text-zinc-600",
+        cta: true,
     },
 ];
 ---
 
-<section
-    id="servicios"
-    data-offer-steps
-    data-step-count={steps.length}
-    class="relative"
-    style={`height: ${steps.length * 100}dvh;`}
->
-    <div
-        data-offer-sticky
-        class="sticky top-0 h-[100dvh] flex items-center overflow-hidden"
-    >
-        <div class="offer-dots" aria-hidden="true"></div>
-        <div class="container mx-auto w-full relative z-10">
-            <div class="mx-auto max-w-5xl">
-                <h2
-                    class="mb-10 md:mb-14 text-sm md:text-base text-zinc-500"
-                >
-                    ¿Qué podemos construir?
-                </h2>
-                {/* Steps list — active goes solid, reveals desc */}
-                <ol class="flex flex-col gap-6 md:gap-8">
-                    {
-                        steps.map((step, i) => (
-                            <li>
-                                <button
-                                    type="button"
-                                    data-step-item
-                                    data-index={i}
-                                    data-active={i === 0 ? "true" : "false"}
-                                    class="step-item group block w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 rounded-lg"
-                                >
-                                    <span class="step-title block text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight">
-                                        {step.title}
-                                    </span>
-                                    <span class="step-desc block text-lg md:text-xl text-zinc-600 leading-relaxed max-w-3xl">
-                                        {step.desc}
-                                    </span>
-                                </button>
-                            </li>
-                        ))
-                    }
-
-                    <li class="mt-4">
-                        <Button link="/contacto">Solicitar diagnóstico</Button>
-                    </li>
-                </ol>
-            </div>
-        </div>
-    </div>
+<section id="servicios" data-offer class="relative">
+    {
+        steps.map((step) => (
+            <section
+                data-offer-panel
+                class={`offer-panel relative h-[100dvh] w-full overflow-hidden flex items-center ${step.surface} ${step.text}`}
+            >
+                <div class="container mx-auto w-full relative z-10">
+                    <div class={`max-w-3xl ${step.id === "ai" ? "ml-auto text-right" : ""}`}>
+                        {step.id === "platforms" && (
+                            <span class={`block mb-6 md:mb-8 text-sm md:text-base ${step.muted}`}>
+                                ¿Qué podemos construir?
+                            </span>
+                        )}
+                        <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05]">
+                            {step.title}
+                        </h2>
+                        <p class={`mt-5 md:mt-6 text-lg md:text-xl leading-relaxed ${step.muted}`}>
+                            {step.desc}
+                        </p>
+                        {step.cta && (
+                            <div class="mt-8 md:mt-10">
+                                <Button link="/contacto">Solicitar diagnóstico</Button>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </section>
+        ))
+    }
 </section>
 
 <style>
-    .offer-dots {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        z-index: 0;
-        background-image: radial-gradient(
-            circle,
-            rgba(4, 120, 87, 0.7) 0.9px,
-            transparent 1.2px
-        );
-        background-size: 13px 13px;
-        opacity: 0.4;
-        /* Soft top/bottom edges so the texture blends into neighbor
-           sections instead of cutting hard at the boundary. */
-        mask-image: linear-gradient(
-            180deg,
-            transparent 0%,
-            #000 18%,
-            #000 82%,
-            transparent 100%
-        );
-        -webkit-mask-image: linear-gradient(
-            180deg,
-            transparent 0%,
-            #000 18%,
-            #000 82%,
-            transparent 100%
-        );
-    }
-
-    @media (min-width: 640px) {
-        .offer-dots {
-            background-image: radial-gradient(
-                circle,
-                rgba(4, 120, 87, 0.7) 1.2px,
-                transparent 1.6px
-            );
-            background-size: 18px 18px;
-        }
-    }
-
-    .step-title {
-        color: rgb(212 212 216); /* zinc-300 */
-        transition: color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .step-item[data-active="true"] .step-title,
-    .step-item:hover .step-title {
-        color: rgb(24 24 27); /* zinc-900 */
-    }
-
-    .step-desc {
-        max-height: 0;
-        opacity: 0;
-        overflow: hidden;
-        transition:
-            max-height 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-            opacity 0.4s ease,
-            margin-top 0.4s ease;
-    }
-    .step-item[data-active="true"] .step-desc {
-        max-height: 14rem;
-        opacity: 1;
-        margin-top: 0.75rem;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        .step-desc,
-        .step-title {
-            transition: none;
-        }
+    /* Stabilize text during pin: promote each panel to its own GPU layer so
+       antialiasing doesn't re-rasterize (the "tilt"/shimmer) as ScrollTrigger
+       toggles position:fixed. */
+    .offer-panel {
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        -webkit-font-smoothing: antialiased;
     }
 </style>
 
 <script>
-    const section = document.querySelector<HTMLElement>("[data-offer-steps]");
+    import gsap from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-    if (section) {
-        const count = Number(section.dataset.stepCount ?? "0");
-        const sticky =
-            section.querySelector<HTMLElement>("[data-offer-sticky]");
-        const items = Array.from(
-            section.querySelectorAll<HTMLElement>("[data-step-item]"),
+    gsap.registerPlugin(ScrollTrigger);
+
+    function init() {
+        const section = document.querySelector<HTMLElement>("[data-offer]");
+        if (!section) return;
+        const panels = gsap.utils.toArray<HTMLElement>(
+            section.querySelectorAll("[data-offer-panel]"),
         );
+        if (panels.length === 0) return;
 
-        let active = -1;
-        let ticking = false;
+        // Reduced motion: no pinning, panels just stack and scroll normally.
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+            return;
 
-        const setActive = (index: number) => {
-            const next = Math.max(0, Math.min(count - 1, index));
-            if (next === active) return;
-            active = next;
-            items.forEach((el) =>
-                el.setAttribute(
-                    "data-active",
-                    el.dataset.index === String(next) ? "true" : "false",
-                ),
-            );
-        };
-
-        // Use the pinned element's own height (layout-driven, dvh) instead of
-        // window.innerHeight — mobile toolbar show/hide won't drift the math.
-        const viewport = () => sticky?.offsetHeight ?? window.innerHeight;
-
-        const update = () => {
-            ticking = false;
-            const rect = section.getBoundingClientRect();
-            const scrollable = section.offsetHeight - viewport();
-            if (scrollable <= 0) {
-                setActive(0);
-                return;
-            }
-            // progress 0→1 across the pinned scroll distance
-            const progress = Math.min(
-                1,
-                Math.max(0, -rect.top / scrollable),
-            );
-            setActive(Math.floor(progress * count - 0.0001));
-        };
-
-        const onScroll = () => {
-            if (!ticking) {
-                ticking = true;
-                requestAnimationFrame(update);
-            }
-        };
-
-        window.addEventListener("scroll", onScroll, { passive: true });
-        window.addEventListener("resize", onScroll);
-        update();
-
-        // Click a title → scroll to that step
-        items.forEach((item) => {
-            item.addEventListener("click", () => {
-                const i = Number(item.dataset.index ?? "0");
-                const scrollable = section.offsetHeight - viewport();
-                const top =
-                    section.offsetTop +
-                    (scrollable * (i + 0.5)) / count;
-                window.scrollTo({
-                    top,
-                    behavior: window.matchMedia(
-                        "(prefers-reduced-motion: reduce)",
-                    ).matches
-                        ? "auto"
-                        : "smooth",
-                });
+        // Layered pinning — each panel pins at the top so the next one
+        // scrolls up and covers it. pinSpacing:false makes them stack
+        // instead of pushing each other down. The LAST panel is left
+        // unpinned so it scrolls out cleanly into the following section
+        // instead of staying fixed and overlapping it.
+        panels.slice(0, -1).forEach((panel) => {
+            ScrollTrigger.create({
+                trigger: panel,
+                start: "top top",
+                pin: true,
+                pinSpacing: false,
+                anticipatePin: 1,
+                pinType: "transform",
             });
         });
     }
-</script>
 
+    init();
+</script>
