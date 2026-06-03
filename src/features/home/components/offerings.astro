@@ -46,9 +46,12 @@ const steps: Step[] = [
     data-offer-steps
     data-step-count={steps.length}
     class="relative"
-    style={`height: ${steps.length * 100}vh;`}
+    style={`height: ${steps.length * 100}dvh;`}
 >
-    <div class="sticky top-0 h-screen flex items-center overflow-hidden">
+    <div
+        data-offer-sticky
+        class="sticky top-0 h-[100dvh] flex items-center overflow-hidden"
+    >
         <div class="container mx-auto w-full">
             <div
                 class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center"
@@ -198,6 +201,8 @@ const steps: Step[] = [
 
     if (section) {
         const count = Number(section.dataset.stepCount ?? "0");
+        const sticky =
+            section.querySelector<HTMLElement>("[data-offer-sticky]");
         const medias = Array.from(
             section.querySelectorAll<HTMLElement>("[data-step-media]"),
         );
@@ -226,10 +231,14 @@ const steps: Step[] = [
             );
         };
 
+        // Use the pinned element's own height (layout-driven, dvh) instead of
+        // window.innerHeight — mobile toolbar show/hide won't drift the math.
+        const viewport = () => sticky?.offsetHeight ?? window.innerHeight;
+
         const update = () => {
             ticking = false;
             const rect = section.getBoundingClientRect();
-            const scrollable = section.offsetHeight - window.innerHeight;
+            const scrollable = section.offsetHeight - viewport();
             if (scrollable <= 0) {
                 setActive(0);
                 return;
@@ -257,7 +266,7 @@ const steps: Step[] = [
         items.forEach((item) => {
             item.addEventListener("click", () => {
                 const i = Number(item.dataset.index ?? "0");
-                const scrollable = section.offsetHeight - window.innerHeight;
+                const scrollable = section.offsetHeight - viewport();
                 const top =
                     section.offsetTop +
                     (scrollable * (i + 0.5)) / count;
