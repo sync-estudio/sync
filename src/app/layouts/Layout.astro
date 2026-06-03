@@ -165,11 +165,34 @@ const logoAbs = new URL("/sync_logo.svg", siteUrl).href;
 					return document.getElementById(sectionId);
 				};
 
+				const getScrollAnchor = (section: HTMLElement) => {
+					const content = section.firstElementChild;
+					return content instanceof HTMLElement ? content : section;
+				};
+
+				const isCenteredSection = (section: HTMLElement) => {
+					const style = getComputedStyle(section);
+					return style.display.includes("flex") && style.alignItems === "center";
+				};
+
 				const computeTargetY = (targetElement: HTMLElement) => {
-					const absoluteTop = window.scrollY + targetElement.getBoundingClientRect().top;
+					const anchorElement = getScrollAnchor(targetElement);
+					const rect = anchorElement.getBoundingClientRect();
+					const absoluteTop = window.scrollY + rect.top;
 					const provisionalY = Math.max(0, absoluteTop - getNavbarBottom() - anchorGap);
 					const navBottomAtTarget = getNavbarBottomFor(provisionalY);
-					return Math.max(0, absoluteTop - navBottomAtTarget - anchorGap);
+
+					// Full-height centered sections (flex + items-center) keep their
+					// content centered in the viewport below the navbar when it fits.
+					// Everything else lands its content top just below the navbar.
+					const viewportBelowNav = window.innerHeight - navBottomAtTarget;
+					const slack = viewportBelowNav - rect.height;
+					const offset =
+						isCenteredSection(targetElement) && slack > anchorGap * 2
+							? slack / 2
+							: anchorGap;
+
+					return Math.max(0, absoluteTop - navBottomAtTarget - offset);
 				};
 
 				const scrollToHash = (hash: string, behavior: ScrollBehavior) => {
