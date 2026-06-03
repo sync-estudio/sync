@@ -152,6 +152,9 @@ const steps: Step[] = [
                 start: "top top",
                 pin: true,
                 pinSpacing: false,
+                // Engage the pin slightly early (by scroll velocity) so it
+                // doesn't catch a frame late and snap — kills the start jump.
+                anticipatePin: 1,
             });
         });
     }
