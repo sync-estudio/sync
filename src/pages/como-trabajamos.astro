@@ -1,12 +1,14 @@
 ---
 import Layout from "@app/layouts/Layout.astro";
 import Workflow from "@features/home/components/workflow.astro";
+import DotBackdrop from "@shared/components/ui/dot-backdrop.astro";
 ---
 
 <Layout
     title="Cómo trabajamos | Sync Estudio"
     description="Conoce las tres fases de nuestra metodología: diagnóstico, desarrollo y educación. Entregables claros, aprobación de tu equipo y mantenimiento continuo del lado nuestro."
 >
+    <DotBackdrop />
     <div class="pt-28 md:pt-40 pb-12 md:pb-20">
         <Workflow detailed />
     </div>

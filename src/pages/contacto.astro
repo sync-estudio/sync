@@ -1,9 +1,11 @@
 ---
 import Layout from "@app/layouts/Layout.astro";
 import ContactSection from "@features/contact/components/contact.astro";
+import DotBackdrop from "@shared/components/ui/dot-backdrop.astro";
 ---
 
 <Layout title="Contacto | Sync Estudio" description="Solicita un diagnóstico estratégico. Construimos software e IA a medida, rediseñamos flujos y formamos a tu equipo — con mantenimiento continuo de nuestro lado.">
+    <DotBackdrop />
     <div class="min-h-[80vh] flex items-center pt-28 pb-12 md:pt-40 md:pb-20">
         <ContactSection />
     </div>
