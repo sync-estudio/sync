@@ -49,6 +49,22 @@ const steps: Step[] = [
                 data-offer-panel
                 class={`offer-panel relative h-[100dvh] w-full overflow-hidden flex items-center ${step.surface} ${step.text}`}
             >
+                {step.id === "platforms" && (
+                    <pre
+                        data-offer-wave
+                        data-pos="bottom"
+                        class="offer-wave"
+                        aria-hidden="true"
+                    />
+                )}
+                {step.id === "mvp" && (
+                    <pre
+                        data-offer-wave
+                        data-pos="top"
+                        class="offer-wave"
+                        aria-hidden="true"
+                    />
+                )}
                 <div class="container mx-auto w-full relative z-10">
                     <div class={`max-w-3xl ${step.id === "ai" ? "ml-auto text-right" : ""}`}>
                         {step.id === "platforms" && (
@@ -75,13 +91,35 @@ const steps: Step[] = [
 </section>
 
 <style>
-    /* Stabilize text during pin: promote each panel to its own GPU layer so
-       antialiasing doesn't re-rasterize (the "tilt"/shimmer) as ScrollTrigger
-       toggles position:fixed. */
-    .offer-panel {
-        transform: translateZ(0);
-        backface-visibility: hidden;
-        -webkit-font-smoothing: antialiased;
+    /* Subtle hero-wave variant — sits at the bottom of the first panel. */
+    .offer-wave {
+        position: absolute;
+        inset: 0;
+        margin: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        font-weight: 700;
+        color: rgba(4, 120, 87, 0.28);
+        white-space: pre;
+        user-select: none;
+        line-height: 1;
+        letter-spacing: 0.4em;
+        mask-image: linear-gradient(
+            90deg,
+            transparent 0%,
+            #000 3%,
+            #000 97%,
+            transparent 100%
+        );
+        -webkit-mask-image: linear-gradient(
+            90deg,
+            transparent 0%,
+            #000 3%,
+            #000 97%,
+            transparent 100%
+        );
     }
 </style>
 
@@ -103,16 +141,6 @@ const steps: Step[] = [
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
             return;
 
-        // Touch devices: skip pinning. Pinning forces a per-frame transform on
-        // the main thread, which fights the compositor-driven scroll on mobile
-        // (stutter), and 100dvh + address-bar resize keeps refreshing the pins.
-        // Panels just scroll as normal full-height sections there.
-        if (window.matchMedia("(hover: none) and (pointer: coarse)").matches)
-            return;
-
-        // Don't refresh/jump pins when the mobile toolbar changes the viewport.
-        ScrollTrigger.config({ ignoreMobileResize: true });
-
         // Layered pinning — each panel pins at the top so the next one
         // scrolls up and covers it. pinSpacing:false makes them stack
         // instead of pushing each other down. The LAST panel is left
@@ -124,11 +152,106 @@ const steps: Step[] = [
                 start: "top top",
                 pin: true,
                 pinSpacing: false,
-                anticipatePin: 1,
-                pinType: "transform",
             });
         });
     }
 
     init();
+
+    // Subtle animated wave at the bottom of the first panel — a calmer
+    // variant of the hero wave (lower, gentler amplitude, fainter).
+    function initWave(el: HTMLElement) {
+        const card = el.parentElement as HTMLElement;
+        const reduce = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        const RAMP = "  ···";
+        const FONT_PX = 13;
+
+        let cols = 0;
+        let rows = 0;
+        let frame = 0;
+        let base = 0;
+        let ampA = 0;
+        let ampB = 0;
+        let thickness = 1;
+        let freqA = 7;
+        let freqB = 13;
+
+        el.style.fontSize = FONT_PX + "px";
+
+        function resize() {
+            const rect = card.getBoundingClientRect();
+            cols = Math.max(1, Math.floor(rect.width / FONT_PX));
+            rows = Math.max(1, Math.floor(rect.height / FONT_PX));
+
+            const cycles = Math.max(1, rect.width / 640);
+            freqA = cycles * Math.PI * 2;
+            freqB = freqA * 1.85;
+
+            // Place at the top or bottom edge of the panel per data-pos.
+            base = el.dataset.pos === "top" ? rows * 0.1 : rows * 0.9;
+            // Gentler than the hero so it stays a quiet texture.
+            ampA = Math.min(rows * 0.16, cols * 0.09);
+            ampB = ampA * 0.5;
+            thickness = Math.max(2, rows * 0.1);
+        }
+
+        function render(t: number) {
+            const out: string[] = [];
+            for (let y = 0; y < rows; y++) {
+                let line = "";
+                for (let x = 0; x < cols; x++) {
+                    const u = x / cols;
+                    const center =
+                        base +
+                        ampA * Math.sin(u * freqA + t) +
+                        ampB * Math.sin(u * freqB - t * 0.7);
+                    const d = Math.abs(y - center) / thickness;
+                    const intensity = Math.exp(-d * d * 1.4);
+                    if (intensity <= 0.06) {
+                        line += " ";
+                    } else {
+                        const idx = Math.min(
+                            RAMP.length - 1,
+                            Math.round(intensity * (RAMP.length - 1)),
+                        );
+                        line += RAMP[idx];
+                    }
+                }
+                out.push(line);
+            }
+            el.textContent = out.join("\n");
+        }
+
+        function loop() {
+            frame += 0.004;
+            render(frame);
+            requestAnimationFrame(loop);
+        }
+
+        let lastW = -1;
+        function onResize() {
+            const w = Math.round(card.getBoundingClientRect().width);
+            if (w === lastW) return;
+            lastW = w;
+            resize();
+            if (reduce) render(0);
+        }
+
+        onResize();
+        window.addEventListener("resize", onResize);
+        window.addEventListener("orientationchange", onResize);
+
+        if (reduce) {
+            render(0);
+        } else {
+            requestAnimationFrame(loop);
+        }
+    }
+
+    document
+        .querySelectorAll<HTMLElement>("[data-offer-wave]")
+        .forEach(initWave);
 </script>
