@@ -5,31 +5,27 @@ import Button from "@shared/components/ui/button.astro";
 
 <div
     id="inicio"
-    class="pt-20 md:pt-20 pb-8 md:pb-12 container mx-auto flex justify-center items-center"
+    data-hero-card
+    class="hero-card relative isolate container mx-auto min-h-screen flex justify-center items-center pt-20 pb-12 md:pb-16 px-6 sm:px-10 md:px-14 lg:px-20"
 >
-    <div
-        data-hero-card
-        class="hero-card relative isolate w-full min-h-[80vh] rounded-2xl md:rounded-3xl overflow-hidden border border-zinc-200 flex justify-center items-center px-6 sm:px-10 md:px-14 lg:px-20 py-20 md:py-24"
-    >
     <pre data-hero-wave class="hero-wave" aria-hidden="true"></pre>
     <div
-        class="flex flex-col gap-5 sm:gap-5 md:gap-6 lg:gap-7 w-full max-w-8xl lg:my-auto pt-0 lg:pt-20 relative z-10"
+        class="flex flex-col gap-6 md:gap-7 w-full max-w-5xl relative z-10"
     >
         <div class="text-zinc-800 text-center">
             <h1
-                class="text-[24px] sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-3 md:mb-4 leading-[1.2] md:leading-[1.1] px-0 sm:px-4 tracking-tight"
+                class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-5 leading-[1.05] tracking-tight text-balance"
             >
                 <span data-hero-line class="hero-line"
-                    >Software para los <span
-                        class="font-[ibm-plex-serif] font-bold italic text-emerald-900 relative inline-block px-1.5 py-0.5 sm:px-3 sm:py-1.5 md:px-4 md:py-2"
-                        ><span
-                            class="absolute inset-0 bg-emerald-200/60 -rotate-1 transform origin-center rounded-sm -mx-1"
-                        ></span><span class="relative z-10">constructores</span></span> del futuro.</span
+                    >Construimos el <span
+                        class="text-emerald-700"
+                        >futuro</span
+                    > de tu operación.</span
                 >
             </h1>
             <p
                 data-hero-line
-                class="hero-line text-sm sm:text-base md:text-lg text-zinc-500 px-0 sm:px-4 max-w-3xl mx-auto leading-snug"
+                class="hero-line text-sm sm:text-base md:text-lg text-zinc-500 max-w-2xl mx-auto leading-relaxed text-balance"
             >
                 IA y herramientas a medida para empresas que ya operan. Quitamos el trabajo manual, desatascamos la operación y dejamos a tu equipo dueño del sistema.
             </p>
@@ -39,10 +35,9 @@ import Button from "@shared/components/ui/button.astro";
             data-hero-actions
             class="flex flex-wrap justify-center gap-3 sm:gap-3 md:gap-4 w-full px-4 sm:px-0 hero-actions"
         >
-            <Button link="/contacto" style="w-full sm:w-auto">Solicitar diagnóstico</Button>
-            <Button link="/#metodologia" variant="outline" style="w-full sm:w-auto">Ver cómo trabajamos</Button>
+            <Button link="/contacto" style="w-full sm:w-auto shadow-sm">Solicitar diagnóstico</Button>
+            <Button link="/#metodologia" variant="outline" style="w-full sm:w-auto !bg-white/70 backdrop-blur-md !border-zinc-300/80 shadow-sm hover:!bg-white/90">Ver cómo trabajamos</Button>
         </div>
-    </div>
     </div>
 </div>
 
@@ -165,8 +160,8 @@ import Button from "@shared/components/ui/button.astro";
             freqA = cycles * Math.PI * 2;
             freqB = freqA * 1.85;
 
-            // Push wave below the text on narrow screens.
-            base = rect.width < 640 ? rows * 0.72 : rows * 0.5;
+            // Push wave below the text on all screens.
+            base = rows * 0.72;
             // Cap amplitude by width so narrow/tall mobile cards stay gentle.
             ampA = Math.min(rows * 0.26, cols * 0.14);
             ampB = ampA * 0.5;
