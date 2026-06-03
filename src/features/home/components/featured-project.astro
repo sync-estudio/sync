@@ -1,8 +1,9 @@
 ---
+import { Image } from "astro:assets";
 import Button from "@shared/components/ui/button.astro";
 
 interface Props {
-    imageSrc: string;
+    imageSrc: ImageMetadata;
     imageAlt: string;
     title: string;
     description: string;
@@ -31,9 +32,9 @@ const {
     ]}
 >
     <div
-        class="bg-emerald-50/70 rounded-2xl md:rounded-3xl flex items-center justify-center p-4 md:p-6 overflow-hidden h-72 md:h-96"
+        class="bg-emerald-100/80 rounded-2xl md:rounded-3xl flex items-center justify-center p-4 md:p-6 overflow-hidden h-72 md:h-96"
     >
-        <img
+        <Image
             class:list={[
                 "max-h-full w-auto max-w-full object-contain",
                 imageClasses,
@@ -42,6 +43,8 @@ const {
             decoding="async"
             src={imageSrc}
             alt={imageAlt}
+            format="webp"
+            quality={80}
         />
     </div>
 

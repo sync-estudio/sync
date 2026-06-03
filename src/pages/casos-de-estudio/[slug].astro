@@ -1,5 +1,6 @@
 ---
 import "@app/styles/global.css";
+import { Image } from "astro:assets";
 import Layout from "@app/layouts/Layout.astro";
 import ArticleLayout from "@shared/components/layout/article-layout.astro";
 import BackLink from "@shared/components/ui/back-link.astro";
@@ -35,7 +36,7 @@ const schema: JsonLd[] = [
         description: metaDescription,
         url: pagePath,
         datePublished: entry.data.pubDate.toISOString(),
-        image: entry.data.cover ?? undefined,
+        image: entry.data.cover?.src ?? undefined,
     }),
     breadcrumbSchema([
         { name: "Inicio", path: "/" },
@@ -87,11 +88,13 @@ const schema: JsonLd[] = [
 
         {entry.data.cover && (
             <figure class="mb-12 md:mb-16">
-                <img
+                <Image
                     src={entry.data.cover}
                     alt={entry.data.title}
                     loading="eager"
                     decoding="async"
+                    format="webp"
+                    quality={80}
                     class="w-full h-auto rounded-2xl md:rounded-3xl border border-zinc-200/70"
                 />
             </figure>
