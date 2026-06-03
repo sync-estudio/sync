@@ -1,7 +1,7 @@
 ---
 import "@app/styles/global.css";
 import Button from "@shared/components/ui/button.astro";
-import BrowserStack from "./browser-stack.astro";
+import PhoneMockup from "./phone-mockup.astro";
 import AgentTerminal from "./agent-terminal.astro";
 import CustomPanel from "./custom-panel.astro";
 
@@ -70,7 +70,7 @@ const steps: Step[] = [
                                 <div class="offer-dots" aria-hidden="true" />
                                 {step.id === "mvp" && (
                                     <div class="absolute inset-0 flex items-center justify-center p-6 md:p-10">
-                                        <BrowserStack />
+                                        <PhoneMockup />
                                     </div>
                                 )}
                                 {step.id === "ai" && (
