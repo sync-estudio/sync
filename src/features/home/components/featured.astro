@@ -4,176 +4,35 @@ import FeaturedProject from "./featured-project.astro";
 
 const projects = [
     {
-        imageSrc: "/skyhr.webp",
-        imageAlt: "Skyhr — interfaz del sistema de control de asistencias",
-        projectName: "Skyhr",
-        description: "Sistema de control de asistencias.",
-    },
-    {
         imageSrc: "/ima-cloud.webp",
         imageAlt: "IMA Cloud",
-        projectName: "IMA Cloud",
-        description: "Automatización y gestión de formas.",
+        title: "IMA Cloud",
+        description: "Plataforma interna a medida que centraliza reportes, documentación e inventario para una empresa de electrificación ferroviaria — del diagnóstico al producto en operación.",
         link: "/casos-de-estudio/ima-cloud",
+        spanClass: "lg:col-span-2",
     },
     {
         imageSrc: "/butaqueando.webp",
         imageAlt: "Butaqueando — mockup de la plataforma para descubrir obras teatrales",
-        projectName: "Butaqueando",
-        description: "Plataforma para descubrir y seguir obras teatrales.",
+        title: "Butaqueando",
+        description: "App para descubrir, seguir y no perderse las obras teatrales en cartelera.",
+        link: "#",
     },
 ];
 ---
 
-<section id="proyectos" class="container mx-auto py-24 md:py-32">
-    <div class="mb-8 md:mb-10 flex flex-col gap-2">
-        <span class="text-xs tracking-[0.2em] text-emerald-700 font-semibold">Portafolio</span>
+<section id="proyectos" class="container mx-auto max-w-6xl py-16 md:py-24">
+    <div class="mb-10 md:mb-14 flex flex-col items-center text-center gap-3 max-w-2xl mx-auto">
         <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-zinc-800">
-            Proyectos destacados
+            Casos de estudio <span class="text-emerald-700">destacados</span>
         </h2>
+        <p class="text-base md:text-lg text-zinc-500 leading-relaxed">
+            Proyectos reales, hoy en producción. Los acompañamos del
+            diagnóstico hasta el producto final.
+        </p>
     </div>
 
-    <div class="relative">
-        <div data-slideshow-viewport class="overflow-hidden">
-            <div
-                data-slideshow-track
-                class="flex"
-                style={`width: ${projects.length * 100}%;`}
-            >
-                {projects.map((project) => (
-                    <div
-                        class="shrink-0"
-                        style={`width: ${100 / projects.length}%;`}
-                    >
-                        <FeaturedProject {...project} />
-                    </div>
-                ))}
-            </div>
-        </div>
-
-        <div class="mt-6 flex items-center justify-between gap-4">
-            <div data-slideshow-dots class="flex gap-2">
-                {projects.map((_, i) => (
-                    <button
-                        type="button"
-                        data-slideshow-dot
-                        data-index={i}
-                        aria-label={`Ir al proyecto ${i + 1}`}
-                        class="h-2 w-2 rounded-full bg-zinc-300 transition-all duration-200 ease-out hover:bg-zinc-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
-                    ></button>
-                ))}
-            </div>
-
-            <div class="flex gap-2">
-                <button
-                    type="button"
-                    data-slideshow-prev
-                    aria-label="Proyecto anterior"
-                    class="h-9 w-9 rounded-full border border-zinc-300 text-zinc-700 transition-all duration-200 ease-out hover:bg-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
-                >
-                    ‹
-                </button>
-                <button
-                    type="button"
-                    data-slideshow-next
-                    aria-label="Siguiente proyecto"
-                    class="h-9 w-9 rounded-full border border-zinc-300 text-zinc-700 transition-all duration-200 ease-out hover:bg-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
-                >
-                    ›
-                </button>
-            </div>
-        </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {projects.map((project) => <FeaturedProject {...project} />)}
     </div>
 </section>
-
-<style>
-    [data-slideshow-dot][data-active="true"] {
-        width: 1.5rem;
-        background-color: rgb(63 63 70);
-    }
-</style>
-
-<script>
-    import { animate } from "framer-motion";
-
-    const track = document.querySelector<HTMLElement>("[data-slideshow-track]");
-    const dots = Array.from(
-        document.querySelectorAll<HTMLButtonElement>("[data-slideshow-dot]")
-    );
-    const prevBtn = document.querySelector<HTMLButtonElement>(
-        "[data-slideshow-prev]"
-    );
-    const nextBtn = document.querySelector<HTMLButtonElement>(
-        "[data-slideshow-next]"
-    );
-    const viewport = document.querySelector<HTMLElement>(
-        "[data-slideshow-viewport]"
-    );
-
-    if (track && dots.length) {
-        const count = dots.length;
-        const prefersReducedMotion = window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        ).matches;
-
-        let index = 0;
-        let autoplay: number | null = null;
-        const intervalMs = 5000;
-
-        const slidePercent = 100 / count;
-
-        const go = (next: number) => {
-            index = ((next % count) + count) % count;
-            const x = `-${index * slidePercent}%`;
-
-            if (prefersReducedMotion) {
-                track.style.transform = `translateX(${x})`;
-            } else {
-                animate(
-                    track,
-                    { transform: `translateX(${x})` },
-                    { duration: 0.7, ease: [0.22, 1, 0.36, 1] }
-                );
-            }
-
-            dots.forEach((d, i) => {
-                d.dataset.active = i === index ? "true" : "false";
-            });
-        };
-
-        const start = () => {
-            if (prefersReducedMotion) return;
-            stop();
-            autoplay = window.setInterval(() => go(index + 1), intervalMs);
-        };
-        const stop = () => {
-            if (autoplay !== null) {
-                clearInterval(autoplay);
-                autoplay = null;
-            }
-        };
-
-        dots.forEach((d) => {
-            d.addEventListener("click", () => {
-                go(Number(d.dataset.index));
-                start();
-            });
-        });
-        prevBtn?.addEventListener("click", () => {
-            go(index - 1);
-            start();
-        });
-        nextBtn?.addEventListener("click", () => {
-            go(index + 1);
-            start();
-        });
-
-        viewport?.addEventListener("mouseenter", stop);
-        viewport?.addEventListener("mouseleave", start);
-        viewport?.addEventListener("focusin", stop);
-        viewport?.addEventListener("focusout", start);
-
-        go(0);
-        start();
-    }
-</script>
