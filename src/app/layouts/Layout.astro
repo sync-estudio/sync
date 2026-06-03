@@ -28,7 +28,7 @@ const {
 } = Astro.props;
 
 const googleFontsUrl =
-	"https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@1,700&display=swap";
+	"https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap";
 
 const siteUrl = SITE_URL;
 const canonicalHref = new URL(Astro.url.pathname, siteUrl).href;
@@ -93,6 +93,11 @@ const jsonLdGraph: JsonLd[] = [
 		{jsonLdGraph.map((node) => (
 			<script is:inline type="application/ld+json" set:html={JSON.stringify(node)} />
 		))}
+		<!-- Mark JS early so [data-reveal] elements can hide pre-paint without
+		     risking invisible content when JS is disabled. -->
+		<script is:inline>
+			document.documentElement.classList.add("js-reveal");
+		</script>
 		<style is:global>
 			:root {
 				--anchor-scroll-offset: 0px;
@@ -101,6 +106,18 @@ const jsonLdGraph: JsonLd[] = [
 
 			:where(#inicio, #soluciones, #nosotros, #proyectos, #metodologia, #preguntas, #contacto) {
 				scroll-margin-top: calc(var(--anchor-scroll-offset) + var(--anchor-scroll-gap));
+			}
+
+			/* Scroll-reveal: hidden only when JS ran early. Reduced motion and
+			   no-JS both leave content fully visible. */
+			.js-reveal [data-reveal] {
+				opacity: 0;
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				.js-reveal [data-reveal] {
+					opacity: 1;
+				}
 			}
 		</style>
 	</head>
@@ -115,6 +132,52 @@ const jsonLdGraph: JsonLd[] = [
 		</main>
 
 		<Footer />
+		<script>
+			// Site-wide scroll-reveal. Any element with [data-reveal] fades +
+			// rises into place once it enters the viewport. Optional
+			// data-reveal-delay (ms) staggers siblings. Reduced motion shows
+			// everything immediately (CSS already keeps it visible).
+			(() => {
+				const reduce = window.matchMedia(
+					"(prefers-reduced-motion: reduce)",
+				).matches;
+				const els = Array.from(
+					document.querySelectorAll<HTMLElement>("[data-reveal]"),
+				);
+				if (!els.length) return;
+
+				if (reduce || !("IntersectionObserver" in window)) {
+					els.forEach((el) => (el.style.opacity = "1"));
+					return;
+				}
+
+				const io = new IntersectionObserver(
+					(entries, obs) => {
+						entries.forEach((entry) => {
+							if (!entry.isIntersecting) return;
+							const el = entry.target as HTMLElement;
+							obs.unobserve(el);
+							const delay = Number(el.dataset.revealDelay ?? 0);
+							el.animate(
+								[
+									{ opacity: 0, transform: "translateY(20px)" },
+									{ opacity: 1, transform: "translateY(0)" },
+								],
+								{
+									duration: 600,
+									easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+									delay,
+									fill: "both",
+								},
+							);
+						});
+					},
+					{ rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
+				);
+
+				els.forEach((el) => io.observe(el));
+			})();
+		</script>
 		<script>
 			document.addEventListener("DOMContentLoaded", () => {
 				const anchorGap = 16;

@@ -1,11 +1,6 @@
 ---
+// Inline highlight = plain emerald color accent (no serif, no marker swatch).
+// Inherits the surrounding heading's weight/size; only the color changes.
 ---
 
-<span
-    class="font-[ibm-plex-serif] font-bold italic text-emerald-900 relative inline-block px-2.5 py-1 sm:px-3 md:px-4"
->
-    <span
-        class="absolute inset-0 bg-emerald-200/60 -rotate-1 transform origin-center rounded-sm -mx-1"
-    ></span>
-    <span class="relative z-10"><slot /></span>
-</span>
+<span class="text-emerald-700"><slot /></span>

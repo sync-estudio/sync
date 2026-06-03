@@ -57,30 +57,29 @@ const phases = [
 >
     {detailed ? (
         <div class="container mx-auto flex flex-col gap-12 md:gap-16">
-            <div class="flex flex-col items-center text-center gap-5 max-w-3xl mx-auto">
+            <div
+                class="flex flex-col items-center text-center gap-5 max-w-4xl mx-auto pt-2 pb-10 md:pb-14"
+            >
                 <span
                     data-workflow-eyebrow
-                    class="text-xs tracking-[0.2em] text-emerald-700 font-semibold opacity-0"
+                    class="relative z-10 text-xs tracking-[0.2em] text-emerald-700 font-semibold opacity-0"
                 >
                     Proceso
                 </span>
                 <h1
                     data-workflow-heading
-                    class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight md:leading-[1.1] tracking-tight text-zinc-800 opacity-0"
+                    class="relative z-10 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-zinc-900 opacity-0"
                 >
                     Diagnóstico, desarrollo y
-                    <span class="font-[ibm-plex-serif] font-bold italic text-emerald-900 relative inline-block px-2.5 py-1 sm:px-3 md:px-4">
-                        <span class="absolute inset-0 bg-emerald-200/60 -rotate-1 transform origin-center rounded-sm -mx-1" />
-                        <span class="relative z-10">educación</span>
-                    </span>
+                    <span class="text-emerald-700">educación</span>
                 </h1>
                 <p
                     data-workflow-sub
-                    class="text-base sm:text-lg text-zinc-600 leading-relaxed max-w-2xl opacity-0"
+                    class="relative z-10 text-base sm:text-lg text-zinc-600 leading-relaxed max-w-2xl opacity-0"
                 >
                     Cada fase cierra con una decisión de tu equipo: aprueba el siguiente paso o paramos a corregir. Nada avanza por inercia, nada se factura sin que sirva.
                 </p>
-                <div data-workflow-cta class="mt-6 opacity-0">
+                <div data-workflow-cta class="relative z-10 mt-6 opacity-0">
                     <Button link="/contacto" variant="outline">Hablemos</Button>
                 </div>
             </div>
@@ -92,7 +91,7 @@ const phases = [
                         class="phase-card group relative flex flex-col gap-5 rounded-2xl md:rounded-3xl border border-zinc-200 bg-white p-8 md:p-10 opacity-0 transition-colors duration-300 hover:border-emerald-700/30"
                     >
                         <div class="flex items-center gap-4">
-                            <span class="inline-flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-emerald-50 border border-emerald-200/60 font-[ibm-plex-serif] italic font-bold text-emerald-900 text-lg md:text-xl">
+                            <span class="inline-flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-emerald-50 border border-emerald-200/60 font-semibold text-emerald-800 text-lg md:text-xl">
                                 {phase.number}
                             </span>
                             <h2 class="text-xl md:text-2xl font-semibold text-zinc-900 tracking-tight">
@@ -150,10 +149,7 @@ const phases = [
                         class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight md:leading-[1.15] tracking-tight text-zinc-800 opacity-0"
                     >
                         Cómo trabajamos
-                        <span class="font-[ibm-plex-serif] font-bold italic text-emerald-900 relative inline-block px-2.5 py-1 sm:px-3 md:px-4">
-                            <span class="absolute inset-0 bg-emerald-200/60 -rotate-1 transform origin-center rounded-sm -mx-1" />
-                            <span class="relative z-10">contigo</span>
-                        </span>
+                        <span class="text-emerald-700">contigo</span>
                     </h2>
                     <p
                         data-workflow-sub
@@ -190,7 +186,7 @@ const phases = [
                             >
                                 <span
                                     data-phase-marker
-                                    class="absolute left-0 top-0 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white border border-zinc-200 flex items-center justify-center font-[ibm-plex-serif] italic font-bold text-emerald-900 text-base md:text-lg shadow-sm transition-colors duration-300"
+                                    class="absolute left-0 top-0 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white border border-zinc-200 flex items-center justify-center font-semibold text-emerald-800 text-base md:text-lg shadow-sm transition-colors duration-300"
                                 >
                                     {phase.number}
                                 </span>
