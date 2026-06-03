@@ -1,10 +1,12 @@
 ---
 import "@app/styles/global.css";
 import FeaturedProject from "./featured-project.astro";
+import imaPreview from "@assets/case-studies/ima/dashboard-preview.webp";
+import butaqueando from "@assets/projects/butaqueando.webp";
 
 const projects = [
     {
-        imageSrc: "/case-studies/ima/dashboard-preview.png",
+        imageSrc: imaPreview,
         imageAlt: "IMA Cloud",
         title: "IMA Cloud",
         description: "Plataforma interna a medida que centraliza reportes, documentación e inventario para una empresa de electrificación ferroviaria — del diagnóstico al producto en operación.",
@@ -13,7 +15,7 @@ const projects = [
         imageClasses: "max-h-[78%] md:max-h-[80%]",
     },
     {
-        imageSrc: "/butaqueando.webp",
+        imageSrc: butaqueando,
         imageAlt: "Butaqueando — mockup de la plataforma para descubrir obras teatrales",
         title: "Butaqueando",
         description: "App para descubrir, seguir y no perderse las obras teatrales en cartelera.",
