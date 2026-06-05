@@ -6,7 +6,7 @@
 // nationally — so the site reads as a Mexican software/IA/app-development
 // studio for both local-pack and national queries.
 
-export const SITE_URL = "https://syncestudio.com";
+export const SITE_URL = "https://synce.mx";
 export const SITE_NAME = "SYNC Estudio";
 
 const u = (path: string): string => new URL(path, SITE_URL).href;

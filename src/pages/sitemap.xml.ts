@@ -3,7 +3,7 @@ import { solutions } from "@features/solutions/data";
 import { landingPages } from "@features/landing/data";
 import { getCollection } from "astro:content";
 
-const SITE = "https://syncestudio.com";
+const SITE = "https://synce.mx";
 
 type Entry = {
     loc: string;

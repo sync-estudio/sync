@@ -9,4 +9,4 @@ Disallow: /api/
 Disallow: /_astro/
 Disallow: /404
 
-Sitemap: https://syncestudio.com/sitemap.xml
+Sitemap: https://synce.mx/sitemap.xml
