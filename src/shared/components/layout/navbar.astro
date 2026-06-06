@@ -151,6 +151,7 @@ const logoWrapper =
                     hreflang={otherCode}
                     aria-label={t("lang.switch")}
                     data-lang-switch
+                    data-lang-target={otherCode}
                     >{otherLabel}</a
                 >
                 <a
@@ -287,6 +288,7 @@ const logoWrapper =
                             hreflang={otherCode}
                             aria-label={t("lang.switch")}
                             data-lang-switch
+                            data-lang-target={otherCode}
                             role="menuitem">{otherLabel}</a
                         >
                     </li>
@@ -642,4 +644,18 @@ const logoWrapper =
             });
         });
     }
+
+    // Persist an explicit language choice so the locale middleware honors it on
+    // future visits to the bare home path. One year, lax — a soft preference.
+    const langSwitches = document.querySelectorAll<HTMLAnchorElement>(
+        "[data-lang-switch]",
+    );
+    langSwitches.forEach((link) => {
+        link.addEventListener("click", () => {
+            const target = link.dataset.langTarget;
+            if (target === "es" || target === "en") {
+                document.cookie = `pref-lang=${target}; path=/; max-age=31536000; samesite=lax`;
+            }
+        });
+    });
 </script>
