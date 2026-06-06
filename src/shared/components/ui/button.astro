@@ -5,6 +5,9 @@ interface Props {
     link?: string;
     blank?: boolean;
     disabled?: boolean;
+    id?: string;
+    /** Pass-through for data-* hooks (e.g. Cal.com popup triggers). */
+    [key: `data-${string}`]: string | undefined;
 }
 
 const {
@@ -13,6 +16,7 @@ const {
     link,
     blank = false,
     disabled = false,
+    ...rest
 } = Astro.props;
 
 const disabledClass = "disabled:opacity-50 disabled:cursor-not-allowed";
@@ -35,6 +39,7 @@ const variants = {
             href={link}
             class={`${style} ${variants[variant]}`}
             target={blank ? "_blank" : "_self"}
+            {...rest}
         >
             <slot />
         </a>
@@ -42,6 +47,7 @@ const variants = {
         <button
             class={`${style} ${variants[variant]} ${disabledClass}`}
             disabled={disabled}
+            {...rest}
         >
             <slot />
         </button>

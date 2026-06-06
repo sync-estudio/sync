@@ -1,6 +1,7 @@
 ---
 import "@app/styles/global.css";
 import Button from "@shared/components/ui/button.astro";
+import CalEmbed from "@shared/components/ui/cal-embed.astro";
 import { signTimestamp } from "@shared/utils/form-token";
 import { getLang, localizedPath } from "@i18n/utils";
 import { contact } from "@i18n/content/contact";
@@ -10,6 +11,7 @@ const copy = contact[lang];
 const pillars = copy.pillars;
 const pricingPath = localizedPath("pricing", lang);
 const whatsappHref = `https://wa.me/522228230805?text=${encodeURIComponent(copy.whatsappMessage)}`;
+const calLink = "yamil-yscapa/diagnostico-gratuito";
 
 // Strings the client-side script needs (validation, alerts, button states).
 const formI18n = {
@@ -357,6 +359,29 @@ const alreadySent = Astro.cookies.get("contact_sent")?.value === "1";
                                     : copy.submitLabel
                             }
                         </Button>
+                        <div class="mt-3">
+                            <CalEmbed
+                                calLink={calLink}
+                                namespace="diagnostico-gratuito"
+                                label={copy.bookingLabel}
+                                variant="outline"
+                                style="w-full"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="w-4 h-4"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    ><path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                    ></path></svg
+                                >
+                            </CalEmbed>
+                        </div>
                         <div class="mt-4 text-center">
                             <Button
                                 variant="ghost"
