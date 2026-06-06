@@ -7,276 +7,251 @@ import { home } from "@i18n/content/home";
 const lang = getLang(Astro.currentLocale);
 const copy = home[lang].offerings;
 
-type Step = {
-    id: string;
-    title: string;
-    desc: string;
-    surface: string;
-    text: string;
-    muted: string;
-    cta?: boolean;
-};
+const themes = {
+    dark: {
+        card: "bg-zinc-900 text-zinc-100",
+        title: "text-white",
+        intro: "text-zinc-300",
+        dots: "rgba(255,255,255,0.18)",
+    },
+    mid: {
+        card: "bg-emerald-800 text-emerald-50",
+        title: "text-white",
+        intro: "text-emerald-100/90",
+        dots: "rgba(255,255,255,0.18)",
+    },
+    light: {
+        card: "bg-[#defbed] text-zinc-800",
+        title: "text-zinc-900",
+        intro: "text-zinc-700",
+        dots: "rgba(4,120,87,0.35)",
+    },
+} as const;
 
-const steps: Step[] = [
+const products = [
     {
-        id: "platforms",
         title: copy.platformsTitle,
         desc: copy.platformsDesc,
-        surface: "bg-white",
-        text: "text-zinc-900",
-        muted: "text-zinc-600",
+        theme: themes.light,
+        aura: { x: "0%", y: "0%" },
     },
     {
-        id: "ai",
         title: copy.aiTitle,
         desc: copy.aiDesc,
-        surface: "bg-zinc-900",
-        text: "text-white",
-        muted: "text-zinc-300",
+        theme: themes.dark,
+        aura: { x: "50%", y: "50%" },
     },
     {
-        id: "mvp",
         title: copy.mvpTitle,
         desc: copy.mvpDesc,
-        surface: "bg-white",
-        text: "text-zinc-900",
-        muted: "text-zinc-600",
-        cta: true,
+        theme: themes.mid,
+        aura: { x: "100%", y: "100%" },
     },
 ];
 ---
 
-<section id="servicios" data-offer class="relative">
-    {
-        steps.map((step) => (
-            <section
-                data-offer-panel
-                class={`offer-panel relative h-[100dvh] w-full overflow-hidden flex items-center ${step.surface} ${step.text}`}
-            >
-                {step.id === "platforms" && (
-                    <pre
-                        data-offer-wave
-                        data-pos="bottom"
-                        class="offer-wave"
-                        aria-hidden="true"
-                    />
-                )}
-                {step.id === "mvp" && (
-                    <pre
-                        data-offer-wave
-                        data-pos="top"
-                        class="offer-wave"
-                        aria-hidden="true"
-                    />
-                )}
-                <div class="container mx-auto w-full relative z-10">
-                    <div class={`max-w-3xl ${step.id === "ai" ? "ml-auto text-right" : ""}`}>
-                        {step.id === "platforms" && (
-                            <span class={`block mb-6 md:mb-8 text-sm md:text-base ${step.muted}`}>
-                                {copy.eyebrow}
-                            </span>
-                        )}
-                        <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05]">
-                            {step.title}
-                        </h2>
-                        <p class={`mt-5 md:mt-6 text-lg md:text-xl leading-relaxed ${step.muted}`}>
-                            {step.desc}
-                        </p>
-                        {step.cta && (
-                            <div class="mt-8 md:mt-10">
-                                <Button link={localizedPath("contact", lang)}>{copy.cta}</Button>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </section>
-        ))
-    }
+<section id="productos" class="container mx-auto py-24 md:py-32">
+    <header
+        class="max-w-3xl mx-auto flex flex-col gap-4 md:gap-5 text-center mb-16 md:mb-20"
+    >
+        <h2
+            data-services-heading
+            class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.05] tracking-tight text-balance text-zinc-800 opacity-0"
+        >
+            {copy.eyebrow}
+        </h2>
+        <p
+            data-services-sub
+            class="text-base sm:text-lg md:text-xl text-zinc-500 leading-relaxed max-w-2xl mx-auto text-balance opacity-0"
+        >
+            {copy.subtitle}
+        </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+        {
+            products.map((product) => {
+                const t = product.theme;
+                return (
+                    <article
+                        data-services-card
+                        style={`--services-dot-color: ${t.dots}; --services-mouse-x: ${product.aura.x}; --services-mouse-y: ${product.aura.y};`}
+                        data-aura-x={product.aura.x}
+                        data-aura-y={product.aura.y}
+                        class={`services-card relative isolate overflow-hidden flex flex-col gap-4 p-8 md:p-10 rounded-3xl min-h-[18rem] md:min-h-[22rem] ${t.card} opacity-0 transition-transform duration-300 ease-out hover:-translate-y-1`}
+                    >
+                        <div class="relative z-10 flex flex-col gap-4">
+                            <h3
+                                class={`text-xl md:text-2xl font-semibold tracking-tight ${t.title}`}
+                            >
+                                {product.title}
+                            </h3>
+                            <p
+                                class={`text-base md:text-lg leading-snug ${t.intro}`}
+                            >
+                                {product.desc}
+                            </p>
+                        </div>
+
+                        <div class="services-dots" aria-hidden="true" />
+                    </article>
+                );
+            })
+        }
+    </div>
+
+    <div data-services-cta class="mt-12 md:mt-16 flex justify-center opacity-0">
+        <Button link={localizedPath("contact", lang)}>{copy.cta}</Button>
+    </div>
 </section>
 
 <style>
-    /* Subtle hero-wave variant — sits at the bottom of the first panel. */
-    .offer-wave {
+    .services-dots {
         position: absolute;
         inset: 0;
-        margin: 0;
         pointer-events: none;
         z-index: 0;
-        overflow: hidden;
-        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-        font-weight: 700;
-        color: rgba(4, 120, 87, 0.28);
-        white-space: pre;
-        user-select: none;
-        line-height: 1;
-        letter-spacing: 0.4em;
-        mask-image: linear-gradient(
-            90deg,
-            transparent 0%,
-            #000 3%,
-            #000 97%,
-            transparent 100%
+        background-image: radial-gradient(
+            circle,
+            var(--services-dot-color) 1.2px,
+            transparent 1.6px
         );
-        -webkit-mask-image: linear-gradient(
-            90deg,
-            transparent 0%,
-            #000 3%,
-            #000 97%,
-            transparent 100%
+        background-size: 14px 14px;
+        background-position: bottom right;
+        mask-image: radial-gradient(
+            circle 320px at var(--services-mouse-x, 100%)
+                var(--services-mouse-y, 100%),
+            #000 0%,
+            rgba(0, 0, 0, 0.55) 35%,
+            rgba(0, 0, 0, 0.2) 70%,
+            rgba(0, 0, 0, 0.1) 100%
         );
+        -webkit-mask-image: radial-gradient(
+            circle 320px at var(--services-mouse-x, 100%)
+                var(--services-mouse-y, 100%),
+            #000 0%,
+            rgba(0, 0, 0, 0.55) 35%,
+            rgba(0, 0, 0, 0.2) 70%,
+            rgba(0, 0, 0, 0.1) 100%
+        );
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        [data-services-heading],
+        [data-services-sub],
+        [data-services-card],
+        [data-services-cta] {
+            opacity: 1 !important;
+        }
     }
 </style>
 
 <script>
-    async function init() {
-        const section = document.querySelector<HTMLElement>("[data-offer]");
-        if (!section) return;
+    import { animate, inView, stagger } from "framer-motion";
 
-        // Reduced motion: no pinning, panels just stack and scroll normally.
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+    const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    const heading = document.querySelector<HTMLElement>(
+        "[data-services-heading]",
+    );
+    const sub = document.querySelector<HTMLElement>("[data-services-sub]");
+    const cta = document.querySelector<HTMLElement>("[data-services-cta]");
+    const cards = document.querySelectorAll<HTMLElement>(
+        "[data-services-card]",
+    );
+
+    const fadeIn = (el: HTMLElement | null, y = 20, duration = 0.6) => {
+        if (!el) return;
+        if (prefersReducedMotion) {
+            el.style.opacity = "1";
             return;
-
-        // Defer the GSAP/ScrollTrigger bundle until the section is near the
-        // viewport — keeps it out of the initial page load.
-        const { default: gsap } = await import("gsap");
-        const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-        gsap.registerPlugin(ScrollTrigger);
-
-        const panels = gsap.utils.toArray<HTMLElement>(
-            section.querySelectorAll("[data-offer-panel]"),
+        }
+        inView(
+            el,
+            () => {
+                animate(
+                    el,
+                    {
+                        opacity: [0, 1],
+                        transform: [`translateY(${y}px)`, "translateY(0px)"],
+                    },
+                    { duration, ease: [0.22, 1, 0.36, 1] },
+                );
+            },
+            { amount: 0.3 },
         );
-        if (panels.length === 0) return;
+    };
 
-        // Layered pinning — each panel pins at the top so the next one
-        // scrolls up and covers it. pinSpacing:false makes them stack
-        // instead of pushing each other down. The LAST panel is left
-        // unpinned so it scrolls out cleanly into the following section
-        // instead of staying fixed and overlapping it.
-        panels.slice(0, -1).forEach((panel) => {
-            ScrollTrigger.create({
-                trigger: panel,
-                start: "top top",
-                pin: true,
-                pinSpacing: false,
-                // Engage the pin slightly early (by scroll velocity) so it
-                // doesn't catch a frame late and snap — kills the start jump.
-                anticipatePin: 1,
+    fadeIn(heading, 20);
+    fadeIn(sub, 16);
+    fadeIn(cta, 12);
+
+    if (cards.length) {
+        if (prefersReducedMotion) {
+            cards.forEach((el) => (el.style.opacity = "1"));
+        } else {
+            const first = cards[0];
+            inView(
+                first,
+                () => {
+                    animate(
+                        cards,
+                        {
+                            opacity: [0, 1],
+                            transform: ["translateY(24px)", "translateY(0px)"],
+                        },
+                        {
+                            duration: 0.55,
+                            ease: [0.22, 1, 0.36, 1],
+                            delay: stagger(0.09),
+                        },
+                    );
+                },
+                { amount: 0.25 },
+            );
+        }
+    }
+
+    const supportsFinePointer = window.matchMedia(
+        "(hover: hover) and (pointer: fine)",
+    ).matches;
+
+    if (supportsFinePointer) {
+        cards.forEach((card) => {
+            const defaultX = card.dataset.auraX ?? "100%";
+            const defaultY = card.dataset.auraY ?? "100%";
+            let rafId = 0;
+            let pendingX = defaultX;
+            let pendingY = defaultY;
+            let rect: DOMRect | null = null;
+
+            const apply = () => {
+                rafId = 0;
+                card.style.setProperty("--services-mouse-x", pendingX);
+                card.style.setProperty("--services-mouse-y", pendingY);
+            };
+
+            card.addEventListener("pointerenter", () => {
+                rect = card.getBoundingClientRect();
+            });
+
+            card.addEventListener("pointermove", (e) => {
+                if (!rect) rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                pendingX = `${x}%`;
+                pendingY = `${y}%`;
+                if (!rafId) rafId = requestAnimationFrame(apply);
+            });
+
+            card.addEventListener("pointerleave", () => {
+                rect = null;
+                pendingX = defaultX;
+                pendingY = defaultY;
+                if (!rafId) rafId = requestAnimationFrame(apply);
             });
         });
     }
-
-    const offerSection = document.querySelector<HTMLElement>("[data-offer]");
-    if (offerSection) {
-        const io = new IntersectionObserver(
-            (entries, obs) => {
-                if (entries.some((e) => e.isIntersecting)) {
-                    obs.disconnect();
-                    init();
-                }
-            },
-            // Wider margin than about: pins must exist before the panel
-            // reaches the top of the viewport.
-            { rootMargin: "600px" },
-        );
-        io.observe(offerSection);
-    } else {
-        init();
-    }
-
-    // Subtle animated wave at the bottom of the first panel — a calmer
-    // variant of the hero wave (lower, gentler amplitude, fainter).
-    function initWave(el: HTMLElement) {
-        const card = el.parentElement as HTMLElement;
-        const reduce = window.matchMedia(
-            "(prefers-reduced-motion: reduce)",
-        ).matches;
-
-        const RAMP = "  ···";
-        const FONT_PX = 13;
-
-        let cols = 0;
-        let rows = 0;
-        let frame = 0;
-        let base = 0;
-        let ampA = 0;
-        let ampB = 0;
-        let thickness = 1;
-        let freqA = 7;
-        let freqB = 13;
-
-        el.style.fontSize = FONT_PX + "px";
-
-        function resize() {
-            const rect = card.getBoundingClientRect();
-            cols = Math.max(1, Math.floor(rect.width / FONT_PX));
-            rows = Math.max(1, Math.floor(rect.height / FONT_PX));
-
-            const cycles = Math.max(1, rect.width / 640);
-            freqA = cycles * Math.PI * 2;
-            freqB = freqA * 1.85;
-
-            // Place at the top or bottom edge of the panel per data-pos.
-            base = el.dataset.pos === "top" ? rows * 0.1 : rows * 0.9;
-            // Gentler than the hero so it stays a quiet texture.
-            ampA = Math.min(rows * 0.16, cols * 0.09);
-            ampB = ampA * 0.5;
-            thickness = Math.max(2, rows * 0.1);
-        }
-
-        function render(t: number) {
-            const out: string[] = [];
-            for (let y = 0; y < rows; y++) {
-                let line = "";
-                for (let x = 0; x < cols; x++) {
-                    const u = x / cols;
-                    const center =
-                        base +
-                        ampA * Math.sin(u * freqA + t) +
-                        ampB * Math.sin(u * freqB - t * 0.7);
-                    const d = Math.abs(y - center) / thickness;
-                    const intensity = Math.exp(-d * d * 1.4);
-                    if (intensity <= 0.06) {
-                        line += " ";
-                    } else {
-                        const idx = Math.min(
-                            RAMP.length - 1,
-                            Math.round(intensity * (RAMP.length - 1)),
-                        );
-                        line += RAMP[idx];
-                    }
-                }
-                out.push(line);
-            }
-            el.textContent = out.join("\n");
-        }
-
-        function loop() {
-            frame += 0.004;
-            render(frame);
-            requestAnimationFrame(loop);
-        }
-
-        let lastW = -1;
-        function onResize() {
-            const w = Math.round(card.getBoundingClientRect().width);
-            if (w === lastW) return;
-            lastW = w;
-            resize();
-            if (reduce) render(0);
-        }
-
-        onResize();
-        window.addEventListener("resize", onResize);
-        window.addEventListener("orientationchange", onResize);
-
-        if (reduce) {
-            render(0);
-        } else {
-            requestAnimationFrame(loop);
-        }
-    }
-
-    document
-        .querySelectorAll<HTMLElement>("[data-offer-wave]")
-        .forEach(initWave);
 </script>

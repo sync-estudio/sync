@@ -1,0 +1,310 @@
+---
+import "@app/styles/global.css";
+import Button from "@shared/components/ui/button.astro";
+import { getSolutions } from "@features/solutions/data";
+import { getLang, solutionPath } from "@i18n/utils";
+import { home } from "@i18n/content/home";
+
+const lang = getLang(Astro.currentLocale);
+const copy = home[lang].services;
+const solutions = getSolutions(lang);
+
+type PanelTheme = {
+    surface: string;
+    text: string;
+    muted: string;
+    badge: string;
+    align: string;
+    wave?: "top" | "bottom";
+};
+
+// Methodology read as a journey: dark uncertainty → emerald work → light
+// clarity, with the team left owning the system. Panels pin and stack so
+// each phase fully lands before the next covers it.
+const panelThemes: Record<string, PanelTheme> = {
+    dark: {
+        surface: "bg-zinc-900",
+        text: "text-white",
+        muted: "text-zinc-300",
+        badge: "bg-white/10 text-white border-white/15",
+        align: "",
+        wave: "bottom",
+    },
+    mid: {
+        surface: "bg-emerald-800",
+        text: "text-white",
+        muted: "text-emerald-100/90",
+        badge: "bg-white/10 text-white border-white/15",
+        align: "ml-auto text-right",
+    },
+    light: {
+        surface: "bg-white",
+        text: "text-zinc-900",
+        muted: "text-zinc-600",
+        badge: "bg-emerald-50 text-emerald-800 border-emerald-200/60",
+        align: "",
+        wave: "top",
+    },
+};
+
+const phases = solutions.map((s, i) => ({
+    ...s,
+    theme: panelThemes[s.themeKey] ?? panelThemes.light,
+    isFirst: i === 0,
+    isLast: i === solutions.length - 1,
+}));
+---
+
+<section id="soluciones" data-offer class="relative">
+    {
+        phases.map((phase) => {
+            const t = phase.theme;
+            const aligned = t.align !== "";
+            return (
+                <section
+                    data-offer-panel
+                    class={`offer-panel relative h-[100dvh] w-full overflow-hidden flex items-center ${t.surface} ${t.text}`}
+                >
+                    {t.wave && (
+                        <pre
+                            data-offer-wave
+                            data-pos={t.wave}
+                            class="offer-wave"
+                            aria-hidden="true"
+                        />
+                    )}
+                    <div class="container mx-auto w-full relative z-10">
+                        <div class={`max-w-3xl ${t.align}`}>
+                            {phase.isFirst && (
+                                <div class="mb-8 md:mb-10 flex flex-col gap-3">
+                                    <span class={`text-sm md:text-base ${t.muted}`}>
+                                        {copy.eyebrow}
+                                    </span>
+                                    <p class={`text-lg md:text-2xl font-medium tracking-tight ${t.text}`}>
+                                        {copy.headingLead}{" "}
+                                        <span class="text-emerald-500">{copy.headingHighlight}</span>{copy.headingTail}
+                                    </p>
+                                </div>
+                            )}
+
+                            <div class={`flex items-center gap-4 ${aligned ? "justify-end" : ""}`}>
+                                <span class={`inline-flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-full border font-semibold text-base md:text-lg ${t.badge}`}>
+                                    {phase.number}
+                                </span>
+                                <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05]">
+                                    {phase.title}
+                                </h2>
+                            </div>
+
+                            <p class={`mt-5 md:mt-6 text-lg md:text-xl leading-relaxed ${t.muted}`}>
+                                {phase.intro}
+                            </p>
+
+                            {phase.isLast && (
+                                <p class={`mt-4 text-base md:text-lg leading-relaxed ${t.muted}`}>
+                                    {copy.footnote}
+                                </p>
+                            )}
+
+                            <div class={`mt-8 md:mt-10 flex ${aligned ? "justify-end" : ""}`}>
+                                <Button
+                                    link={solutionPath(phase.slug, lang)}
+                                    variant="outline"
+                                >
+                                    {copy.detail}
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        })
+    }
+</section>
+
+<style>
+    /* Subtle hero-wave variant — sits at the edge of the first/last panel. */
+    .offer-wave {
+        position: absolute;
+        inset: 0;
+        margin: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        font-weight: 700;
+        color: rgba(4, 120, 87, 0.28);
+        white-space: pre;
+        user-select: none;
+        line-height: 1;
+        letter-spacing: 0.4em;
+        mask-image: linear-gradient(
+            90deg,
+            transparent 0%,
+            #000 3%,
+            #000 97%,
+            transparent 100%
+        );
+        -webkit-mask-image: linear-gradient(
+            90deg,
+            transparent 0%,
+            #000 3%,
+            #000 97%,
+            transparent 100%
+        );
+    }
+</style>
+
+<script>
+    async function init() {
+        const section = document.querySelector<HTMLElement>("[data-offer]");
+        if (!section) return;
+
+        // Reduced motion: no pinning, panels just stack and scroll normally.
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+            return;
+
+        // Defer the GSAP/ScrollTrigger bundle until the section is near the
+        // viewport — keeps it out of the initial page load.
+        const { default: gsap } = await import("gsap");
+        const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+        gsap.registerPlugin(ScrollTrigger);
+
+        const panels = gsap.utils.toArray<HTMLElement>(
+            section.querySelectorAll("[data-offer-panel]"),
+        );
+        if (panels.length === 0) return;
+
+        // Layered pinning — each panel pins at the top so the next one
+        // scrolls up and covers it. pinSpacing:false makes them stack
+        // instead of pushing each other down. The LAST panel is left
+        // unpinned so it scrolls out cleanly into the following section
+        // instead of staying fixed and overlapping it.
+        panels.slice(0, -1).forEach((panel) => {
+            ScrollTrigger.create({
+                trigger: panel,
+                start: "top top",
+                pin: true,
+                pinSpacing: false,
+                // Engage the pin slightly early (by scroll velocity) so it
+                // doesn't catch a frame late and snap — kills the start jump.
+                anticipatePin: 1,
+            });
+        });
+    }
+
+    const offerSection = document.querySelector<HTMLElement>("[data-offer]");
+    if (offerSection) {
+        const io = new IntersectionObserver(
+            (entries, obs) => {
+                if (entries.some((e) => e.isIntersecting)) {
+                    obs.disconnect();
+                    init();
+                }
+            },
+            // Wider margin than about: pins must exist before the panel
+            // reaches the top of the viewport.
+            { rootMargin: "600px" },
+        );
+        io.observe(offerSection);
+    } else {
+        init();
+    }
+
+    // Subtle animated wave at the edge of the first/last panel — a calmer
+    // variant of the hero wave (lower, gentler amplitude, fainter).
+    function initWave(el: HTMLElement) {
+        const card = el.parentElement as HTMLElement;
+        const reduce = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        const RAMP = "  ···";
+        const FONT_PX = 13;
+
+        let cols = 0;
+        let rows = 0;
+        let frame = 0;
+        let base = 0;
+        let ampA = 0;
+        let ampB = 0;
+        let thickness = 1;
+        let freqA = 7;
+        let freqB = 13;
+
+        el.style.fontSize = FONT_PX + "px";
+
+        function resize() {
+            const rect = card.getBoundingClientRect();
+            cols = Math.max(1, Math.floor(rect.width / FONT_PX));
+            rows = Math.max(1, Math.floor(rect.height / FONT_PX));
+
+            const cycles = Math.max(1, rect.width / 640);
+            freqA = cycles * Math.PI * 2;
+            freqB = freqA * 1.85;
+
+            // Place at the top or bottom edge of the panel per data-pos.
+            base = el.dataset.pos === "top" ? rows * 0.1 : rows * 0.9;
+            // Gentler than the hero so it stays a quiet texture.
+            ampA = Math.min(rows * 0.16, cols * 0.09);
+            ampB = ampA * 0.5;
+            thickness = Math.max(2, rows * 0.1);
+        }
+
+        function render(t: number) {
+            const out: string[] = [];
+            for (let y = 0; y < rows; y++) {
+                let line = "";
+                for (let x = 0; x < cols; x++) {
+                    const u = x / cols;
+                    const center =
+                        base +
+                        ampA * Math.sin(u * freqA + t) +
+                        ampB * Math.sin(u * freqB - t * 0.7);
+                    const d = Math.abs(y - center) / thickness;
+                    const intensity = Math.exp(-d * d * 1.4);
+                    if (intensity <= 0.06) {
+                        line += " ";
+                    } else {
+                        const idx = Math.min(
+                            RAMP.length - 1,
+                            Math.round(intensity * (RAMP.length - 1)),
+                        );
+                        line += RAMP[idx];
+                    }
+                }
+                out.push(line);
+            }
+            el.textContent = out.join("\n");
+        }
+
+        function loop() {
+            frame += 0.004;
+            render(frame);
+            requestAnimationFrame(loop);
+        }
+
+        let lastW = -1;
+        function onResize() {
+            const w = Math.round(card.getBoundingClientRect().width);
+            if (w === lastW) return;
+            lastW = w;
+            resize();
+            if (reduce) render(0);
+        }
+
+        onResize();
+        window.addEventListener("resize", onResize);
+        window.addEventListener("orientationchange", onResize);
+
+        if (reduce) {
+            render(0);
+        } else {
+            requestAnimationFrame(loop);
+        }
+    }
+
+    document
+        .querySelectorAll<HTMLElement>("[data-offer-wave]")
+        .forEach(initWave);
+</script>

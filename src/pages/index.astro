@@ -4,9 +4,9 @@ export const prerender = true;
 import "@app/styles/global.css";
 import Layout from "@app/layouts/Layout.astro";
 import Hero from "@features/home/components/hero.astro";
-import Offerings from "@features/home/components/offerings.astro";
+import Methodology from "@features/home/components/methodology.astro";
 import Featured from "@features/home/components/featured.astro";
-import Services from "@features/home/components/services.astro";
+import Offerings from "@features/home/components/offerings.astro";
 import About from "@features/home/components/about.astro";
 import Faq from "@features/home/components/faq.astro";
 ---
@@ -15,8 +15,8 @@ import Faq from "@features/home/components/faq.astro";
 	<div class="min-h-screen">
 		<Hero />
 		<About />
+		<Methodology />
 		<Offerings />
-		<Services />
 		<Featured />
 		<Faq />
 	</div>

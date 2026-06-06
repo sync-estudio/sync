@@ -32,6 +32,7 @@ type HomeCopy = {
     };
     offerings: {
         eyebrow: string;
+        subtitle: string;
         platformsTitle: string;
         platformsDesc: string;
         aiTitle: string;
@@ -41,6 +42,7 @@ type HomeCopy = {
         cta: string;
     };
     services: {
+        eyebrow: string;
         headingLead: string;
         headingHighlight: string;
         headingTail: string;
@@ -98,6 +100,8 @@ export const home: Record<Lang, HomeCopy> = {
         },
         offerings: {
             eyebrow: "¿Qué podemos construir?",
+            subtitle:
+                "El software es el medio, no el fin. Construimos la herramienta que tu operación necesita — y nos quedamos para que siga sirviendo mientras creces.",
             platformsTitle: "Software a medida",
             platformsDesc:
                 "Sistemas internos que se ajustan a cómo ya trabajas, no al revés. Tu equipo los opera; el mantenimiento queda de nuestro lado.",
@@ -108,11 +112,12 @@ export const home: Record<Lang, HomeCopy> = {
             cta: "Solicitar diagnóstico",
         },
         services: {
+            eyebrow: "Cómo trabajamos contigo",
             headingLead: "Diagnosticamos, construimos y",
             headingHighlight: "entregamos",
             headingTail: ".",
             subtitle:
-                "Diagnosticamos tu operación, desarrollamos las herramientas y formamos a tu equipo.",
+                "Tres fases para entender tu operación, construir la herramienta y dejar a tu equipo al mando. No entregamos y desaparecemos: desde aquí arranca la relación.",
             detail: "Ver detalle",
             footnote:
                 "Las tres juntas. Entregar solo el software es desplazar el problema, no resolverlo.",
@@ -251,6 +256,8 @@ export const home: Record<Lang, HomeCopy> = {
         },
         offerings: {
             eyebrow: "What can we build?",
+            subtitle:
+                "Software is the means, not the end. We build the tool your operation needs — and we stay so it keeps serving as you grow.",
             platformsTitle: "Custom software",
             platformsDesc:
                 "Internal systems that fit how you already work, not the other way around. Your team operates them; maintenance stays on our side.",
@@ -261,11 +268,12 @@ export const home: Record<Lang, HomeCopy> = {
             cta: "Request an assessment",
         },
         services: {
+            eyebrow: "How we work with you",
             headingLead: "We assess, we build, and we",
             headingHighlight: "deliver",
             headingTail: ".",
             subtitle:
-                "We assess your operation, build the tools, and train your team.",
+                "Three phases to understand your operation, build the tool, and leave your team in charge. We don't deliver and disappear: this is where the relationship starts.",
             detail: "View detail",
             footnote:
                 "All three together. Delivering only the software moves the problem, it doesn't solve it.",
