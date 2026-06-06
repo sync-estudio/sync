@@ -68,11 +68,11 @@ export const pricing: Record<Lang, PricingCopy> = {
             },
             {
                 number: "03",
-                title: "Plan de Acompañamiento",
+                title: "Acompañamiento",
                 timing: "Mensual · Mínimo 12 meses",
-                body: "Mantenimiento, soporte y evolución del sistema en producción. Obligatorio para todos los proyectos: sin acompañamiento, el software se vuelve deuda en 6 meses.",
+                body: "Tu equipo opera el sistema con confianza y nosotros nos quedamos: lo mantenemos y evolucionamos a tu lado. Plan de Acompañamiento mensual incluido por defecto, no como complemento.",
                 items: [
-                    "Tres tiers según volumen y frecuencia de soporte",
+                    "Tres niveles según volumen y frecuencia de soporte",
                     "Cubre roles nuevos, ajustes operativos y mantenimiento",
                     "Revisiones trimestrales para priorizar lo que no rinde",
                 ],
@@ -150,9 +150,9 @@ export const pricing: Record<Lang, PricingCopy> = {
             },
             {
                 number: "03",
-                title: "Support Plan",
+                title: "Partnership",
                 timing: "Monthly · Minimum 12 months",
-                body: "Maintenance, support and evolution of the system in production. Mandatory for all projects: without support, the software becomes debt in 6 months.",
+                body: "Your team operates the system with confidence and we stay: we maintain and evolve it by your side. Monthly Support Plan included by default, not as an add-on.",
                 items: [
                     "Three tiers by volume and support frequency",
                     "Covers new roles, operational adjustments and maintenance",

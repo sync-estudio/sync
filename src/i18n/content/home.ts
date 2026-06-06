@@ -236,7 +236,6 @@ export const home: Record<Lang, HomeCopy> = {
                     number: "03",
                     title: "Acompañamiento",
                     body: "Tu equipo opera el sistema con confianza en el día a día y nosotros nos quedamos: lo mantenemos y evolucionamos contigo. Plan de Acompañamiento mensual incluido por defecto.",
-                    note: "Plan de Acompañamiento incluido.",
                     deliverables: [
                         "Talleres prácticos por rol, no charlas genéricas",
                         "Playbooks y documentación viva, versionada con el código",
@@ -400,7 +399,6 @@ export const home: Record<Lang, HomeCopy> = {
                     number: "03",
                     title: "Partnership",
                     body: "Your team operates the system with confidence day-to-day and we stay: we maintain and evolve it with you. Monthly Support Plan included by default.",
-                    note: "Support Plan included.",
                     deliverables: [
                         "Hands-on workshops by role, not generic talks",
                         "Playbooks and living docs, versioned with the code",
