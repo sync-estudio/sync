@@ -48,22 +48,22 @@ export const pricing: Record<Lang, PricingCopy> = {
                 number: "01",
                 title: "Diagnóstico",
                 timing: "2-3 semanas · Precio fijo",
-                body: "Mapeo de procesos y stack actual, pain points priorizados y roadmap por fases. Es el único punto de entrada: sin Diagnóstico no construimos.",
+                body: "Mapeo de procesos y tecnologías actuales, puntos de fricción priorizados y hoja de ruta por fases. Es el único punto de entrada: sin Diagnóstico no construimos.",
                 items: [
                     "Precio fijo desde el primer día",
-                    "Entregable: roadmap operativo y técnico",
-                    "Si decides no seguir, el roadmap se queda contigo",
+                    "Entregable: hoja de ruta operativa y técnica",
+                    "Si decides no seguir, la hoja de ruta se queda contigo",
                 ],
             },
             {
                 number: "02",
                 title: "Desarrollo",
-                timing: "Sprints de 1-2 semanas · Precio fijo",
+                timing: "Ciclos de 1-2 semanas · Precio fijo",
                 body: "Precio fijo cerrado al final del Diagnóstico, no estimaciones por hora. El número se calcula sobre el alcance acordado, ponderado por complejidad técnica, urgencia, tamaño y claridad de requerimientos.",
                 items: [
                     "Esquema estándar 40/30/30 (inicio, mitad, entrega)",
                     "Proyectos pequeños: 50/50",
-                    "Iteraciones por sprint hasta cierre del alcance acordado",
+                    "Iteraciones por ciclo hasta cierre del alcance acordado",
                 ],
             },
             {
@@ -97,7 +97,7 @@ export const pricing: Record<Lang, PricingCopy> = {
         faqs: [
             {
                 q: "¿Por qué el Plan de Acompañamiento es obligatorio?",
-                a: "Software operativo sin mantenimiento se vuelve deuda en pocos meses: integraciones que se rompen, roles nuevos sin onboarding, procesos que evolucionan más rápido que la documentación. El acompañamiento mantiene el sistema vivo y útil; sin él, lo que entregamos hoy se vuelve un problema mañana.",
+                a: "Software operativo sin mantenimiento se vuelve deuda en pocos meses: integraciones que se rompen, roles nuevos sin incorporación, procesos que evolucionan más rápido que la documentación. El acompañamiento mantiene el sistema vivo y útil; sin él, lo que entregamos hoy se vuelve un problema mañana.",
             },
             {
                 q: "¿Por qué mínimo 12 meses?",

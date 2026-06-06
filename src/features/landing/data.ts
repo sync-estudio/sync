@@ -67,37 +67,37 @@ export const landingEntries: LandingEntry[] = [
             es: {
                 metaTitle: "Desarrollo de software a medida | SYNC Estudio",
                 metaDescription:
-                    "Desarrollo de software a medida para empresas en operación. Portales internos, dashboards, automatizaciones e integraciones que tu equipo sí opera — con mantenimiento del lado nuestro. Desde México, disponibles en todo el mundo.",
+                    "Desarrollo de software a medida para empresas en operación. Portales internos, tableros, automatizaciones e integraciones que tu equipo sí opera — con mantenimiento del lado nuestro. Desde México, disponibles en todo el mundo.",
                 label: "Desarrollo de software",
                 title: "Desarrollo de software a medida",
                 highlight: "medida",
                 subtitle:
                     "Construimos el software que tu operación necesita y que el producto empaquetado no resuelve: pensado alrededor de cómo trabaja tu equipo, no al revés.",
-                timing: "Sprints de 1-2 semanas · Precio fijo cerrado en Diagnóstico",
+                timing: "Ciclos de 1-2 semanas · Precio fijo cerrado en Diagnóstico",
                 serviceName: "Desarrollo de software a medida",
                 serviceType: "Desarrollo de software",
                 sections: [
                     {
                         title: "Qué construimos",
                         items: [
-                            "Software operativo a medida: portales internos, dashboards y herramientas de campo",
-                            "Automatización de procesos: workflows, reporting y sincronización entre sistemas",
-                            "Integraciones reales con tus ERPs, CRMs y sistemas legacy",
+                            "Software operativo a medida: portales internos, tableros y herramientas de campo",
+                            "Automatización de procesos: flujos de trabajo, reportes y sincronización entre sistemas",
+                            "Integraciones reales con tus ERPs, CRMs y sistemas heredados",
                             "Copilotos e IA aplicada donde de verdad suman a la operación",
                         ],
                     },
                     {
                         title: "Cómo trabajamos",
-                        body: "Sprints de 1 a 2 semanas con demo en vivo. Cada release pasa por tu equipo antes de cambiar el día a día, y el código vive en tu repositorio desde el primer día.",
+                        body: "Ciclos de 1 a 2 semanas con demo en vivo. Cada entrega pasa por tu equipo antes de cambiar el día a día, y el código vive en tu repositorio desde el primer día.",
                         items: [
-                            "Demos cada sprint con feedback en la sala",
-                            "Aprobación de tu equipo antes de cada release",
+                            "Demos cada ciclo con retroalimentación en la sala",
+                            "Aprobación de tu equipo antes de cada entrega",
                             "Repositorio y documentación entregables desde el día uno",
                         ],
                     },
                     {
-                        title: "Stack que usamos",
-                        body: "Adaptamos el stack a lo que tu equipo pueda mantener: TypeScript, Next.js, Go, Python, Postgres y MongoDB. Si ya tienes preferencias o restricciones técnicas, las respetamos.",
+                        title: "Tecnologías que usamos",
+                        body: "Adaptamos las tecnologías a lo que tu equipo pueda mantener: TypeScript, Next.js, Go, Python, Postgres y MongoDB. Si ya tienes preferencias o restricciones técnicas, las respetamos.",
                     },
                     {
                         title: "Lo que no hacemos",
@@ -125,7 +125,7 @@ export const landingEntries: LandingEntry[] = [
                     },
                     {
                         q: "¿Quién mantiene el software después del lanzamiento?",
-                        a: "Nosotros. El Plan de Acompañamiento mensual va incluido, no es un add-on.",
+                        a: "Nosotros. El Plan de Acompañamiento mensual va incluido, no es un complemento.",
                     },
                 ],
                 related: [
@@ -133,7 +133,7 @@ export const landingEntries: LandingEntry[] = [
                         href: "/soluciones/desarrollo",
                         label: "Solución: Desarrollo",
                         description:
-                            "Cómo construimos software a medida sobre el roadmap del Diagnóstico.",
+                            "Cómo construimos software a medida sobre la hoja de ruta del Diagnóstico.",
                     },
                     {
                         href: "/soluciones/diagnostico",
@@ -238,14 +238,14 @@ export const landingEntries: LandingEntry[] = [
                 highlight: "aplicaciones",
                 subtitle:
                     "Aplicaciones web y móviles construidas alrededor de tu operación: herramientas de campo, portales y apps internas que tu equipo usa todos los días.",
-                timing: "Sprints de 1-2 semanas · Precio fijo cerrado en Diagnóstico",
+                timing: "Ciclos de 1-2 semanas · Precio fijo cerrado en Diagnóstico",
                 serviceName: "Desarrollo de aplicaciones web y móviles",
                 serviceType: "Desarrollo de aplicaciones",
                 sections: [
                     {
                         title: "Qué tipo de apps construimos",
                         items: [
-                            "Aplicaciones web internas: portales, dashboards y back-office a medida",
+                            "Aplicaciones web internas: portales, tableros y herramientas administrativas a medida",
                             "Apps móviles para equipos de campo y operación en sitio",
                             "Herramientas conectadas a tus sistemas, sin exportar Excel entre áreas",
                             "Flujos con IA integrada donde reducen trabajo manual",
@@ -253,10 +253,10 @@ export const landingEntries: LandingEntry[] = [
                     },
                     {
                         title: "Cómo trabajamos",
-                        body: "Iteramos en sprints cortos con demo en vivo. La app se conecta a los sistemas que ya usas y tu equipo la aprueba antes de que toque producción.",
+                        body: "Iteramos en ciclos cortos con demo en vivo. La app se conecta a los sistemas que ya usas y tu equipo la aprueba antes de que toque producción.",
                         items: [
-                            "Diseño alrededor del flujo real, no de un template genérico",
-                            "Integración con ERPs, CRMs y sistemas legacy",
+                            "Diseño alrededor del flujo real, no de una plantilla genérica",
+                            "Integración con ERPs, CRMs y sistemas heredados",
                             "Código y documentación en tu repositorio desde el día uno",
                         ],
                     },
@@ -282,7 +282,7 @@ export const landingEntries: LandingEntry[] = [
                     },
                     {
                         q: "¿Pueden integrar la app con nuestros sistemas actuales?",
-                        a: "Sí. La mayoría de proyectos incluyen integraciones con ERPs, CRMs, herramientas de campo o sistemas legacy.",
+                        a: "Sí. La mayoría de proyectos incluyen integraciones con ERPs, CRMs, herramientas de campo o sistemas heredados.",
                     },
                     {
                         q: "¿Trabajan con empresas fuera de México?",
@@ -396,7 +396,7 @@ export const landingEntries: LandingEntry[] = [
                 highlight: "aplicada",
                 subtitle:
                     "IA puesta a trabajar dentro de tu operación: agentes, copilotos y modelos integrados donde reducen trabajo manual de verdad — no un chatbot por tener uno.",
-                timing: "Sprints de 1-2 semanas · Precio fijo cerrado en Diagnóstico",
+                timing: "Ciclos de 1-2 semanas · Precio fijo cerrado en Diagnóstico",
                 serviceName: "Inteligencia artificial aplicada a la operación",
                 serviceType: "Inteligencia artificial para empresas",
                 sections: [
@@ -406,14 +406,14 @@ export const landingEntries: LandingEntry[] = [
                             "Copilotos que absorben tareas repetitivas dentro de tus herramientas",
                             "Agentes que orquestan procesos entre sistemas",
                             "LLMs integrados para búsqueda, redacción y soporte interno",
-                            "Automatización de reporting y clasificación de datos",
+                            "Automatización de reportes y clasificación de datos",
                         ],
                     },
                     {
                         title: "Cómo decidimos dónde usarla",
                         body: "Partimos del Diagnóstico: medimos dónde la IA reduce trabajo real antes de construir. Si una automatización simple resuelve el problema, no metemos un modelo de más.",
                         items: [
-                            "Casos de uso priorizados por impacto, no por hype",
+                            "Casos de uso priorizados por impacto, no por moda",
                             "Métricas base para medir el antes y el después",
                             "Integración con los sistemas y datos que ya tienes",
                         ],
@@ -440,7 +440,7 @@ export const landingEntries: LandingEntry[] = [
                     },
                     {
                         q: "¿Necesitamos muchos datos para empezar?",
-                        a: "No siempre. En el Diagnóstico evaluamos qué datos existen y dónde la IA aporta hoy, sin esperar a un data lake perfecto.",
+                        a: "No siempre. En el Diagnóstico evaluamos qué datos existen y dónde la IA aporta hoy, sin esperar a un repositorio de datos perfecto.",
                     },
                     {
                         q: "¿Trabajan con empresas fuera de México?",

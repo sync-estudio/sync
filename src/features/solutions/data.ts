@@ -80,7 +80,7 @@ export const solutionEntries: SolutionEntry[] = [
                     "Identificación de cuellos de botella reales",
                     "Mapa de oportunidades priorizado por impacto",
                 ],
-                deliverable: "Un roadmap operativo, no un presupuesto especulativo.",
+                deliverable: "Una hoja de ruta operativa, no un presupuesto especulativo.",
                 timing: "2-3 semanas · Precio fijo",
                 sections: [
                     {
@@ -89,7 +89,7 @@ export const solutionEntries: SolutionEntry[] = [
                         items: [
                             "Entrevistas por rol, no encuestas masivas",
                             "Observación en sitio o en sesiones de trabajo grabadas",
-                            "Auditoría de stack, accesos y deuda técnica",
+                            "Auditoría de tecnologías, accesos y deuda técnica",
                             "Revisión de métricas existentes (o ausencia de ellas)",
                         ],
                     },
@@ -97,8 +97,8 @@ export const solutionEntries: SolutionEntry[] = [
                         title: "¿Qué entregamos al cierre?",
                         items: [
                             "Mapa de procesos con puntos de fricción marcados",
-                            "Pain points priorizados por impacto y esfuerzo",
-                            "Roadmap por fases con dependencias y orden recomendado",
+                            "Puntos de fricción priorizados por impacto y esfuerzo",
+                            "Hoja de ruta por fases con dependencias y orden recomendado",
                             "Métricas base para medir el antes y el después",
                             "Recomendaciones claras sobre construir vs comprar",
                         ],
@@ -114,7 +114,7 @@ export const solutionEntries: SolutionEntry[] = [
                 ],
                 outcomes: [
                     "Decidir con datos qué resolver primero",
-                    "Caso de negocio y roadmap técnico en el mismo documento",
+                    "Caso de negocio y hoja de ruta técnica en el mismo documento",
                     "Métricas base para evaluar mejoras",
                     "Claridad sobre qué vale construir y qué no",
                 ],
@@ -125,11 +125,11 @@ export const solutionEntries: SolutionEntry[] = [
                     },
                     {
                         q: "¿Tenemos que darles acceso a todo?",
-                        a: "Acceso de lectura es suficiente. Si hay restricciones por compliance o seguridad, adaptamos el alcance sin romper tus políticas.",
+                        a: "Acceso de lectura es suficiente. Si hay restricciones por cumplimiento o seguridad, adaptamos el alcance sin romper tus políticas.",
                     },
                     {
                         q: "¿Qué pasa si decidimos no seguir con ustedes?",
-                        a: "El roadmap es tuyo. Puedes ejecutarlo internamente o con otro proveedor, sin candados.",
+                        a: "La hoja de ruta es tuya. Puedes ejecutarla internamente o con otro proveedor, sin candados.",
                     },
                     {
                         q: "¿Necesitamos un equipo técnico para el diagnóstico?",
@@ -220,16 +220,16 @@ export const solutionEntries: SolutionEntry[] = [
                 title: "Desarrollo",
                 highlight: "operación",
                 intro: "Software a medida para los problemas operativos que el producto empaquetado no resuelve.",
-                lead: "Construimos las soluciones que tu operación necesita: portales, automatizaciones, integraciones y copilotos de IA pensados alrededor de cómo trabaja tu equipo, no al revés. Iteramos sobre el roadmap acordado en diagnóstico, con tu equipo aprobando cada entrega antes de que toque producción.",
+                lead: "Construimos las soluciones que tu operación necesita: portales, automatizaciones, integraciones y copilotos de IA pensados alrededor de cómo trabaja tu equipo, no al revés. Iteramos sobre la hoja de ruta acordada en diagnóstico, con tu equipo aprobando cada entrega antes de que toque producción.",
                 bulletsLabel: "Soluciones que entregamos:",
                 bullets: [
-                    "Software operativo a medida — portales internos, dashboards, herramientas de campo",
-                    "Automatización de procesos — workflows, reporting, sincronización entre sistemas",
+                    "Software operativo a medida — portales internos, tableros, herramientas de campo",
+                    "Automatización de procesos — flujos de trabajo, reportes, sincronización entre sistemas",
                     "IA aplicada a la operación — agentes, copilotos y LLMs integrados donde suman",
                 ],
                 deliverable:
                     "Soluciones operativas que resuelven problemas concretos, no plataformas genéricas adaptadas a la fuerza.",
-                timing: "Sprints de 1-2 semanas · Precio fijo cerrado en Diagnóstico",
+                timing: "Ciclos de 1-2 semanas · Precio fijo cerrado en Diagnóstico",
                 sections: [
                     {
                         title: "¿Qué resolvemos?",
@@ -243,16 +243,16 @@ export const solutionEntries: SolutionEntry[] = [
                     },
                     {
                         title: "¿Cómo trabajamos?",
-                        body: "Sprints de 1 a 2 semanas con demo en vivo. Cada release pasa por tu equipo antes de cambiar el día a día. El código vive en tu repositorio, no en el nuestro.",
+                        body: "Ciclos de 1 a 2 semanas con demo en vivo. Cada entrega pasa por tu equipo antes de cambiar el día a día. El código vive en tu repositorio, no en el nuestro.",
                         items: [
-                            "Demos cada sprint con feedback en la sala",
-                            "Aprobación de tu equipo antes de cada release",
+                            "Demos cada ciclo con retroalimentación en la sala",
+                            "Aprobación de tu equipo antes de cada entrega",
                             "Repositorio y documentación entregables desde el día uno",
                         ],
                     },
                     {
-                        title: "Stack que usamos",
-                        body: "Adaptamos el stack a lo que tu equipo pueda mantener, no al revés. Trabajamos principalmente con TypeScript, Next.js, Go, Python, Postgres y MongoDB. Si ya tienes preferencias técnicas o restricciones, las respetamos.",
+                        title: "Tecnologías que usamos",
+                        body: "Adaptamos las tecnologías a lo que tu equipo pueda mantener, no al revés. Trabajamos principalmente con TypeScript, Next.js, Go, Python, Postgres y MongoDB. Si ya tienes preferencias técnicas o restricciones, las respetamos.",
                     },
                     {
                         title: "Lo que no hacemos",
@@ -276,7 +276,7 @@ export const solutionEntries: SolutionEntry[] = [
                     },
                     {
                         q: "¿Pueden integrarse con nuestros sistemas actuales?",
-                        a: "Sí. La mayoría de proyectos incluyen integraciones con ERPs, CRMs, herramientas de campo o sistemas legacy.",
+                        a: "Sí. La mayoría de proyectos incluyen integraciones con ERPs, CRMs, herramientas de campo o sistemas heredados.",
                     },
                     {
                         q: "¿Quién mantiene el sistema después del lanzamiento?",
@@ -379,7 +379,7 @@ export const solutionEntries: SolutionEntry[] = [
                 bulletsLabel: "Lo que entregamos:",
                 bullets: [
                     "Talleres prácticos por rol (operador, supervisor, dirección)",
-                    "Documentación operativa y playbooks de uso",
+                    "Documentación operativa y guías de uso",
                     "Programas de adopción de IA donde aplique",
                     "Plan de Acompañamiento mensual incluido",
                 ],
@@ -392,23 +392,23 @@ export const solutionEntries: SolutionEntry[] = [
                         body: "Talleres prácticos con datos reales del sistema, no demos genéricas. Sesiones por rol para no saturar a quien no necesita ese nivel de detalle. Sesiones grabadas para nuevos miembros que se incorporen después.",
                         items: [
                             "Talleres por rol: operador, supervisor, dirección",
-                            "Ejercicios sobre flujos reales, no en sandbox",
-                            "Sesiones grabadas y editadas para onboarding futuro",
-                            "Resolución de dudas en vivo, no por ticket",
+                            "Ejercicios sobre flujos reales, no en un entorno de prueba",
+                            "Sesiones grabadas y editadas para incorporación futura",
+                            "Resolución de dudas en vivo, no por solicitud",
                         ],
                     },
                     {
                         title: "¿Qué entregamos?",
                         items: [
-                            "Playbooks por rol con escenarios típicos del día a día",
+                            "Guías por rol con escenarios típicos del día a día",
                             "Documentación viva, versionada junto al código",
-                            "Guías de troubleshooting para los errores más probables",
+                            "Guías de resolución de problemas para los errores más probables",
                             "Programas de adopción de IA donde sume valor",
                         ],
                     },
                     {
                         title: "Plan de Acompañamiento",
-                        body: "Nos quedamos como soporte y mantenimiento del sistema después del cierre. Office hours mensuales, canal directo asíncrono y revisiones trimestrales para ajustar lo que no rinde. Incluido por defecto, no es un add-on.",
+                        body: "Nos quedamos como soporte y mantenimiento del sistema después del cierre. Sesiones de consulta mensuales, canal directo asíncrono y revisiones trimestrales para ajustar lo que no rinde. Incluido por defecto, no es un complemento.",
                         link: { href: "/como-cobramos", label: "Cómo se estructura" },
                     },
                     {
@@ -416,14 +416,14 @@ export const solutionEntries: SolutionEntry[] = [
                         items: [
                             "Manuales PDF que nadie va a leer",
                             "Charlas genéricas sin conexión a la operación real",
-                            "Capacitación de un solo shot sin acompañamiento posterior",
+                            "Capacitación de una sola sesión sin acompañamiento posterior",
                         ],
                     },
                 ],
                 outcomes: [
                     "Equipo que opera el sistema con confianza en el día a día",
                     "Documentación que sí se mantiene actualizada",
-                    "Menos tickets por dudas básicas",
+                    "Menos solicitudes por dudas básicas",
                     "Adopción real, no fricción contra el software",
                 ],
                 faqs: [
@@ -441,7 +441,7 @@ export const solutionEntries: SolutionEntry[] = [
                     },
                     {
                         q: "¿Qué pasa si rota gente en el equipo?",
-                        a: "Las sesiones grabadas y los playbooks están pensados para onboarding futuro. Si necesitas talleres adicionales, el Plan de Acompañamiento los cubre.",
+                        a: "Las sesiones grabadas y las guías están pensadas para incorporación futura. Si necesitas talleres adicionales, el Plan de Acompañamiento los cubre.",
                     },
                 ],
                 cta: null,

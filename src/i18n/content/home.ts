@@ -151,7 +151,7 @@ export const home: Record<Lang, HomeCopy> = {
                     description:
                         "App para descubrir, seguir y no perderse las obras teatrales en cartelera.",
                     imageAlt:
-                        "Butaqueando — mockup de la plataforma para descubrir obras teatrales",
+                        "Butaqueando — maqueta de la plataforma para descubrir obras teatrales",
                 },
             ],
         },
@@ -183,7 +183,7 @@ export const home: Record<Lang, HomeCopy> = {
                 },
                 {
                     q: "¿Tenemos que empezar por el Diagnóstico?",
-                    a: "Sí. Es el único punto de entrada. Sin entender la operación primero, cualquier propuesta es especulativa. Si decides no seguir con nosotros después del Diagnóstico, el roadmap se queda contigo: puedes ejecutarlo internamente o con otro proveedor.",
+                    a: "Sí. Es el único punto de entrada. Sin entender la operación primero, cualquier propuesta es especulativa. Si decides no seguir con nosotros después del Diagnóstico, la hoja de ruta se queda contigo: puedes ejecutarla internamente o con otro proveedor.",
                     link: { href: "/soluciones/diagnostico", label: "Ver Diagnóstico" },
                 },
                 {
@@ -215,21 +215,21 @@ export const home: Record<Lang, HomeCopy> = {
                     title: "Diagnóstico",
                     body: "Dos semanas dentro de tu operación: dónde se atasca el trabajo, qué datos viven en archivos sueltos y qué procesos siguen vivos por costumbre. Salimos con un plan, no con una propuesta comercial.",
                     deliverables: [
-                        "Mapa de procesos y stack actual",
-                        "Pain points priorizados por impacto y esfuerzo",
-                        "Roadmap con fases y dependencias claras",
+                        "Mapa de procesos y tecnologías actuales",
+                        "Puntos de fricción priorizados por impacto y esfuerzo",
+                        "Hoja de ruta con fases y dependencias claras",
                         "Métricas base para medir el antes y el después",
                     ],
                 },
                 {
                     number: "02",
                     title: "Desarrollo",
-                    body: "Construimos las soluciones que tu operación necesita iterando sobre el roadmap acordado. Cada release pasa por tu equipo antes de tocar su día a día, y se queda en producción sólo si resuelve el problema real.",
+                    body: "Construimos las soluciones que tu operación necesita iterando sobre la hoja de ruta acordada. Cada entrega pasa por tu equipo antes de tocar su día a día, y se queda en producción sólo si resuelve el problema real.",
                     deliverables: [
-                        "Sprints de 1 a 2 semanas con demo en vivo",
-                        "Integraciones funcionando en producción, no en slides",
+                        "Ciclos de 1 a 2 semanas con demo en vivo",
+                        "Integraciones funcionando en producción, no en diapositivas",
                         "Repositorio y documentación técnica entregables",
-                        "Aprobación de tu equipo antes de cada release",
+                        "Aprobación de tu equipo antes de cada entrega",
                     ],
                 },
                 {
