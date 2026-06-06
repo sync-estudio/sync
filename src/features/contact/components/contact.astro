@@ -1,6 +1,14 @@
 ---
 import "@app/styles/global.css";
 import Button from "@shared/components/ui/button.astro";
+import { signTimestamp } from "@shared/utils/form-token";
+
+// Time-trap: sign the render time so the endpoint can reject instant/forged submits.
+const formTs = Date.now();
+const formSig = signTimestamp(formTs);
+
+// Cooldown: endpoint sets `contact_sent` after a send — disable the form on reload.
+const alreadySent = Astro.cookies.get("contact_sent")?.value === "1";
 
 const pillars = [
     {
@@ -114,6 +122,21 @@ const pillars = [
                     class="relative z-10 space-y-4"
                     novalidate
                 >
+                    <input type="hidden" name="formTs" value={formTs} />
+                    <input type="hidden" name="formSig" value={formSig} />
+                    <div
+                        aria-hidden="true"
+                        class="absolute -left-[9999px] top-0 h-px w-px overflow-hidden"
+                    >
+                        <label for="website">No llenar este campo</label>
+                        <input
+                            type="text"
+                            id="website"
+                            name="website"
+                            tabindex="-1"
+                            autocomplete="off"
+                        />
+                    </div>
                     <div class="space-y-1">
                         <label
                             for="email"
@@ -334,8 +357,16 @@ const pillars = [
                                 >Política de Privacidad</a
                             >.
                         </p>
-                        <Button variant="default" style="w-full">
-                            Solicitar diagnóstico estratégico
+                        <Button
+                            variant="default"
+                            style="w-full"
+                            disabled={alreadySent}
+                        >
+                            {
+                                alreadySent
+                                    ? "Ya enviaste tu mensaje"
+                                    : "Solicitar diagnóstico estratégico"
+                            }
                         </Button>
                         <div class="mt-4 text-center">
                             <Button
@@ -638,33 +669,37 @@ const pillars = [
             }
 
             const target = e.target as HTMLFormElement;
-            const formData = new FormData(target);
+            const submitButton = target.querySelector(
+                "button",
+            ) as HTMLButtonElement;
 
-            const additionalInfo = `
-Empresa: ${formData.get("companyName")}
-Cargo: ${formData.get("jobTitle")}
-Tamaño: ${formData.get("companySize")}
-Teléfono: ${formData.get("phone") || "N/A"}
----
-Mensaje: ${formData.get("message")}
-    `.trim();
+            // Already in-flight — ignore repeat submits so the button only ever
+            // shows the sending state for a single live request.
+            if (submitButton.disabled) return;
+
+            const formData = new FormData(target);
 
             const data = {
                 name: `${formData.get("firstName")} ${formData.get("lastName")}`,
                 email: formData.get("email"),
-                message: additionalInfo,
+                companyName: formData.get("companyName"),
+                jobTitle: formData.get("jobTitle"),
+                companySize: formData.get("companySize"),
+                phone: formData.get("phone"),
+                message: formData.get("message"),
+                website: formData.get("website"), // honeypot
+                formTs: formData.get("formTs"),
+                formSig: formData.get("formSig"),
+                idempotencyKey: crypto.randomUUID(),
             };
 
-            const submitButton = target.querySelector(
-                "button",
-            ) as HTMLButtonElement;
             const originalText = submitButton.textContent;
             submitButton.textContent = "Enviando...";
             submitButton.disabled = true;
 
             try {
                 const response = await fetch(
-                    "https://mail.synce.mx/send",
+                    "/api/send",
                     {
                         method: "POST",
                         headers: {
@@ -676,6 +711,10 @@ Mensaje: ${formData.get("message")}
 
                 const result = await response.json();
 
+                // Sent (or cooldown active) -> keep the button locked, matching
+                // the contact_sent cookie state on the next page load.
+                let locked = false;
+
                 if (result.success) {
                     alert(
                         "¡Mensaje enviado con éxito! Te contactaremos pronto.",
@@ -683,15 +722,27 @@ Mensaje: ${formData.get("message")}
                     target.reset();
                     updateMessageCount();
                     Object.keys(validations).forEach(hideError);
+                    locked = true;
+                } else if (response.status === 429) {
+                    alert(
+                        "Ya recibimos tu mensaje. Te contactaremos pronto.",
+                    );
+                    locked = true;
                 } else {
                     alert(
                         "Error al enviar el mensaje. Por favor, intenta de nuevo.",
                     );
                 }
+
+                if (locked) {
+                    submitButton.textContent = "Ya enviaste tu mensaje";
+                } else {
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                }
             } catch (error) {
                 alert("Error de conexión. Por favor, intenta de nuevo.");
                 console.error("Error:", error);
-            } finally {
                 submitButton.textContent = originalText;
                 submitButton.disabled = false;
             }
