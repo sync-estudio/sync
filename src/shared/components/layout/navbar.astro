@@ -299,11 +299,18 @@ const logoWrapper =
 <style>
     .nav-root {
         top: 0;
-        transition: top 280ms cubic-bezier(0.22, 1, 0.36, 1);
+        transition:
+            top 280ms cubic-bezier(0.22, 1, 0.36, 1),
+            transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .nav-root.is-scrolled {
         top: 1rem;
+    }
+
+    /* Hidden when scrolling down; slides back in on scroll up. */
+    .nav-root.is-hidden {
+        transform: translateY(-150%);
     }
 
     .navbar-pill {
@@ -450,13 +457,43 @@ const logoWrapper =
 
     if (nav instanceof HTMLElement && pill instanceof HTMLElement) {
         const SCROLL_THRESHOLD = 8;
-        const applyScrollState = () => {
-            const scrolled = window.scrollY > SCROLL_THRESHOLD;
+        // Don't hide while still near the top; ignore sub-pixel jitter.
+        const HIDE_AFTER = 120;
+        const DELTA = 6;
+        let lastY = window.scrollY;
+        let ticking = false;
+
+        const update = () => {
+            const y = window.scrollY;
+            const scrolled = y > SCROLL_THRESHOLD;
             nav.classList.toggle("is-scrolled", scrolled);
             pill.classList.toggle("is-scrolled", scrolled);
+
+            const menuOpen = menu?.classList.contains("is-open");
+            if (Math.abs(y - lastY) > DELTA && !menuOpen) {
+                const goingDown = y > lastY;
+                if (goingDown && y > HIDE_AFTER) {
+                    nav.classList.add("is-hidden");
+                } else if (!goingDown) {
+                    nav.classList.remove("is-hidden");
+                }
+                lastY = y;
+            }
+            if (y <= HIDE_AFTER) nav.classList.remove("is-hidden");
+            ticking = false;
         };
-        applyScrollState();
-        window.addEventListener("scroll", applyScrollState, { passive: true });
+
+        update();
+        window.addEventListener(
+            "scroll",
+            () => {
+                if (!ticking) {
+                    ticking = true;
+                    requestAnimationFrame(update);
+                }
+            },
+            { passive: true },
+        );
     }
 
     if (entrance) {
@@ -538,6 +575,7 @@ const logoWrapper =
             );
 
             if (isOpen) {
+                nav?.classList.remove("is-hidden");
                 menu.removeAttribute("inert");
                 animateMenuOpen();
             } else {
