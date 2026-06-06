@@ -4,12 +4,11 @@ import { verifyFormToken } from "@shared/utils/form-token";
 
 export const prerender = false;
 
-// process.env = Railway runtime; import.meta.env = local .env via Vite.
 const RESEND_API_KEY =
   process.env.RESEND_API_KEY ?? import.meta.env.RESEND_API_KEY;
 
 const COOLDOWN_COOKIE = "contact_sent";
-const COOLDOWN_SECONDS = 600; // 10min UX guard against accidental resubmit
+const COOLDOWN_SECONDS = 600; // 10min guard
 
 interface ContactPayload {
   name: string;
@@ -19,7 +18,7 @@ interface ContactPayload {
   jobTitle?: string;
   companySize?: string;
   phone?: string;
-  website?: string; // honeypot — must stay empty
+  website?: string; // honeypot
   formTs?: string;
   formSig?: string;
   idempotencyKey?: string;
@@ -88,7 +87,7 @@ export const POST: APIRoute = async ({ request }) => {
     const { data, error } = await resend.emails.send(
       {
         from: "dotcom@synce.mx",
-        to: ["yamil.yscapa@gmail.com"],
+        to: ["yamil.yscapa@gmail.com", "hola@synce.mx"],
         subject: `Nuevo contacto de ${name}`,
         html: `
         <h2>Información del Contacto</h2>
