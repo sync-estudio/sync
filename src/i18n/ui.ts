@@ -44,7 +44,7 @@ export const ui = {
         // Page meta (how-we-work, contact)
         "page.howWeWork.title": "Cómo trabajamos | Sync Estudio",
         "page.howWeWork.description":
-            "Conoce las tres fases de nuestra metodología: diagnóstico, desarrollo y educación. Entregables claros, aprobación de tu equipo y mantenimiento continuo del lado nuestro.",
+            "Conoce las tres fases de nuestra metodología: diagnóstico, desarrollo y acompañamiento. Entregables claros, aprobación de tu equipo y mantenimiento continuo del lado nuestro.",
         "page.contact.title": "Contacto | Sync Estudio",
         "page.contact.description":
             "Solicita un diagnóstico estratégico. Construimos software e IA a medida, rediseñamos flujos y formamos a tu equipo — con mantenimiento continuo de nuestro lado.",
@@ -148,7 +148,7 @@ export const ui = {
         // Page meta (how-we-work, contact)
         "page.howWeWork.title": "How we work | Sync Estudio",
         "page.howWeWork.description":
-            "Learn the three phases of our methodology: assessment, development and enablement. Clear deliverables, your team's approval, and ongoing maintenance on our side.",
+            "Learn the three phases of our methodology: assessment, development and partnership. Clear deliverables, your team's approval, and ongoing maintenance on our side.",
         "page.contact.title": "Contact | Sync Estudio",
         "page.contact.description":
             "Request a strategic assessment. We build custom software and AI, redesign workflows, and train your team — with ongoing maintenance on our side.",

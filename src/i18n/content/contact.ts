@@ -74,8 +74,8 @@ export const contact: Record<Lang, ContactCopy> = {
             },
             {
                 number: "03",
-                title: "Educación",
-                body: "Tu equipo opera el sistema con confianza. Plan de Acompañamiento del lado nuestro.",
+                title: "Acompañamiento",
+                body: "Tu equipo opera el sistema con confianza y nosotros seguimos a su lado. Plan de Acompañamiento del lado nuestro.",
             },
         ],
         formTitle: "Solicita tu diagnóstico",
@@ -170,8 +170,8 @@ export const contact: Record<Lang, ContactCopy> = {
             },
             {
                 number: "03",
-                title: "Enablement",
-                body: "Your team operates the system with confidence. Support Plan on our side.",
+                title: "Partnership",
+                body: "Your team operates the system with confidence and we stay by their side. Support Plan on our side.",
             },
         ],
         formTitle: "Request your assessment",

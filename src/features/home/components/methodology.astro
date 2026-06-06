@@ -13,7 +13,6 @@ type PanelTheme = {
     surface: string;
     text: string;
     muted: string;
-    badge: string;
     align: string;
     wave?: "top" | "bottom";
 };
@@ -26,7 +25,6 @@ const panelThemes: Record<string, PanelTheme> = {
         surface: "bg-zinc-900",
         text: "text-white",
         muted: "text-zinc-300",
-        badge: "bg-white/10 text-white border-white/15",
         align: "",
         wave: "bottom",
     },
@@ -34,14 +32,12 @@ const panelThemes: Record<string, PanelTheme> = {
         surface: "bg-emerald-800",
         text: "text-white",
         muted: "text-emerald-100/90",
-        badge: "bg-white/10 text-white border-white/15",
         align: "ml-auto text-right",
     },
     light: {
         surface: "bg-white",
         text: "text-zinc-900",
         muted: "text-zinc-600",
-        badge: "bg-emerald-50 text-emerald-800 border-emerald-200/60",
         align: "",
         wave: "top",
     },
@@ -50,6 +46,7 @@ const panelThemes: Record<string, PanelTheme> = {
 const phases = solutions.map((s, i) => ({
     ...s,
     theme: panelThemes[s.themeKey] ?? panelThemes.light,
+    summary: copy.phaseSummaries[s.key] ?? s.intro,
     isFirst: i === 0,
     isLast: i === solutions.length - 1,
 }));
@@ -76,35 +73,18 @@ const phases = solutions.map((s, i) => ({
                     <div class="container mx-auto w-full relative z-10">
                         <div class={`max-w-3xl ${t.align}`}>
                             {phase.isFirst && (
-                                <div class="mb-8 md:mb-10 flex flex-col gap-3">
-                                    <span class={`text-sm md:text-base ${t.muted}`}>
-                                        {copy.eyebrow}
-                                    </span>
-                                    <p class={`text-lg md:text-2xl font-medium tracking-tight ${t.text}`}>
-                                        {copy.headingLead}{" "}
-                                        <span class="text-emerald-500">{copy.headingHighlight}</span>{copy.headingTail}
-                                    </p>
-                                </div>
-                            )}
-
-                            <div class={`flex items-center gap-4 ${aligned ? "justify-end" : ""}`}>
-                                <span class={`inline-flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-full border font-semibold text-base md:text-lg ${t.badge}`}>
-                                    {phase.number}
+                                <span class={`block mb-6 md:mb-8 text-sm md:text-base ${t.muted}`}>
+                                    {copy.eyebrow}
                                 </span>
-                                <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05]">
-                                    {phase.title}
-                                </h2>
-                            </div>
-
-                            <p class={`mt-5 md:mt-6 text-lg md:text-xl leading-relaxed ${t.muted}`}>
-                                {phase.intro}
-                            </p>
-
-                            {phase.isLast && (
-                                <p class={`mt-4 text-base md:text-lg leading-relaxed ${t.muted}`}>
-                                    {copy.footnote}
-                                </p>
                             )}
+
+                            <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05]">
+                                {phase.title}
+                            </h2>
+
+                            <p class={`mt-5 md:mt-7 text-xl md:text-2xl leading-relaxed max-w-2xl ${t.muted} ${aligned ? "ml-auto" : ""}`}>
+                                {phase.summary}
+                            </p>
 
                             <div class={`mt-8 md:mt-10 flex ${aligned ? "justify-end" : ""}`}>
                                 <Button

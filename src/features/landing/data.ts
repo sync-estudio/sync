@@ -297,10 +297,10 @@ export const landingEntries: LandingEntry[] = [
                             "El proceso completo para llevar una app a producción.",
                     },
                     {
-                        href: "/soluciones/educacion",
-                        label: "Solución: Educación",
+                        href: "/soluciones/acompanamiento",
+                        label: "Solución: Acompañamiento",
                         description:
-                            "Formamos a tu equipo para que opere la app con autonomía.",
+                            "Nos quedamos a tu lado: tu equipo opera la app y nosotros la mantenemos viva.",
                     },
                 ],
             },
@@ -373,10 +373,10 @@ export const landingEntries: LandingEntry[] = [
                             "The full process to take an app to production.",
                     },
                     {
-                        href: "/en/solutions/enablement",
-                        label: "Solution: Enablement",
+                        href: "/en/solutions/partnership",
+                        label: "Solution: Partnership",
                         description:
-                            "We train your team to operate the app with autonomy.",
+                            "We stay by your side: your team operates the app and we keep it alive.",
                     },
                 ],
             },

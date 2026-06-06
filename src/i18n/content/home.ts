@@ -49,6 +49,7 @@ type HomeCopy = {
         subtitle: string;
         detail: string;
         footnote: string;
+        phaseSummaries: Record<string, string>;
     };
     featured: {
         titleLead: string;
@@ -112,7 +113,7 @@ export const home: Record<Lang, HomeCopy> = {
             cta: "Solicitar diagnóstico",
         },
         services: {
-            eyebrow: "Cómo trabajamos contigo",
+            eyebrow: "¿Cómo trabajamos contigo?",
             headingLead: "Diagnosticamos, construimos y",
             headingHighlight: "entregamos",
             headingTail: ".",
@@ -121,6 +122,14 @@ export const home: Record<Lang, HomeCopy> = {
             detail: "Ver detalle",
             footnote:
                 "Las tres juntas. Entregar solo el software es desplazar el problema, no resolverlo.",
+            phaseSummaries: {
+                diagnostico:
+                    "Entendemos tu operación a fondo y salimos con una hoja de ruta priorizada por impacto. Decidimos juntos qué resolver primero — con datos, no corazonadas.",
+                desarrollo:
+                    "Construimos el software que tu operación necesita, entrega por entrega y con tu equipo aprobando cada una. No una caja cerrada: un sistema que crece contigo.",
+                educacion:
+                    "Tu equipo opera el sistema con confianza y nosotros lo mantenemos y evolucionamos a tu lado. No un seguimiento aparte: el Acompañamiento es parte del servicio.",
+            },
         },
         featured: {
             titleLead: "Casos de estudio ",
@@ -154,12 +163,12 @@ export const home: Record<Lang, HomeCopy> = {
             items: [
                 {
                     q: "¿Cómo trabajan en cada proyecto?",
-                    a: "Tres fases con aprobación de tu equipo entre cada una: Diagnóstico para entender la operación y trazar el roadmap, Desarrollo en sprints de 1-2 semanas con demos en vivo, y Educación para que tu equipo opere el sistema con confianza. Cada fase cierra con una decisión: aprueba el siguiente paso o paramos a corregir.",
+                    a: "Tres fases con aprobación de tu equipo entre cada una: Diagnóstico para entender la operación y trazar la hoja de ruta, Desarrollo en ciclos de 1-2 semanas con demostraciones en vivo, y Acompañamiento para que tu equipo opere el sistema con confianza mientras seguimos a su lado. Cada fase cierra con una decisión: aprueba el siguiente paso o paramos a corregir.",
                     link: { href: "/como-trabajamos", label: "Ver metodología completa" },
                 },
                 {
                     q: "¿Cuánto cuesta un proyecto?",
-                    a: "El monto exacto se cierra al final del Diagnóstico, con alcance acordado y precio fijo. No estimamos por hora con tope abierto. El Desarrollo se cobra en esquema 40/30/30 y el Plan de Acompañamiento mensual va incluido en la fase de Educación.",
+                    a: "El monto exacto se cierra al final del Diagnóstico, con alcance acordado y precio fijo. No estimamos por hora con tope abierto. El Desarrollo se cobra en esquema 40/30/30 y el Plan de Acompañamiento mensual va incluido en la fase de Acompañamiento.",
                     link: { href: "/como-cobramos", label: "Ver cómo cobramos" },
                 },
                 {
@@ -169,8 +178,8 @@ export const home: Record<Lang, HomeCopy> = {
                 },
                 {
                     q: "¿Quién mantiene el sistema después del lanzamiento?",
-                    a: "Nosotros. El Plan de Acompañamiento mensual va incluido en la fase de Educación, no como add-on. Cubre mantenimiento del sistema en producción, soporte para tu equipo, ajustes operativos y revisiones trimestrales para priorizar lo que no rinde.",
-                    link: { href: "/soluciones/educacion", label: "Ver Educación" },
+                    a: "Nosotros. El Plan de Acompañamiento mensual va incluido en la fase de Acompañamiento, no como complemento. Cubre mantenimiento del sistema en producción, soporte para tu equipo, ajustes operativos y revisiones trimestrales para priorizar lo que no rinde.",
+                    link: { href: "/soluciones/acompanamiento", label: "Ver Acompañamiento" },
                 },
                 {
                     q: "¿Tenemos que empezar por el Diagnóstico?",
@@ -195,7 +204,7 @@ export const home: Record<Lang, HomeCopy> = {
             briefCta: "Ver la metodología completa",
             detailedEyebrow: "Proceso",
             detailedHeadingLead: "Diagnóstico, desarrollo y ",
-            detailedHeadingHighlight: "educación",
+            detailedHeadingHighlight: "acompañamiento",
             detailedSubtitle:
                 "Cada fase cierra con una decisión de tu equipo: aprueba el siguiente paso o paramos a corregir. Nada avanza por inercia, nada se factura sin que sirva.",
             detailedCta: "Hablemos",
@@ -225,8 +234,8 @@ export const home: Record<Lang, HomeCopy> = {
                 },
                 {
                     number: "03",
-                    title: "Educación",
-                    body: "Tu equipo aprende a operar el sistema con confianza en el día a día, mientras nosotros lo mantenemos y evolucionamos detrás. Plan de Acompañamiento mensual incluido por defecto.",
+                    title: "Acompañamiento",
+                    body: "Tu equipo opera el sistema con confianza en el día a día y nosotros nos quedamos: lo mantenemos y evolucionamos contigo. Plan de Acompañamiento mensual incluido por defecto.",
                     note: "Plan de Acompañamiento incluido.",
                     deliverables: [
                         "Talleres prácticos por rol, no charlas genéricas",
@@ -268,7 +277,7 @@ export const home: Record<Lang, HomeCopy> = {
             cta: "Request an assessment",
         },
         services: {
-            eyebrow: "How we work with you",
+            eyebrow: "How do we work with you?",
             headingLead: "We assess, we build, and we",
             headingHighlight: "deliver",
             headingTail: ".",
@@ -277,6 +286,14 @@ export const home: Record<Lang, HomeCopy> = {
             detail: "View detail",
             footnote:
                 "All three together. Delivering only the software moves the problem, it doesn't solve it.",
+            phaseSummaries: {
+                diagnostico:
+                    "We understand your operation in depth and leave with a roadmap prioritized by impact. We decide together what to solve first — with data, not hunches.",
+                desarrollo:
+                    "We build the software your operation needs, release by release, with your team approving every delivery. Not a closed box: a system that grows with you.",
+                educacion:
+                    "Your team operates the system with confidence and we maintain and evolve it by your side. Not a separate follow-up: partnership is part of the service.",
+            },
         },
         featured: {
             titleLead: "Featured ",
@@ -310,12 +327,12 @@ export const home: Record<Lang, HomeCopy> = {
             items: [
                 {
                     q: "How do you work on each project?",
-                    a: "Three phases with your team's approval between each one: Assessment to understand the operation and draw the roadmap, Development in 1-2 week sprints with live demos, and Enablement so your team operates the system with confidence. Each phase closes with a decision: approve the next step or stop to correct.",
+                    a: "Three phases with your team's approval between each one: Assessment to understand the operation and draw the roadmap, Development in 1-2 week sprints with live demos, and Partnership so your team operates the system with confidence while we stay by their side. Each phase closes with a decision: approve the next step or stop to correct.",
                     link: { href: "/en/how-we-work", label: "See the full methodology" },
                 },
                 {
                     q: "How much does a project cost?",
-                    a: "The exact amount is set at the end of the Assessment, with agreed scope and a fixed price. We don't estimate by the hour with an open cap. Development is billed on a 40/30/30 schedule and the monthly Support Plan is included in the Enablement phase.",
+                    a: "The exact amount is set at the end of the Assessment, with agreed scope and a fixed price. We don't estimate by the hour with an open cap. Development is billed on a 40/30/30 schedule and the monthly Support Plan is included in the Partnership phase.",
                     link: { href: "/en/pricing", label: "See how we charge" },
                 },
                 {
@@ -325,8 +342,8 @@ export const home: Record<Lang, HomeCopy> = {
                 },
                 {
                     q: "Who maintains the system after launch?",
-                    a: "We do. The monthly Support Plan is included in the Enablement phase, not as an add-on. It covers maintenance of the system in production, support for your team, operational adjustments and quarterly reviews to prioritize what isn't performing.",
-                    link: { href: "/en/solutions/enablement", label: "See Enablement" },
+                    a: "We do. The monthly Support Plan is included in the Partnership phase, not as an add-on. It covers maintenance of the system in production, support for your team, operational adjustments and quarterly reviews to prioritize what isn't performing.",
+                    link: { href: "/en/solutions/partnership", label: "See Partnership" },
                 },
                 {
                     q: "Do we have to start with the Assessment?",
@@ -351,7 +368,7 @@ export const home: Record<Lang, HomeCopy> = {
             briefCta: "See the full methodology",
             detailedEyebrow: "Process",
             detailedHeadingLead: "Assessment, development and ",
-            detailedHeadingHighlight: "enablement",
+            detailedHeadingHighlight: "partnership",
             detailedSubtitle:
                 "Each phase closes with a decision from your team: approve the next step or stop to correct. Nothing moves by inertia, nothing is billed unless it's useful.",
             detailedCta: "Let's talk",
@@ -381,8 +398,8 @@ export const home: Record<Lang, HomeCopy> = {
                 },
                 {
                     number: "03",
-                    title: "Enablement",
-                    body: "Your team learns to operate the system with confidence day-to-day, while we maintain and evolve it behind the scenes. Monthly Support Plan included by default.",
+                    title: "Partnership",
+                    body: "Your team operates the system with confidence day-to-day and we stay: we maintain and evolve it with you. Monthly Support Plan included by default.",
                     note: "Support Plan included.",
                     deliverables: [
                         "Hands-on workshops by role, not generic talks",

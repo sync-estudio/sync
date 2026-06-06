@@ -280,7 +280,7 @@ export const solutionEntries: SolutionEntry[] = [
                     },
                     {
                         q: "¿Quién mantiene el sistema después del lanzamiento?",
-                        a: "Nosotros. El Plan de Acompañamiento mensual va incluido en la fase de Educación, no como add-on.",
+                        a: "Nosotros. El Plan de Acompañamiento mensual va incluido en la fase de Acompañamiento, no como complemento.",
                     },
                     {
                         q: "¿Trabajan con nuestros proveedores actuales?",
@@ -353,7 +353,7 @@ export const solutionEntries: SolutionEntry[] = [
                     },
                     {
                         q: "Who maintains the system after launch?",
-                        a: "We do. The monthly Support Plan is included in the Enablement phase, not as an add-on.",
+                        a: "We do. The monthly Support Plan is included in the Partnership phase, not as an add-on.",
                     },
                     {
                         q: "Do you work with our current vendors?",
@@ -369,13 +369,13 @@ export const solutionEntries: SolutionEntry[] = [
         number: "03",
         themeKey: "light",
         relatedCaseStudies: ["ima-cloud"],
-        slug: { es: "educacion", en: "enablement" },
+        slug: { es: "acompanamiento", en: "partnership" },
         copy: {
             es: {
-                title: "Educación",
-                highlight: "autonomía",
-                intro: "Tu equipo aprende a usar software construido alrededor de su operación.",
-                lead: "Educación no es enseñar el software. Es asegurar que tu equipo opere el sistema con confianza en el día a día, mientras nosotros lo mantenemos y evolucionamos detrás.",
+                title: "Acompañamiento",
+                highlight: "juntos",
+                intro: "Nos quedamos a tu lado: tu equipo opera el sistema con confianza y nosotros lo mantenemos vivo.",
+                lead: "El Acompañamiento empieza donde otros se van. Tu equipo opera el sistema con confianza en el día a día, y nosotros lo mantenemos y evolucionamos contigo — trimestre a trimestre, no en una sola entrega.",
                 bulletsLabel: "Lo que entregamos:",
                 bullets: [
                     "Talleres prácticos por rol (operador, supervisor, dirección)",
@@ -447,10 +447,10 @@ export const solutionEntries: SolutionEntry[] = [
                 cta: null,
             },
             en: {
-                title: "Enablement",
-                highlight: "autonomy",
-                intro: "Your team learns to use software built around their operation.",
-                lead: "Enablement isn't teaching the software. It's making sure your team operates the system with confidence day-to-day, while we maintain and evolve it behind the scenes.",
+                title: "Partnership",
+                highlight: "together",
+                intro: "We stay by your side: your team operates the system with confidence and we keep it alive.",
+                lead: "Partnership starts where others leave. Your team operates the system with confidence day-to-day, and we maintain and evolve it with you — quarter after quarter, not in a single handoff.",
                 bulletsLabel: "What we deliver:",
                 bullets: [
                     "Hands-on workshops by role (operator, supervisor, leadership)",
