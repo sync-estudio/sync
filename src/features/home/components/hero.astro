@@ -43,6 +43,12 @@ const copy = home[lang].hero;
             <Button link={localizedPath("contact", lang)} style="w-full sm:w-auto">{copy.ctaPrimary}</Button>
             <Button link={localizedPath("howWeWork", lang)} variant="outline" style="w-full sm:w-auto">{copy.ctaSecondary}</Button>
         </div>
+
+        <p
+            class="hero-actions text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400 text-center mt-1"
+        >
+            {copy.locationTag}
+        </p>
     </div>
 </div>
 

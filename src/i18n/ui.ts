@@ -14,13 +14,13 @@ export const defaultLang: Lang = "es";
 export const ui = {
     es: {
         // Site meta defaults (Layout)
-        "meta.title": "Desarrollo de software, apps e IA en México | SYNC Estudio",
+        "meta.title": "Desarrollo de software, apps e IA a medida | SYNC Estudio",
         "meta.description":
-            "Desarrollo de software, aplicaciones e inteligencia artificial a medida para empresas en México. Rediseñamos flujos, formamos a tu equipo y mantenemos las herramientas del lado nuestro.",
+            "Desarrollo de software, aplicaciones e inteligencia artificial a medida para empresas en operación. Rediseñamos flujos, formamos a tu equipo y mantenemos las herramientas del lado nuestro. Desde México, disponibles en todo el mundo.",
         "meta.ogTitle":
-            "Desarrollo de software, apps e IA a medida en México | SYNC Estudio",
+            "Desarrollo de software, apps e IA a medida | SYNC Estudio",
         "meta.ogDescription":
-            "Software, aplicaciones e IA a medida para empresas en operación en México. Construimos las herramientas, rediseñamos los flujos y formamos a tu equipo — con mantenimiento continuo de nuestro lado.",
+            "Software, aplicaciones e IA a medida para empresas en operación. Construimos las herramientas, rediseñamos los flujos y formamos a tu equipo — con mantenimiento continuo de nuestro lado. Desde México, disponibles en todo el mundo.",
         "meta.ogImageAlt":
             "SYNC Estudio — Software e IA a medida para empresas en operación",
 
@@ -106,25 +106,25 @@ export const ui = {
         "sol.ctaPrimary": "Agendemos un diagnóstico",
         "sol.ctaSecondary": "Ver otras soluciones",
         "sol.titleSuffix":
-            "Software, apps e IA a medida en México | Sync Estudio",
+            "Software, apps e IA a medida | Sync Estudio",
 
         // Case study detail page
         "case.label": "Caso de estudio",
         "case.back": "Volver a proyectos",
         "case.ctaPrimary": "Agendemos un diagnóstico",
         "case.ctaSecondary": "Volver al inicio",
-        "case.titleSuffix": "Caso de estudio en México | Sync Estudio",
+        "case.titleSuffix": "Caso de estudio | Sync Estudio",
         "case.fallbackDescription":
-            "Caso de estudio Sync Estudio — software e IA a medida para empresas en operación en México.",
+            "Caso de estudio Sync Estudio — software e IA a medida para empresas en operación.",
     },
     en: {
         // Site meta defaults (Layout)
-        "meta.title": "Custom software, apps & AI in Mexico | SYNC Estudio",
+        "meta.title": "Custom software, apps & AI | SYNC Estudio",
         "meta.description":
-            "Custom software, applications and artificial intelligence for companies in Mexico. We redesign workflows, train your team, and keep the tools running on our side.",
-        "meta.ogTitle": "Custom software, apps & AI in Mexico | SYNC Estudio",
+            "Custom software, applications and artificial intelligence for working companies. We redesign workflows, train your team, and keep the tools running on our side. Based in Mexico, available worldwide.",
+        "meta.ogTitle": "Custom software, apps & AI | SYNC Estudio",
         "meta.ogDescription":
-            "Custom software, applications and AI for working companies in Mexico. We build the tools, redesign the workflows, and train your team — with ongoing maintenance on our side.",
+            "Custom software, applications and AI for working companies. We build the tools, redesign the workflows, and train your team — with ongoing maintenance on our side. Based in Mexico, available worldwide.",
         "meta.ogImageAlt":
             "SYNC Estudio — Custom software & AI for companies in operation",
 
@@ -209,16 +209,16 @@ export const ui = {
         "sol.viewCase": "View case",
         "sol.ctaPrimary": "Let's schedule an assessment",
         "sol.ctaSecondary": "See other solutions",
-        "sol.titleSuffix": "Custom software, apps & AI in Mexico | Sync Estudio",
+        "sol.titleSuffix": "Custom software, apps & AI | Sync Estudio",
 
         // Case study detail page
         "case.label": "Case study",
         "case.back": "Back to projects",
         "case.ctaPrimary": "Let's schedule an assessment",
         "case.ctaSecondary": "Back to home",
-        "case.titleSuffix": "Case study in Mexico | Sync Estudio",
+        "case.titleSuffix": "Case study | Sync Estudio",
         "case.fallbackDescription":
-            "Sync Estudio case study — custom software and AI for working companies in Mexico.",
+            "Sync Estudio case study — custom software and AI for working companies.",
     },
 } as const;
 

@@ -65,11 +65,11 @@ export const landingEntries: LandingEntry[] = [
         slug: { es: "desarrollo-de-software", en: "software-development" },
         copy: {
             es: {
-                metaTitle: "Desarrollo de software a medida en México | SYNC Estudio",
+                metaTitle: "Desarrollo de software a medida | SYNC Estudio",
                 metaDescription:
-                    "Desarrollo de software a medida para empresas en operación en México. Portales internos, dashboards, automatizaciones e integraciones que tu equipo sí opera — con mantenimiento del lado nuestro.",
+                    "Desarrollo de software a medida para empresas en operación. Portales internos, dashboards, automatizaciones e integraciones que tu equipo sí opera — con mantenimiento del lado nuestro. Desde México, disponibles en todo el mundo.",
                 label: "Desarrollo de software",
-                title: "Desarrollo de software a medida en México",
+                title: "Desarrollo de software a medida",
                 highlight: "medida",
                 subtitle:
                     "Construimos el software que tu operación necesita y que el producto empaquetado no resuelve: pensado alrededor de cómo trabaja tu equipo, no al revés.",
@@ -121,7 +121,7 @@ export const landingEntries: LandingEntry[] = [
                     },
                     {
                         q: "¿Trabajan con empresas fuera de Puebla?",
-                        a: "Sí. Operamos desde Puebla y trabajamos con empresas en todo México, presencial o remoto según la fase.",
+                        a: "Sí. Operamos desde Puebla y trabajamos con empresas en México y el extranjero, presencial o remoto según la fase.",
                     },
                     {
                         q: "¿Quién mantiene el software después del lanzamiento?",
@@ -144,11 +144,11 @@ export const landingEntries: LandingEntry[] = [
                 ],
             },
             en: {
-                metaTitle: "Custom software development in Mexico | SYNC Estudio",
+                metaTitle: "Custom software development | SYNC Estudio",
                 metaDescription:
-                    "Custom software development for working companies in Mexico. Internal portals, dashboards, automations and integrations your team actually operates — with maintenance on our side.",
+                    "Custom software development for working companies. Internal portals, dashboards, automations and integrations your team actually operates — with maintenance on our side. Based in Mexico, available worldwide.",
                 label: "Software development",
-                title: "Custom software development in Mexico",
+                title: "Custom software development",
                 highlight: "Custom",
                 subtitle:
                     "We build the software your operation needs and that off-the-shelf products don't solve: designed around how your team works, not the other way around.",
@@ -200,7 +200,7 @@ export const landingEntries: LandingEntry[] = [
                     },
                     {
                         q: "Do you work with companies outside Puebla?",
-                        a: "Yes. We operate from Puebla and work with companies across Mexico, in person or remote depending on the phase.",
+                        a: "Yes. We operate from Puebla and work with companies in Mexico and abroad, in person or remote depending on the phase.",
                     },
                     {
                         q: "Who maintains the software after launch?",
@@ -230,11 +230,11 @@ export const landingEntries: LandingEntry[] = [
         copy: {
             es: {
                 metaTitle:
-                    "Desarrollo de aplicaciones web y móviles en México | SYNC Estudio",
+                    "Desarrollo de aplicaciones web y móviles | SYNC Estudio",
                 metaDescription:
-                    "Desarrollo de aplicaciones web y móviles a medida para empresas en México. Apps operativas conectadas a tus sistemas, que tu equipo opera con autonomía y nosotros mantenemos.",
+                    "Desarrollo de aplicaciones web y móviles a medida para empresas en operación. Apps operativas conectadas a tus sistemas, que tu equipo opera con autonomía y nosotros mantenemos. Desde México, disponibles en todo el mundo.",
                 label: "Desarrollo de aplicaciones",
-                title: "Desarrollo de aplicaciones a medida en México",
+                title: "Desarrollo de aplicaciones a medida",
                 highlight: "aplicaciones",
                 subtitle:
                     "Aplicaciones web y móviles construidas alrededor de tu operación: herramientas de campo, portales y apps internas que tu equipo usa todos los días.",
@@ -285,8 +285,8 @@ export const landingEntries: LandingEntry[] = [
                         a: "Sí. La mayoría de proyectos incluyen integraciones con ERPs, CRMs, herramientas de campo o sistemas legacy.",
                     },
                     {
-                        q: "¿Atienden empresas en todo México?",
-                        a: "Sí. Estamos en Puebla y trabajamos con empresas en todo el país, presencial o remoto según la fase.",
+                        q: "¿Trabajan con empresas fuera de México?",
+                        a: "Sí. Estamos en Puebla y trabajamos con empresas en México y el extranjero, presencial o remoto según la fase.",
                     },
                 ],
                 related: [
@@ -306,11 +306,11 @@ export const landingEntries: LandingEntry[] = [
             },
             en: {
                 metaTitle:
-                    "Web and mobile app development in Mexico | SYNC Estudio",
+                    "Web and mobile app development | SYNC Estudio",
                 metaDescription:
-                    "Custom web and mobile app development for companies in Mexico. Operational apps connected to your systems, operated by your team with autonomy and maintained by us.",
+                    "Custom web and mobile app development for working companies. Operational apps connected to your systems, operated by your team with autonomy and maintained by us. Based in Mexico, available worldwide.",
                 label: "App development",
-                title: "Custom app development in Mexico",
+                title: "Custom app development",
                 highlight: "app",
                 subtitle:
                     "Web and mobile applications built around your operation: field tools, portals and internal apps your team uses every day.",
@@ -361,8 +361,8 @@ export const landingEntries: LandingEntry[] = [
                         a: "Yes. Most projects include integrations with ERPs, CRMs, field tools or legacy systems.",
                     },
                     {
-                        q: "Do you serve companies across Mexico?",
-                        a: "Yes. We're in Puebla and work with companies across the country, in person or remote depending on the phase.",
+                        q: "Do you work with companies outside Mexico?",
+                        a: "Yes. We're in Puebla and work with companies in Mexico and abroad, in person or remote depending on the phase.",
                     },
                 ],
                 related: [
@@ -388,11 +388,11 @@ export const landingEntries: LandingEntry[] = [
         copy: {
             es: {
                 metaTitle:
-                    "Inteligencia artificial para empresas en México | SYNC Estudio",
+                    "Inteligencia artificial aplicada para empresas | SYNC Estudio",
                 metaDescription:
-                    "Inteligencia artificial aplicada a la operación para empresas en México: agentes, copilotos y LLMs integrados donde suman. Sin humo, con mantenimiento del lado nuestro.",
+                    "Inteligencia artificial aplicada a la operación: agentes, copilotos y LLMs integrados donde suman. Sin humo, con mantenimiento del lado nuestro. Desde México, disponibles en todo el mundo.",
                 label: "Inteligencia artificial",
-                title: "Inteligencia artificial aplicada para empresas en México",
+                title: "Inteligencia artificial aplicada para empresas",
                 highlight: "aplicada",
                 subtitle:
                     "IA puesta a trabajar dentro de tu operación: agentes, copilotos y modelos integrados donde reducen trabajo manual de verdad — no un chatbot por tener uno.",
@@ -443,8 +443,8 @@ export const landingEntries: LandingEntry[] = [
                         a: "No siempre. En el Diagnóstico evaluamos qué datos existen y dónde la IA aporta hoy, sin esperar a un data lake perfecto.",
                     },
                     {
-                        q: "¿Atienden empresas en todo México?",
-                        a: "Sí. Operamos desde Puebla y trabajamos con empresas en todo el país.",
+                        q: "¿Trabajan con empresas fuera de México?",
+                        a: "Sí. Operamos desde Puebla y trabajamos con empresas en México y el extranjero.",
                     },
                 ],
                 related: [
@@ -463,11 +463,11 @@ export const landingEntries: LandingEntry[] = [
             },
             en: {
                 metaTitle:
-                    "Artificial intelligence for companies in Mexico | SYNC Estudio",
+                    "Applied artificial intelligence for companies | SYNC Estudio",
                 metaDescription:
-                    "Applied artificial intelligence for companies in Mexico: agents, copilots and LLMs integrated where they add value. No hype, with maintenance on our side.",
+                    "Applied artificial intelligence for working companies: agents, copilots and LLMs integrated where they add value. No hype, with maintenance on our side. Based in Mexico, available worldwide.",
                 label: "Artificial intelligence",
-                title: "Applied artificial intelligence for companies in Mexico",
+                title: "Applied artificial intelligence for companies",
                 highlight: "Applied",
                 subtitle:
                     "AI put to work inside your operation: agents, copilots and models integrated where they genuinely cut manual work — not a chatbot for the sake of it.",
@@ -518,8 +518,8 @@ export const landingEntries: LandingEntry[] = [
                         a: "Not always. In the Assessment we evaluate what data exists and where AI adds value today, without waiting for a perfect data lake.",
                     },
                     {
-                        q: "Do you serve companies across Mexico?",
-                        a: "Yes. We operate from Puebla and work with companies across the country.",
+                        q: "Do you work with companies outside Mexico?",
+                        a: "Yes. We operate from Puebla and work with companies in Mexico and abroad.",
                     },
                 ],
                 related: [

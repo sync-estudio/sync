@@ -23,6 +23,7 @@ type HomeCopy = {
         subtitle: string;
         ctaPrimary: string;
         ctaSecondary: string;
+        locationTag: string;
     };
     about: {
         eyebrow: string;
@@ -85,9 +86,10 @@ export const home: Record<Lang, HomeCopy> = {
             titleHighlight: "futuro",
             titleTail: " de tu operación.",
             subtitle:
-                "Desarrollo de software, aplicaciones e inteligencia artificial a medida para empresas que ya operan en México. Quitamos el trabajo manual, desatascamos la operación y dejamos a tu equipo dueño del sistema.",
+                "Desarrollo de software, aplicaciones e inteligencia artificial a medida para empresas en operación. Quitamos el trabajo manual, desatascamos la operación y dejamos a tu equipo dueño del sistema.",
             ctaPrimary: "Solicitar diagnóstico",
             ctaSecondary: "Ver cómo trabajamos",
+            locationTag: "Desde México · Disponibles en todo el mundo",
         },
         about: {
             eyebrow: "¿Por qué existimos?",
@@ -237,9 +239,10 @@ export const home: Record<Lang, HomeCopy> = {
             titleHighlight: "future",
             titleTail: " of your operation.",
             subtitle:
-                "Custom software, applications and artificial intelligence for companies already operating in Mexico. We remove manual work, unblock the operation, and leave your team owning the system.",
+                "Custom software, applications and artificial intelligence for working companies. We remove manual work, unblock the operation, and leave your team owning the system.",
             ctaPrimary: "Request an assessment",
             ctaSecondary: "See how we work",
+            locationTag: "Based in Mexico · Available worldwide",
         },
         about: {
             eyebrow: "Why do we exist?",

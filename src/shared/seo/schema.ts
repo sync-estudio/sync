@@ -2,9 +2,9 @@
 // (Organization + WebSite + LocalBusiness) plus any page-specific nodes
 // (Service, FAQPage, BreadcrumbList, Article) via Layout's `schema` prop.
 //
-// Geo strategy: anchored as a LocalBusiness in Puebla, areaServed = México
-// nationally — so the site reads as a Mexican software/IA/app-development
-// studio for both local-pack and national queries.
+// Geo strategy: anchored as a LocalBusiness in Puebla (origin signal for
+// local queries), but areaServed = Worldwide — the studio is based in Mexico
+// and available globally, in person or remote.
 
 export const SITE_URL = "https://synce.mx";
 export const SITE_NAME = "SYNC Estudio";
@@ -16,13 +16,13 @@ type Lang = "es" | "en";
 const inLanguageOf = (lang: Lang): string => (lang === "en" ? "en-US" : "es-MX");
 
 const ORG_DESCRIPTION: Record<Lang, string> = {
-    es: "Estudio de desarrollo de software, aplicaciones e inteligencia artificial a medida para empresas en operación en México.",
-    en: "Custom software, application and artificial intelligence studio for working companies in Mexico.",
+    es: "Estudio de desarrollo de software, aplicaciones e inteligencia artificial a medida para empresas en operación. Desde México, disponibles en todo el mundo.",
+    en: "Custom software, application and artificial intelligence studio for working companies. Based in Mexico, available worldwide.",
 };
 
 const LOCAL_BUSINESS_DESCRIPTION: Record<Lang, string> = {
-    es: "Desarrollo de software a medida, aplicaciones web y móviles, e inteligencia artificial aplicada para empresas en México.",
-    en: "Custom software development, web and mobile applications, and applied artificial intelligence for companies in Mexico.",
+    es: "Desarrollo de software a medida, aplicaciones web y móviles, e inteligencia artificial aplicada para empresas en operación. Desde México, disponibles en todo el mundo.",
+    en: "Custom software development, web and mobile applications, and applied artificial intelligence for working companies. Based in Mexico, available worldwide.",
 };
 
 // JSON-LD nodes are loosely typed by nature (open vocabulary), so model
@@ -73,8 +73,8 @@ export const localBusinessSchema = (lang: Lang = "es"): JsonLd => ({
         addressCountry: "MX",
     },
     areaServed: {
-        "@type": "Country",
-        name: "México",
+        "@type": "Place",
+        name: "Worldwide",
     },
     knowsLanguage: ["es", "en"],
     priceRange: "$$",
@@ -95,7 +95,7 @@ export const serviceSchema = (input: ServiceInput): JsonLd => ({
     description: input.description,
     url: u(input.url),
     provider: { "@id": `${SITE_URL}/#organization` },
-    areaServed: { "@type": "Country", name: "México" },
+    areaServed: { "@type": "Place", name: "Worldwide" },
 });
 
 export const faqPageSchema = (
