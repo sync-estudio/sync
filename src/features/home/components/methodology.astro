@@ -17,35 +17,35 @@ type PanelTheme = {
     wave?: "top" | "bottom";
 };
 
-// Methodology read as a journey: dark uncertainty → emerald work → light
-// clarity, with the team left owning the system. Panels pin and stack so
-// each phase fully lands before the next covers it.
-const panelThemes: Record<string, PanelTheme> = {
-    dark: {
-        surface: "bg-zinc-900",
-        text: "text-white",
-        muted: "text-zinc-300",
+// Panels pin and stack so each phase fully lands before the next covers
+// it. Backgrounds run white → dark (inverted) → white, so the middle
+// phase punches as a full-bleed dark beat between two light ones.
+const panelSequence: PanelTheme[] = [
+    {
+        surface: "bg-white",
+        text: "text-zinc-900",
+        muted: "text-zinc-600",
         align: "",
         wave: "bottom",
     },
-    mid: {
-        surface: "bg-emerald-800",
+    {
+        surface: "bg-zinc-900",
         text: "text-white",
-        muted: "text-emerald-100/90",
+        muted: "text-zinc-300",
         align: "ml-auto text-right",
     },
-    light: {
+    {
         surface: "bg-white",
         text: "text-zinc-900",
         muted: "text-zinc-600",
         align: "",
         wave: "top",
     },
-};
+];
 
 const phases = solutions.map((s, i) => ({
     ...s,
-    theme: panelThemes[s.themeKey] ?? panelThemes.light,
+    theme: panelSequence[i] ?? panelSequence[panelSequence.length - 1],
     summary: copy.phaseSummaries[s.key] ?? s.intro,
     isFirst: i === 0,
     isLast: i === solutions.length - 1,
