@@ -14,12 +14,21 @@ const aliases = {
   "@features": fileURLToPath(new URL("./src/features", import.meta.url)),
   "@shared": fileURLToPath(new URL("./src/shared", import.meta.url)),
   "@assets": fileURLToPath(new URL("./src/assets", import.meta.url)),
+  "@i18n": fileURLToPath(new URL("./src/i18n", import.meta.url)),
 };
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://synce.mx",
   output: "server",
+
+  i18n: {
+    locales: ["es", "en"],
+    defaultLocale: "es",
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
 
   vite: {
     plugins: [tailwindcss()],

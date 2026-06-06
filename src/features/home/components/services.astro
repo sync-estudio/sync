@@ -1,7 +1,13 @@
 ---
 import "@app/styles/global.css";
 import Button from "@shared/components/ui/button.astro";
-import { solutions } from "@features/solutions/data";
+import { getSolutions } from "@features/solutions/data";
+import { getLang, solutionPath } from "@i18n/utils";
+import { home } from "@i18n/content/home";
+
+const lang = getLang(Astro.currentLocale);
+const copy = home[lang].services;
+const solutions = getSolutions(lang);
 
 const themes = {
     dark: {
@@ -64,7 +70,7 @@ const auraPositions: Record<string, { x: string; y: string }> = {
 const services = solutions.map((s) => ({
     ...s,
     theme: themes[s.themeKey],
-    aura: auraPositions[s.id] ?? { x: "100%", y: "100%" },
+    aura: auraPositions[s.key] ?? { x: "100%", y: "100%" },
 }));
 ---
 
@@ -76,15 +82,14 @@ const services = solutions.map((s) => ({
             data-services-heading
             class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.05] tracking-tight text-balance text-zinc-800 opacity-0"
         >
-            Diagnosticamos, construimos y
-            <span class="text-emerald-700">entregamos</span>.
+            {copy.headingLead}
+            <span class="text-emerald-700">{copy.headingHighlight}</span>{copy.headingTail}
         </h2>
         <p
             data-services-sub
             class="text-base sm:text-lg md:text-xl text-zinc-500 leading-relaxed max-w-2xl mx-auto text-balance opacity-0"
         >
-            Diagnosticamos tu operación, desarrollamos las herramientas y
-            formamos a tu equipo.
+            {copy.subtitle}
         </p>
     </header>
 
@@ -123,10 +128,10 @@ const services = solutions.map((s) => ({
                                 </Button>
                             )}
                             <Button
-                                link={`/soluciones/${service.id}`}
+                                link={solutionPath(service.slug, lang)}
                                 variant="outline"
                             >
-                                Ver detalle
+                                {copy.detail}
                             </Button>
                         </div>
 
@@ -142,8 +147,7 @@ const services = solutions.map((s) => ({
         class="mt-12 md:mt-16 text-start opacity-0"
     >
         <p class="text-zinc-600 text-sm md:text-base">
-            Las tres juntas. Entregar solo el software es desplazar el problema,
-            no resolverlo.
+            {copy.footnote}
         </p>
     </div>
 </section>

@@ -10,7 +10,7 @@ if (!slug) {
 
 const entries = await getCollection(
     "blog",
-    (e) => e.data.lang === "es" && (e.data.urlSlug ?? e.id) === slug,
+    (e) => e.data.lang === "en" && (e.data.urlSlug ?? e.id) === slug,
 );
 const entry = entries[0];
 
@@ -19,4 +19,4 @@ if (!entry) {
 }
 ---
 
-<CaseStudyPage entry={entry} lang="es" />
+<CaseStudyPage entry={entry} lang="en" />

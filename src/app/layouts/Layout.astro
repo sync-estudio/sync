@@ -9,6 +9,14 @@ import {
 	localBusinessSchema,
 	type JsonLd,
 } from "@shared/seo/schema";
+import {
+	getLang,
+	otherLang,
+	useTranslations,
+	routes,
+	type Lang,
+	type RouteKey,
+} from "@i18n/utils";
 
 interface Props {
 	title?: string;
@@ -17,35 +25,62 @@ interface Props {
 	ogDescription?: string;
 	/** Page-specific JSON-LD nodes appended to the default graph. */
 	schema?: JsonLd[];
+	/** Static route key — derives both-locale paths for hreflang + switcher. */
+	routeKey?: RouteKey;
+	/** Explicit per-locale paths (for data-driven dynamic routes). */
+	alternates?: Record<Lang, string>;
 }
 
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+
 const {
-	title = "Desarrollo de software, apps e IA en México | SYNC Estudio",
-	description = "Desarrollo de software, aplicaciones e inteligencia artificial a medida para empresas en México. Rediseñamos flujos, formamos a tu equipo y mantenemos las herramientas del lado nuestro.",
-	ogTitle = "Desarrollo de software, apps e IA a medida en México | SYNC Estudio",
-	ogDescription = "Software, aplicaciones e IA a medida para empresas en operación en México. Construimos las herramientas, rediseñamos los flujos y formamos a tu equipo — con mantenimiento continuo de nuestro lado.",
+	title = t("meta.title"),
+	description = t("meta.description"),
+	ogTitle = t("meta.ogTitle"),
+	ogDescription = t("meta.ogDescription"),
 	schema = [],
+	routeKey,
+	alternates,
 } = Astro.props;
 
 const googleFontsUrl =
 	"https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap";
 
 const siteUrl = SITE_URL;
-const canonicalHref = new URL(Astro.url.pathname, siteUrl).href;
+
+// Both-locale paths for this page: explicit > route key > current path (fallback).
+const localePaths: Record<Lang, string> =
+	alternates ??
+	(routeKey
+		? { es: routes[routeKey].es, en: routes[routeKey].en }
+		: { es: Astro.url.pathname, en: Astro.url.pathname });
+
+const esHref = new URL(localePaths.es, siteUrl).href;
+const enHref = new URL(localePaths.en, siteUrl).href;
+const canonicalHref = lang === "es" ? esHref : enHref;
+const switchHref = localePaths[otherLang(lang)];
+
+const htmlLang = lang === "es" ? "es-MX" : "en-US";
+const ogLocale = lang === "es" ? "es_MX" : "en_US";
+const ogLocaleAlt = lang === "es" ? "en_US" : "es_MX";
+
+const homePath = routes.home[lang];
 const ogImageAbs = new URL("/share_image.webp", siteUrl).href;
+const ogImageAlt = t("meta.ogImageAlt");
 
 // Default graph on every page + any page-specific nodes (Service, FAQPage,
 // BreadcrumbList, Article) passed via the `schema` prop.
 const jsonLdGraph: JsonLd[] = [
-	organizationSchema(),
-	websiteSchema(),
-	localBusinessSchema(),
+	organizationSchema(lang),
+	websiteSchema(lang),
+	localBusinessSchema(lang),
 	...schema,
 ];
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={htmlLang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -57,8 +92,9 @@ const jsonLdGraph: JsonLd[] = [
 		<meta name="theme-color" content="#10b981" />
 		<meta name="robots" content="index,follow" />
 		<link rel="canonical" href={canonicalHref} />
-		<link rel="alternate" hreflang="es-MX" href={canonicalHref} />
-		<link rel="alternate" hreflang="x-default" href={canonicalHref} />
+		<link rel="alternate" hreflang="es-MX" href={esHref} />
+		<link rel="alternate" hreflang="en" href={enHref} />
+		<link rel="alternate" hreflang="x-default" href={esHref} />
 
 		<!-- Preconnect for Google Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -74,20 +110,21 @@ const jsonLdGraph: JsonLd[] = [
 		<meta property="og:site_name" content="SYNC Estudio" />
 		<meta property="og:title" content={ogTitle} />
 		<meta property="og:description" content={ogDescription} />
-		<meta property="og:locale" content="es_MX" />
+		<meta property="og:locale" content={ogLocale} />
+		<meta property="og:locale:alternate" content={ogLocaleAlt} />
 		<meta property="og:url" content={canonicalHref} />
 		<meta property="og:image" content={ogImageAbs} />
 		<meta property="og:image:type" content="image/webp" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
-		<meta property="og:image:alt" content="SYNC Estudio — Software e IA a medida para empresas en operación" />
+		<meta property="og:image:alt" content={ogImageAlt} />
 
 		<!-- Twitter Card -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={ogTitle} />
 		<meta name="twitter:description" content={ogDescription} />
 		<meta name="twitter:image" content={ogImageAbs} />
-		<meta name="twitter:image:alt" content="SYNC Estudio — Software e IA a medida para empresas en operación" />
+		<meta name="twitter:image:alt" content={ogImageAlt} />
 
 		<!-- Structured Data: Organization + WebSite + LocalBusiness + page nodes -->
 		{jsonLdGraph.map((node) => (
@@ -124,14 +161,15 @@ const jsonLdGraph: JsonLd[] = [
 
 	<body
 		class="min-h-screen font-[Manrope] text-zinc-800 relative"
+		data-home-path={homePath}
 	>
-		<Navbar />
+		<Navbar lang={lang} switchHref={switchHref} />
 
 		<main>
 			<slot />
 		</main>
 
-		<Footer />
+		<Footer lang={lang} />
 		<script>
 			// Site-wide scroll-reveal. Any element with [data-reveal] fades +
 			// rises into place once it enters the viewport. Optional
@@ -181,8 +219,10 @@ const jsonLdGraph: JsonLd[] = [
 		<script>
 			document.addEventListener("DOMContentLoaded", () => {
 				const anchorGap = 16;
-				const sectionPath = "/";
+				const stripSlash = (p: string) => (p.length > 1 ? p.replace(/\/$/, "") : p);
+				const sectionPath = stripSlash(document.body.dataset.homePath || "/");
 				const SCROLL_THRESHOLD = 8;
+				const atSectionPath = () => stripSlash(window.location.pathname) === sectionPath;
 				let resizeFrame = 0;
 				let lastViewportWidth = window.innerWidth;
 
@@ -286,7 +326,7 @@ const jsonLdGraph: JsonLd[] = [
 
 				document.addEventListener("click", (event) => {
 					const target = event.target;
-					const link = target instanceof Element ? target.closest('a[href^="/#"]') : null;
+					const link = target instanceof Element ? target.closest('a[href*="#"]') : null;
 
 					if (!(link instanceof HTMLAnchorElement)) {
 						return;
@@ -294,7 +334,7 @@ const jsonLdGraph: JsonLd[] = [
 
 					const url = new URL(link.href, window.location.origin);
 
-					if (url.pathname !== sectionPath || window.location.pathname !== sectionPath) {
+					if (!url.hash || stripSlash(url.pathname) !== sectionPath || !atSectionPath()) {
 						return;
 					}
 
@@ -316,13 +356,13 @@ const jsonLdGraph: JsonLd[] = [
 				window.addEventListener("load", () => {
 					syncAnchorOffset();
 
-					if (window.location.pathname === sectionPath && window.location.hash) {
+					if (atSectionPath() && window.location.hash) {
 						scrollToHash(window.location.hash, "auto");
 					}
 				});
 
 				window.addEventListener("hashchange", () => {
-					if (window.location.pathname !== sectionPath || !window.location.hash) {
+					if (!atSectionPath() || !window.location.hash) {
 						return;
 					}
 
@@ -338,7 +378,7 @@ const jsonLdGraph: JsonLd[] = [
 						const didViewportWidthChange = currentViewportWidth !== lastViewportWidth;
 						lastViewportWidth = currentViewportWidth;
 
-						if (didViewportWidthChange && window.location.pathname === sectionPath && window.location.hash) {
+						if (didViewportWidthChange && atSectionPath() && window.location.hash) {
 							scrollToHash(window.location.hash, "auto");
 						}
 					});

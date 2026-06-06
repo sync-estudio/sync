@@ -21,8 +21,55 @@ interface ContactPayload {
   website?: string; // honeypot
   formTs?: string;
   formSig?: string;
+  locale?: string;
   idempotencyKey?: string;
 }
+
+type Lang = "es" | "en";
+
+const EMAIL_COPY: Record<
+  Lang,
+  {
+    notProvided: string;
+    subject: (name: string) => string;
+    contactInfo: string;
+    name: string;
+    email: string;
+    phone: string;
+    companyDetails: string;
+    company: string;
+    role: string;
+    size: string;
+    message: string;
+  }
+> = {
+  es: {
+    notProvided: "No proporcionado",
+    subject: (name) => `Nuevo contacto de ${name}`,
+    contactInfo: "Información del Contacto",
+    name: "Nombre",
+    email: "Email",
+    phone: "Teléfono",
+    companyDetails: "Detalles de la Empresa",
+    company: "Empresa",
+    role: "Cargo",
+    size: "Tamaño",
+    message: "Mensaje",
+  },
+  en: {
+    notProvided: "Not provided",
+    subject: (name) => `New contact from ${name}`,
+    contactInfo: "Contact Information",
+    name: "Name",
+    email: "Email",
+    phone: "Phone",
+    companyDetails: "Company Details",
+    company: "Company",
+    role: "Job title",
+    size: "Size",
+    message: "Message",
+  },
+};
 
 const json = (body: unknown, status = 200, headers?: Record<string, string>) =>
   new Response(JSON.stringify(body), {
@@ -70,10 +117,13 @@ export const POST: APIRoute = async ({ request }) => {
   }
   const resend = new Resend(RESEND_API_KEY);
 
-  const phone = payload.phone?.trim() || "No proporcionado";
-  const company = companyName?.trim() || "No proporcionado";
-  const role = jobTitle?.trim() || "No proporcionado";
-  const size = companySize?.trim() || "No proporcionado";
+  const lang: Lang = payload.locale === "en" ? "en" : "es";
+  const c = EMAIL_COPY[lang];
+
+  const phone = payload.phone?.trim() || c.notProvided;
+  const company = companyName?.trim() || c.notProvided;
+  const role = jobTitle?.trim() || c.notProvided;
+  const size = companySize?.trim() || c.notProvided;
   const userMessage = message.trim();
 
   // 5. Idempotency — Resend dedupes the same key for 24h (double-click, retry, replay).
@@ -88,31 +138,31 @@ export const POST: APIRoute = async ({ request }) => {
       {
         from: "dotcom@synce.mx",
         to: ["yamil.yscapa@gmail.com", "hola@synce.mx"],
-        subject: `Nuevo contacto de ${name}`,
+        subject: c.subject(name),
         html: `
-        <h2>Información del Contacto</h2>
-        <p><strong>Nombre:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Teléfono:</strong> ${phone}</p>
+        <h2>${c.contactInfo}</h2>
+        <p><strong>${c.name}:</strong> ${name}</p>
+        <p><strong>${c.email}:</strong> ${email}</p>
+        <p><strong>${c.phone}:</strong> ${phone}</p>
         <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 16px 0;">
-        <h2>Detalles de la Empresa</h2>
-        <p><strong>Empresa:</strong> ${company}</p>
-        <p><strong>Cargo:</strong> ${role}</p>
-        <p><strong>Tamaño:</strong> ${size}</p>
+        <h2>${c.companyDetails}</h2>
+        <p><strong>${c.company}:</strong> ${company}</p>
+        <p><strong>${c.role}:</strong> ${role}</p>
+        <p><strong>${c.size}:</strong> ${size}</p>
         <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 16px 0;">
-        <h2>Mensaje</h2>
+        <h2>${c.message}</h2>
         <p>${userMessage}</p>
       `,
         text: `
-Nombre: ${name}
-Email: ${email}
-Teléfono: ${phone}
+${c.name}: ${name}
+${c.email}: ${email}
+${c.phone}: ${phone}
 
-Empresa: ${company}
-Cargo: ${role}
-Tamaño: ${size}
+${c.company}: ${company}
+${c.role}: ${role}
+${c.size}: ${size}
 
-Mensaje:
+${c.message}:
 ${userMessage}
       `,
       },

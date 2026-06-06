@@ -1,4 +1,18 @@
 ---
+import {
+    useTranslations,
+    localizedPath,
+    homeHash,
+    type Lang,
+} from "@i18n/utils";
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
 const linkBase =
     "text-zinc-400 hover:text-white transition-colors rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900";
 ---
@@ -13,8 +27,8 @@ const linkBase =
             <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
                 <div class="flex flex-col gap-4 max-w-md">
                     <a
-                        href="/#inicio"
-                        aria-label="Inicio"
+                        href={homeHash("#inicio", lang)}
+                        aria-label={t("nav.homeAria")}
                         class="inline-flex items-center self-start rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
                     >
                         <img
@@ -28,41 +42,41 @@ const linkBase =
                         />
                     </a>
                     <p class="text-zinc-400 text-base md:text-lg leading-snug">
-                        Construimos sistemas que sirven a tu operación. No operaciones que sirven al software.
+                        {t("footer.tagline")}
                     </p>
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-8 sm:gap-12">
                     <nav
                         class="flex flex-col gap-2 text-sm md:text-base"
-                        aria-label="Servicios"
+                        aria-label={t("footer.servicesAria")}
                     >
                         <span class="text-xs uppercase tracking-wide text-zinc-500">
-                            Servicios
+                            {t("footer.services")}
                         </span>
-                        <a href="/desarrollo-de-software" class={linkBase}>
-                            Desarrollo de software
+                        <a href={localizedPath("softwareDev", lang)} class={linkBase}>
+                            {t("footer.softwareDev")}
                         </a>
-                        <a href="/desarrollo-de-apps" class={linkBase}>
-                            Desarrollo de apps
+                        <a href={localizedPath("appDev", lang)} class={linkBase}>
+                            {t("footer.appDev")}
                         </a>
-                        <a href="/inteligencia-artificial" class={linkBase}>
-                            Inteligencia artificial
+                        <a href={localizedPath("ai", lang)} class={linkBase}>
+                            {t("footer.ai")}
                         </a>
                     </nav>
 
                     <nav
                         class="flex flex-col gap-2 text-sm md:text-base"
-                        aria-label="Enlaces del sitio"
+                        aria-label={t("footer.linksAria")}
                     >
                         <span class="text-xs uppercase tracking-wide text-zinc-500">
-                            Navegación
+                            {t("footer.navigation")}
                         </span>
-                        <a href="/#soluciones" class={linkBase}>Soluciones</a>
-                        <a href="/#proyectos" class={linkBase}>Proyectos</a>
-                        <a href="/como-trabajamos" class={linkBase}>Metodología</a>
-                        <a href="/como-cobramos" class={linkBase}>Cómo cobramos</a>
-                        <a href="/contacto" class={linkBase}>Contacto</a>
+                        <a href={homeHash("#soluciones", lang)} class={linkBase}>{t("footer.solutions")}</a>
+                        <a href={homeHash("#proyectos", lang)} class={linkBase}>{t("footer.projects")}</a>
+                        <a href={localizedPath("howWeWork", lang)} class={linkBase}>{t("footer.methodology")}</a>
+                        <a href={localizedPath("pricing", lang)} class={linkBase}>{t("footer.pricing")}</a>
+                        <a href={localizedPath("contact", lang)} class={linkBase}>{t("footer.contact")}</a>
                     </nav>
                 </div>
             </div>
@@ -75,7 +89,7 @@ const linkBase =
                         >hola@synce.mx</a
                     >
                     <a href="tel:+5222228230805" class={linkBase}>+52 222 2823 0805</a>
-                    <span>Puebla, México</span>
+                    <span>{t("footer.location")}</span>
                 </div>
 
                 <div class="flex items-center gap-4">
@@ -83,7 +97,7 @@ const linkBase =
                         href="https://www.instagram.com/sync.estudio/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label="Instagram de SYNC Estudio"
+                        aria-label={t("footer.instagramAria")}
                         class={`inline-flex w-9 h-9 items-center justify-center rounded-full border border-white/15 bg-white/5 hover:bg-white/10 ${linkBase}`}
                     >
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -96,7 +110,7 @@ const linkBase =
                         href="https://www.linkedin.com/company/syncestudio/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label="LinkedIn de SYNC Estudio"
+                        aria-label={t("footer.linkedinAria")}
                         class={`inline-flex w-9 h-9 items-center justify-center rounded-full border border-white/15 bg-white/5 hover:bg-white/10 ${linkBase}`}
                     >
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -105,7 +119,7 @@ const linkBase =
                             ></path>
                         </svg>
                     </a>
-                    <p class="text-zinc-500 text-xs">© 2026 SYNC Estudio.</p>
+                    <p class="text-zinc-500 text-xs">{t("footer.rights")}</p>
                 </div>
             </div>
         </div>

@@ -1,5 +1,25 @@
 ---
-import { solutions } from "@features/solutions/data";
+import { getSolutions } from "@features/solutions/data";
+import {
+    useTranslations,
+    localizedPath,
+    homeHash,
+    solutionPath,
+    languages,
+    otherLang,
+    type Lang,
+} from "@i18n/utils";
+
+interface Props {
+    lang: Lang;
+    switchHref: string;
+}
+
+const { lang, switchHref } = Astro.props;
+const t = useTranslations(lang);
+const solutions = getSolutions(lang);
+const otherCode = otherLang(lang);
+const otherLabel = languages[otherCode];
 
 const linkWrapper =
     "text-zinc-600 hover:text-zinc-900 px-3 py-1.5 rounded-full transition-all duration-300 hover:bg-zinc-100/80 font-medium text-sm md:text-base focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white";
@@ -21,7 +41,7 @@ const logoWrapper =
             class="navbar-pill px-4 md:px-6 grid grid-cols-[auto_1fr_auto] items-center gap-3 md:gap-6 pointer-events-auto w-[95%] max-w-5xl navbar-entrance"
         >
             <div class="flex items-center shrink-0">
-                <a class={logoWrapper} href="/#inicio" aria-label="Inicio">
+                <a class={logoWrapper} href={homeHash("#inicio", lang)} aria-label={t("nav.homeAria")}>
                     <img
                         src="/sync.svg"
                         alt="SYNC Estudio"
@@ -38,16 +58,16 @@ const logoWrapper =
                 <ul
                     class="flex items-center gap-0.5 md:gap-1"
                     role="menubar"
-                    aria-label="Navegación principal"
+                    aria-label={t("nav.mainNav")}
                 >
                     <li class="relative">
-                        <a class={linkWrapper} href="/#inicio" role="menuitem"
-                            >Inicio</a
+                        <a class={linkWrapper} href={homeHash("#inicio", lang)} role="menuitem"
+                            >{t("nav.home")}</a
                         >
                     </li>
                     <li class="relative">
-                        <a class={linkWrapper} href="/#nosotros" role="menuitem"
-                            >Nosotros</a
+                        <a class={linkWrapper} href={homeHash("#nosotros", lang)} role="menuitem"
+                            >{t("nav.about")}</a
                         >
                     </li>
                     <li class="relative" data-nav-dropdown>
@@ -60,7 +80,7 @@ const logoWrapper =
                                 role="menuitem"
                                 aria-haspopup="menu"
                             >
-                                Soluciones
+                                {t("nav.solutions")}
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="12"
@@ -83,7 +103,7 @@ const logoWrapper =
                             >
                                 {solutions.map((s) => (
                                     <a
-                                        href={`/soluciones/${s.id}`}
+                                        href={solutionPath(s.slug, lang)}
                                         role="menuitem"
                                         class="flex items-start gap-3 px-3 py-2.5 rounded-xl hover:bg-zinc-100/80 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
                                     >
@@ -102,23 +122,23 @@ const logoWrapper =
                                 ))}
                                 <div class="my-1 border-t border-zinc-200/70" />
                                 <a
-                                    href="/#soluciones"
+                                    href={homeHash("#soluciones", lang)}
                                     role="menuitem"
                                     class="block px-3 py-2 rounded-xl hover:bg-zinc-100/80 text-sm text-zinc-600 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
                                 >
-                                    Ver todas las soluciones
+                                    {t("nav.allSolutions")}
                                 </a>
                             </div>
                         </details>
                     </li>
                     <li class="relative">
-                        <a class={linkWrapper} href="/#proyectos" role="menuitem"
-                            >Proyectos</a
+                        <a class={linkWrapper} href={homeHash("#proyectos", lang)} role="menuitem"
+                            >{t("nav.projects")}</a
                         >
                     </li>
                     <li class="relative">
-                        <a class={linkWrapper} href="/como-trabajamos" role="menuitem"
-                            >Metodología</a
+                        <a class={linkWrapper} href={localizedPath("howWeWork", lang)} role="menuitem"
+                            >{t("nav.methodology")}</a
                         >
                     </li>
                 </ul>
@@ -126,14 +146,24 @@ const logoWrapper =
 
             <div class="flex items-center justify-end shrink-0 gap-2">
                 <a
+                    class={`${linkWrapper} hidden sm:inline-flex`}
+                    href={switchHref}
+                    hreflang={otherCode}
+                    aria-label={t("lang.switch")}
+                    data-lang-switch
+                    >{otherLabel}</a
+                >
+                <a
                     class={`${ctaWrapper} hidden sm:inline-flex`}
-                    href="/contacto"
-                    role="menuitem">Trabajemos juntos</a
+                    href={localizedPath("contact", lang)}
+                    role="menuitem">{t("nav.cta")}</a
                 >
                 <button
                     type="button"
                     class="sm:hidden inline-flex items-center justify-center h-10 w-10 rounded-full border border-white/50 bg-white/80 text-zinc-800 shadow-sm transition-all duration-300 hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white nav-toggle"
-                    aria-label="Abrir menú"
+                    aria-label={t("nav.openMenu")}
+                    data-label-open={t("nav.openMenu")}
+                    data-label-close={t("nav.closeMenu")}
                     aria-controls="mobile-nav-menu"
                     aria-expanded="false"
                     data-site-nav-toggle
@@ -166,20 +196,20 @@ const logoWrapper =
                 <ul
                     class="flex flex-col gap-2"
                     role="menu"
-                    aria-label="Navegación móvil"
+                    aria-label={t("nav.mobileNav")}
                 >
                     <li>
                         <a
                             class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
-                            href="/#inicio"
-                            role="menuitem">Inicio</a
+                            href={homeHash("#inicio", lang)}
+                            role="menuitem">{t("nav.home")}</a
                         >
                     </li>
                     <li>
                         <a
                             class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
-                            href="/#nosotros"
-                            role="menuitem">Nosotros</a
+                            href={homeHash("#nosotros", lang)}
+                            role="menuitem">{t("nav.about")}</a
                         >
                     </li>
                     <li>
@@ -189,7 +219,7 @@ const logoWrapper =
                                 role="menuitem"
                                 aria-haspopup="menu"
                             >
-                                <span>Soluciones</span>
+                                <span>{t("nav.solutions")}</span>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="14"
@@ -209,7 +239,7 @@ const logoWrapper =
                             <div class="mt-1 ml-1 pl-3 border-l border-zinc-200/70 flex flex-col gap-1">
                                 {solutions.map((s) => (
                                     <a
-                                        href={`/soluciones/${s.id}`}
+                                        href={solutionPath(s.slug, lang)}
                                         role="menuitem"
                                         class="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-zinc-700 hover:bg-zinc-100/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
                                     >
@@ -220,11 +250,11 @@ const logoWrapper =
                                     </a>
                                 ))}
                                 <a
-                                    href="/#soluciones"
+                                    href={homeHash("#soluciones", lang)}
                                     role="menuitem"
                                     class="block px-3 py-2 rounded-xl text-xs text-zinc-500 hover:bg-zinc-100/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
                                 >
-                                    Ver todas las soluciones
+                                    {t("nav.allSolutions")}
                                 </a>
                             </div>
                         </details>
@@ -232,22 +262,32 @@ const logoWrapper =
                     <li>
                         <a
                             class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
-                            href="/#proyectos"
-                            role="menuitem">Proyectos</a
+                            href={homeHash("#proyectos", lang)}
+                            role="menuitem">{t("nav.projects")}</a
                         >
                     </li>
                     <li>
                         <a
                             class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
-                            href="/como-trabajamos"
-                            role="menuitem">Metodología</a
+                            href={localizedPath("howWeWork", lang)}
+                            role="menuitem">{t("nav.methodology")}</a
                         >
                     </li>
                     <li>
                         <a
                             class="block w-full text-zinc-900 font-medium px-3 py-2 rounded-xl bg-zinc-100/90 hover:bg-zinc-200/80 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
-                            href="/contacto"
-                            role="menuitem">Trabajemos juntos</a
+                            href={localizedPath("contact", lang)}
+                            role="menuitem">{t("nav.cta")}</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            class="block w-full text-zinc-600 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+                            href={switchHref}
+                            hreflang={otherCode}
+                            aria-label={t("lang.switch")}
+                            data-lang-switch
+                            role="menuitem">{otherLabel}</a
                         >
                     </li>
                 </ul>
@@ -492,7 +532,9 @@ const logoWrapper =
             toggle.classList.toggle("is-open", isOpen);
             toggle.setAttribute(
                 "aria-label",
-                isOpen ? "Cerrar menú" : "Abrir menú",
+                isOpen
+                    ? toggle.dataset.labelClose ?? "Cerrar menú"
+                    : toggle.dataset.labelOpen ?? "Abrir menú",
             );
 
             if (isOpen) {

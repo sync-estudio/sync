@@ -1,6 +1,8 @@
 ---
 import "@app/styles/global.css";
 import Button from "@shared/components/ui/button.astro";
+import { getLang, localizedPath } from "@i18n/utils";
+import { home } from "@i18n/content/home";
 
 interface Props {
     detailed?: boolean;
@@ -8,42 +10,9 @@ interface Props {
 
 const { detailed = false } = Astro.props;
 
-const phases = [
-    {
-        number: "01",
-        title: "Diagnóstico",
-        body: "Dos semanas dentro de tu operación: dónde se atasca el trabajo, qué datos viven en archivos sueltos y qué procesos siguen vivos por costumbre. Salimos con un plan, no con una propuesta comercial.",
-        deliverables: [
-            "Mapa de procesos y stack actual",
-            "Pain points priorizados por impacto y esfuerzo",
-            "Roadmap con fases y dependencias claras",
-            "Métricas base para medir el antes y el después",
-        ],
-    },
-    {
-        number: "02",
-        title: "Desarrollo",
-        body: "Construimos las soluciones que tu operación necesita iterando sobre el roadmap acordado. Cada release pasa por tu equipo antes de tocar su día a día, y se queda en producción sólo si resuelve el problema real.",
-        deliverables: [
-            "Sprints de 1 a 2 semanas con demo en vivo",
-            "Integraciones funcionando en producción, no en slides",
-            "Repositorio y documentación técnica entregables",
-            "Aprobación de tu equipo antes de cada release",
-        ],
-    },
-    {
-        number: "03",
-        title: "Educación",
-        body: "Tu equipo aprende a operar el sistema con confianza en el día a día, mientras nosotros lo mantenemos y evolucionamos detrás. Plan de Acompañamiento mensual incluido por defecto.",
-        note: "Plan de Acompañamiento incluido.",
-        deliverables: [
-            "Talleres prácticos por rol, no charlas genéricas",
-            "Playbooks y documentación viva, versionada con el código",
-            "Mantenimiento del sistema en producción del lado nuestro",
-            "Iteraciones mensuales priorizadas por impacto",
-        ],
-    },
-];
+const lang = getLang(Astro.currentLocale);
+const copy = home[lang].workflow;
+const phases = copy.phases;
 ---
 
 <section
@@ -64,23 +33,23 @@ const phases = [
                     data-workflow-eyebrow
                     class="relative z-10 text-xs tracking-[0.2em] text-emerald-700 font-semibold opacity-0"
                 >
-                    Proceso
+                    {copy.detailedEyebrow}
                 </span>
                 <h1
                     data-workflow-heading
                     class="relative z-10 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-zinc-900 opacity-0"
                 >
-                    Diagnóstico, desarrollo y
-                    <span class="text-emerald-700">educación</span>
+                    {copy.detailedHeadingLead}
+                    <span class="text-emerald-700">{copy.detailedHeadingHighlight}</span>
                 </h1>
                 <p
                     data-workflow-sub
                     class="relative z-10 text-base sm:text-lg text-zinc-600 leading-relaxed max-w-2xl opacity-0"
                 >
-                    Cada fase cierra con una decisión de tu equipo: aprueba el siguiente paso o paramos a corregir. Nada avanza por inercia, nada se factura sin que sirva.
+                    {copy.detailedSubtitle}
                 </p>
                 <div data-workflow-cta class="relative z-10 mt-6 opacity-0">
-                    <Button link="/contacto" variant="outline">Hablemos</Button>
+                    <Button link={localizedPath("contact", lang)} variant="outline">{copy.detailedCta}</Button>
                 </div>
             </div>
 
@@ -106,7 +75,7 @@ const phases = [
                         {phase.deliverables && (
                             <div class="flex flex-col gap-3 pt-2 border-t border-zinc-100">
                                 <span class="text-xs tracking-wide font-medium text-zinc-500">
-                                    Entregables
+                                    {copy.deliverablesLabel}
                                 </span>
                                 <ul class="flex flex-col gap-2.5">
                                     {phase.deliverables.map((item) => (
@@ -142,26 +111,25 @@ const phases = [
                         data-workflow-eyebrow
                         class="text-xs tracking-[0.2em] text-emerald-700 font-semibold opacity-0"
                     >
-                        Metodología
+                        {copy.briefEyebrow}
                     </span>
                     <h2
                         data-workflow-heading
                         class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight md:leading-[1.15] tracking-tight text-zinc-800 opacity-0"
                     >
-                        Cómo trabajamos
-                        <span class="text-emerald-700">contigo</span>
+                        {copy.briefHeadingLead}
+                        <span class="text-emerald-700">{copy.briefHeadingHighlight}</span>
                     </h2>
                     <p
                         data-workflow-sub
                         class="text-base sm:text-lg text-zinc-600 leading-snug max-w-md opacity-0"
                     >
-                        3 fases, cada una con entregables claros y aprobación de
-                        tu equipo antes de avanzar.
+                        {copy.briefSubtitle}
                     </p>
 
                     <div data-workflow-cta class="mt-6 opacity-0">
-                        <Button link="/como-trabajamos" variant="outline">
-                            Ver la metodología completa
+                        <Button link={localizedPath("howWeWork", lang)} variant="outline">
+                            {copy.briefCta}
                         </Button>
                     </div>
                 </div>

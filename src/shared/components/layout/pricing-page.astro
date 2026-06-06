@@ -1,0 +1,108 @@
+---
+import "@app/styles/global.css";
+import Layout from "@app/layouts/Layout.astro";
+import ArticleLayout from "@shared/components/layout/article-layout.astro";
+import PageHeader from "@shared/components/ui/page-header.astro";
+import PhaseCard from "@shared/components/ui/phase-card.astro";
+import HighlightedSection from "@shared/components/ui/highlighted-section.astro";
+import BulletList from "@shared/components/ui/bullet-list.astro";
+import SectionHeader from "@shared/components/ui/section-header.astro";
+import FaqItem from "@shared/components/ui/faq-item.astro";
+import ArticleFooter from "@shared/components/ui/article-footer.astro";
+import CardSection from "@shared/components/ui/card-section.astro";
+import CardHeading from "@shared/components/ui/card-heading.astro";
+import EyebrowLabel from "@shared/components/ui/eyebrow-label.astro";
+import { getLang, localizedPath, homeHash } from "@i18n/utils";
+import { pricing } from "@i18n/content/pricing";
+
+const lang = getLang(Astro.currentLocale);
+const copy = pricing[lang];
+const { phases, paymentTerms, faqs } = copy;
+const contactPath = localizedPath("contact", lang);
+---
+
+<Layout
+    title={copy.metaTitle}
+    description={copy.metaDescription}
+    routeKey="pricing"
+>
+    <ArticleLayout>
+        <PageHeader
+            label={copy.headerLabel}
+            title={copy.headerTitle}
+            highlight={copy.headerHighlight}
+            subtitle={copy.headerSubtitle}
+            helper={copy.headerHelper}
+            cta={{ label: copy.ctaLabel, href: contactPath }}
+        />
+
+        <div class="flex flex-col gap-6 md:gap-8 mb-20">
+            {
+                phases.map((phase) => (
+                    <PhaseCard
+                        number={phase.number}
+                        title={phase.title}
+                        timing={phase.timing}
+                        body={phase.body}
+                        items={phase.items}
+                    />
+                ))
+            }
+        </div>
+
+        <div
+            class="mb-12 md:mb-16 border-t border-zinc-200"
+            aria-hidden="true"
+        >
+        </div>
+
+        <CardSection class="mb-20">
+            <div class="flex flex-col gap-3">
+                <EyebrowLabel>{copy.supportEyebrow}</EyebrowLabel>
+                <CardHeading>{copy.supportHeading}</CardHeading>
+            </div>
+
+            <p
+                class="text-[15px] md:text-base leading-relaxed text-zinc-600 max-w-2xl"
+            >
+                {copy.supportBody1}
+            </p>
+
+            <p
+                class="text-[15px] md:text-base leading-relaxed text-zinc-600 max-w-2xl"
+            >
+                {copy.supportBody2}
+            </p>
+        </CardSection>
+
+        <HighlightedSection
+            label={copy.paymentLabel}
+            title={copy.paymentTitle}
+        >
+            <BulletList items={paymentTerms} tone="emerald" />
+        </HighlightedSection>
+
+        <section class="mb-20">
+            <SectionHeader
+                label={copy.faqLabel}
+                title={copy.faqTitle}
+            />
+            <div class="flex flex-col gap-3">
+                {
+                    faqs.map((faq) => (
+                        <FaqItem question={faq.q}>
+                            <p class="mt-4 text-[15px] md:text-base leading-relaxed text-zinc-600">
+                                {faq.a}
+                            </p>
+                        </FaqItem>
+                    ))
+                }
+            </div>
+        </section>
+
+        <ArticleFooter
+            primary={{ label: copy.ctaLabel, href: contactPath }}
+            secondary={{ label: copy.footerSecondary, href: homeHash("#soluciones", lang) }}
+        />
+    </ArticleLayout>
+</Layout>

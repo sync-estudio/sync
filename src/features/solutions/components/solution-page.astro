@@ -11,8 +11,10 @@ import ArticleFooter from "@shared/components/ui/article-footer.astro";
 import CardSection from "@shared/components/ui/card-section.astro";
 import CardHeading from "@shared/components/ui/card-heading.astro";
 import EyebrowLabel from "@shared/components/ui/eyebrow-label.astro";
+import InlineLink from "@shared/components/ui/inline-link.astro";
 import ArrowIcon from "@shared/components/ui/arrow-icon.astro";
-import type { LandingPage } from "@features/landing/data";
+import { getCollection } from "astro:content";
+import { type Solution, solutionSlug } from "@features/solutions/data";
 import {
     serviceSchema,
     breadcrumbSchema,
@@ -23,63 +25,90 @@ import {
     useTranslations,
     localizedPath,
     homeHash,
+    solutionPath,
+    caseStudyPath,
     type Lang,
-    type RouteKey,
 } from "@i18n/utils";
 
 interface Props {
-    page: LandingPage;
+    solution: Solution;
     lang: Lang;
 }
 
-const { page, lang } = Astro.props;
+const { solution, lang } = Astro.props;
 const t = useTranslations(lang);
-const routeKey = page.key as RouteKey;
-const pagePath = localizedPath(routeKey, lang);
+
+const wanted = new Set(solution.relatedCaseStudies);
+const relatedCases = await getCollection(
+    "blog",
+    (e) =>
+        (e.data.lang ?? "es") === lang &&
+        wanted.has(e.data.urlSlug ?? e.id),
+);
+
+const pagePath = solutionPath(solution.slug, lang);
 const contactPath = localizedPath("contact", lang);
-const homePath = localizedPath("home", lang);
+const solutionsHash = homeHash("#soluciones", lang);
+
+const alternates: Record<Lang, string> = {
+    es: solutionPath(solutionSlug(solution.key, "es") ?? solution.slug, "es"),
+    en: solutionPath(solutionSlug(solution.key, "en") ?? solution.slug, "en"),
+};
 
 const schema: JsonLd[] = [
     serviceSchema({
-        name: page.serviceName,
-        serviceType: page.serviceType,
-        description: page.metaDescription,
+        name: solution.title,
+        serviceType: solution.title,
+        description: solution.intro,
         url: pagePath,
     }),
     breadcrumbSchema([
-        { name: t("breadcrumb.home"), path: homePath },
-        { name: page.label, path: pagePath },
+        { name: t("breadcrumb.home"), path: localizedPath("home", lang) },
+        { name: t("breadcrumb.solutions"), path: solutionsHash },
+        { name: solution.title, path: pagePath },
     ]),
-    faqPageSchema(page.faqs),
+    faqPageSchema(solution.faqs.map((f) => ({ q: f.q, a: f.a }))),
 ];
 ---
 
 <Layout
-    title={page.metaTitle}
-    description={page.metaDescription}
+    title={`${solution.title} | ${t("sol.titleSuffix")}`}
+    description={solution.lead}
     schema={schema}
-    routeKey={routeKey}
+    alternates={alternates}
 >
     <ArticleLayout>
-        <BackLink href={homePath} label={t("landing.back")} />
+        <BackLink href={solutionsHash} label={t("sol.back")} />
 
         <PageHeader
-            label={page.label}
-            title={page.title}
-            highlight={page.highlight}
-            subtitle={page.subtitle}
-            cta={{ label: t("sol.ctaPrimary"), href: contactPath }}
-            timing={page.timing}
+            label={t("sol.label")}
+            title={solution.title}
+            highlight={solution.highlight}
+            subtitle={solution.lead}
+            cta={{
+                label: solution.cta?.label ?? t("sol.ctaPrimary"),
+                href: solution.cta?.href ?? contactPath,
+            }}
+            timing={solution.timing}
         />
 
         <div class="flex flex-col gap-6 md:gap-8 mb-20">
             {
-                page.sections.map((section) => (
+                solution.sections.map((section) => (
                     <CardSection>
                         <CardHeading>{section.title}</CardHeading>
                         {section.body && (
                             <p class="text-[15px] md:text-base leading-relaxed text-zinc-600 max-w-2xl">
                                 {section.body}
+                                {section.link && (
+                                    <>
+                                        {" "}
+                                        <InlineLink href={section.link.href}>
+                                            {section.link.label}
+                                        </InlineLink>
+                                        .
+                                    </>
+                                )}
                             </p>
                         )}
                         {section.items && <BulletList items={section.items} />}
@@ -88,22 +117,34 @@ const schema: JsonLd[] = [
             }
         </div>
 
-        <HighlightedSection label={page.outcomesLabel} title={t("landing.outcomesTitle")}>
-            <BulletList items={page.outcomes} tone="emerald" />
+        <HighlightedSection
+            label={t("sol.resultsLabel")}
+            title={t("sol.outcomes")}
+        >
+            <BulletList items={solution.outcomes} tone="emerald" />
         </HighlightedSection>
 
         {
-            page.faqs.length > 0 && (
+            solution.faqs.length > 0 && (
                 <section class="mb-20">
                     <SectionHeader
                         label={t("sol.faqLabel")}
                         title={t("sol.faqTitle")}
                     />
                     <div class="flex flex-col gap-3">
-                        {page.faqs.map((faq) => (
+                        {solution.faqs.map((faq) => (
                             <FaqItem question={faq.q}>
                                 <p class="mt-4 text-[15px] md:text-base leading-relaxed text-zinc-600">
                                     {faq.a}
+                                    {faq.link && (
+                                        <>
+                                            {" "}
+                                            <InlineLink href={faq.link.href}>
+                                                {faq.link.label}
+                                            </InlineLink>
+                                            .
+                                        </>
+                                    )}
                                 </p>
                             </FaqItem>
                         ))}
@@ -113,29 +154,29 @@ const schema: JsonLd[] = [
         }
 
         {
-            page.related.length > 0 && (
+            relatedCases.length > 0 && (
                 <section class="mb-20">
                     <SectionHeader
-                        label={t("landing.relatedLabel")}
-                        title={t("landing.relatedTitle")}
+                        label={t("sol.relatedLabel")}
+                        title={t("sol.relatedTitle")}
                     />
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-                        {page.related.map((item) => (
+                        {relatedCases.map((entry) => (
                             <a
-                                href={item.href}
+                                href={caseStudyPath(entry.data.urlSlug ?? entry.id, lang)}
                                 class="group rounded-2xl md:rounded-3xl border border-zinc-200 bg-emerald-50 p-8 md:p-10 transition-transform duration-200 hover:-translate-y-1 hover:border-emerald-700/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
                             >
                                 <EyebrowLabel tone="emerald-soft">
-                                    SYNC Estudio
+                                    {t("sol.caseLabel")}
                                 </EyebrowLabel>
                                 <CardHeading as="h3" class="mt-3">
-                                    {item.label}
+                                    {entry.data.title}
                                 </CardHeading>
                                 <p class="mt-3 text-[15px] leading-relaxed text-zinc-600">
-                                    {item.description}
+                                    {entry.data.description}
                                 </p>
                                 <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-emerald-800 group-hover:gap-2.5 transition-all">
-                                    {t("landing.viewMore")}
+                                    {t("sol.viewCase")}
                                     <ArrowIcon />
                                 </span>
                             </a>
@@ -147,7 +188,7 @@ const schema: JsonLd[] = [
 
         <ArticleFooter
             primary={{ label: t("sol.ctaPrimary"), href: contactPath }}
-            secondary={{ label: t("nav.allSolutions"), href: homeHash("#soluciones", lang) }}
+            secondary={{ label: t("sol.ctaSecondary"), href: solutionsHash }}
         />
     </ArticleLayout>
 </Layout>

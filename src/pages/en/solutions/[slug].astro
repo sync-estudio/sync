@@ -5,7 +5,7 @@ import { getSolutions, type Solution } from "@features/solutions/data";
 export const prerender = true;
 
 export async function getStaticPaths() {
-    return getSolutions("es").map((solution) => ({
+    return getSolutions("en").map((solution) => ({
         params: { slug: solution.slug },
         props: { solution },
     }));
@@ -16,4 +16,4 @@ type Props = { solution: Solution };
 const { solution } = Astro.props;
 ---
 
-<SolutionPage solution={solution} lang="es" />
+<SolutionPage solution={solution} lang="en" />

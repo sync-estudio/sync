@@ -3,24 +3,35 @@ import "@app/styles/global.css";
 import FeaturedProject from "./featured-project.astro";
 import imaPreview from "@assets/case-studies/ima/dashboard-preview.webp";
 import butaqueando from "@assets/projects/butaqueando.webp";
+import { getLang, caseStudyPath } from "@i18n/utils";
+import { home } from "@i18n/content/home";
+
+const lang = getLang(Astro.currentLocale);
+const copy = home[lang].featured;
+
+const byId = Object.fromEntries(copy.projects.map((p) => [p.id, p]));
+const ima = byId["ima-cloud"];
+const buta = byId["butaqueando"];
 
 const projects = [
     {
         imageSrc: imaPreview,
-        imageAlt: "IMA Cloud",
-        title: "IMA Cloud",
-        description: "Plataforma interna a medida que centraliza reportes, documentación e inventario para una empresa de electrificación ferroviaria — del diagnóstico al producto en operación.",
-        link: "/casos-de-estudio/ima-cloud",
+        imageAlt: ima.imageAlt,
+        title: ima.title,
+        description: ima.description,
+        link: caseStudyPath("ima-cloud", lang),
+        linkLabel: copy.viewCaseLabel,
         spanClass: "lg:col-span-2",
         imageClasses: "max-h-[78%] md:max-h-[80%]",
     },
     {
         imageSrc: butaqueando,
-        imageAlt: "Butaqueando — mockup de la plataforma para descubrir obras teatrales",
-        title: "Butaqueando",
-        description: "App para descubrir, seguir y no perderse las obras teatrales en cartelera.",
+        imageAlt: buta.imageAlt,
+        title: buta.title,
+        description: buta.description,
         imageClasses: "max-h-[78%] md:max-h-[80%]",
         link: "#",
+        linkLabel: copy.viewCaseLabel,
     },
 ];
 ---
@@ -28,11 +39,10 @@ const projects = [
 <section id="proyectos" class="container mx-auto py-16 md:py-24">
     <div class="mb-10 md:mb-14 flex flex-col items-center text-center gap-3 max-w-2xl mx-auto">
         <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-zinc-800">
-            Casos de estudio <span class="text-emerald-700">destacados</span>
+            {copy.titleLead}<span class="text-emerald-700">{copy.titleHighlight}</span>
         </h2>
         <p class="text-base md:text-lg text-zinc-500 leading-relaxed">
-            Proyectos reales, hoy en producción. Los acompañamos del
-            diagnóstico hasta el producto final.
+            {copy.subtitle}
         </p>
     </div>
 

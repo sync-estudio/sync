@@ -1,8 +1,12 @@
 ---
 import "@app/styles/global.css";
 import Button from "@shared/components/ui/button.astro";
+import { getLang, localizedPath } from "@i18n/utils";
+import { home } from "@i18n/content/home";
 
-// Copy — voz "del lado nuestro". Editar libremente.
+const lang = getLang(Astro.currentLocale);
+const copy = home[lang].offerings;
+
 type Step = {
     id: string;
     title: string;
@@ -16,24 +20,24 @@ type Step = {
 const steps: Step[] = [
     {
         id: "platforms",
-        title: "Software a medida",
-        desc: "Sistemas internos que se ajustan a cómo ya trabajas, no al revés. Tu equipo los opera; el mantenimiento queda de nuestro lado.",
+        title: copy.platformsTitle,
+        desc: copy.platformsDesc,
         surface: "bg-white",
         text: "text-zinc-900",
         muted: "text-zinc-600",
     },
     {
         id: "ai",
-        title: "Agentes de IA",
-        desc: "Le quitamos a tu equipo el trabajo repetitivo. Hacen la tarea, te avisan cuando algo necesita tu decisión, y siempre ves qué están haciendo y por qué.",
+        title: copy.aiTitle,
+        desc: copy.aiDesc,
         surface: "bg-zinc-900",
         text: "text-white",
         muted: "text-zinc-300",
     },
     {
         id: "mvp",
-        title: "MVP",
-        desc: "Construimos lo justo para salir al mundo y aprender de gente real. Sin gastar de más: validamos rápido y, desde ahí, crecemos contigo.",
+        title: copy.mvpTitle,
+        desc: copy.mvpDesc,
         surface: "bg-white",
         text: "text-zinc-900",
         muted: "text-zinc-600",
@@ -69,7 +73,7 @@ const steps: Step[] = [
                     <div class={`max-w-3xl ${step.id === "ai" ? "ml-auto text-right" : ""}`}>
                         {step.id === "platforms" && (
                             <span class={`block mb-6 md:mb-8 text-sm md:text-base ${step.muted}`}>
-                                ¿Qué podemos construir?
+                                {copy.eyebrow}
                             </span>
                         )}
                         <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05]">
@@ -80,7 +84,7 @@ const steps: Step[] = [
                         </p>
                         {step.cta && (
                             <div class="mt-8 md:mt-10">
-                                <Button link="/contacto">Solicitar diagnóstico</Button>
+                                <Button link={localizedPath("contact", lang)}>{copy.cta}</Button>
                             </div>
                         )}
                     </div>

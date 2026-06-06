@@ -3,45 +3,12 @@ import "@app/styles/global.css";
 import Button from "@shared/components/ui/button.astro";
 import FaqItem from "@shared/components/ui/faq-item.astro";
 import ArrowIcon from "@shared/components/ui/arrow-icon.astro";
+import { getLang, localizedPath } from "@i18n/utils";
+import { home } from "@i18n/content/home";
 
-type Faq = {
-    q: string;
-    a: string;
-    link: { href: string; label: string };
-};
-
-const faqs: Faq[] = [
-    {
-        q: "¿Cómo trabajan en cada proyecto?",
-        a: "Tres fases con aprobación de tu equipo entre cada una: Diagnóstico para entender la operación y trazar el roadmap, Desarrollo en sprints de 1-2 semanas con demos en vivo, y Educación para que tu equipo opere el sistema con confianza. Cada fase cierra con una decisión: aprueba el siguiente paso o paramos a corregir.",
-        link: { href: "/como-trabajamos", label: "Ver metodología completa" },
-    },
-    {
-        q: "¿Cuánto cuesta un proyecto?",
-        a: "El monto exacto se cierra al final del Diagnóstico, con alcance acordado y precio fijo. No estimamos por hora con tope abierto. El Desarrollo se cobra en esquema 40/30/30 y el Plan de Acompañamiento mensual va incluido en la fase de Educación.",
-        link: { href: "/como-cobramos", label: "Ver cómo cobramos" },
-    },
-    {
-        q: "¿Qué tipo de soluciones construyen?",
-        a: "Software operativo a medida: portales internos, dashboards, herramientas de campo, automatización de procesos, integraciones entre sistemas, y agentes/copilotos de IA aplicados a la operación. No vendemos productos genéricos rebautizados con tu logo.",
-        link: { href: "/soluciones/desarrollo", label: "Ver Desarrollo" },
-    },
-    {
-        q: "¿Quién mantiene el sistema después del lanzamiento?",
-        a: "Nosotros. El Plan de Acompañamiento mensual va incluido en la fase de Educación, no como add-on. Cubre mantenimiento del sistema en producción, soporte para tu equipo, ajustes operativos y revisiones trimestrales para priorizar lo que no rinde.",
-        link: { href: "/soluciones/educacion", label: "Ver Educación" },
-    },
-    {
-        q: "¿Tenemos que empezar por el Diagnóstico?",
-        a: "Sí. Es el único punto de entrada. Sin entender la operación primero, cualquier propuesta es especulativa. Si decides no seguir con nosotros después del Diagnóstico, el roadmap se queda contigo: puedes ejecutarlo internamente o con otro proveedor.",
-        link: { href: "/soluciones/diagnostico", label: "Ver Diagnóstico" },
-    },
-    {
-        q: "¿Cómo empezamos?",
-        a: "Escríbenos contándonos sobre tu operación: qué proceso está costando más de lo que debería, qué intentaste antes y qué resultado esperas. Respondemos en menos de 24h hábiles para agendar la conversación inicial.",
-        link: { href: "/contacto", label: "Ir a contacto" },
-    },
-];
+const lang = getLang(Astro.currentLocale);
+const copy = home[lang].faq;
+const faqs = copy.items;
 
 const faqSchema = {
     "@context": "https://schema.org",
@@ -65,16 +32,15 @@ const faqSchema = {
             <span
                 class="text-xs tracking-[0.2em] text-emerald-700 font-semibold"
             >
-                Preguntas frecuentes
+                {copy.eyebrow}
             </span>
             <h2
                 class="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-zinc-800"
             >
-                Lo que casi siempre preguntan
+                {copy.title}
             </h2>
             <p class="text-base sm:text-lg text-zinc-600 leading-relaxed">
-                Respuestas breves a las dudas más recurrentes. Cada una enlaza a
-                la página con el detalle completo.
+                {copy.subtitle}
             </p>
         </header>
 
@@ -105,8 +71,8 @@ const faqSchema = {
         <div
             class="flex flex-wrap items-center gap-3 pt-4 border-t border-zinc-200"
         >
-            <p class="text-sm text-zinc-600">¿Tu duda no está aquí?</p>
-            <Button variant="outline" link="/contacto">Escríbenos</Button>
+            <p class="text-sm text-zinc-600">{copy.footerQuestion}</p>
+            <Button variant="outline" link={localizedPath("contact", lang)}>{copy.footerCta}</Button>
         </div>
     </div>
 </section>

@@ -1,6 +1,11 @@
 ---
 import "@app/styles/global.css";
 import Button from "@shared/components/ui/button.astro";
+import { getLang, localizedPath } from "@i18n/utils";
+import { home } from "@i18n/content/home";
+
+const lang = getLang(Astro.currentLocale);
+const copy = home[lang].hero;
 ---
 
 <div
@@ -17,17 +22,17 @@ import Button from "@shared/components/ui/button.astro";
                 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-5 leading-[1.05] tracking-tight text-balance"
             >
                 <span data-hero-line class="hero-line"
-                    >Construimos el <span
+                    >{copy.titleLead}<span
                         class="text-emerald-700"
-                        >futuro</span
-                    > de tu operación.</span
+                        >{copy.titleHighlight}</span
+                    >{copy.titleTail}</span
                 >
             </h1>
             <p
                 data-hero-line
                 class="hero-line text-[13px] sm:text-base md:text-lg text-zinc-500 max-w-2xl mx-auto leading-snug sm:leading-relaxed text-balance"
             >
-                Desarrollo de software, aplicaciones e inteligencia artificial a medida para empresas que ya operan en México. Quitamos el trabajo manual, desatascamos la operación y dejamos a tu equipo dueño del sistema.
+                {copy.subtitle}
             </p>
         </div>
 
@@ -35,8 +40,8 @@ import Button from "@shared/components/ui/button.astro";
             data-hero-actions
             class="flex flex-wrap justify-center gap-3 sm:gap-3 md:gap-4 w-full px-4 sm:px-0 hero-actions"
         >
-            <Button link="/contacto" style="w-full sm:w-auto">Solicitar diagnóstico</Button>
-            <Button link="/como-trabajamos" variant="outline" style="w-full sm:w-auto">Ver cómo trabajamos</Button>
+            <Button link={localizedPath("contact", lang)} style="w-full sm:w-auto">{copy.ctaPrimary}</Button>
+            <Button link={localizedPath("howWeWork", lang)} variant="outline" style="w-full sm:w-auto">{copy.ctaSecondary}</Button>
         </div>
     </div>
 </div>
