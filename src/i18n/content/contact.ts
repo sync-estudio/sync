@@ -40,6 +40,7 @@ type ContactCopy = {
     submitLabel: string;
     alreadySentLabel: string;
     sendingLabel: string;
+    bookingLabel: string;
     whatsappLabel: string;
     whatsappMessage: string;
     /** Strings consumed by the client-side validation/submit script. */
@@ -116,6 +117,7 @@ export const contact: Record<Lang, ContactCopy> = {
         submitLabel: "Solicitar diagnóstico estratégico",
         alreadySentLabel: "Ya enviaste tu mensaje",
         sendingLabel: "Enviando...",
+        bookingLabel: "Agenda tu diagnóstico gratuito",
         whatsappLabel: "O envíanos un WhatsApp",
         whatsappMessage:
             "Hola, me gustaría saber más sobre sus servicios.",
@@ -212,6 +214,7 @@ export const contact: Record<Lang, ContactCopy> = {
         submitLabel: "Request strategic assessment",
         alreadySentLabel: "You already sent your message",
         sendingLabel: "Sending...",
+        bookingLabel: "Book your free assessment",
         whatsappLabel: "Or send us a WhatsApp",
         whatsappMessage: "Hi, I'd like to know more about your services.",
         validations: {

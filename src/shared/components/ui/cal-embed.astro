@@ -1,0 +1,83 @@
+---
+import Button from "@shared/components/ui/button.astro";
+
+interface Props {
+    /** Cal.com event path, e.g. "yamil-yscapa/diagnostico-gratuito". */
+    calLink: string;
+    /** Visible button label (rendered after any slotted icon). */
+    label: string;
+    variant?: "default" | "outline" | "ghost" | "small";
+    style?: string;
+    /**
+     * Cal namespace — must be unique per event link on a page. Defaults to a
+     * slug of the event so multiple embeds can coexist without colliding.
+     */
+    namespace?: string;
+}
+
+const {
+    calLink,
+    label,
+    variant = "outline",
+    style = "",
+    namespace = calLink.replace(/[^a-z0-9]+/gi, "-"),
+} = Astro.props;
+
+// Popup config + theming. Single emerald brand voltage per DESIGN.md.
+const calConfig = JSON.stringify({ layout: "month_view" });
+const calUi = {
+    cssVarsPerTheme: { light: { "cal-brand": "#1c5534" } },
+    hideEventTypeDetails: false,
+    layout: "month_view",
+};
+---
+
+<Button
+    variant={variant}
+    style={style}
+    data-cal-namespace={namespace}
+    data-cal-link={calLink}
+    data-cal-config={calConfig}
+>
+    <slot />{label}
+</Button>
+
+<script is:inline define:vars={{ namespace, calUi }}>
+    // Official Cal.com embed loader — lazy-injects embed.js on first call and
+    // is idempotent, so rendering this component more than once is safe.
+    (function (C, A, L) {
+        let p = function (a, ar) {
+            a.q.push(ar);
+        };
+        let d = C.document;
+        C.Cal =
+            C.Cal ||
+            function () {
+                let cal = C.Cal;
+                let ar = arguments;
+                if (!cal.loaded) {
+                    cal.ns = {};
+                    cal.q = cal.q || [];
+                    d.head.appendChild(d.createElement("script")).src = A;
+                    cal.loaded = true;
+                }
+                if (ar[0] === L) {
+                    const api = function () {
+                        p(api, arguments);
+                    };
+                    const namespace = ar[1];
+                    api.q = api.q || [];
+                    if (typeof namespace === "string") {
+                        cal.ns[namespace] = cal.ns[namespace] || api;
+                        p(cal.ns[namespace], ar);
+                        p(cal, ["initNamespace", namespace]);
+                    } else p(cal, ar);
+                    return;
+                }
+                p(cal, ar);
+            };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
+
+    Cal("init", namespace, { origin: "https://app.cal.com" });
+    Cal.ns[namespace]("ui", calUi);
+</script>
