@@ -1,11 +1,15 @@
 ---
 import "@app/styles/global.css";
 import Button from "@shared/components/ui/button.astro";
+import CalEmbed from "@shared/components/ui/cal-embed.astro";
 import { getLang, localizedPath } from "@i18n/utils";
 import { home } from "@i18n/content/home";
 
 const lang = getLang(Astro.currentLocale);
 const copy = home[lang].hero;
+
+// Same booking event as the contact page — hero CTA opens the Cal popup.
+const calLink = "yamil-yscapa/diagnostico-gratuito";
 ---
 
 <div
@@ -40,7 +44,27 @@ const copy = home[lang].hero;
             data-hero-actions
             class="flex flex-wrap justify-center gap-3 sm:gap-3 md:gap-4 w-full px-4 sm:px-0 hero-actions"
         >
-            <Button link={localizedPath("contact", lang)} style="w-full sm:w-auto">{copy.ctaPrimary}</Button>
+            <CalEmbed
+                calLink={calLink}
+                namespace="diagnostico-hero"
+                label={copy.ctaPrimary}
+                variant="default"
+                style="w-full sm:w-auto"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    ><path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    ></path></svg
+                >
+            </CalEmbed>
             <Button link={localizedPath("howWeWork", lang)} variant="outline" style="w-full sm:w-auto">{copy.ctaSecondary}</Button>
         </div>
 

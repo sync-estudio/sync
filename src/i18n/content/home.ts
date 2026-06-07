@@ -90,7 +90,7 @@ export const home: Record<Lang, HomeCopy> = {
             titleTail: " de tu operación.",
             subtitle:
                 "Desarrollo de software, aplicaciones e inteligencia artificial a medida para empresas en operación. Quitamos el trabajo manual, desatascamos la operación y dejamos a tu equipo dueño del sistema.",
-            ctaPrimary: "Solicitar diagnóstico",
+            ctaPrimary: "Agenda una llamada",
             ctaSecondary: "Ver cómo trabajamos",
             locationTag: "Desde México · Disponibles en todo el mundo",
         },
@@ -253,7 +253,7 @@ export const home: Record<Lang, HomeCopy> = {
             titleTail: " of your operation.",
             subtitle:
                 "Custom software, applications and artificial intelligence for working companies. We remove manual work, unblock the operation, and leave your team owning the system.",
-            ctaPrimary: "Request an assessment",
+            ctaPrimary: "Book a call",
             ctaSecondary: "See how we work",
             locationTag: "Based in Mexico · Available worldwide",
         },
