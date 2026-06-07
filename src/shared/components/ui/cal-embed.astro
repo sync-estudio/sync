@@ -80,4 +80,35 @@ const calUi = {
 
     Cal("init", namespace, { origin: "https://app.cal.com" });
     Cal.ns[namespace]("ui", calUi);
+
+    // Mobile zoom guard. The booking form lives in a cross-origin app.cal.com
+    // iframe whose input font-size we can't control, so iOS auto-zooms when a
+    // field is focused inside the popup. Lock maximum-scale=1 only while the
+    // Cal modal (<cal-modal-box>, appended to <body>) is open, then restore —
+    // so pinch-zoom stays available everywhere else. iOS-only on purpose: on
+    // Android, maximum-scale=1 would disable pinch-zoom outright. Runs once
+    // regardless of how many CalEmbed instances render on the page.
+    if (!window.__calZoomGuard) {
+        window.__calZoomGuard = true;
+        const ua = navigator.userAgent;
+        const isIOS =
+            /iP(hone|od|ad)/.test(ua) ||
+            (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+        const viewport = document.querySelector('meta[name="viewport"]');
+        if (isIOS && viewport) {
+            const base = viewport.getAttribute("content");
+            const locked = base + ", maximum-scale=1";
+            let isLocked = false;
+            const sync = () => {
+                const open = !!document.querySelector("cal-modal-box");
+                if (open === isLocked) return;
+                isLocked = open;
+                viewport.setAttribute("content", open ? locked : base);
+            };
+            // Observe only <body>'s direct children: the modal box is appended
+            // there, and skipping the subtree avoids firing on the hero wave's
+            // per-frame text updates.
+            new MutationObserver(sync).observe(document.body, { childList: true });
+        }
+    }
 </script>
