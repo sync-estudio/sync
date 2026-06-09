@@ -81,6 +81,22 @@ const calUi = {
     Cal("init", namespace, { origin: "https://app.cal.com" });
     Cal.ns[namespace]("ui", calUi);
 
+    // Meta Pixel conversion. Fire a Lead on completed booking. Register once
+    // per namespace — multiple CTAs sharing a calLink reuse the namespace, and
+    // Cal("on") would otherwise stack duplicate listeners and double-count.
+    window.__calLeadTracked = window.__calLeadTracked || {};
+    if (!window.__calLeadTracked[namespace]) {
+        window.__calLeadTracked[namespace] = true;
+        Cal.ns[namespace]("on", {
+            action: "bookingSuccessful",
+            callback: function () {
+                if (typeof window.fbq === "function") {
+                    window.fbq("track", "Lead");
+                }
+            },
+        });
+    }
+
     // Mobile zoom guard. The booking form lives in a cross-origin app.cal.com
     // iframe whose input font-size we can't control, so iOS auto-zooms when a
     // field is focused inside the popup. Lock maximum-scale=1 only while the
