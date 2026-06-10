@@ -1,53 +1,47 @@
 ---
 import "@app/styles/global.css";
-import Button from "@shared/components/ui/button.astro";
+import { Image } from "astro:assets";
 import CalEmbed from "@shared/components/ui/cal-embed.astro";
-import { getLang, localizedPath } from "@i18n/utils";
+import ArrowIcon from "@shared/components/ui/arrow-icon.astro";
+import imaPreview from "@assets/case-studies/ima/dashboard-preview.webp";
+import butaqueando from "@assets/projects/butaqueando.webp";
+import { getLang, caseStudyPath } from "@i18n/utils";
 import { home } from "@i18n/content/home";
 
 const lang = getLang(Astro.currentLocale);
 const copy = home[lang].hero;
+const featured = home[lang].featured;
+
+const buta = featured.projects.find((p) => p.id === "butaqueando");
 
 // Same booking event as the contact page — hero CTA opens the Cal popup.
 const calLink = "yamil-yscapa/diagnostico-gratuito";
 ---
 
-<div
-    id="inicio"
-    data-hero-card
-    class="hero-card relative isolate container mx-auto min-h-screen flex justify-center items-center pt-20 pb-12 md:pb-16 px-6 sm:px-10 md:px-14 lg:px-20"
->
-    <pre data-hero-wave class="hero-wave" aria-hidden="true"></pre>
+<section id="inicio" class="container mx-auto pt-24 md:pt-28 pb-10 md:pb-14">
     <div
-        class="flex flex-col gap-6 md:gap-7 w-full max-w-5xl relative z-10"
+        class="flex flex-col items-center text-center w-full gap-5 md:gap-6"
     >
-        <div class="text-zinc-800 text-center">
-            <p
-                class="hero-line text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-4 md:mb-5"
+        <h1
+            class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight text-zinc-900 text-balance"
+        >
+            <span data-hero-line class="hero-line"
+                >{copy.titleLead}<span class="text-emerald-700"
+                    >{copy.titleHighlight}</span
+                >{copy.titleTail}</span
             >
-                {copy.locationTag}
-            </p>
-            <h1
-                class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-5 leading-[1.05] tracking-tight text-balance"
-            >
-                <span data-hero-line class="hero-line"
-                    >{copy.titleLead}<span
-                        class="text-emerald-700"
-                        >{copy.titleHighlight}</span
-                    >{copy.titleTail}</span
-                >
-            </h1>
-            <p
-                data-hero-line
-                class="hero-line text-[13px] sm:text-base md:text-lg text-zinc-500 max-w-2xl mx-auto leading-snug sm:leading-relaxed text-balance"
-            >
-                {copy.subtitle}
-            </p>
-        </div>
+        </h1>
+
+        <p
+            data-hero-line
+            class="hero-line text-[13px] sm:text-base md:text-lg text-zinc-500 max-w-4xl leading-snug sm:leading-relaxed"
+        >
+            {copy.subtitle}
+        </p>
 
         <div
             data-hero-actions
-            class="flex flex-wrap justify-center gap-3 sm:gap-3 md:gap-4 w-full px-4 sm:px-0 hero-actions"
+            class="hero-actions flex flex-wrap justify-center gap-3 md:gap-4 w-full px-4 sm:px-0 mt-1"
         >
             <CalEmbed
                 calLink={calLink}
@@ -71,52 +65,83 @@ const calLink = "yamil-yscapa/diagnostico-gratuito";
                     ></path></svg
                 >
             </CalEmbed>
-            <Button link={localizedPath("howWeWork", lang)} variant="outline" style="w-full sm:w-auto">{copy.ctaSecondary}</Button>
         </div>
-
-        <p
-            class="hero-actions text-xs sm:text-sm text-zinc-500 text-center text-balance mt-1"
-        >
-            {copy.ctaNote}
-        </p>
     </div>
-</div>
+
+    <div
+        class="hero-cards grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-10 md:mt-14"
+    >
+        <a
+            href={caseStudyPath("ima-cloud", lang)}
+            class="group relative isolate overflow-hidden rounded-2xl md:rounded-3xl bg-emerald-100/80 h-[380px] sm:h-[440px] lg:h-[500px] block focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+            aria-label={`${copy.visual.name} — ${copy.visual.cta}`}
+        >
+            <div class="absolute top-0 inset-x-0 z-10 p-5 sm:p-6 md:p-7">
+                <div class="flex items-center justify-between gap-3">
+                    <p
+                        class="font-semibold text-zinc-900 text-base md:text-lg leading-tight whitespace-nowrap"
+                    >
+                        {copy.visual.name}
+                    </p>
+                    <span
+                        class="shrink-0 inline-flex items-center gap-1.5 rounded-full bg-zinc-900 px-4 py-2 text-xs font-semibold text-white shadow-sm transition-colors duration-200 group-hover:bg-zinc-700"
+                    >
+                        {copy.visual.cta}
+                        <ArrowIcon
+                            size={12}
+                            class="transition-transform duration-300 group-hover:translate-x-0.5"
+                        />
+                    </span>
+                </div>
+                <p
+                    class="mt-2 text-sm text-zinc-600 leading-snug max-w-sm text-balance line-clamp-2 md:line-clamp-none"
+                >
+                    {copy.visual.caption}
+                </p>
+            </div>
+
+            <Image
+                class="absolute left-1/2 -translate-x-1/2 bottom-[-8%] w-[88%] max-w-none rounded-lg sm:rounded-xl border border-zinc-200/80 shadow-2xl transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-2"
+                loading="eager"
+                decoding="async"
+                src={imaPreview}
+                alt={copy.visual.imageAlt}
+                format="webp"
+                quality={80}
+            />
+        </a>
+
+        <div
+            class="relative isolate overflow-hidden rounded-2xl md:rounded-3xl bg-emerald-100/80 h-[380px] sm:h-[440px] lg:h-[500px]"
+        >
+            {
+                buta && (
+                    <>
+                        <div class="absolute top-0 inset-x-0 z-10 p-5 sm:p-6 md:p-7">
+                            <p class="font-semibold text-zinc-900 text-base md:text-lg leading-tight">
+                                {buta.title}
+                            </p>
+                            <p class="mt-1 text-sm text-zinc-600 leading-snug max-w-sm text-balance">
+                                {buta.description}
+                            </p>
+                        </div>
+                        <Image
+                            class="absolute left-1/2 -translate-x-1/2 bottom-[-12%] h-[78%] w-auto max-w-none drop-shadow-2xl"
+                            loading="eager"
+                            decoding="async"
+                            src={butaqueando}
+                            alt={buta.imageAlt}
+                            format="webp"
+                            quality={80}
+                        />
+                    </>
+                )
+            }
+        </div>
+    </div>
+</section>
 
 <style>
-    .hero-card {
-        position: relative;
-    }
-
-    .hero-wave {
-        position: absolute;
-        inset: 0;
-        margin: 0;
-        pointer-events: none;
-        z-index: 0;
-        overflow: hidden;
-        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-        font-weight: 700;
-        color: rgba(4, 120, 87, 0.45);
-        white-space: pre;
-        user-select: none;
-        line-height: 1;
-        letter-spacing: 0.4em;
-        mask-image: linear-gradient(
-            90deg,
-            transparent 0%,
-            #000 3%,
-            #000 97%,
-            transparent 100%
-        );
-        -webkit-mask-image: linear-gradient(
-            90deg,
-            transparent 0%,
-            #000 3%,
-            #000 97%,
-            transparent 100%
-        );
-    }
-
     .hero-line {
         display: block;
     }
@@ -125,148 +150,21 @@ const calLink = "yamil-yscapa/diagnostico-gratuito";
         animation: hero-actions-in 0.76s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
     }
 
+    .hero-cards {
+        animation: hero-actions-in 0.76s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
+    }
+
     @keyframes hero-actions-in {
         from { opacity: 0; transform: translateY(24px); }
         to   { opacity: 1; transform: translateY(0); }
     }
 
     @media (prefers-reduced-motion: reduce) {
-        .hero-actions {
+        .hero-actions,
+        .hero-cards {
             animation: none !important;
             opacity: 1 !important;
             transform: none !important;
         }
     }
-
-    @media (min-width: 640px) {
-        #inicio img {
-            max-height: 600px;
-            min-height: 400px;
-        }
-    }
-
-    @media (min-width: 768px) {
-        #inicio img {
-            max-height: 700px;
-            min-height: 500px;
-        }
-    }
-
-    @media (min-width: 1024px) {
-        #inicio img {
-            max-height: 800px;
-            min-height: 600px;
-        }
-    }
-
-    @media (min-width: 1280px) {
-        #inicio img {
-            max-height: 900px;
-            min-height: 700px;
-        }
-    }
 </style>
-
-<script>
-    const RAMP = "  ···";
-    const FONT_PX = 13;
-    const CELL_W = FONT_PX;
-    const CELL_H = FONT_PX;
-
-    function initWave(el: HTMLElement) {
-        const card = el.parentElement as HTMLElement;
-        const reduce = window.matchMedia(
-            "(prefers-reduced-motion: reduce)",
-        ).matches;
-
-        let cols = 0;
-        let rows = 0;
-        let frame = 0;
-        let base = 0;
-        let ampA = 0;
-        let ampB = 0;
-        let thickness = 1;
-        let freqA = 7;
-        let freqB = 13;
-
-        el.style.fontSize = FONT_PX + "px";
-
-        function resize() {
-            const rect = card.getBoundingClientRect();
-            cols = Math.max(1, Math.floor(rect.width / CELL_W));
-            rows = Math.max(1, Math.floor(rect.height / CELL_H));
-
-            // Keep wavelength ~constant in px: ~one crest per 640px.
-            const cycles = Math.max(1, rect.width / 640);
-            freqA = cycles * Math.PI * 2;
-            freqB = freqA * 1.85;
-
-            // Push wave below the text on all screens.
-            base = rows * 0.72;
-            // Cap amplitude by width so narrow/tall mobile cards stay gentle.
-            ampA = Math.min(rows * 0.26, cols * 0.14);
-            ampB = ampA * 0.5;
-            thickness = Math.max(2, rows * 0.14);
-        }
-
-        function render(t: number) {
-            const out: string[] = [];
-
-            for (let y = 0; y < rows; y++) {
-                let line = "";
-                for (let x = 0; x < cols; x++) {
-                    const u = x / cols;
-                    const center =
-                        base +
-                        ampA * Math.sin(u * freqA + t) +
-                        ampB * Math.sin(u * freqB - t * 0.7);
-                    const d = Math.abs(y - center) / thickness;
-                    // smooth bell falloff for gentle edges, constant along x
-                    const intensity = Math.exp(-d * d * 1.4);
-                    if (intensity <= 0.06) {
-                        line += " ";
-                    } else {
-                        const idx = Math.min(
-                            RAMP.length - 1,
-                            Math.round(intensity * (RAMP.length - 1)),
-                        );
-                        line += RAMP[idx];
-                    }
-                }
-                out.push(line);
-            }
-            el.textContent = out.join("\n");
-        }
-
-        function loop() {
-            frame += 0.005;
-            render(frame);
-            requestAnimationFrame(loop);
-        }
-
-        let lastW = -1;
-        function onResize() {
-            const w = Math.round(card.getBoundingClientRect().width);
-            // Ignore height-only changes (mobile address-bar show/hide on scroll).
-            if (w === lastW) return;
-            lastW = w;
-            resize();
-            if (reduce) render(0);
-        }
-
-        onResize();
-        window.addEventListener("resize", onResize);
-        window.addEventListener("orientationchange", onResize);
-
-        if (reduce) {
-            render(0);
-        } else {
-            requestAnimationFrame(loop);
-        }
-    }
-
-    document
-        .querySelectorAll<HTMLElement>("[data-hero-wave]")
-        .forEach(initWave);
-</script>
-

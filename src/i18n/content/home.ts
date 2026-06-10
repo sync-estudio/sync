@@ -26,6 +26,14 @@ type HomeCopy = {
         ctaSecondary: string;
         ctaNote: string;
         locationTag: string;
+        trustSignals: string[];
+        visual: {
+            badge: string;
+            name: string;
+            caption: string;
+            cta: string;
+            imageAlt: string;
+        };
     };
     about: {
         eyebrow: string;
@@ -110,10 +118,24 @@ export const home: Record<Lang, HomeCopy> = {
             ctaSecondary: "Ver cómo trabajamos",
             ctaNote: "Una llamada para entender tu operación. Gratuita y sin compromiso.",
             locationTag: "Desde México · Disponibles en todo el mundo",
+            trustSignals: [
+                "Precio fijo, sin horas abiertas",
+                "El código es tuyo desde el día uno",
+                "Quien te atiende es quien construye",
+            ],
+            visual: {
+                badge: "En producción",
+                name: "IMA Cloud",
+                caption:
+                    "Plataforma operativa para una empresa de electrificación ferroviaria — reportes, documentación e inventario en un solo lugar.",
+                cta: "Ver caso de estudio",
+                imageAlt:
+                    "IMA Cloud — panel general de la plataforma en producción",
+            },
         },
         about: {
             eyebrow: "¿Por qué existimos?",
-            body: "La mayoría de las agencias vende software que los equipos nunca llegan a operar. Eso no resuelve problemas, los disfraza. Sync existe para hacer lo opuesto: entendemos la operación real, educamos al equipo sobre sus cuellos de botella, y entregamos soluciones hechas para que tu equipo las opere — con mantenimiento continuo de nuestro lado.",
+            body: "La mayoría de las agencias vende software que los equipos nunca llegan a operar. Eso no resuelve problemas, los disfraza. Sync existe para hacer lo opuesto: entendemos la operación real, educamos al equipo sobre sus cuellos de botella, y entregamos soluciones hechas para que tu equipo las opere — con mantenimiento continuo de nuestro lado. La persona con la que hablas es la persona que construye. Sin traspasos.",
             role: "Co-fundador de Sync",
         },
         offerings: {
@@ -207,6 +229,11 @@ export const home: Record<Lang, HomeCopy> = {
                     link: { href: "/soluciones/diagnostico", label: "Ver Diagnóstico" },
                 },
                 {
+                    q: "¿Trabajan con empresas de todo México y del extranjero?",
+                    a: "Sí. Trabajamos con empresas de todo México y con clientes en Estados Unidos y otros países. El proceso funciona igual a distancia: mismo Diagnóstico, mismo precio fijo cerrado, mismo Plan de Acompañamiento mensual. Y siempre sabes quién construye tu sistema, porque es la misma persona con la que hablas.",
+                    link: { href: "/contacto", label: "Ir a contacto" },
+                },
+                {
                     q: "¿Cómo empezamos?",
                     a: "Escríbenos contándonos sobre tu operación: qué proceso está costando más de lo que debería, qué intentaste antes y qué resultado esperas. Respondemos en menos de 24h hábiles para agendar la conversación inicial.",
                     link: { href: "/contacto", label: "Ir a contacto" },
@@ -283,16 +310,31 @@ export const home: Record<Lang, HomeCopy> = {
             titleHighlight: "future",
             titleTail: " of your operation.",
             subtitle:
-                "Custom software, applications and artificial intelligence for working companies. We remove manual work and leave your team owning the system.",
+                "Custom software, applications and AI for businesses already in operation. We remove the manual work and leave your team owning the system — built from Mexico, working your hours.",
             ctaPrimary: "Book a discovery call",
             ctaPrimaryShort: "Book a discovery call",
             ctaSecondary: "See how we work",
             ctaNote: "One call to understand your operation. Free, no commitment.",
             locationTag: "Based in Mexico · Available worldwide",
+            trustSignals: [
+                "U.S.-hours overlap",
+                "English-first communication",
+                "USD invoicing",
+                "You own the code from day one",
+            ],
+            visual: {
+                badge: "In production",
+                name: "IMA Cloud",
+                caption:
+                    "Operations platform for a railway electrification company — reports, documentation and inventory in one place.",
+                cta: "View case study",
+                imageAlt:
+                    "IMA Cloud — overview dashboard of the platform in production",
+            },
         },
         about: {
             eyebrow: "Why do we exist?",
-            body: "Most agencies sell software that teams never actually operate. That doesn't solve problems, it disguises them. Sync exists to do the opposite: we understand the real operation, educate the team about its bottlenecks, and deliver solutions built for your team to operate — with ongoing maintenance on our side.",
+            body: "Most agencies sell software that teams never actually operate. That doesn't solve problems, it disguises them. Sync exists to do the opposite: we understand the real operation, educate the team about its bottlenecks, and deliver solutions built for your team to operate — with ongoing maintenance on our side. The person you talk to is the person who builds. No handoffs.",
             role: "Co-founder of Sync",
         },
         offerings: {
@@ -384,6 +426,11 @@ export const home: Record<Lang, HomeCopy> = {
                     q: "Do we have to start with the Assessment?",
                     a: "Yes. It's the only entry point. Without understanding the operation first, any proposal is speculative. If you decide not to continue with us after the Assessment, the roadmap stays with you: you can execute it in-house or with another provider.",
                     link: { href: "/en/solutions/assessment", label: "See Assessment" },
+                },
+                {
+                    q: "Do you work with companies outside Mexico?",
+                    a: "Yes — we're based in Mexico and work with clients in the U.S. and elsewhere. We work on U.S. hours (Central Time), communicate in English by default, invoice in USD, and you own the repository and IP from day one. Distance doesn't change the methodology: same Assessment, same fixed price, same monthly Support Plan.",
+                    link: { href: "/en/contact", label: "Go to contact" },
                 },
                 {
                     q: "How do we start?",
