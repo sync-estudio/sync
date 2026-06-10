@@ -1,0 +1,67 @@
+---
+import "@app/styles/global.css";
+import ArrowIcon from "@shared/components/ui/arrow-icon.astro";
+import CalEmbed from "@shared/components/ui/cal-embed.astro";
+import { getLang, localizedPath } from "@i18n/utils";
+import { home } from "@i18n/content/home";
+
+const lang = getLang(Astro.currentLocale);
+const copy = home[lang].closing;
+
+// Same booking event as the hero and methodology CTAs.
+const calLink = "yamil-yscapa/diagnostico-gratuito";
+---
+
+<section id="hablemos" class="container mx-auto pb-16 md:pb-24">
+    <div
+        class="relative isolate overflow-hidden rounded-2xl md:rounded-3xl bg-emerald-800 px-6 py-16 sm:px-10 md:px-16 md:py-24 text-center"
+    >
+        <div
+            class="absolute inset-0 pointer-events-none"
+            aria-hidden="true"
+            style="background-image:radial-gradient(circle,rgba(255,255,255,0.18) 1.2px,transparent 1.6px);background-size:14px 14px;mask-image:radial-gradient(ellipse at bottom right,black,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at bottom right,black,transparent 70%)"
+        >
+        </div>
+
+        <div
+            class="relative z-10 max-w-2xl mx-auto flex flex-col items-center gap-5 md:gap-6"
+        >
+            <h2
+                class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.1] text-white text-balance"
+            >
+                {copy.titleLead}<span class="text-emerald-200"
+                    >{copy.titleHighlight}</span
+                >{copy.titleTail}
+            </h2>
+            <p
+                class="text-base md:text-lg text-emerald-100/90 leading-relaxed text-balance"
+            >
+                {copy.subtitle}
+            </p>
+
+            <div
+                class="mt-2 flex flex-wrap items-center justify-center gap-3 w-full"
+            >
+                <CalEmbed
+                    calLink={calLink}
+                    namespace="diagnostico-cierre"
+                    label={copy.ctaPrimary}
+                    variant="inverted"
+                    style="w-full sm:w-auto"
+                />
+                <a
+                    href={localizedPath("contact", lang)}
+                    class="group inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-sm font-semibold text-emerald-50 hover:text-white rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-emerald-800"
+                >
+                    {copy.ctaSecondary}
+                    <ArrowIcon
+                        size={14}
+                        class="transition-transform duration-300 group-hover:translate-x-0.5"
+                    />
+                </a>
+            </div>
+
+            <p class="text-xs sm:text-sm text-emerald-100/80">{copy.note}</p>
+        </div>
+    </div>
+</section>

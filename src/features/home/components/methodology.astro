@@ -1,6 +1,7 @@
 ---
 import "@app/styles/global.css";
 import Button from "@shared/components/ui/button.astro";
+import CalEmbed from "@shared/components/ui/cal-embed.astro";
 import { getSolutions } from "@features/solutions/data";
 import { getLang, solutionPath } from "@i18n/utils";
 import { home } from "@i18n/content/home";
@@ -42,6 +43,10 @@ const panelSequence: PanelTheme[] = [
         wave: "top",
     },
 ];
+
+// Same booking event as the hero — the final panel closes with the
+// primary CTA so the methodology story ends in an action, not a detour.
+const calLink = "yamil-yscapa/diagnostico-gratuito";
 
 const phases = solutions.map((s, i) => ({
     ...s,
@@ -86,7 +91,15 @@ const phases = solutions.map((s, i) => ({
                                 {phase.summary}
                             </p>
 
-                            <div class={`mt-8 md:mt-10 flex ${aligned ? "justify-end" : ""}`}>
+                            <div class={`mt-8 md:mt-10 flex flex-wrap gap-3 ${aligned ? "justify-end" : ""}`}>
+                                {phase.isLast && (
+                                    <CalEmbed
+                                        calLink={calLink}
+                                        namespace="diagnostico-metodologia"
+                                        label={copy.cta}
+                                        variant="default"
+                                    />
+                                )}
                                 <Button
                                     link={solutionPath(phase.slug, lang)}
                                     variant="outline"

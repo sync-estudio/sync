@@ -1,6 +1,7 @@
 ---
 import "@app/styles/global.css";
 import Button from "@shared/components/ui/button.astro";
+import ArrowIcon from "@shared/components/ui/arrow-icon.astro";
 import { getLang, localizedPath } from "@i18n/utils";
 import { home } from "@i18n/content/home";
 
@@ -12,38 +13,45 @@ const themes = {
         card: "bg-zinc-900 text-zinc-100",
         title: "text-white",
         intro: "text-zinc-300",
+        link: "text-emerald-300",
         dots: "rgba(255,255,255,0.18)",
     },
     mid: {
         card: "bg-emerald-800 text-emerald-50",
         title: "text-white",
         intro: "text-emerald-100/90",
+        link: "text-emerald-200",
         dots: "rgba(255,255,255,0.18)",
     },
     light: {
         card: "bg-[#defbed] text-zinc-800",
         title: "text-zinc-900",
         intro: "text-zinc-700",
+        link: "text-emerald-800",
         dots: "rgba(4,120,87,0.35)",
     },
 } as const;
 
+// Each card routes intent to its landing page — no dead-end cards.
 const products = [
     {
         title: copy.platformsTitle,
         desc: copy.platformsDesc,
+        href: localizedPath("softwareDev", lang),
         theme: themes.light,
         aura: { x: "0%", y: "0%" },
     },
     {
         title: copy.aiTitle,
         desc: copy.aiDesc,
+        href: localizedPath("ai", lang),
         theme: themes.dark,
         aura: { x: "50%", y: "50%" },
     },
     {
         title: copy.mvpTitle,
         desc: copy.mvpDesc,
+        href: localizedPath("appDev", lang),
         theme: themes.mid,
         aura: { x: "100%", y: "100%" },
     },
@@ -73,14 +81,15 @@ const products = [
             products.map((product) => {
                 const t = product.theme;
                 return (
-                    <article
+                    <a
+                        href={product.href}
                         data-services-card
                         style={`--services-dot-color: ${t.dots}; --services-mouse-x: ${product.aura.x}; --services-mouse-y: ${product.aura.y};`}
                         data-aura-x={product.aura.x}
                         data-aura-y={product.aura.y}
-                        class={`services-card relative isolate overflow-hidden flex flex-col gap-4 p-8 md:p-10 rounded-3xl min-h-[18rem] md:min-h-[22rem] ${t.card} opacity-0 transition-transform duration-300 ease-out hover:-translate-y-1`}
+                        class={`group services-card relative isolate overflow-hidden flex flex-col p-8 md:p-10 rounded-3xl min-h-[18rem] md:min-h-[22rem] ${t.card} opacity-0 transition-transform duration-300 ease-out hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2`}
                     >
-                        <div class="relative z-10 flex flex-col gap-4">
+                        <div class="relative z-10 flex flex-col gap-4 flex-1">
                             <h3
                                 class={`text-xl md:text-2xl font-semibold tracking-tight ${t.title}`}
                             >
@@ -91,10 +100,19 @@ const products = [
                             >
                                 {product.desc}
                             </p>
+                            <span
+                                class={`mt-auto pt-4 inline-flex items-center gap-1.5 text-sm font-semibold ${t.link}`}
+                            >
+                                {copy.cardCta}
+                                <ArrowIcon
+                                    size={14}
+                                    class="transition-transform duration-300 group-hover:translate-x-0.5"
+                                />
+                            </span>
                         </div>
 
                         <div class="services-dots" aria-hidden="true" />
-                    </article>
+                    </a>
                 );
             })
         }

@@ -23,6 +23,7 @@ type HomeCopy = {
         subtitle: string;
         ctaPrimary: string;
         ctaSecondary: string;
+        ctaNote: string;
         locationTag: string;
     };
     about: {
@@ -39,6 +40,7 @@ type HomeCopy = {
         aiDesc: string;
         mvpTitle: string;
         mvpDesc: string;
+        cardCta: string;
         cta: string;
     };
     services: {
@@ -48,8 +50,18 @@ type HomeCopy = {
         headingTail: string;
         subtitle: string;
         detail: string;
+        cta: string;
         footnote: string;
         phaseSummaries: Record<string, string>;
+    };
+    closing: {
+        titleLead: string;
+        titleHighlight: string;
+        titleTail: string;
+        subtitle: string;
+        ctaPrimary: string;
+        ctaSecondary: string;
+        note: string;
     };
     featured: {
         titleLead: string;
@@ -89,9 +101,10 @@ export const home: Record<Lang, HomeCopy> = {
             titleHighlight: "futuro",
             titleTail: " de tu operación.",
             subtitle:
-                "Desarrollo de software, aplicaciones e inteligencia artificial a medida para empresas en operación. Quitamos el trabajo manual, desatascamos la operación y dejamos a tu equipo dueño del sistema.",
-            ctaPrimary: "Agenda una llamada",
+                "Software, aplicaciones e inteligencia artificial a medida para empresas en operación. Quitamos el trabajo manual y dejamos a tu equipo dueño del sistema.",
+            ctaPrimary: "Agenda tu llamada de descubrimiento",
             ctaSecondary: "Ver cómo trabajamos",
+            ctaNote: "Una llamada para entender tu operación. Gratuita y sin compromiso.",
             locationTag: "Desde México · Disponibles en todo el mundo",
         },
         about: {
@@ -110,6 +123,7 @@ export const home: Record<Lang, HomeCopy> = {
             aiDesc: "Le quitamos a tu equipo el trabajo repetitivo. Hacen la tarea, te avisan cuando algo necesita tu decisión, y siempre ves qué están haciendo y por qué.",
             mvpTitle: "MVP",
             mvpDesc: "Construimos lo justo para salir al mundo y aprender de gente real. Sin gastar de más: validamos rápido y, desde ahí, crecemos contigo.",
+            cardCta: "Conocer más",
             cta: "Solicitar diagnóstico",
         },
         services: {
@@ -120,6 +134,7 @@ export const home: Record<Lang, HomeCopy> = {
             subtitle:
                 "Tres fases para entender tu operación, construir la herramienta y dejar a tu equipo al mando. No entregamos y desaparecemos: desde aquí arranca la relación.",
             detail: "Ver detalle",
+            cta: "Agenda tu llamada de descubrimiento",
             footnote:
                 "Las tres juntas. Entregar solo el software es desplazar el problema, no resolverlo.",
             phaseSummaries: {
@@ -195,6 +210,16 @@ export const home: Record<Lang, HomeCopy> = {
             footerQuestion: "¿Tu duda no está aquí?",
             footerCta: "Escríbenos",
         },
+        closing: {
+            titleLead: "Hablemos de tu ",
+            titleHighlight: "operación",
+            titleTail: ".",
+            subtitle:
+                "Cuéntanos qué proceso está costando más de lo que debería. La primera llamada es gratuita y sin compromiso — y si decides no seguir, lo que aprendas se queda contigo.",
+            ctaPrimary: "Agenda tu llamada de descubrimiento",
+            ctaSecondary: "O escríbenos",
+            note: "Respondemos en menos de 24h hábiles.",
+        },
         workflow: {
             briefEyebrow: "Metodología",
             briefHeadingLead: "Cómo trabajamos ",
@@ -252,9 +277,10 @@ export const home: Record<Lang, HomeCopy> = {
             titleHighlight: "future",
             titleTail: " of your operation.",
             subtitle:
-                "Custom software, applications and artificial intelligence for working companies. We remove manual work, unblock the operation, and leave your team owning the system.",
-            ctaPrimary: "Book a call",
+                "Custom software, applications and artificial intelligence for working companies. We remove manual work and leave your team owning the system.",
+            ctaPrimary: "Book a discovery call",
             ctaSecondary: "See how we work",
+            ctaNote: "One call to understand your operation. Free, no commitment.",
             locationTag: "Based in Mexico · Available worldwide",
         },
         about: {
@@ -273,6 +299,7 @@ export const home: Record<Lang, HomeCopy> = {
             aiDesc: "We take repetitive work off your team. They do the task, flag you when something needs your decision, and you always see what they're doing and why.",
             mvpTitle: "MVP",
             mvpDesc: "We build just enough to ship to the world and learn from real people. Without overspending: we validate fast and grow with you from there.",
+            cardCta: "Learn more",
             cta: "Request an assessment",
         },
         services: {
@@ -283,6 +310,7 @@ export const home: Record<Lang, HomeCopy> = {
             subtitle:
                 "Three phases to understand your operation, build the tool, and leave your team in charge. We don't deliver and disappear: this is where the relationship starts.",
             detail: "View detail",
+            cta: "Book a discovery call",
             footnote:
                 "All three together. Delivering only the software moves the problem, it doesn't solve it.",
             phaseSummaries: {
@@ -357,6 +385,16 @@ export const home: Record<Lang, HomeCopy> = {
             ],
             footerQuestion: "Your question isn't here?",
             footerCta: "Write to us",
+        },
+        closing: {
+            titleLead: "Let's talk about your ",
+            titleHighlight: "operation",
+            titleTail: ".",
+            subtitle:
+                "Tell us which process is costing more than it should. The first call is free with no commitment — and if you decide not to continue, what you learn stays with you.",
+            ctaPrimary: "Book a discovery call",
+            ctaSecondary: "Or write to us",
+            note: "We reply within 24 business hours.",
         },
         workflow: {
             briefEyebrow: "Methodology",

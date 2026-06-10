@@ -22,6 +22,11 @@ const calLink = "yamil-yscapa/diagnostico-gratuito";
         class="flex flex-col gap-6 md:gap-7 w-full max-w-5xl relative z-10"
     >
         <div class="text-zinc-800 text-center">
+            <p
+                class="hero-line text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-4 md:mb-5"
+            >
+                {copy.locationTag}
+            </p>
             <h1
                 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-5 leading-[1.05] tracking-tight text-balance"
             >
@@ -69,9 +74,9 @@ const calLink = "yamil-yscapa/diagnostico-gratuito";
         </div>
 
         <p
-            class="hero-actions text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400 text-center mt-1"
+            class="hero-actions text-xs sm:text-sm text-zinc-500 text-center text-balance mt-1"
         >
-            {copy.locationTag}
+            {copy.ctaNote}
         </p>
     </div>
 </div>
