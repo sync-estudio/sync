@@ -6,6 +6,8 @@ interface Props {
     calLink: string;
     /** Visible button label (rendered after any slotted icon). */
     label: string;
+    /** Compact label shown below the `sm` breakpoint, where the full one wraps. */
+    labelShort?: string;
     variant?: "default" | "inverted" | "outline" | "ghost" | "small";
     style?: string;
     /**
@@ -18,6 +20,7 @@ interface Props {
 const {
     calLink,
     label,
+    labelShort,
     variant = "outline",
     style = "",
     namespace = calLink.replace(/[^a-z0-9]+/gi, "-"),
@@ -39,7 +42,16 @@ const calUi = {
     data-cal-link={calLink}
     data-cal-config={calConfig}
 >
-    <slot />{label}
+    <slot />{
+        labelShort ? (
+            <>
+                <span class="sm:hidden">{labelShort}</span>
+                <span class="hidden sm:inline">{label}</span>
+            </>
+        ) : (
+            label
+        )
+    }
 </Button>
 
 <script is:inline define:vars={{ namespace, calUi }}>
