@@ -71,10 +71,8 @@ const calLink = "yamil-yscapa/diagnostico-gratuito";
     <div
         class="hero-cards grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-14 md:mt-20"
     >
-        <a
-            href={caseStudyPath("ima-cloud", lang)}
-            class="group relative isolate overflow-hidden rounded-2xl md:rounded-3xl bg-emerald-100/80 flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
-            aria-label={`${copy.visual.name} — ${copy.visual.cta}`}
+        <div
+            class="group relative isolate overflow-hidden rounded-2xl md:rounded-3xl bg-emerald-100/80 flex flex-col"
         >
             <div class="relative z-10 p-5 sm:p-6 md:p-7">
                 <p
@@ -87,15 +85,16 @@ const calLink = "yamil-yscapa/diagnostico-gratuito";
                 >
                     {copy.visual.caption}
                 </p>
-                <span
-                    class="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-800 underline-offset-4 group-hover:underline"
+                <a
+                    href={caseStudyPath("ima-cloud", lang)}
+                    class="group/cta mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-800 underline-offset-4 hover:underline rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
                 >
                     {copy.visual.cta}
                     <ArrowIcon
                         size={13}
-                        class="transition-transform duration-300 group-hover:translate-x-0.5"
+                        class="transition-transform duration-300 group-hover/cta:translate-x-0.5"
                     />
-                </span>
+                </a>
             </div>
 
             <Image
@@ -107,7 +106,7 @@ const calLink = "yamil-yscapa/diagnostico-gratuito";
                 format="webp"
                 quality={80}
             />
-        </a>
+        </div>
 
         <div
             class="relative isolate overflow-hidden rounded-2xl md:rounded-3xl bg-emerald-100/80 flex flex-col"
