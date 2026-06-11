@@ -14,6 +14,12 @@ type Project = {
     description: string;
     imageAlt: string;
 };
+type Testimonial = {
+    quote: string;
+    name: string;
+    role: string;
+    company: string;
+};
 
 type HomeCopy = {
     hero: {
@@ -88,6 +94,13 @@ type HomeCopy = {
         items: Faq[];
         footerQuestion: string;
         footerCta: string;
+    };
+    testimonials: {
+        eyebrow: string;
+        title: string;
+        // Render-gated: the section stays off the page while this is empty.
+        // Only real, attributed quotes go here — never placeholders.
+        items: Testimonial[];
     };
     workflow: {
         briefEyebrow: string;
@@ -241,6 +254,11 @@ export const home: Record<Lang, HomeCopy> = {
             ],
             footerQuestion: "¿Tu duda no está aquí?",
             footerCta: "Escríbenos",
+        },
+        testimonials: {
+            eyebrow: "Lo que dicen nuestros clientes",
+            title: "Trabajamos para que lo cuenten así",
+            items: [],
         },
         closing: {
             titleLead: "Hablemos de tu ",
@@ -440,6 +458,11 @@ export const home: Record<Lang, HomeCopy> = {
             ],
             footerQuestion: "Your question isn't here?",
             footerCta: "Write to us",
+        },
+        testimonials: {
+            eyebrow: "What our clients say",
+            title: "We work so they tell it like this",
+            items: [],
         },
         closing: {
             titleLead: "Let's talk about your ",

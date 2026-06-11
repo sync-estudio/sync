@@ -1,0 +1,44 @@
+---
+import "@app/styles/global.css";
+import { getLang } from "@i18n/utils";
+import { home } from "@i18n/content/home";
+
+const lang = getLang(Astro.currentLocale);
+const copy = home[lang].testimonials;
+---
+
+{
+    copy.items.length > 0 && (
+        <section id="testimonios" class="container mx-auto py-16 md:py-24">
+            <div class="mb-10 md:mb-14 flex flex-col items-center text-center gap-3 max-w-2xl mx-auto">
+                <span class="text-sm md:text-base text-zinc-500 tracking-wide">
+                    {copy.eyebrow}
+                </span>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-zinc-800">
+                    {copy.title}
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-5xl mx-auto">
+                {copy.items.map((item) => (
+                    <figure class="flex flex-col justify-between gap-8 rounded-2xl md:rounded-3xl bg-white border border-zinc-200/80 p-6 sm:p-8 md:p-10">
+                        <blockquote class="text-lg md:text-xl text-zinc-700 leading-relaxed">
+                            “{item.quote}”
+                        </blockquote>
+                        <figcaption class="flex items-center gap-3 text-sm md:text-base">
+                            <span class="font-medium text-zinc-800">
+                                {item.name}
+                            </span>
+                            <span class="text-zinc-300" aria-hidden="true">
+                                •
+                            </span>
+                            <span class="text-zinc-500">
+                                {item.role}, {item.company}
+                            </span>
+                        </figcaption>
+                    </figure>
+                ))}
+            </div>
+        </section>
+    )
+}
