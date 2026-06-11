@@ -38,9 +38,9 @@ const logoWrapper =
     <div class="flex w-full flex-col items-center gap-3 relative">
         <div
             data-nav-pill
-            class="navbar-pill px-4 md:px-6 grid grid-cols-[auto_1fr_auto] items-center gap-3 md:gap-6 pointer-events-auto w-[95%] max-w-5xl navbar-entrance"
+            class="navbar-pill px-4 md:px-6 flex items-center justify-between gap-3 pointer-events-auto w-[95%] max-w-[1800px] navbar-entrance"
         >
-            <div class="flex items-center shrink-0">
+            <div class="flex items-center gap-2 md:gap-6 min-w-0">
                 <a class={logoWrapper} href={homeHash("#inicio", lang)} aria-label={t("nav.homeAria")}>
                     <img
                         src="/sync.svg"
@@ -52,24 +52,13 @@ const logoWrapper =
                         class="h-3 w-auto md:h-4 object-contain"
                     />
                 </a>
-            </div>
 
-            <div class="hidden sm:flex justify-center">
+                <div class="hidden sm:flex">
                 <ul
                     class="flex items-center gap-0.5 md:gap-1"
                     role="menubar"
                     aria-label={t("nav.mainNav")}
                 >
-                    <li class="relative">
-                        <a class={linkWrapper} href={homeHash("#inicio", lang)} role="menuitem"
-                            >{t("nav.home")}</a
-                        >
-                    </li>
-                    <li class="relative">
-                        <a class={linkWrapper} href={homeHash("#nosotros", lang)} role="menuitem"
-                            >{t("nav.about")}</a
-                        >
-                    </li>
                     <li class="relative" data-nav-dropdown>
                         <details class="nav-dropdown group">
                             <summary
@@ -98,7 +87,7 @@ const logoWrapper =
                                 </svg>
                             </summary>
                             <div
-                                class="nav-dropdown-panel absolute right-0 top-full mt-3 w-[22rem] bg-white/90 backdrop-blur-lg border border-zinc-200/80 rounded-2xl shadow-[0_12px_32px_rgba(0,0,0,0.08)] p-2 flex flex-col z-50"
+                                class="nav-dropdown-panel absolute left-0 top-full mt-3 w-[22rem] bg-white/90 backdrop-blur-lg border border-zinc-200/80 rounded-2xl shadow-[0_12px_32px_rgba(0,0,0,0.08)] p-2 flex flex-col z-50"
                                 role="menu"
                             >
                                 {solutions.map((s) => (
@@ -132,16 +121,12 @@ const logoWrapper =
                         </details>
                     </li>
                     <li class="relative">
-                        <a class={linkWrapper} href={homeHash("#proyectos", lang)} role="menuitem"
-                            >{t("nav.projects")}</a
-                        >
-                    </li>
-                    <li class="relative">
                         <a class={linkWrapper} href={localizedPath("howWeWork", lang)} role="menuitem"
                             >{t("nav.methodology")}</a
                         >
                     </li>
                 </ul>
+                </div>
             </div>
 
             <div class="flex items-center justify-end shrink-0 gap-2">
@@ -199,20 +184,6 @@ const logoWrapper =
                     aria-label={t("nav.mobileNav")}
                 >
                     <li>
-                        <a
-                            class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
-                            href={homeHash("#inicio", lang)}
-                            role="menuitem">{t("nav.home")}</a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
-                            href={homeHash("#nosotros", lang)}
-                            role="menuitem">{t("nav.about")}</a
-                        >
-                    </li>
-                    <li>
                         <details class="nav-dropdown-mobile group">
                             <summary
                                 class="list-none cursor-pointer flex items-center justify-between text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
@@ -258,13 +229,6 @@ const logoWrapper =
                                 </a>
                             </div>
                         </details>
-                    </li>
-                    <li>
-                        <a
-                            class="block w-full text-zinc-700 hover:text-zinc-900 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-zinc-100/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
-                            href={homeHash("#proyectos", lang)}
-                            role="menuitem">{t("nav.projects")}</a
-                        >
                     </li>
                     <li>
                         <a
