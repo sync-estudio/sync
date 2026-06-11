@@ -214,7 +214,7 @@ export const contact: Record<Lang, ContactCopy> = {
         submitLabel: "Request strategic assessment",
         alreadySentLabel: "You already sent your message",
         sendingLabel: "Sending...",
-        bookingLabel: "Book a diagnostic call",
+        bookingLabel: "Book a discovery call",
         whatsappLabel: "Or send us a WhatsApp",
         whatsappMessage: "Hi, I'd like to know more about your services.",
         validations: {

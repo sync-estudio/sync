@@ -146,7 +146,7 @@ export const landingEntries: LandingEntry[] = [
             en: {
                 metaTitle: "Custom software development | SYNC Estudio",
                 metaDescription:
-                    "Custom software development for working companies. Internal portals, dashboards, automations and integrations your team actually operates — with maintenance on our side. Based in Mexico, available worldwide.",
+                    "Custom software development for companies that run real operations. Internal portals, dashboards, automations and integrations your team actually operates — with maintenance on our side. Based in Mexico, available worldwide.",
                 label: "Software development",
                 title: "Custom software development",
                 highlight: "Custom",
@@ -308,7 +308,7 @@ export const landingEntries: LandingEntry[] = [
                 metaTitle:
                     "Web and mobile app development | SYNC Estudio",
                 metaDescription:
-                    "Custom web and mobile app development for working companies. Operational apps connected to your systems, operated by your team with autonomy and maintained by us. Based in Mexico, available worldwide.",
+                    "Custom web and mobile app development for companies that run real operations. Operational apps connected to your systems, operated by your team with autonomy and maintained by us. Based in Mexico, available worldwide.",
                 label: "App development",
                 title: "Custom app development",
                 highlight: "app",
@@ -465,7 +465,7 @@ export const landingEntries: LandingEntry[] = [
                 metaTitle:
                     "Applied artificial intelligence for companies | SYNC Estudio",
                 metaDescription:
-                    "Applied artificial intelligence for working companies: agents, copilots and LLMs integrated where they add value. No hype, with maintenance on our side. Based in Mexico, available worldwide.",
+                    "Applied artificial intelligence for companies that run real operations: agents, copilots and LLMs integrated where they add value. No hype, with maintenance on our side. Based in Mexico, available worldwide.",
                 label: "Artificial intelligence",
                 title: "Applied artificial intelligence for companies",
                 highlight: "Applied",

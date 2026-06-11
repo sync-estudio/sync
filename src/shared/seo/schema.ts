@@ -17,12 +17,12 @@ const inLanguageOf = (lang: Lang): string => (lang === "en" ? "en-US" : "es-MX")
 
 const ORG_DESCRIPTION: Record<Lang, string> = {
     es: "Estudio de desarrollo de software, aplicaciones e inteligencia artificial a medida para empresas en operación. Desde México, disponibles en todo el mundo.",
-    en: "Custom software, application and artificial intelligence studio for working companies. Based in Mexico, available worldwide.",
+    en: "Custom software, application and artificial intelligence studio for companies that run real operations. Based in Mexico, available worldwide.",
 };
 
 const LOCAL_BUSINESS_DESCRIPTION: Record<Lang, string> = {
     es: "Desarrollo de software a medida, aplicaciones web y móviles, e inteligencia artificial aplicada para empresas en operación. Desde México, disponibles en todo el mundo.",
-    en: "Custom software development, web and mobile applications, and applied artificial intelligence for working companies. Based in Mexico, available worldwide.",
+    en: "Custom software development, web and mobile applications, and applied artificial intelligence for companies that run real operations. Based in Mexico, available worldwide.",
 };
 
 // JSON-LD nodes are loosely typed by nature (open vocabulary), so model
