@@ -222,7 +222,7 @@ export const ui = {
         "case.ctaSecondary": "Back to home",
         "case.titleSuffix": "Case study | Sync Estudio",
         "case.fallbackDescription":
-            "Sync Estudio case study — custom software and AI for working companies.",
+            "Sync Estudio case study — custom software and AI for companies that run real operations.",
     },
 } as const;
 
