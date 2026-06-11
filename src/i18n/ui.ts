@@ -123,10 +123,10 @@ export const ui = {
         // Site meta defaults (Layout)
         "meta.title": "Custom software, apps & AI | SYNC Estudio",
         "meta.description":
-            "Custom software, applications and artificial intelligence for businesses in operation. Nearshore team based in Mexico, working U.S. hours, available worldwide. We redesign workflows, train your team, and keep the tools running on our side.",
+            "Custom software, applications and artificial intelligence for businesses in operation. Based in Mexico, working U.S. hours, available worldwide. We redesign workflows, train your team, and keep the tools running on our side.",
         "meta.ogTitle": "Custom software, apps & AI | SYNC Estudio",
         "meta.ogDescription":
-            "Custom software, applications and AI for businesses in operation. We build the tools, redesign the workflows, and train your team — with ongoing maintenance on our side. Nearshore from Mexico, available worldwide.",
+            "Custom software, applications and AI for businesses in operation. We build the tools, redesign the workflows, and train your team — with ongoing maintenance on our side. Based in Mexico, available worldwide.",
         "meta.ogImageAlt":
             "SYNC Estudio — Custom software & AI for companies in operation",
 
