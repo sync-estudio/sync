@@ -18,7 +18,7 @@ const buta = featured.projects.find((p) => p.id === "butaqueando");
 const calLink = "yamil-yscapa/diagnostico-gratuito";
 ---
 
-<section id="inicio" class="container mx-auto pt-24 md:pt-28 pb-10 md:pb-14">
+<section id="inicio" class="container mx-auto pt-28 md:pt-36 pb-14 md:pb-20">
     <div
         class="flex flex-col items-center text-center w-full gap-5 md:gap-6"
     >
@@ -69,21 +69,21 @@ const calLink = "yamil-yscapa/diagnostico-gratuito";
     </div>
 
     <div
-        class="hero-cards grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-10 md:mt-14"
+        class="hero-cards grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-14 md:mt-20"
     >
         <a
             href={caseStudyPath("ima-cloud", lang)}
-            class="group relative isolate overflow-hidden rounded-2xl md:rounded-3xl bg-emerald-100/80 h-[380px] sm:h-[440px] lg:h-[500px] block focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+            class="group relative isolate overflow-hidden rounded-2xl md:rounded-3xl bg-emerald-100/80 flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
             aria-label={`${copy.visual.name} — ${copy.visual.cta}`}
         >
-            <div class="absolute top-0 inset-x-0 z-10 p-5 sm:p-6 md:p-7">
+            <div class="relative z-10 p-5 sm:p-6 md:p-7">
                 <p
                     class="font-semibold text-zinc-900 text-base md:text-lg leading-tight"
                 >
                     {copy.visual.name}
                 </p>
                 <p
-                    class="mt-1.5 text-sm text-zinc-600 leading-snug max-w-sm text-balance line-clamp-2 md:line-clamp-none"
+                    class="mt-1.5 text-sm text-zinc-600 leading-snug max-w-sm text-balance"
                 >
                     {copy.visual.caption}
                 </p>
@@ -99,7 +99,7 @@ const calLink = "yamil-yscapa/diagnostico-gratuito";
             </div>
 
             <Image
-                class="absolute left-1/2 -translate-x-1/2 bottom-[-8%] w-[88%] max-w-none rounded-lg sm:rounded-xl border border-zinc-200/80 shadow-2xl transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-2"
+                class="mt-auto mx-auto w-[88%] max-w-none mb-[-6%] rounded-lg sm:rounded-xl border border-zinc-200/80 shadow-2xl transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-2"
                 loading="eager"
                 decoding="async"
                 src={imaPreview}
@@ -110,12 +110,12 @@ const calLink = "yamil-yscapa/diagnostico-gratuito";
         </a>
 
         <div
-            class="relative isolate overflow-hidden rounded-2xl md:rounded-3xl bg-emerald-100/80 h-[380px] sm:h-[440px] lg:h-[500px]"
+            class="relative isolate overflow-hidden rounded-2xl md:rounded-3xl bg-emerald-100/80 flex flex-col"
         >
             {
                 buta && (
                     <>
-                        <div class="absolute top-0 inset-x-0 z-10 p-5 sm:p-6 md:p-7">
+                        <div class="relative z-10 p-5 sm:p-6 md:p-7">
                             <p class="font-semibold text-zinc-900 text-base md:text-lg leading-tight">
                                 {buta.title}
                             </p>
@@ -124,7 +124,7 @@ const calLink = "yamil-yscapa/diagnostico-gratuito";
                             </p>
                         </div>
                         <Image
-                            class="absolute left-1/2 -translate-x-1/2 bottom-[-12%] h-[78%] w-auto max-w-none drop-shadow-2xl"
+                            class="mt-auto mx-auto h-[360px] sm:h-[420px] lg:h-[460px] w-auto max-w-none mb-[-100px] lg:mb-[-130px] drop-shadow-2xl"
                             loading="eager"
                             decoding="async"
                             src={butaqueando}
