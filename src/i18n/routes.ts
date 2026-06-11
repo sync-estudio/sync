@@ -14,6 +14,8 @@ export const routes = {
     softwareDev: { es: "/desarrollo-de-software", en: "/en/software-development" },
     appDev: { es: "/desarrollo-de-apps", en: "/en/app-development" },
     ai: { es: "/inteligencia-artificial", en: "/en/artificial-intelligence" },
+    privacy: { es: "/aviso-de-privacidad", en: "/en/privacy-notice" },
+    dataPractices: { es: "/codigo-y-datos", en: "/en/code-and-data" },
 } as const satisfies Record<string, Record<Lang, string>>;
 
 export type RouteKey = keyof typeof routes;

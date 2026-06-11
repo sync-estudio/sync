@@ -23,6 +23,8 @@ export const GET: APIRoute = async () => {
         { loc: localizedPath("howWeWork", lang), changefreq: "monthly", priority: "0.8" },
         { loc: localizedPath("pricing", lang), changefreq: "monthly", priority: "0.7" },
         { loc: localizedPath("contact", lang), changefreq: "monthly", priority: "0.7" },
+        { loc: localizedPath("privacy", lang), changefreq: "yearly", priority: "0.3" },
+        { loc: localizedPath("dataPractices", lang), changefreq: "yearly", priority: "0.4" },
     ]);
 
     // Keyword landing pages — high priority, they target the head terms.

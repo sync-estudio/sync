@@ -1,0 +1,19 @@
+---
+export const prerender = true;
+
+import Layout from "@app/layouts/Layout.astro";
+import LegalPage from "@shared/components/layout/legal-page.astro";
+import { getLang } from "@i18n/utils";
+import { privacy } from "@i18n/content/legal";
+
+const lang = getLang(Astro.currentLocale);
+const copy = privacy[lang];
+---
+
+<Layout
+    title={copy.metaTitle}
+    description={copy.metaDescription}
+    routeKey="privacy"
+>
+    <LegalPage copy={copy} />
+</Layout>
