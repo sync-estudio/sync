@@ -1,0 +1,135 @@
+---
+import "@app/styles/global.css";
+import { getEntry } from "astro:content";
+import Button from "@shared/components/ui/button.astro";
+import BulletList from "@shared/components/ui/bullet-list.astro";
+
+const caseStudy = await getEntry("blog", "ima-cloud");
+
+const cover = caseStudy?.data.cover ?? "/case-studies/ima/dashboard.jpeg";
+const title = caseStudy?.data.title ?? "IMA Cloud";
+const client = caseStudy?.data.client ?? "IMA Soluciones";
+const industry =
+    caseStudy?.data.industry ??
+    "Electrificación ferroviaria, energía y telecomunicaciones";
+
+const outcomes = [
+    "Reportes operativos en un solo sistema, no en archivos dispersos.",
+    "Evidencias y documentos consultables desde cualquier área.",
+    "Inventario integrado a la operación, no como hoja de cálculo aparte.",
+    "Base modular lista para sumar nuevos procesos sin reinventar todo.",
+];
+---
+
+<section id="proyectos" class="container mx-auto py-16 md:py-24">
+    <div
+        data-case-reveal
+        class="grid grid-cols-1 lg:grid-cols-2 items-stretch rounded-2xl md:rounded-3xl border border-zinc-200 overflow-hidden bg-white opacity-0"
+    >
+        <div class="relative bg-emerald-800 min-h-[18rem] lg:min-h-full">
+            <img
+                src={cover}
+                alt={`Plataforma ${title} para ${client}`}
+                loading="lazy"
+                class="absolute inset-0 h-full w-full object-cover"
+            />
+        </div>
+
+        <div
+            class="relative isolate flex flex-col gap-6 p-8 sm:p-10 md:p-12 lg:p-14"
+        >
+            <div class="case-dots" aria-hidden="true"></div>
+            <div class="relative z-10 flex flex-col gap-3">
+                <span
+                    class="text-xs tracking-[0.2em] uppercase text-emerald-700 font-semibold"
+                >
+                    Caso de estudio
+                </span>
+                <h2
+                    class="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-zinc-900"
+                >
+                    {title} — digitalización operativa para una empresa
+                    ferroviaria
+                </h2>
+                <p class="text-sm text-zinc-500">{client} · {industry}</p>
+                <p class="text-base md:text-lg text-zinc-600 leading-relaxed">
+                    Más de 20 años de operación técnica con la información
+                    viviendo entre archivos sueltos. Construimos una plataforma
+                    interna alrededor de cómo el equipo realmente trabaja — y se
+                    quedó porque la operan todos los días.
+                </p>
+            </div>
+
+            <div class="relative z-10">
+                <BulletList items={outcomes} />
+            </div>
+
+            <div class="relative z-10 flex flex-wrap items-center gap-3 pt-1">
+                <Button link="/casos-de-estudio/ima-cloud">Leer el caso completo</Button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .case-dots {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background-image: radial-gradient(
+            circle,
+            rgba(4, 120, 87, 0.7) 1.2px,
+            transparent 1.6px
+        );
+        background-size: 18px 18px;
+        opacity: 0.35;
+        mask-image: radial-gradient(
+            circle 220px at 100% 100%,
+            #000 0%,
+            transparent 75%
+        );
+        -webkit-mask-image: radial-gradient(
+            circle 220px at 100% 100%,
+            #000 0%,
+            transparent 75%
+        );
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        [data-case-reveal] {
+            opacity: 1 !important;
+        }
+    }
+</style>
+
+<script>
+    import { animate, inView } from "framer-motion";
+
+    const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    const card = document.querySelector<HTMLElement>("[data-case-reveal]");
+
+    if (card) {
+        if (prefersReducedMotion) {
+            card.style.opacity = "1";
+        } else {
+            inView(
+                card,
+                () => {
+                    animate(
+                        card,
+                        {
+                            opacity: [0, 1],
+                            transform: ["translateY(24px)", "translateY(0px)"],
+                        },
+                        { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+                    );
+                },
+                { amount: 0.25 },
+            );
+        }
+    }
+</script>

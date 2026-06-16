@@ -1,0 +1,171 @@
+---
+import "@app/styles/global.css";
+import BulletList from "@shared/components/ui/bullet-list.astro";
+
+type Challenge = {
+    number: string;
+    title: string;
+    body: string;
+    items: string[];
+};
+
+const challenges: Challenge[] = [
+    {
+        number: "01",
+        title: "Documentación dispersa",
+        body: "Evidencias, reportes y planos repartidos entre carpetas locales, mensajería interna y formatos en papel.",
+        items: [
+            "Captura repetida entre áreas y proyectos",
+            "Historial difícil de encontrar cuando se necesita",
+            "Información que depende de quién la guardó",
+        ],
+    },
+    {
+        number: "02",
+        title: "Operación en campo desconectada",
+        body: "Cuadrillas y técnicos trabajando fuera de oficina, capturando en papel lo que luego alguien transcribe.",
+        items: [
+            "Doble captura entre campo y oficina",
+            "Reportes que llegan tarde a quien decide",
+            "Procesos imposibles de escalar al ritmo de la obra",
+        ],
+    },
+    {
+        number: "03",
+        title: "Decisiones sin datos a tiempo",
+        body: "Inventario y avance de proyecto viviendo en hojas de cálculo separadas de la operación real.",
+        items: [
+            "Inventario aparte de reportes y documentación",
+            "Avance de proyecto poco trazable",
+            "Sin visibilidad consolidada para planear",
+        ],
+    },
+];
+---
+
+<section class="container mx-auto py-24 md:py-32">
+    <header
+        class="max-w-3xl mx-auto flex flex-col gap-5 md:gap-6 text-center mb-12 md:mb-16"
+    >
+        <span
+            data-challenges-reveal
+            class="text-xs tracking-[0.2em] uppercase text-emerald-700 font-semibold opacity-0"
+        >
+            El reto del sector
+        </span>
+        <h2
+            data-challenges-reveal
+            class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight md:leading-[1.15] tracking-tight text-zinc-800 opacity-0"
+        >
+            La operación está viva — la información, dispersa
+        </h2>
+        <p
+            data-challenges-reveal
+            class="text-base sm:text-lg md:text-xl text-zinc-600 leading-relaxed max-w-2xl mx-auto opacity-0"
+        >
+            En electrificación ferroviaria, energía y telecomunicaciones el
+            trabajo técnico avanza más rápido que los sistemas que deberían
+            sostenerlo. Estos son los cuellos de botella que vemos una y otra vez.
+        </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+        {
+            challenges.map((challenge) => (
+                <article
+                    data-challenges-card
+                    class="flex flex-col gap-6 p-8 md:p-10 rounded-3xl border border-zinc-200 bg-white opacity-0"
+                >
+                    <div class="flex flex-col gap-3">
+                        <span class="text-sm font-semibold tracking-tight text-emerald-700">
+                            {challenge.number}
+                        </span>
+                        <h3 class="text-xl md:text-2xl font-semibold tracking-tight text-zinc-900">
+                            {challenge.title}
+                        </h3>
+                        <p class="text-base leading-snug text-zinc-600">
+                            {challenge.body}
+                        </p>
+                    </div>
+                    <div class="pt-1 border-t border-zinc-100">
+                        <div class="pt-5">
+                            <BulletList items={challenge.items} />
+                        </div>
+                    </div>
+                </article>
+            ))
+        }
+    </div>
+</section>
+
+<style>
+    @media (prefers-reduced-motion: reduce) {
+        [data-challenges-reveal],
+        [data-challenges-card] {
+            opacity: 1 !important;
+        }
+    }
+</style>
+
+<script>
+    import { animate, inView, stagger } from "framer-motion";
+
+    const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    const reveals = document.querySelectorAll<HTMLElement>(
+        "[data-challenges-reveal]",
+    );
+    const cards = document.querySelectorAll<HTMLElement>(
+        "[data-challenges-card]",
+    );
+
+    const fadeIn = (el: HTMLElement, y = 18, duration = 0.6) => {
+        if (prefersReducedMotion) {
+            el.style.opacity = "1";
+            return;
+        }
+        inView(
+            el,
+            () => {
+                animate(
+                    el,
+                    {
+                        opacity: [0, 1],
+                        transform: [`translateY(${y}px)`, "translateY(0px)"],
+                    },
+                    { duration, ease: [0.22, 1, 0.36, 1] },
+                );
+            },
+            { amount: 0.4 },
+        );
+    };
+
+    reveals.forEach((el) => fadeIn(el));
+
+    if (cards.length) {
+        if (prefersReducedMotion) {
+            cards.forEach((el) => (el.style.opacity = "1"));
+        } else {
+            inView(
+                cards[0],
+                () => {
+                    animate(
+                        cards,
+                        {
+                            opacity: [0, 1],
+                            transform: ["translateY(24px)", "translateY(0px)"],
+                        },
+                        {
+                            duration: 0.55,
+                            ease: [0.22, 1, 0.36, 1],
+                            delay: stagger(0.09),
+                        },
+                    );
+                },
+                { amount: 0.25 },
+            );
+        }
+    }
+</script>
